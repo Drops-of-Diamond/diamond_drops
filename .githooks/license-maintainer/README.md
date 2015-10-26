@@ -1,6 +1,8 @@
 # license-maintainer
 Maintains copyright/license preamble in source files etc in your project.
 
+<blockquote><b>NOTE!</b> Recently moved entire script to new subdirectory .githooks/license-maintainer/ - you must re-install the pre-commit hook using the normal procedure (see below)</blockquote>
+
 This project provides a tool that hooks into the `git commit` process to maintain copyright/license preamble in the files in your project.
 
 When committing files, the tool inspects the files you are about to commit to see if an expected license header is present. If there is no license header, it is added, and if it already exists, it updates it to make sure that:
