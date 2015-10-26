@@ -26,14 +26,14 @@ Honestly I have only tested this on Linux so far. Please file any issues you hav
 
 * `.githooks/`
 * `.githooks/license-maintainer/`
-* `.githooks/license-maintainer/README.md` - this file
-* `.githooks/license-maintainer/LICENSE` - license by which the license-maintainer is distributed
-* `.githooks/license-maintainer/install` - script for automatic install
-* `.githooks/license-maintainer/pre-commit` - entry point for "pre-commit" git hook, has the git-specific parts
-* `.githooks/license-maintainer/license.pm` - perl module for adding & updating license in a single file at a time
-* `.githooks/license-maintainer/.gitattributes` - license maintenance configuration for the license maintainer itself
-* `.githooks/license-maintainer/LICENSE-hash` - sample (Apache 2.0) license file formatted for inclusion in files using `#` for end-of-line comments
-* `.githooks/license-maintainer/LICENSE-javadoc` - sample (Apache 2.0) license file formatted for inclusion with javadoc style comments
+    * `README.md` - this file
+    * `LICENSE` - license by which the license-maintainer is distributed
+    * `install` - script for automatic install
+    * `pre-commit` - entry point for "pre-commit" git hook, has the git-specific parts
+    * `license.pm` - perl module for adding & updating license in a single file at a time
+    * `.gitattributes` - license maintenance configuration for the license maintainer itself
+    * `LICENSE-hash` - sample (Apache 2.0) license file formatted for inclusion in files using `#` for end-of-line comments
+    * `LICENSE-javadoc` - sample (Apache 2.0) license file formatted for inclusion with javadoc style comments
 
 # Importing the license maintainer into your project
 
