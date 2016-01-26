@@ -89,9 +89,9 @@ Configuration is done using the "gitattributes" mechanism, which is similar to g
 
 The license maintainer includes its own configuration for license maintenance in `.githooks/license-maintainer/.gitattributes`. That is the only maintenance done by default. To enable license maintaintenance for files in your project, you specify the license template file to use for a file, or a filename pattern. First create a `.gitattributes` file, for example in the root directory of your repository. Then, for each file or pattern, specify the license using the "licensefile" attribute, e.g. with lines like:
 
-    *.java    licensefile=.gitattributes/LICENSE-javadoc
-    *.sh      licensefile=.gitattributes/LICENSE-hash
-    /install  licensefile=.gitattributes/LICENSE-hash
+    *.java    licensefile=.githooks/license-maintainer/LICENSE-javadoc
+    *.sh      licensefile=.githooks/license-maintainer/LICENSE-hash
+    /install  licensefile=.githooks/license-maintainer/LICENSE-hash
 
 This will enable maintenance of all `*.java` files in the project with the `LICENSE-javadoc` license template and all `*.sh` files with the `LICENSE-hash` license template. The `install` file in the root directory of the repository also uses the `LICENSE-hash` template.
 
@@ -103,7 +103,7 @@ If you want to verify that the correct license templates will be used for each f
 
     git ls-files | git check-attr licensefile --stdin | sed -e 's!licensefile: !!' -e 's!un\(set\|specified\)$!-!'
 
-The example `LICENSE-*` template files included in the `.gitattributes/` directory are based on the Apache 2.0 license that the license maintainer itself is licensed under. You can freely use them or create your own template files anywhere in your repository with the license(s) you want to use for your project.
+The example `LICENSE-*` template files included in the `.githooks/license-maintainer/` directory are based on the Apache 2.0 license that the license maintainer itself is licensed under. You can freely use them or create your own template files anywhere in your repository with the license(s) you want to use for your project.
 
 # Temporarily avoiding license maintenance
 
