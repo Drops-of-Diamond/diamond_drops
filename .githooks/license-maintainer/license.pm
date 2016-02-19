@@ -1,4 +1,4 @@
-# Copyright 2013, 2015 Nitor Creations Oy, Jonas Berlin
+# Copyright 2013, 2015-2016 Nitor Creations Oy, Jonas Berlin
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -138,12 +138,14 @@ sub _execute($$$$$$$) {
 
     # check for possible hashbang line and temporarily detach it
 
-    my $hashbang = '';
+    my $text_before_license = '';
     if ($contents =~ s{^(#!\V+\v)(?:\h*\v)*}{}s) {
-	$hashbang = $1;
+	$text_before_license = $1;
 	if ($EMPTY_LINE_AFTER_HASHBANG) {
-	    $hashbang .= "\n";
+	    $text_before_license .= "\n";
 	}
+    } elsif ($contents =~ s{^(<\?xml\V*\?>\s*\v)(?:\h*\v)*}{}s) {
+	$text_before_license = $1;
     }
 
     # create regexp version of license for relaxed detection of existing license
@@ -201,7 +203,7 @@ sub _execute($$$$$$$) {
 
     # output
 
-    return 0, $hashbang, $newlicense, $contents;
+    return 0, $text_before_license, $newlicense, $contents;
 }
 
 sub isLackingProperLicense($$$) {
