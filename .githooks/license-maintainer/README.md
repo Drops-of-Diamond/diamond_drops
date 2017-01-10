@@ -59,7 +59,9 @@ So, we add a git remote called `githooks-license-maintainer` for the hooks-only 
 To import and later update the license-maintainer code in your project, execute these commands in your "master" branch of your project:
 
     git fetch githooks-license-maintainer
-    git merge githooks-license-maintainer/hooks-only
+    git merge --allow-unrelated-histories githooks-license-maintainer/hooks-only
+
+*for git 2.8 and older, remove the `--allow-unrelated-histories` parameter*
 
 Now you have the code in your repository. The next step is to enable it.
 
