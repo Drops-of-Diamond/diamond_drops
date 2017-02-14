@@ -73,7 +73,7 @@ sub regexpify_license {
 	    $special = '(?<'.$YEARS_CAPTURE_GROUP.'>'.$year_or_year_range_regexp.'(?:\s*,\s*'.$year_or_year_range_regexp.')*)';
 	} elsif ($special eq 'AUTHORS') {
 	    # accept any sensibly formatted set of authors, ignoring whitespace
-	    my $author_regexp = '\w[^\r\n,]*\w';
+	    my $author_regexp = '\w[^\r\n,]*[\w>]';
 	    $special = '(?<'.$AUTHORS_CAPTURE_GROUP.'>'.$author_regexp.'(?:\s*,\s*'.$author_regexp.')*)';
 	} elsif(length($special)) {
 	    $special = '\s+'; # instead of exact sequence of whitespace characters accept any amount of whitespace
