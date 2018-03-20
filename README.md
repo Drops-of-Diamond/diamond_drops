@@ -6,10 +6,10 @@
 Want to make Ethereum faster and more mainstream?
 
 Tasks:
-- [x] Read the [Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf) (this is necessary for building a client from scratch, and important for developing one that may be integrated with an existing client like [Parity](https://github.com/paritytech/parity), although with Ethereum 2.0 the EVM may be almost completely rewritten).
+- [x] This is not essential: read the [Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf) (this is necessary for building a client from scratch, and important for developing one that may be integrated with an existing client like [Parity](https://github.com/paritytech/parity), although with Ethereum 2.0 the EVM may be almost completely rewritten).
 - [x] This is not essential for [phase 1 sharding](https://ethresear.ch/t/sharding-phase-1-spec/): read about the [stateless client concept](https://ethresear.ch/t/the-stateless-client-concept/172).
-- [x] Familiarize with the (now depecrated) Python sharding repo [here](https://github.com/ethereum/sharding/tree/develop/sharding) (a doc is available [here](https://github.com/ethereum/sharding/blob/develop/docs/doc.md)).
-- [x] Learn about abstract programming language features.
+- [x] Familiarize with the (now **depecrated**) Python sharding repo [here](https://github.com/ethereum/sharding/tree/develop/sharding) (a doc is available [here](https://github.com/ethereum/sharding/blob/develop/docs/doc.md)).
+- [x] This is not essential but it is helpful to know for development: learn about abstract programming language features.
 - [ ] WIP: [learn Rust](https://doc.rust-lang.org/book/second-edition) (almost finished, up to chaper 16 out of 21);
 - [x] Read the draft [phase 1 sharding spec](https://ethresear.ch/t/sharding-phase-1-spec/).
 - [ ] Start building sharding and Ethereum 2.0 in this repo, which involves:
@@ -22,7 +22,7 @@ Tasks:
 - [ ] Possibly further familiarize with the sharding implementation on top of PyEVM [here](https://github.com/ethereum/py-evm/tree/sharding);
 - [ ] Possibly further familiarize with Parity. While it's probably best to understand it in detail that may not be needed. Having an idea of the overall design/structure may be sufficient.
 - [ ] This is not a high immediate priority as others have already tested Parity with EWasm: further familiarise with [EWasm](https://github.com/ewasm); and
-- [ ] (ongoing operation): keep track of major [Ethereum Research](https://ethresear.ch) topics, particularly those that are on the [sharding roadmap](https://ethresear.ch/t/sharding-phase-1-spec).
+- [ ] (ongoing operation): keep track of major [Ethereum Research](https://ethresear.ch) topics, particularly those that are on the [sharding roadmap](https://ethresear.ch/t/sharding-phase-1-spec). For more specific sharding updates, you can contact apply@ethereum.org.
 
 ------
 
