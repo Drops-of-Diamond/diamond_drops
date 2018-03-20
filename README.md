@@ -16,6 +16,7 @@ Tasks:
     - [ ] Use a test-driven development approach to aim for 100% test coverage at all times.
     - [ ] Implement the draft [phase 1 sharding spec](https://ethresear.ch/t/sharding-phase-1-spec/).
     - [ ] Research how to implement a sharding networking protocol.
+    - [ ] Research and implement sharding syncing methods.
     - [ ] Contribute to research for further developments in the subsequent phases of the [sharding roadmap](https://ethresear.ch/t/sharding-phase-1-spec)
     - [ ] Develop further research.
 - [ ] Possibly further familiarize with the sharding implementation on top of PyEVM [here](https://github.com/ethereum/py-evm/tree/sharding);
