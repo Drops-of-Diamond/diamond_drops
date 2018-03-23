@@ -1,0 +1,8 @@
+[package]
+name = "SMC"
+version = "0.1.0"
+authors = ["jamesray1 <16969914+jamesray1@users.noreply.github.com>"]
+
+[dependencies]
+ethereum-types = "0.3.0"
+ethcore-bytes = "0.1.0"
