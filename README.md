@@ -5,7 +5,7 @@
 
 Want to make Ethereum faster and more mainstream?
 
-Read this first: [the draft phase 1 sharding soec](https://ethresear.ch/t/sharding-phase-1-spec/).
+Read this first: [the draft phase 1 sharding spec](https://ethresear.ch/t/sharding-phase-1-spec/).
 
 Tasks:
 - [x] This is **not essential according to the [draft phase 1 sharding spec](https://ethresear.ch/t/sharding-phase-1-spec/) as the EVM execution engine may be almost completely rewritten and abstracted to allow multiple execution engines**: read the [Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf) (this is necessary for building a client from scratch, and important for developing one that may be integrated with an existing client like [Parity](https://github.com/paritytech/parity), although with Ethereum 2.0 the EVM may be almost completely rewritten).
