@@ -14,7 +14,7 @@ Tasks:
 - [x] Start building sharding and Ethereum 2.0 in this repo, which involves:
     - [ ] Use a test-driven development approach to aim for 100% test coverage at all times.
     - [ ] Implement the draft [phase 1 sharding spec](https://ethresear.ch/t/sharding-phase-1-spec/).
-    - [ ] Research how to implement a sharding networking protocol.
+    - [ ] Research how to implement a sharding networking protocol, also refer to [libp2p](https://libp2p.io/)
     - [ ] Research and implement sharding syncing methods.
     - [ ] Contribute to research for further developments in the subsequent phases of the [sharding roadmap](https://ethresear.ch/t/sharding-phase-1-spec).
     - [ ] Research and implement further phases as outlined in the draft phase 1 spec.
