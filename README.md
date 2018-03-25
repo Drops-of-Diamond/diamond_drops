@@ -3,7 +3,7 @@
 [![License: Unlicense](https://img.shields.io/badge/License-Unlicense-lightgrey.svg)](https://github.com/Drops-of-Diamond/Diamond-drops/blob/master/LICENSE)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Drops-of-Diamond/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Want to make Ethereum faster and more mainstream?
+Are you interested in making Ethereum faster and more mainstream?
 
 Read this first: [the draft phase 1 sharding spec](https://ethresear.ch/t/sharding-phase-1-spec/).
 
@@ -34,9 +34,9 @@ After comparing Rust, C++, Go, Javascript and Python, as well as corresponding i
 
 ------
 
-For an introduction to Ethereum, see https://github.com/ethereum/wiki/wiki/Ethereum-introduction.
+For an introduction to Ethereum, see https://ethereum.org/ or https://github.com/ethereum/wiki/wiki/Ethereum-introduction.
 
-For an introduction to sharding implementations, see https://github.com/ethereum/wiki/wiki/Sharding-and-stateless-client-implementations.
+For an introduction to WIP sharding implementations, see https://github.com/ethereum/wiki/wiki/Sharding-and-stateless-client-implementations.
 
 ------
 
