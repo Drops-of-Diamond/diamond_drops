@@ -3,15 +3,12 @@
 [![License: Unlicense](https://img.shields.io/badge/License-Unlicense-lightgrey.svg)](https://github.com/Drops-of-Diamond/Diamond-drops/blob/master/LICENSE)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Drops-of-Diamond/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Are you interested in making Ethereum faster and more mainstream?
+Are you interested in making [Ethereum](https://ethereum.org/) faster and more mainstream?
 
-Read this first: [the draft phase 1 sharding spec](https://ethresear.ch/t/sharding-phase-1-spec/).
+If so, read this first: [the draft phase 1 sharding spec](https://ethresear.ch/t/sharding-phase-1-spec/).
 
 Tasks:
-- [x] This is **not essential according to the [draft phase 1 sharding spec](https://ethresear.ch/t/sharding-phase-1-spec/) as the EVM execution engine may be almost completely rewritten and abstracted to allow multiple execution engines**: read the [Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf) (this is necessary for building a client from scratch, and important for developing one that may be integrated with an existing client like [Parity](https://github.com/paritytech/parity), although with Ethereum 2.0 the EVM may be almost completely rewritten).
-- [x] This is **not essential for [phase 1 sharding](https://ethresear.ch/t/sharding-phase-1-spec/)**: read about the [stateless client concept](https://ethresear.ch/t/the-stateless-client-concept/172).
-- [x] Possibly not essential (could wait for the draft phase 1 spec to be updated and continue building): familiarize with the (now **depecrated**) Python sharding repo [here](https://github.com/ethereum/sharding/tree/develop/sharding) (a doc is available [here](https://github.com/ethereum/sharding/blob/develop/docs/doc.md)). It may still be useful to refer to how the functions are implemented.
-- [x] This is **not essential** but it is helpful to know for development: learn about abstract programming language features.
+
 - [ ] WIP: [learn Rust](https://doc.rust-lang.org/book/second-edition). (I'm almost finished, up to part way through chaper 19 out of 21. I will refer back to this and finish reading it on an as-needed basis.)
 - [x] Read the draft [phase 1 sharding spec](https://ethresear.ch/t/sharding-phase-1-spec/).
 - [x] Start building sharding and Ethereum 2.0 in this repo, which involves:
@@ -21,24 +18,26 @@ Tasks:
     - [ ] Research and implement sharding syncing methods.
     - [ ] Contribute to research for further developments in the subsequent phases of the [sharding roadmap](https://ethresear.ch/t/sharding-phase-1-spec).
     - [ ] Research and implement further phases as outlined in the draft phase 1 spec.
-- [ ] Possibly further familiarize with the sharding implementation on top of PyEVM [here](https://github.com/ethereum/py-evm/tree/sharding);
-- [ ] Possibly further familiarize with Parity. While it's probably best to understand it in detail that may not be needed. Having an idea of the overall design/structure may be sufficient.
-- [ ] This is not a high immediate priority as others have already tested Parity with EWasm: further familiarise with [EWasm](https://github.com/ewasm); and
 - [ ] (ongoing operation): keep track of major [Ethereum Research](https://ethresear.ch) topics, particularly those that are on the [sharding roadmap](https://ethresear.ch/t/sharding-phase-1-spec). For more specific sharding updates, you can contact apply@ethereum.org. But probably only do this on an as-needed basis once you get up to these topics in the development pipeline.
+- [ ] Possibly further familiarize with the sharding implementation on top of PyEVM [here](https://github.com/ethereum/py-evm/tree/sharding). Since they are ahead in the development of sharding, it will be useful as a reference implementation, as well as because of Python's readability;
+- [ ] Possibly further familiarize with Parity. While it's probably best to understand it in detail that may not be needed. Having an idea of the overall design/structure may be sufficient. However, note that the EVM execution engine in phase 2 may be almost completely rewritten and abstracted to allow multiple execution engines.
+- [ ] This is not a high immediate priority as others have already tested Parity with EWasm: further familiarise with [EWasm](https://github.com/ewasm); and
+- [x] This is **not essential** according to the [draft phase 1 sharding spec](https://ethresear.ch/t/sharding-phase-1-spec/) since as mentioned, the EVM execution engine may be almost completely rewritten and abstracted to allow multiple execution engines**: read the [Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf) (this is necessary for building a client from scratch, and important for developing one that may be integrated with an existing client like [Parity](https://github.com/paritytech/parity), although with Ethereum 2.0 the EVM may be almost completely rewritten).
+- [x] This is **not essential for [phase 1 sharding](https://ethresear.ch/t/sharding-phase-1-spec/)**: read about the [stateless client concept](https://ethresear.ch/t/the-stateless-client-concept/172).
+- [x] Possibly not essential (could wait for the draft phase 1 spec to be updated and continue building): familiarize with the (now **depecrated**) Python sharding repo [here](https://github.com/ethereum/sharding/tree/develop/sharding) (a doc is available [here](https://github.com/ethereum/sharding/blob/develop/docs/doc.md)). It may still be useful to refer to how the functions are implemented.
+- [x] This is **not essential** but it is helpful to know for development: learn about abstract programming language features.
 
-------
-
-### Why Rust?
-
-After comparing Rust, C++, Go, Javascript and Python, as well as corresponding implementations (Parity, cppethereum, Go-ethereum, ethereumJS and Py-EVM), Rust and Parity seem like they are most preferable. Rust has advantages such as safety, concurrency, practicality, better memory safety, zero-cost abstractions, and support for functional and imperative-procedural paradigms.  It also is compatible with Wasm. More details are here: https://gitter.im/ewasm/Lobby?at=5a92381135dd17022eedc444. Additionally, [Go is not compatible with Wasm at present](https://github.com/golang/go/issues/18892), so [Go-ethereum isn't either](https://github.com/ethereum/go-ethereum/issues/16192). However, wasm isn't very practical at the moment with its MVP, e.g. it doesn't support parallel threads and other feautures, but it is planned to support other languages and these features.
-
-------
+### Introductions
 
 For an introduction to Ethereum, see https://ethereum.org/ or https://github.com/ethereum/wiki/wiki/Ethereum-introduction.
 
 For an introduction to WIP sharding implementations, see https://github.com/ethereum/wiki/wiki/Sharding-and-stateless-client-implementations.
 
-------
+### Why Rust?
+
+After comparing Rust, C++, Go, Javascript and Python, as well as corresponding implementations (Parity, cppethereum, Go-ethereum, ethereumJS and Py-EVM), Rust and Parity seem like they are most preferable. Rust has advantages such as safety, concurrency, practicality, better memory safety, zero-cost abstractions, and support for functional and imperative-procedural paradigms.  It also is compatible with Wasm. More details are here: https://gitter.im/ewasm/Lobby?at=5a92381135dd17022eedc444. Additionally, [Go is not compatible with Wasm at present](https://github.com/golang/go/issues/18892), so [Go-ethereum isn't either](https://github.com/ethereum/go-ethereum/issues/16192). However, Wasm isn't very practical at the moment with its MVP, e.g. it doesn't support parallel threads and other feautures, but it is planned to support other languages and these features.
+
+### Further information
 
 This repo and the Drops of Diamond project it belongs to is not a part of or owned by the Ethereum Foundation, nor is it endorsed by the Foundation. A different project name and logo may be used (the logo could use a more modern design rather than just using a photo in the public domain), and alternative proposals are welcome. The Drops of Diamond project is not legally incorporated as of yet, so legally it is not an organisation. That should be done, but probably only as needed once the project is more well-developed.
 
