@@ -14,7 +14,7 @@ Tasks:
 - [x] This is **not essential** but it is helpful to know for development: learn about abstract programming language features.
 - [ ] WIP: [learn Rust](https://doc.rust-lang.org/book/second-edition). (I'm almost finished, up to part way through chaper 19 out of 21. I will refer back to this and finish reading it on an as-needed basis.)
 - [x] Read the draft [phase 1 sharding spec](https://ethresear.ch/t/sharding-phase-1-spec/).
-- [ ] Start building sharding and Ethereum 2.0 in this repo, which involves:
+- [x] Start building sharding and Ethereum 2.0 in this repo, which involves:
     - [ ] Use a test-driven development approach to aim for 100% test coverage at all times.
     - [ ] Implement the draft [phase 1 sharding spec](https://ethresear.ch/t/sharding-phase-1-spec/).
     - [ ] Research how to implement a sharding networking protocol.
