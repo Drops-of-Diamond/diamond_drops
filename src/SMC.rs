@@ -86,7 +86,7 @@ fn main() {
 	let mut proposer_registry: HashMap<Address, ProposerRegistry> =
 		HashMap::new();
 	
-	let mut collation_trees: HashMap<U256, Hashmap<Bytes32, Bytes32>> =
+	let mut collation_trees: HashMap<U256, HashMap<Bytes32, Bytes32>> =
 		HashMap::new();
 	// collation trees (the collation tree of a shard maps collation hashes to previous collation hashes truncated to 24 bytes packed into a bytes32 with the collation height in the last 8 bytes)
 }
