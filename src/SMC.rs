@@ -1,5 +1,6 @@
 /// Implemented from https://ethresear.ch/t/sharding-phase-1-spec/1407.
 
+//#![allow(unused)]
 extern crate ethereum_types;
 extern crate ethcore_bytes;
 extern crate bytes32;
@@ -10,8 +11,6 @@ use self::bytes32::{Bytes32};
 
 //use std::i64;
 use std::collections::HashMap;
-
-#![allow(unused)]
 
 fn main() {
 	
@@ -87,8 +86,7 @@ fn main() {
 	let mut proposer_registry: HashMap<Address, ProposerRegistry> =
 		HashMap::new();
 	
-	let mut collation_trees: HashMap<U256, Hashmap<, > =
+	let mut collation_trees: HashMap<U256, Hashmap<Bytes32, Bytes32>> =
 		HashMap::new();
-	Bytes32[Bytes32][uint256]
 	// collation trees (the collation tree of a shard maps collation hashes to previous collation hashes truncated to 24 bytes packed into a bytes32 with the collation height in the last 8 bytes)
 }
