@@ -9,7 +9,7 @@ keywords = ["Ethereum",
 	"Ethereum 2.0",
 	"scalability",
 	"data-availability",
-	"enshrined-in-consensus"
+	"enshrined-in-consensus",
 	"blockchain"]
 categories = ["cryptography"]
 license = "Unlicense"
