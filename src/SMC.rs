@@ -87,8 +87,6 @@ fn main() {
 	let mut proposer_registry: HashMap<Address, ProposerRegistry> =
 		HashMap::new();
 	
- 	struct Bytes32 {
-		bytes32: Bytes
 	let mut collation_trees: HashMap<U256, Hashmap<, > =
 		HashMap::new();
 	Bytes32[Bytes32][uint256]
