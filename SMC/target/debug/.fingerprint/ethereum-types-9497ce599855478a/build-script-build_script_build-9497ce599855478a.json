@@ -1,1 +1,0 @@
-{"rustc":17022772061213237036,"features":"[\"default\", \"ethbloom\", \"ethereum-types-serialize\", \"fixed-hash\", \"heapsizeof\", \"serde\", \"serialize\", \"std\", \"uint\"]","target":13123923088509177768,"profile":4513376542218014594,"path":3425577043962489951,"deps":[["rustc_version v0.2.2",6899718741765954579]],"local":[{"Precalculated":"0.3.0"}],"rustflags":[]}

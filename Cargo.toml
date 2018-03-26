@@ -1,0 +1,23 @@
+[package]
+name = "Diamond-Drops"
+version = "0.1.0-a"
+authors = ["James Ray <16969914+jamesray1@users.noreply.github.com>"]
+description = "Used to create a custom type for 32-bit-wide byte arrays. Used for Drops of Diamond (more information about DoD is available at https://github.com/Drops-of-Diamond/Diamond-drops)."
+keywords = ["Ethereum",
+	"sharding",
+	"phase 1",
+	"Ethereum 2.0",
+	"scalability",
+	"data-availability",
+	"enshrined-in-consensus"
+	"blockchain"]
+categories = ["cryptography"]
+license = "Unlicense"
+
+[dependencies]
+ethereum-types = "0.3.0"
+ethcore-bytes = "0.1.0"
+bytes32 = "0.1.4-0"
+
+[badges]
+gitlab = { repository = "Drops-of-Diamond/Diamond-drops", branch = "master" }
