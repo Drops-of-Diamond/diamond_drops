@@ -6,4 +6,4 @@ mod tests {
     }
 }
 
-mod SMC;
+mod smc;
