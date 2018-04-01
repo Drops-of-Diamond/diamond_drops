@@ -7,32 +7,11 @@
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/Drops-of-Diamond/Diamond-drops.svg)](http://isitmaintained.com/project/Drops-of-Diamond/Diamond-drops "Average time to resolve an issue")
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/Drops-of-Diamond/Diamond-drops.svg)](http://isitmaintained.com/project/Drops-of-Diamond/Diamond-drops "Percentage of issues still open")
 
-Are you interested in making [Ethereum](https://ethereum.org/) faster and more mainstream?
+### We're looking for more developers!
 
-If so, read this first: [the draft phase 1 sharding spec](https://ethresear.ch/t/sharding-phase-1-spec/).
+See [here](https://github.com/Drops-of-Diamond/Diamond-drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information.
 
-Tasks:
-
-- [ ] WIP: [learn Rust](https://doc.rust-lang.org/book/second-edition). (I, James, am almost finished, up to part way through chaper 19 out of 21. I will refer back to this and finish reading it on an as-needed basis.)
-- [x] Read the draft [phase 1 sharding spec](https://ethresear.ch/t/sharding-phase-1-spec/).
-- [x] Start building sharding and Ethereum 2.0 in this repo, which involves:
-    - [ ] Use a test-driven development approach to aim for 100% test coverage at all times.
-    - [ ] Implement the draft [phase 1 sharding spec](https://ethresear.ch/t/sharding-phase-1-spec/).
-    - [ ] Research how to implement a sharding networking protocol, also refer to [libp2p](https://libp2p.io/)
-    - [ ] Research and implement sharding syncing methods.
-    - [ ] Contribute to research for further developments in the subsequent phases of the [sharding roadmap](https://ethresear.ch/t/sharding-phase-1-spec).
-    - [ ] Research and implement further phases as outlined in the draft phase 1 spec.
-- [ ] (ongoing operation): keep track of major [Ethereum Research](https://ethresear.ch) topics, particularly those that are on the [sharding roadmap](https://ethresear.ch/t/sharding-phase-1-spec). But probably only do this on an as-needed basis once you get up to these topics in the development pipeline.
-### Non-essential tasks
-- [ ] Possibly further familiarize with the sharding implementation on top of PyEVM [here](https://github.com/ethereum/py-evm/tree/sharding). Since they are ahead in the development of sharding, it will be useful as a reference implementation, as well as because of Python's readability.
-- [ ] Possibly further familiarize with Parity. While it's probably best to understand it in detail that may not be needed. Having an idea of the overall design/structure may be sufficient. However, note that the EVM execution engine in phase 2 may be almost completely rewritten and abstracted to allow multiple execution engines.
-- [ ] This is not a high immediate priority as others have already tested Parity with EWasm: further familiarise with [EWasm](https://github.com/ewasm); and
-- [x] This is **not essential** according to the [draft phase 1 sharding spec](https://ethresear.ch/t/sharding-phase-1-spec/) since as mentioned, the EVM execution engine may be almost completely rewritten and is abstracted to potentially allow multiple execution engines that are significantly different**: read the [Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf) (this is necessary for building a client from scratch, and important for developing one that may be integrated with an existing client like [Parity](https://github.com/paritytech/parity), although with Ethereum 2.0 the EVM may be almost completely rewritten).
-- [x] This is **not essential for [phase 1 sharding](https://ethresear.ch/t/sharding-phase-1-spec/)**: read about the [stateless client concept](https://ethresear.ch/t/the-stateless-client-concept/172).
-- [x] Possibly not essential (could wait for the draft phase 1 spec to be updated and continue building): familiarize with the (now **depecrated**) Python sharding repo [here](https://github.com/ethereum/sharding/tree/develop/sharding) (a doc is available [here](https://github.com/ethereum/sharding/blob/develop/docs/doc.md)). It may still be useful to refer to how the functions are implemented.
-- [x] This is **not essential** but it is helpful to know for development: learn about abstract programming language features.
-
-### Introductions
+### Introduction
 
 For an introduction to Ethereum, see https://ethereum.org/ or https://github.com/ethereum/wiki/wiki/Ethereum-introduction.
 
@@ -46,4 +25,3 @@ After comparing Rust, C++, Go, Javascript and Python, as well as corresponding i
 
 This repo and the Drops of Diamond project it belongs to is not a part of or owned by the Ethereum Foundation, nor is it endorsed by the Foundation. A different project name and logo may be used (the logo could use a more modern design rather than just using a photo in the public domain), and alternative proposals are welcome. The Drops of Diamond project is not legally incorporated as of yet, so legally it is not an organisation. That should be done, but probably only as needed once the project is more well-developed.
 
-At the moment I'm working pro-bono, living off my savings. Once funds are raised or a grant is given by the Ethereum Foundation I can pay other developers. Compensation to developers at this stage can't be offered, as it would depend on some form of revenue, which isn't available at this stage. However, revenue will be more likely to be obtained the more a product is demonstrated. All are welcome to contribute, in the spirit of open-source code and friendly collaboration. If revenue is obtained it will be shared accordingly and fairly with a budget, after setting up a more formal organization, e.g. controlled in a similar fashion to how the Ethereum Foundation is run. (A grant from the Ethereum Foundation has been applied for, as per [this blog post](https://blog.ethereum.org/2018/01/02/ethereum-scalability-research-development-subsidy-programs/).) If you are interested in making a donation but would prefer to not send it to an individual, please say so on Gitter (click the badge above). It's probably best to have an MVP, or alpha or beta release, before actively raising funds. There are alternatives for revenue, e.g. [here](https://ethresear.ch/t/incentives-for-running-full-ethereum-nodes/1239/33).
