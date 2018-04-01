@@ -14,9 +14,6 @@ See [here](https://github.com/Drops-of-Diamond/Diamond-drops/wiki/Introduction-a
 ### Introduction
 
 For an introduction to Ethereum, see https://ethereum.org/ or https://github.com/ethereum/wiki/wiki/Ethereum-introduction.
-
-For an introduction to WIP sharding implementations, see https://github.com/ethereum/wiki/wiki/Sharding-and-stateless-client-implementations.
-
 ### Why Rust?
 
 After comparing Rust, C++, Go, Javascript and Python, as well as corresponding implementations (Parity, cppethereum, Go-ethereum, ethereumJS and Py-EVM), Rust and Parity seem like they are most preferable. Rust has advantages such as safety, concurrency, practicality, better memory safety, zero-cost abstractions, and support for functional and imperative-procedural paradigms.  It also is compatible with Wasm. More details are here: https://gitter.im/ewasm/Lobby?at=5a92381135dd17022eedc444. Additionally, [Go is not compatible with Wasm at present](https://github.com/golang/go/issues/18892), so [Go-ethereum isn't either](https://github.com/ethereum/go-ethereum/issues/16192). However, Wasm isn't very practical at the moment with its MVP, e.g. it doesn't support parallel threads and other feautures, but it is planned to support other languages and these features.
