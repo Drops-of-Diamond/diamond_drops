@@ -3,9 +3,12 @@
 [![TravisCI](https://img.shields.io/travis/Drops-of-Diamond/Diamond-drops/master.svg)](https://travis-ci.org/Drops-of-Diamond/Diamond-drops)
 [![codecov](https://codecov.io/gh/Drops-of-Diamond/Diamond-drops/branch/master/graph/badge.svg)](https://codecov.io/gh/Drops-of-Diamond/Diamond-drops)
 [![License: Unlicense](https://img.shields.io/badge/License-Unlicense-lightgrey.svg)](https://github.com/Drops-of-Diamond/Diamond-drops/blob/master/LICENSE)
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Drops-of-Diamond/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/Drops-of-Diamond/Diamond-drops.svg)](http://isitmaintained.com/project/Drops-of-Diamond/Diamond-drops "Average time to resolve an issue")
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/Drops-of-Diamond/Diamond-drops.svg)](http://isitmaintained.com/project/Drops-of-Diamond/Diamond-drops "Percentage of issues still open")
+
+Get in touch with us on Gitter: 
+[![Gitter: DropsOfDiamond/Lobby](https://img.shields.io/badge/gitter-Drops%20of%20Diamond/Lobby-4AB495.svg)](https://gitter.im/Drops-of-Diamond/Lobby)
+[![Gitter: DropsOfDiamond/Development](https://img.shields.io/badge/gitter-Drops%20of%20Diamond/Development-4AB495.svg)](https://gitter.im/Drops-of-Diamond/Development)
 
 ### We're looking for more developers!
 
