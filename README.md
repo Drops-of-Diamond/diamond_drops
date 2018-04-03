@@ -1,5 +1,5 @@
 # Diamond Drops
-
+[![Twitter](https://img.shields.io/twitter/follow/DropsOfDiamond.svg?style=social)](https://twitter.com/DropsOfDiamond)
 [![TravisCI](https://img.shields.io/travis/Drops-of-Diamond/Diamond-drops/master.svg)](https://travis-ci.org/Drops-of-Diamond/Diamond-drops)
 [![codecov](https://codecov.io/gh/Drops-of-Diamond/Diamond-drops/branch/master/graph/badge.svg)](https://codecov.io/gh/Drops-of-Diamond/Diamond-drops)
 [![License: Unlicense](https://img.shields.io/badge/License-Unlicense-lightgrey.svg)](https://github.com/Drops-of-Diamond/Diamond-drops/blob/master/LICENSE)
