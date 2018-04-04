@@ -1,5 +1,5 @@
 [package]
-name = "Diamond-Drops"
+name = "diamond_drops"
 version = "0.1.0-a"
 authors = ["James Ray <16969914+jamesray1@users.noreply.github.com>"]
 description = "Used to create a custom type for 32-bit-wide byte arrays. Used for Drops of Diamond (more information about DoD is available at https://github.com/Drops-of-Diamond/Diamond-drops)."
