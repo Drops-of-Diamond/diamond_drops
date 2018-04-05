@@ -1,65 +1,8 @@
-use std::env;
+// Module declarations
+pub mod cli;
+pub mod config;
 
-#[derive(Debug, PartialEq)]
-pub enum Mode {
-    Proposer,
-    Collator,
-    Both
-}
-
-#[derive(PartialEq)]
-enum ConfigType {
-    Mode,
-    Nil
-}
-
-#[derive(Debug, PartialEq)]
-pub struct Config {
-    mode: Mode
-}
-
-impl Config {
-    pub fn new(mode: Mode) -> Config {
-        Config { mode }
-    }
-}
-
-pub fn parse_args(mut args: Vec<String>) -> Result<Config, &'static str> {
-    let mut config_type = ConfigType::Nil;
-    
-    // Default Case
-    let mut mode = Mode::Both;
-
-    for arg in args {
-        // Match `-` prefixed args to a list of valid configuration points and set their values with the following non `-` prefixed value
-        if arg.starts_with("-") {
-            match arg.to_lowercase().as_ref() {
-                    "-mode" => { config_type = ConfigType::Mode; },
-                    _ => { return Err("Invalid configuration argument"); }
-                }
-        } else if config_type == ConfigType::Mode {
-            // Match provided value to mode type
-            match arg.to_lowercase().as_ref() {
-                "proposer" | "p" => { mode = Mode::Proposer; },
-                "collator" | "c" => { mode = Mode::Collator; },
-                "both" | "b" => { mode = Mode::Both; }
-                _ => { return Err("Invalid configuration value"); }
-            }
-
-            config_type = ConfigType::Nil;
-        } else {
-            return Err("No configuration argument supplied");
-        }
-    }
-
-    if config_type == ConfigType::Nil {
-        Ok(Config::new(mode))
-    } else {
-        Err("No configuration value supplied")
-    }
-}
-
-pub fn run(config: Config) {
+pub fn run(config: config::Config) {
     /// The main function to run the node.  
     /// 
     /// # Inputs
