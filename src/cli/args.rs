@@ -1,4 +1,4 @@
-use config;
+use cli::config;
 
 #[derive(PartialEq)]
 enum ConfigType {
