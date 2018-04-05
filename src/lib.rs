@@ -1,7 +1,8 @@
 // Module declarations
 pub mod cli;
-mod proposer;
-mod collator;
+pub mod proposer;
+pub mod collator;
+pub mod smc_listener;
 
 use std::thread;
 
@@ -14,8 +15,8 @@ pub fn run(config: cli::config::Config) {
     
     println!("Client Mode: {:?}", config.mode);
 
-    let proposer = proposer::Proposer::new();
-    let collator = collator::Collator::new();
+    let mut proposer = proposer::Proposer::new();
+    let mut collator = collator::Collator::new();
 
     let mut proposer_handle: Option<thread::JoinHandle<()>> = None;
     let mut collator_handle: Option<thread::JoinHandle<()>> = None;

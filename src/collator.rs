@@ -1,25 +1,48 @@
-pub struct Collator;
+pub struct Collator {
+    pub registered: bool,
+    pub eligible: bool
+}
 
 impl Collator {
     pub fn new() -> Collator {
-        Collator
+        Collator {
+            registered: false,
+            eligible: false
+        }
     }
 
-    pub fn run(&self) {}
+    pub fn run(&mut self) {
+        if !self.registered {
+            self.register();
+        }
 
-    fn register(&self) {}
+        loop {
+            while self.eligible{
+                self.get_eligibility();
+                self.get_collation_headers();
+                self.download_collations();
+                self.get_collation_headers();
+                self.download_collations();
+                self.collect_proposals();
+                self.select_proposal();
+                self.add_header();
+            }
+        }
+    }
 
-    fn check_smc(&self) {}
+    pub fn register(&self) {}
 
-    fn get_eligibility(&self) {}
+    pub fn check_smc(&self) {}
 
-    fn get_collation_headers(&self) {}
+    pub fn get_eligibility(&self) {}
 
-    fn download_collations(&self) {}
+    pub fn get_collation_headers(&self) {}
 
-    fn collect_proposals(&self) {}
+    pub fn download_collations(&self) {}
 
-    fn select_proposal(&self) {}
+    pub fn collect_proposals(&self) {}
 
-    fn add_header(&self) {}
+    pub fn select_proposal(&self) {}
+
+    pub fn add_header(&self) {}
 }
