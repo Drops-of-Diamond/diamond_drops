@@ -5,19 +5,19 @@ impl Collator {
         Collator
     }
 
-    fn register();
+    fn register() {}
 
-    fn check_smc();
+    fn check_smc() {}
 
-    fn get_eligibility();
+    fn get_eligibility() {}
 
-    fn get_collation_headers();
+    fn get_collation_headers() {}
 
-    fn download_collations();
+    fn download_collations() {}
 
-    fn collect_proposals();
+    fn collect_proposals() {}
 
-    fn select_proposal();
+    fn select_proposal() {}
 
-    fn add_header();
+    fn add_header() {}
 }

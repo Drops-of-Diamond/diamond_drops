@@ -1,6 +1,8 @@
 // Module declarations
 pub mod cli;
 pub mod config;
+mod proposer;
+mod collator;
 
 pub fn run(config: config::Config) {
     /// The main function to run the node.  

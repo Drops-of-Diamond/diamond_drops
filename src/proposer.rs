@@ -5,15 +5,15 @@ impl Proposer {
         Proposer
     }
 
-    fn register();
+    fn register() {}
 
-    fn add_balance();
+    fn add_balance() {}
 
-    fn collect_blobs();
+    fn collect_blobs() {}
 
-    fn prepare_collation();
+    fn prepare_collation() {}
 
-    fn reveal_proposal();
+    fn reveal_proposal() {}
 
-    fn broadcast_collation_body();
+    fn broadcast_collation_body() {}
 }
