@@ -1,7 +1,7 @@
 [package]
 name = "diamond_drops"
 version = "0.1.0-a"
-authors = ["James Ray, ChosunOne"]
+authors = ["James Ray", "ChosunOne"]
 description = "A work in progress implementation of Ethereum sharding in Rust."
 keywords = ["Ethereum",
 	"sharding",
