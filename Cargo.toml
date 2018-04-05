@@ -2,7 +2,7 @@
 name = "diamond_drops"
 version = "0.1.0-a"
 authors = ["James Ray"]
-description = ")."
+description = "A work in progress implementation of Ethereum sharding in Rust."
 keywords = ["Ethereum",
 	"sharding",
 	"phase 1",
