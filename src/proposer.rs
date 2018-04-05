@@ -1,19 +1,21 @@
 pub struct Proposer;
 
 impl Proposer {
-    fn new() -> Proposer {
+    pub fn new() -> Proposer {
         Proposer
     }
 
-    fn register() {}
+    pub fn run(&self) {}
 
-    fn add_balance() {}
+    fn register(&self) {}
 
-    fn collect_blobs() {}
+    fn add_balance(&self) {}
 
-    fn prepare_collation() {}
+    fn collect_blobs(&self) {}
 
-    fn reveal_proposal() {}
+    fn prepare_collation(&self) {}
 
-    fn broadcast_collation_body() {}
+    fn reveal_proposal(&self) {}
+
+    fn broadcast_collation_body(&self) {}
 }

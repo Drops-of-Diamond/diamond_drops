@@ -4,6 +4,8 @@ pub mod config;
 mod proposer;
 mod collator;
 
+use std::thread;
+
 pub fn run(config: config::Config) {
     /// The main function to run the node.  
     /// 
@@ -12,6 +14,33 @@ pub fn run(config: config::Config) {
     /// config - A struct containing the configuration values for the client
     
     println!("Client Mode: {:?}", config.mode);
+
+    let proposer = proposer::Proposer::new();
+    let collator = collator::Collator::new();
+
+    match config.mode {
+        config::Mode::Proposer => {
+            // Start a thread to run the proposer
+            thread::spawn(move || {
+                proposer.run();
+            });
+        },
+        config::Mode::Collator => {
+            // Start a thread to run the collator
+            thread::spawn(move || {
+                collator.run();
+            });
+        },
+        config::Mode::Both => {
+            // Start threads for both proposer and collator
+            thread::spawn(move || {
+                proposer.run();
+            });
+            thread::spawn(move || {
+                collator.run();
+            });
+        }
+    }
 }
 
 #[cfg(test)]

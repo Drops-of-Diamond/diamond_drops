@@ -1,23 +1,25 @@
 pub struct Collator;
 
 impl Collator {
-    fn new() -> Collator {
+    pub fn new() -> Collator {
         Collator
     }
 
-    fn register() {}
+    pub fn run(&self) {}
 
-    fn check_smc() {}
+    fn register(&self) {}
 
-    fn get_eligibility() {}
+    fn check_smc(&self) {}
 
-    fn get_collation_headers() {}
+    fn get_eligibility(&self) {}
 
-    fn download_collations() {}
+    fn get_collation_headers(&self) {}
 
-    fn collect_proposals() {}
+    fn download_collations(&self) {}
 
-    fn select_proposal() {}
+    fn collect_proposals(&self) {}
 
-    fn add_header() {}
+    fn select_proposal(&self) {}
+
+    fn add_header(&self) {}
 }
