@@ -18,31 +18,42 @@ pub fn run(config: config::Config) {
     let proposer = proposer::Proposer::new();
     let collator = collator::Collator::new();
 
+    let mut proposer_handle: Option<thread::JoinHandle<()>> = None;
+    let mut collator_handle: Option<thread::JoinHandle<()>> = None;
+
     match config.mode {
         config::Mode::Proposer => {
             println!("Running as a proposer");
             // Start a thread to run the proposer
-            thread::spawn(move || {
+            proposer_handle = Some(thread::spawn(move || {
                 proposer.run();
-            });
+            }));
         },
         config::Mode::Collator => {
             println!("Running as a collator");
             // Start a thread to run the collator
-            thread::spawn(move || {
+            collator_handle = Some(thread::spawn(move || {
                 collator.run();
-            });
+            }));
         },
         config::Mode::Both => {
             println!("Running as both a proposer and collator");
             // Start threads for both proposer and collator
-            thread::spawn(move || {
+            proposer_handle = Some(thread::spawn(move || {
                 proposer.run();
-            });
-            thread::spawn(move || {
+            }));
+            collator_handle = Some(thread::spawn(move || {
                 collator.run();
-            });
+            }));
         }
+    }
+
+    if let Some(handle) = proposer_handle {
+        handle.join();
+    }
+
+    if let Some(handle) = collator_handle {
+        handle.join();
     }
 }
 
