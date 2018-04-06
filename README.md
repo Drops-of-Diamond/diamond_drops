@@ -21,6 +21,52 @@ We're implementing the Ethereum [Draft Sharding Phase 1 Specification](https://e
   
 For further information please refer to the [Introduction and onboarding process for new developers](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers).
 
+### Setup guide
+
+#### Install dependencies
+
+  * [Install Rust](https://github.com/rust-lang/book/blob/master/2018-edition/src/ch01-01-installation.md)
+
+  * **Update Rust**
+    ```bash
+    rustup update
+    ```
+
+#### Clone a fork of the repository
+
+  * Fork the repository https://github.com/Drops-of-Diamond/diamond_drops
+
+  * Clone your fork of the repository (replace <USERNAME> below with your Github username):
+    ```bash
+    git clone https://github.com/<USERNAME>/Diamond-drops;
+    cd Diamond-drops
+    ```
+
+  * Add the "upstream" repository to your remotes and show your list of remotes verbosely
+    ```bash
+    git remote add upstream https://github.com/Drops-of-Diamond/diamond_drops;
+    git remote --verbose
+    ```
+
+  * Change from the "master" branch to the "develop" branch to see the latest features that are being integrated but are not officially ready for production
+
+#### Run and Test the code
+
+  * Build and run the code and provide arguments that it accepts from the CLI
+    ```bash
+    cargo run -- -mode b
+    ```
+
+    * Note: CLI Options available may include:
+      * Proposer Mode: `cargo run -- -mode p`
+      * Collator Mode: `cargo run -- -mode c`
+      * Both Proposer and Collator Mode: `cargo run -- -mode b`
+
+  * Run tests
+    ```bash
+    cargo test
+    ```
+
 ### We're looking for more developers!
 
 See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information.
