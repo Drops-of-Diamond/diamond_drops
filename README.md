@@ -67,6 +67,8 @@ For further information please refer to the [Introduction and onboarding process
     cargo test
     ```
 
+See this wiki article [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Contributing-guidelines).
+
 ### We're looking for more developers!
 
 See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information.
@@ -78,10 +80,6 @@ For an introduction to Ethereum, see https://ethereum.org/ or https://github.com
 ### Why Rust?
 
 After comparing Rust, C++, Go, Javascript and Python, as well as corresponding implementations (Parity, cppethereum, Go-ethereum, ethereumJS and Py-EVM), Rust is most preferable, while I haven't tried being a user of other implementations, so I can't comment on a comparison. Rust has advantages such as safety, concurrency, practicality, better memory safety, zero-cost abstractions, and support for functional and imperative-procedural paradigms.
-
-### How to contribute to this Github repository?
-
-See this wiki article [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Contributing-guidelines).
 
 ### Further information
 
