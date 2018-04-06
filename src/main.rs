@@ -1,3 +1,4 @@
+extern crate diamond_drops;
 use diamond_drops::cli;
 
 use std::env;
