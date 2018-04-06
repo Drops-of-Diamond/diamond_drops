@@ -1,10 +1,10 @@
 # Diamond Drops
 [![Twitter](https://img.shields.io/twitter/follow/DropsofDiamond.svg?style=social)](https://twitter.com/DropsOfDiamond)
-[![TravisCI](https://img.shields.io/travis/Drops-of-Diamond/Diamond-drops/master.svg)](https://travis-ci.org/Drops-of-Diamond/Diamond-drops)
-[![codecov](https://codecov.io/gh/Drops-of-Diamond/Diamond-drops/branch/master/graph/badge.svg)](https://codecov.io/gh/Drops-of-Diamond/Diamond-drops)
-[![License: Unlicense](https://img.shields.io/badge/License-Unlicense-lightgrey.svg)](https://github.com/Drops-of-Diamond/Diamond-drops/blob/master/LICENSE)
-[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/Drops-of-Diamond/Diamond-drops.svg)](http://isitmaintained.com/project/Drops-of-Diamond/Diamond-drops "Average time to resolve an issue")
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/Drops-of-Diamond/Diamond-drops.svg)](http://isitmaintained.com/project/Drops-of-Diamond/Diamond-drops "Percentage of issues still open")
+[![TravisCI](https://img.shields.io/travis/Drops-of-Diamond/Diamond-drops/master.svg)](https://travis-ci.org/Drops-of-Diamond/diamond_drops)
+[![codecov](https://codecov.io/gh/Drops-of-Diamond/Diamond-drops/branch/master/graph/badge.svg)](https://codecov.io/gh/Drops-of-Diamond/diamond_drops)
+[![License: Unlicense](https://img.shields.io/badge/License-Unlicense-lightgrey.svg)](https://github.com/Drops-of-Diamond/diamond_drops/blob/master/LICENSE)
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/Drops-of-Diamond/Diamond-drops.svg)](http://isitmaintained.com/project/Drops-of-Diamond/diamond_drops "Average time to resolve an issue")
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/Drops-of-Diamond/Diamond-drops.svg)](http://isitmaintained.com/project/Drops-of-Diamond/diamond_drops "Percentage of issues still open")
 
 Get in touch with us on Gitter: 
 [![Gitter: DropsOfDiamond/Lobby](https://img.shields.io/badge/gitter-Drops%20of%20Diamond/Lobby-4AB495.svg)](https://gitter.im/Drops-of-Diamond/Lobby)
@@ -23,7 +23,7 @@ For further information please refer to the [Introduction and onboarding process
 
 ### We're looking for more developers!
 
-See [here](https://github.com/Drops-of-Diamond/Diamond-drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information.
+See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information.
 
 ### Introduction
 
