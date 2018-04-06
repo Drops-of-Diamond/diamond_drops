@@ -1,3 +1,3 @@
 [submodule "sharding"]
 	path = sharding
-	url = ../sharding.git
+	url = git@github.com:Drops-of-Diamond/sharding.git
