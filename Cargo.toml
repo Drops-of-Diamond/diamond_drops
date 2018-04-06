@@ -22,10 +22,6 @@ path = "src/lib.rs"
 ethereum-types = "0.3.0"
 ethcore-bytes = "0.1.0"
 
-[lib]
-name = "diamond_drops"
-path = "src/lib.rs"
-
 [badges]
 travis-ci = { repository = "Drops-of-Diamond/Diamond-drops", branch = "master" }
 codecov = { repository = "Drops-of-Diamond/Diamond-drops", branch = "master", service = "github" }
