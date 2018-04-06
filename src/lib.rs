@@ -6,8 +6,11 @@ pub mod cli;
 pub mod proposer;
 pub mod collator;
 pub mod smc_listener;
+pub mod collation;
+pub mod message;
 
 use std::thread;
+use std::sync::mpsc;
 
 pub fn run(config: cli::config::Config) {
     /// The main function to run the node.  
@@ -18,9 +21,17 @@ pub fn run(config: cli::config::Config) {
     
     println!("Client Mode: {:?}", config.mode);
 
-    let mut proposer = proposer::Proposer::new();
-    let mut collator = collator::Collator::new();
+    // Create the channel for the collator and smc listener
+    let (collator_sender, collator_receiver) = mpsc::channel();
 
+    // Create the SMC listener
+    let smc_listener = smc_listener::SMCListener::new(collator_sender);
+
+    // Create the proposer and collator
+    let mut proposer = proposer::Proposer::new();
+    let mut collator = collator::Collator::new(collator_receiver);
+
+    // Get thread handles
     let mut proposer_handle: Option<thread::JoinHandle<()>> = None;
     let mut collator_handle: Option<thread::JoinHandle<()>> = None;
 

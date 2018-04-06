@@ -1,52 +1,62 @@
+use collation;
+use message;
+
+use std::sync::mpsc;
+use std::collections::HashMap;
+
 pub struct Collator {
-    pub registered: bool,
-    pub eligible: bool,
-    pub shard_id: usize
+    eligible: bool,
+    shard_id: usize,
+    collation_trees: HashMap<usize, collation::tree::Tree>,
+    listener: mpsc::Receiver<message::Message>,
 }
 
 impl Collator {
-    pub fn new() -> Collator {
+    pub fn new(listener: mpsc::Receiver<message::Message>) -> Collator {
         Collator {
-            registered: false,
             eligible: false,
-            shard_id: 0
+            shard_id: 0,
+            listener,
+            collation_trees: HashMap::new()
         }
     }
 
     pub fn run(&mut self) {
-        if !self.registered {
-            self.register();
-        }
-
         loop {
-            while self.eligible{
-                self.get_eligibility();
-                self.get_collation_headers();
-                self.download_collations();
-                self.get_collation_headers();
-                self.download_collations();
-                self.collect_proposals();
+            // Get message from the SMC listener
+            let msg_result = self.listener.recv();
+            let msg: message::Message;
+
+            match msg_result {
+                Ok(m) => { msg = m }
+                Err(e) => { eprintln!("Error receiving message from SMC listener"); continue }
+            }
+
+            // Respond to SMC listener message
+            match msg {
+                message::Message::Eligible { value } => { self.eligible = value; }
+                message::Message::Shard { value } => { self.shard_id = value; },
+                message::Message::Header { value } => { self.store_collation_header(value); },
+                message::Message::Collation { value } => { self.store_collation(value); },
+                message::Message::Proposal { value } => { self.store_proposal(value); }
+            }
+
+            if self.eligible {
                 self.select_proposal();
                 self.add_header();
             }
         }
     }
 
-    pub fn register(&self) {}
+    fn store_collation_header(&self, header: collation::header::Header) {}
 
-    pub fn check_smc(&self) {}
+    fn store_collation(&self, collation: collation::collation::Collation) {}
 
-    pub fn get_eligibility(&self) {}
+    fn store_proposal(&self, collation: collation::collation::Collation) {}
 
-    pub fn get_collation_headers(&self) {}
+    fn select_proposal(&self) {}
 
-    pub fn download_collations(&self) {}
-
-    pub fn collect_proposals(&self) {}
-
-    pub fn select_proposal(&self) {}
-
-    pub fn add_header(&self) {}
+    fn add_header(&self) {}
 }
 
 #[cfg(test)]
@@ -54,28 +64,16 @@ mod tests {
     use super::*;
 
     #[test]
-    fn it_should_register() {
-        let c = collator::Collator::new();
+    fn it_stores_collation_header() {
+        let (tx, rx) = mpsc::channel();
+        let c = Collator::new(rx);
 
-        assert_eq!(c.registered, false);
+        let h = collation::header::Header::new();
 
-        c.register();
+        // Store the header message
+        c.store_collation_header(h);
 
-        assert_eq!(c.registered, true);
-    }
-
-    #[test]
-    fn it_checks_smc() {
-        assert!(false);
-    }
-
-    #[test]
-    fn it_gets_eligibility() {
-        assert!(false);
-    }
-
-    #[test]
-    fn it_gets_collation_headers() {
+        // Check if the header is properly stored
         assert!(false);
     }
 
