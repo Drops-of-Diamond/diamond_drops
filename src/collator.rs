@@ -1,13 +1,15 @@
 pub struct Collator {
     pub registered: bool,
-    pub eligible: bool
+    pub eligible: bool,
+    pub shard_id: usize
 }
 
 impl Collator {
     pub fn new() -> Collator {
         Collator {
             registered: false,
-            eligible: false
+            eligible: false,
+            shard_id: 0
         }
     }
 
@@ -45,4 +47,55 @@ impl Collator {
     pub fn select_proposal(&self) {}
 
     pub fn add_header(&self) {}
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn it_should_register() {
+        let c = collator::Collator::new();
+
+        assert_eq!(c.registered, false);
+
+        c.register();
+
+        assert_eq!(c.registered, true);
+    }
+
+    #[test]
+    fn it_checks_smc() {
+        assert!(false);
+    }
+
+    #[test]
+    fn it_gets_eligibility() {
+        assert!(false);
+    }
+
+    #[test]
+    fn it_gets_collation_headers() {
+        assert!(false);
+    }
+
+    #[test]
+    fn it_downloads_collations() {
+        assert!(false);
+    }
+
+    #[test]
+    fn it_collects_proposals() {
+        assert!(false);
+    }
+
+    #[test]
+    fn it_selects_proposal() {
+        assert!(false);
+    }
+
+    #[test]
+    fn it_adds_header() {
+        assert!(false);
+    }
 }

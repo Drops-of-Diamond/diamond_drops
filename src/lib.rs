@@ -1,3 +1,6 @@
+// External crates
+extern crate ethereum_types;
+
 // Module declarations
 pub mod cli;
 pub mod proposer;
