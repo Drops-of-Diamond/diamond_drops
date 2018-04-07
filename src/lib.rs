@@ -5,7 +5,7 @@ mod collator;
 
 use std::thread;
 
-pub fn run(config: cli::config::Config) {
+pub fn run(config: cli::config::Config) -> () {
     /// The main function to run the node.  
     /// 
     /// # Inputs
@@ -60,11 +60,27 @@ pub fn run(config: cli::config::Config) {
     }
 
     if let Some(handle) = proposer_handle {
-        handle.join();
+        match handle.join() {
+            Ok(x) => {
+                println!("Success handling proposer thread join {:?}", x);
+                ()
+            },
+            Err(e) => {
+                panic!("Failed to handle proposer thread join {:?}", e);
+            }
+        }
     }
 
     if let Some(handle) = collator_handle {
-        handle.join();
+        match handle.join() {
+            Ok(x) => {
+                println!("Success handling collator thread join {:?}", x);
+                ()
+            },
+            Err(e) => {
+                panic!("Failed to handle collator thread join {:?}", e);
+            }
+        }
     }
 }
 

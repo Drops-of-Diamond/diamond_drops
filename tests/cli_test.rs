@@ -81,4 +81,21 @@ mod tests {
         assert_eq!(test_proposer_name, "proposer".to_string());
         assert_eq!(test_collator_name, "collator".to_string());
     }
+
+    #[test]
+    fn it_does_not_panic_running_client_mode_with_proposer() {
+        let test_args_short = vec![String::from("-mode"), String::from("p")];
+        let config_short = args::parse_args(test_args_short).unwrap();
+        let result = diamond_drops::run(config_short);
+
+        assert_eq!(result, ());
+    }
+
+    fn it_does_not_panic_running_client_mode_with_collator() {
+        let test_args_short = vec![String::from("-mode"), String::from("c")];
+        let config_short = args::parse_args(test_args_short).unwrap();
+        let result = diamond_drops::run(config_short);
+
+        assert_eq!(result, ());
+    }
 }
