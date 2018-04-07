@@ -1,3 +1,5 @@
+use std::{thread, time};
+
 pub struct Proposer;
 
 impl Proposer {
@@ -5,7 +7,11 @@ impl Proposer {
         Proposer
     }
 
-    pub fn run(&self) {}
+    pub fn run(&self) {
+        let ten_millis = time::Duration::from_millis(10);
+        thread::sleep(ten_millis);
+        panic!("Make this test fail");
+    }
 
     fn register(&self) {}
 
