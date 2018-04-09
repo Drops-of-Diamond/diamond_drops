@@ -65,15 +65,6 @@ mod tests {
 
     #[test]
     fn it_stores_collation_header() {
-        let (tx, rx) = mpsc::channel();
-        let c = Collator::new(rx);
-
-        let h = collation::header::Header::new();
-
-        // Store the header message
-        c.store_collation_header(h);
-
-        // Check if the header is properly stored
         assert!(false);
     }
 
