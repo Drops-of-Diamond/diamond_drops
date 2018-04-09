@@ -1,5 +1,6 @@
 // External crates
 extern crate ethereum_types;
+extern crate tiny_keccak;
 
 // Module declarations
 pub mod cli;
