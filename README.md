@@ -74,6 +74,15 @@ For further information please refer to the [Introduction and onboarding process
 
 See this wiki article [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Contributing-guidelines).
 
+### View UML Diagram
+
+  * UML diagram is updated each time `cargo build` is performed and stored in /diagrams/ml.svg
+    ```bash
+    open -a "Google Chrome" ./diagrams/ml.svg
+    ```
+
+![](https://github.com/Drops-of-Diamond/diamond_drops/diagrams/ml.svg)
+
 ### We're looking for more developers!
 
 See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information.

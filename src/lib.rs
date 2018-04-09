@@ -1,3 +1,5 @@
+//! ![uml](ml.svg)
+
 // External crates
 extern crate ethereum_types;
 
