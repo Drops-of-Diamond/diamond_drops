@@ -76,7 +76,7 @@ See this wiki article [here](https://github.com/Drops-of-Diamond/diamond_drops/w
     open -a "Google Chrome" ./diagrams/ml.svg
     ```
 ![](
-https://raw.githubusercontent.com/Drops-of-Diamond/diamond_drops/master/diagrams/ml.svg?sanitize=true)
+https://raw.githubusercontent.com/ltfschoen/Diamond-drops/develop/diagrams/ml.svg?sanitize=true)
 
 ### We're looking for more developers!
 
