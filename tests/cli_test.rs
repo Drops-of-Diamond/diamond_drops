@@ -72,4 +72,32 @@ mod tests {
         assert_eq!(error_no_arg, Err("No configuration argument supplied"));
         assert_eq!(error_no_value, Err("No configuration value supplied"));
     }
+
+    #[test]
+    fn it_sets_thread_name_for_config_arguments() {
+        let test_proposer_name = config::Mode::Proposer.value();
+        let test_collator_name = config::Mode::Collator.value();
+
+        assert_eq!(test_proposer_name, "proposer".to_string());
+        assert_eq!(test_collator_name, "collator".to_string());
+    }
+
+    #[test]
+    #[ignore]
+    fn it_does_not_panic_running_client_mode_with_proposer() {
+        let test_args_short = vec![String::from("-mode"), String::from("p")];
+        let config_short = args::parse_args(test_args_short).unwrap();
+        let result = diamond_drops::run(config_short);
+        assert_eq!(result, ());
+    }
+
+    #[test]
+    #[ignore]
+    fn it_does_not_panic_running_client_mode_with_collator() {
+        let test_args_short = vec![String::from("-mode"), String::from("c")];
+        let config_short = args::parse_args(test_args_short).unwrap();
+        let result = diamond_drops::run(config_short);
+
+        assert_eq!(result, ());
+    }
 }

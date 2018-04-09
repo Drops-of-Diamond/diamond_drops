@@ -67,6 +67,11 @@ For further information please refer to the [Introduction and onboarding process
     cargo test
     ```
 
+  * Troubleshooting:
+    ```bash
+    RUST_TEST_THREADS=5 cargo test --test cli_test && cargo test
+    ```
+
 See this wiki article [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Contributing-guidelines).
 
 ### We're looking for more developers!
