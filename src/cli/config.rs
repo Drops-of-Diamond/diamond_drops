@@ -10,7 +10,7 @@ impl Mode {
         match *self {
             Mode::Proposer => "proposer".to_string(),
             Mode::Collator => "collator".to_string(),
-            Mode::Both => "both".to_string()
+            _ => "both".to_string()
         }
     }
 }
@@ -31,7 +31,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn it_sets_thread_name_for_config_arguments() {
+    fn it_set_thread_name_for_config_arguments() {
         let test_proposer_name = Mode::Proposer.value();
         let test_collator_name = Mode::Collator.value();
 

@@ -67,21 +67,16 @@ For further information please refer to the [Introduction and onboarding process
     cargo test
     ```
 
-  * Troubleshooting:
-    ```bash
-    RUST_TEST_THREADS=5 cargo test --test cli_test && cargo test
-    ```
-
 See this wiki article [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Contributing-guidelines).
 
 ### View UML Diagram
 
-  * UML diagram is updated each time `cargo build` is performed and stored in /diagrams/ml.svg
+  * UML diagram is updated each time `cargo build` is run and stored in /diagrams/ml.svg.
     ```bash
     open -a "Google Chrome" ./diagrams/ml.svg
     ```
-
-![](https://github.com/Drops-of-Diamond/diamond_drops/diagrams/ml.svg)
+![](
+https://raw.githubusercontent.com/Drops-of-Diamond/diamond_drops/master/diagrams/ml.svg?sanitize=true)
 
 ### We're looking for more developers!
 
