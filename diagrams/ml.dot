@@ -1,0 +1,13 @@
+digraph ml {
+    ndConfigType[label="{&lt;&lt;&lt;Enumeration&gt;&gt;&gt;\nConfigType|Mode\nNil}"][shape="record"];
+    ndMode[label="{&lt;&lt;&lt;Enumeration&gt;&gt;&gt;\nMode|Proposer\nCollator\nBoth|+ value(&amp;self) -&gt; String}"][shape="record"];
+    ndConfig[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nConfig|+ mode: Mode|+ new(mode: Mode) -&gt; Config}"][shape="record"];
+    ndBody[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nBody}"][shape="record"];
+    ndCollation[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nCollation|- header: header::Header\n- body: body::Body}"][shape="record"];
+    ndTree[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nTree}"][shape="record"];
+    ndCollator[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nCollator|- eligible: bool\n- shard_id: usize\n- collation_trees: HashMap&lt;usize, collation::tree::Tree&gt;\n- listener: mpsc::Receiver&lt;message::Message&gt;|+ new(listener: mpsc::Receiver&lt;message::Message&gt;) -&gt; Collator\n+ run(&amp;mut self)\n- store_collation_header(&amp;self, header: collation::header::Header)\n- store_collation(&amp;self, collation: collation::collation::Collation)\n- store_proposal(&amp;self, collation: collation::collation::Collation)\n- select_proposal(&amp;self)\n- add_header(&amp;self)}"][shape="record"];
+    ndMessage[label="{&lt;&lt;&lt;Enumeration&gt;&gt;&gt;\nMessage|Eligible\nShard\nHeader\nCollation\nProposal}"][shape="record"];
+    ndSMCListener[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nSMCListener|- period: usize\n- collator_sender: mpsc::Sender&lt;message::Message&gt;|+ new(collator_sender: mpsc::Sender&lt;message::Message&gt;) -&gt; SMCListener\n- register(&amp;self, addr: Address) -&gt; Result&lt;bool, &amp;\'static str&gt;\n- get_eligible_collator(&amp;self, shard_id: usize) -&gt; Address}"][shape="record"];
+    ndMode -> ndConfig[label=""][style="dashed"][arrowhead="diamond"];
+    ndCollation -> ndCollator[label=""][style="dashed"][arrowhead="vee"];
+}

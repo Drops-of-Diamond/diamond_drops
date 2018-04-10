@@ -72,4 +72,23 @@ mod tests {
         assert_eq!(error_no_arg, Err("No configuration argument supplied"));
         assert_eq!(error_no_value, Err("No configuration value supplied"));
     }
+
+    #[test]
+    #[ignore]
+    fn it_does_not_panic_running_client_mode_with_proposer() {
+        let test_args_short = vec![String::from("-mode"), String::from("p")];
+        let config_short = args::parse_args(test_args_short).unwrap();
+        let result = diamond_drops::run(config_short);
+        assert_eq!(result, ());
+    }
+
+    #[test]
+    #[ignore]
+    fn it_does_not_panic_running_client_mode_with_collator() {
+        let test_args_short = vec![String::from("-mode"), String::from("c")];
+        let config_short = args::parse_args(test_args_short).unwrap();
+        let result = diamond_drops::run(config_short);
+
+        assert_eq!(result, ());
+    }
 }
