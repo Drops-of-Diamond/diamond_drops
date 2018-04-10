@@ -12,7 +12,6 @@ Get in touch with us on Gitter:
 
 [Gitter room for discussion on sharding, e.g. the latest developments in research and implementations](https://gitter.im/ethereum/sharding).
 
-
 ### What are we building?
 
 We are working on a sharding implementation in Rust. The below information may be outdated. For the latest information, please ask on Gitter, while additional information on plans and work tasks is in the issues.
@@ -25,6 +24,14 @@ We're implementing sharding according to collaboration with Ethereum research at
 * Implementing further planned additions in the sharding roadmap, which is available in the above issue.
   
 For further information please refer to the [Introduction and onboarding process for new developers](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers).
+
+### Help support us!
+
+Send a donation to our multi-sig wallet at 0x6D446f9545dBC380A6BBDde8A285A7A8030D4381.
+
+### We're looking for more developers!
+
+See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information.
 
 ### Setup guide
 
@@ -73,10 +80,6 @@ For further information please refer to the [Introduction and onboarding process
     ```
 
 See this wiki article [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Contributing-guidelines).
-
-### We're looking for more developers!
-
-See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information.
 
 ### Introduction
 
