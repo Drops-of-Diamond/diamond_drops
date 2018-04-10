@@ -1,8 +1,8 @@
 [package]
-name = "Diamond-Drops"
+name = "diamond_drops"
 version = "0.1.0-a"
-authors = ["James Ray <16969914+jamesray1@users.noreply.github.com>"]
-description = "Used to create a custom type for 32-bit-wide byte arrays. Used for Drops of Diamond (more information about DoD is available at https://github.com/Drops-of-Diamond/Diamond-drops)."
+authors = ["James Ray", "ChosunOne"]
+description = "A work in progress implementation of Ethereum sharding in Rust."
 keywords = ["Ethereum",
 	"sharding",
 	"phase 1",
@@ -12,10 +12,17 @@ keywords = ["Ethereum",
 	"enshrined-in-consensus",
 	"blockchain"]
 license = "Unlicense"
+repository = "https://github.com/Drops-of-Diamond/diamond_drops"
+
+[lib]
+name = "diamond_drops"
+path = "src/lib.rs"
 
 [dependencies]
 ethereum-types = "0.3.0"
 ethcore-bytes = "0.1.0"
+tiny-keccak = "1.3"
+indextree = "1.1.0"
 
 [badges]
 travis-ci = { repository = "Drops-of-Diamond/Diamond-drops", branch = "master" }
