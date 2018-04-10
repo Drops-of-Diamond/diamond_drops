@@ -4,14 +4,14 @@ use message;
 
 pub struct SMCListener {
     period: usize,
-    collator_sender: mpsc::Sender<message::Message>
+    notary_sender: mpsc::Sender<message::Message>
 }
 
 impl SMCListener {
-    pub fn new(collator_sender: mpsc::Sender<message::Message>) -> SMCListener {
+    pub fn new(notary_sender: mpsc::Sender<message::Message>) -> SMCListener {
         SMCListener {
             period: 0,
-            collator_sender
+            notary_sender
         }
     }
 
@@ -19,8 +19,8 @@ impl SMCListener {
         Ok(false)
     }
 
-    fn get_eligible_collator(&self, shard_id: usize) -> Address {
-        Address::zero()
+    fn get_selected_notaries(&self, shard_id: usize) -> Vec<Address> {
+        vec![Address::zero()]
     }
 }
 
@@ -39,17 +39,17 @@ mod tests {
     }
 
     #[test]
-    fn it_gets_eligible_collator() {
+    fn it_gets_selected_notaries() {
         let (tx, rx) = mpsc::channel();
         let smc = SMCListener::new(tx);
         let shard_id = 0;
-        let addr = smc.get_eligible_collator(shard_id);
+        let addr = smc.get_selected_notaries(shard_id);
 
-        // The dummy "eligible collator"
+        // The dummy "selected notary"
         let addr_bytes: [u8; 20] = [0x6C, 0xaC, 0xE0, 0x52, 0x83, 0x24, 0xA8, 0xaf, 0xC2, 0xb1, 0x57, 0xCe, 0xbA, 0x3c, 0xDd, 0x2a, 0x27, 0xc4, 0xE2, 0x1f];
-        let eligible_addr = Address::from_slice(&addr_bytes);
+        let selected_addr = Address::from_slice(&addr_bytes);
 
-        assert_eq!(eligible_addr, addr);
+        assert_eq!(vec![selected_addr], addr);
     }
 
     #[test]

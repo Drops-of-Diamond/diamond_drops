@@ -1,15 +1,17 @@
 use collation::header;
 use collation::collation;
+use collation::body;
 use message;
 
 use indextree;
+use ethereum_types;
 
 use std::sync::mpsc;
 use std::collections::HashMap;
 
 pub struct Notary {
     selected: bool,
-    shard_id: usize,
+    shard_id: ethereum_types::U256,
     collation_trees: HashMap<usize, indextree::Arena<collation::Collation>>,
     listener: mpsc::Receiver<message::Message>,
 }
@@ -18,7 +20,7 @@ impl Notary {
     pub fn new(listener: mpsc::Receiver<message::Message>) -> Notary {
         Notary {
             selected: false,
-            shard_id: 0,
+            shard_id: ethereum_types::U256::from_dec_str("0").unwrap(),
             listener,
             collation_trees: HashMap::new()
         }
@@ -51,13 +53,13 @@ impl Notary {
         }
     }
 
-    fn store_collation_header(&self, header: header::Header) {}
+    fn store_collation_header(&mut self, header: header::Header) {}
 
-    fn store_collation(&self, collation: collation::Collation) {}
+    fn store_collation(&mut self, collation: collation::Collation) {}
 
-    fn store_proposal(&self, collation: collation::Collation) {}
+    fn store_proposal(&mut self, collation: collation::Collation) {}
 
-    fn get_availability(&self) {}
+    fn get_availability(&mut self) {}
 
     fn submit_vote(&self) {}
 }
@@ -68,6 +70,20 @@ mod tests {
 
     #[test]
     fn it_stores_collation_header() {
+        // Create the notary
+        let (tx, rx) = mpsc::channel();
+        let notary = Notary::new(rx);
+
+        // Collation parameters
+        let shard_id = ethereum_types::U256::from_dec_str("0").unwrap();
+        let chunk_root = ethereum_types::H256::zero();
+        let period = ethereum_types::U256::from_dec_str("0").unwrap();
+        let proposer_address = ethereum_types::H160::zero(); 
+
+        // Genesis collation
+        let genesis_header = header::Header::new(shard_id, chunk_root, period, proposer_address);
+        let genesis_collation = collation::Collation::new(genesis_header, body::Body);
+
         assert!(false);
     }
 
