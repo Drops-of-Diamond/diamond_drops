@@ -3,7 +3,6 @@
 // External crates
 extern crate ethereum_types;
 extern crate tiny_keccak;
-extern crate indextree;
 
 // Module declarations
 pub mod cli;

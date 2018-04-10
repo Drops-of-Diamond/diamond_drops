@@ -51,7 +51,12 @@ impl Notary {
         }
     }
 
-    fn store_collation(&mut self, collation: collation::Collation) {}
+    fn store_collation(&mut self, collation: collation::Collation) {
+        // Insert an entry if the current shard_id is not part of the notary
+        self.collation_vectors.entry(self.shard_id).or_insert(vec![]);
+        let vector = self.collation_vectors.get_mut(&self.shard_id).unwrap();
+        vector.push(collation);
+    }
 
     fn store_proposal(&mut self, collation: collation::Collation) {}
 
