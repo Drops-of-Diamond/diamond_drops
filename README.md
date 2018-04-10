@@ -10,13 +10,14 @@ Get in touch with us on Gitter:
 [![Gitter: DropsOfDiamond/Lobby](https://img.shields.io/badge/gitter-Drops%20of%20Diamond/Lobby-4AB495.svg)](https://gitter.im/Drops-of-Diamond/Lobby)
 [![Gitter: DropsOfDiamond/Development](https://img.shields.io/badge/gitter-Drops%20of%20Diamond/Development-4AB495.svg)](https://gitter.im/Drops-of-Diamond/Development)
 
-Gitter room for discussion on sharding, e.g. the latest developments in research and implementations: [![Gitter: Sharding](https://img.shields.io/badge/gitter-Sharding-4AB495.svg)](https://gitter.im/ethereum/sharding).
+Gitter room for discussion on sharding, e.g. the latest developments in research and implementations:
+
 
 ### What are we building?
 
 We are working on a sharding implementation in Rust. The below information may be outdated. For the latest information, please ask on Gitter, while additional information on plans and work tasks is in the issues.
 
-We're implementing sharding according to collaboration with Ethereum research at https://ethresear.ch and other teams. ~~the Ethereum [Draft Sharding Phase 1 Specification](https://ethresear.ch/t/sharding-phase-1-spec/1407)~~ which includes tasks outlined in [issue #13](https://github.com/Drops-of-Diamond/diamond_drops/issues/13) as well as:
+We're implementing sharding according to collaboration with Ethereum research at https://ethresear.ch and other teams which includes tasks outlined in [issue #13](https://github.com/Drops-of-Diamond/diamond_drops/issues/13) as well as:
 
 * Developing a CLI interface for a Sharding Client in Rust for Proposers and Collators to use
 * Developing a [Sharding Manager Contract (SMC) in the Vyper language](https://github.com/Drops-of-Diamond/sharding/blob/develop/smc/Sharding_Manager_Contract.v.py), which is a smart contract that will be deployed on the Ethereum Mainnet for the Sharding Clients to interact with. 
