@@ -1,3 +1,1 @@
-pub struct Body {
-    
-}
+pub struct Body;
