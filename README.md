@@ -18,8 +18,8 @@ We are working on a sharding implementation in Rust. The below information may b
 
 We're implementing sharding according to collaboration with Ethereum research at https://ethresear.ch and other teams which includes tasks outlined in [issue #13](https://github.com/Drops-of-Diamond/diamond_drops/issues/13) as well as:
 
-* Developing a CLI interface for a Sharding Client in Rust for Proposers and Collators to use
-* Developing a [Sharding Manager Contract (SMC) in the Vyper language](https://github.com/Drops-of-Diamond/sharding/blob/develop/smc/Sharding_Manager_Contract.v.py), which is a smart contract that will be deployed on the Ethereum Mainnet for the Sharding Clients to interact with. 
+* Developing a CLI interface for a Sharding Client in Rust for Proposers and Notaries to use
+* Developing [Sharding Manager Contract (SMC) in the Vyper language](https://github.com/Drops-of-Diamond/sharding/blob/develop/smc/Sharding_Manager_Contract.v.py), which is a smart contract that will be deployed on the Ethereum Mainnet for the Sharding Clients to interact with. 
 * Researching how to implement a Sharding P2P Network Protocol.
 * Implementing further planned additions in the sharding roadmap, which is available in the above issue.
   
@@ -71,8 +71,8 @@ See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-a
 
     * Note: CLI Options available may include:
       * Proposer Mode: `cargo run -- -mode p`
-      * Collator Mode: `cargo run -- -mode c`
-      * Both Proposer and Collator Mode: `cargo run -- -mode b`
+      * Notary Mode: `cargo run -- -mode n`
+      * Both Proposer and Notary Mode: `cargo run -- -mode b`
 
   * Run tests
     ```bash
@@ -80,6 +80,19 @@ See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-a
     ```
 
 See this wiki article [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Contributing-guidelines).
+
+### View UML Diagram
+
+  * UML diagram is updated each time `cargo build` is run and stored in /diagrams/ml.svg.
+    ```bash
+    open -a "Google Chrome" ./diagrams/ml.svg
+    ```
+![](
+https://raw.githubusercontent.com/ltfschoen/Diamond-drops/develop/diagrams/ml.svg?sanitize=true)
+
+### We're looking for more developers!
+
+See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information.
 
 ### Introduction
 

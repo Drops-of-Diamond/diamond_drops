@@ -1,7 +1,7 @@
 [package]
 name = "diamond_drops"
 version = "0.1.0-a"
-authors = ["James Ray", "ChosunOne"]
+authors = ["James Ray", "ChosunOne", "Luke Schoen"]
 description = "A work in progress implementation of Ethereum sharding in Rust."
 keywords = ["Ethereum",
 	"sharding",
@@ -13,6 +13,7 @@ keywords = ["Ethereum",
 	"blockchain"]
 license = "Unlicense"
 repository = "https://github.com/Drops-of-Diamond/diamond_drops"
+build = "build.rs"
 
 [lib]
 name = "diamond_drops"
@@ -29,3 +30,5 @@ codecov = { repository = "Drops-of-Diamond/Diamond-drops", branch = "master", se
 is-it-maintained-issue-resolution = { repository = "Drops-of-Diamond/Diamond-drops" }
 is-it-maintained-open-issues = { repository = "Drops-of-Diamond/Diamond-drops" }
 
+[build-dependencies.mml]
+version = "0.1"

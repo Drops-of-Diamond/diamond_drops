@@ -1,3 +1,5 @@
+//! ![uml](ml.svg)
+
 // External crates
 extern crate ethereum_types;
 extern crate tiny_keccak;
@@ -13,7 +15,7 @@ pub mod message;
 use std::thread;
 use std::sync::mpsc;
 
-pub fn run(config: cli::config::Config) {
+pub fn run(config: cli::config::Config) -> () {
     /// The main function to run the node.  
     /// 
     /// # Inputs
@@ -40,35 +42,57 @@ pub fn run(config: cli::config::Config) {
         cli::config::Mode::Proposer => {
             println!("Running as a proposer");
             // Start a thread to run the proposer
-            proposer_handle = Some(thread::spawn(move || {
-                proposer.run();
-            }));
+            proposer_handle = Some(thread::Builder::new()
+                .name(cli::config::Mode::Proposer.value())
+                .spawn(move || {
+                    proposer.run();
+                })
+                .expect("Failed to spawn a proposer thread")
+            );
         },
         cli::config::Mode::Notary => {
             println!("Running as a notary");
             // Start a thread to run the notary
-            notary_handle = Some(thread::spawn(move || {
-                notary.run();
-            }));
+            notary_handle = Some(thread::Builder::new()
+                .name(cli::config::Mode::Notary.value())
+                .spawn(move || {
+                    notary.run();
+                })
+                .expect("Failed to spawn a notary thread")
+            );
         },
         cli::config::Mode::Both => {
             println!("Running as both a proposer and notary");
             // Start threads for both proposer and notary
-            proposer_handle = Some(thread::spawn(move || {
-                proposer.run();
-            }));
-            notary_handle = Some(thread::spawn(move || {
-                notary.run();
-            }));
+            proposer_handle = Some(thread::Builder::new()
+                .name(cli::config::Mode::Proposer.value())
+                .spawn(move || {
+                    proposer.run();
+                })
+                .expect("Failed to spawn a proposer thread")
+            );
+            notary_handle = Some(thread::Builder::new()
+                .name(cli::config::Mode::Notary.value())
+                .spawn(move || {
+                    notary.run();
+                })
+                .expect("Failed to spawn a notary thread")
+            );
         }
     }
 
     if let Some(handle) = proposer_handle {
-        handle.join();
+        match handle.join() {
+            Ok(x) => { println!("Successful proposer thread join {:?}", x); () },
+            Err(e) => { panic!("Failed proposer thread join {:?}", e); }
+        }
     }
 
     if let Some(handle) = notary_handle {
-        handle.join();
+        match handle.join() {
+            Ok(x) => { println!("Successful notary thread join {:?}", x); () },
+            Err(e) => { panic!("Failed notary thread join {:?}", e); }
+        }
     }
 }
 
