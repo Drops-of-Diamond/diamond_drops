@@ -20,16 +20,16 @@ mod tests {
     }
 
     #[test]
-    fn it_sets_client_mode_to_collator() {
+    fn it_sets_client_mode_to_notary() {
         // Verbose command
-        let test_args_verbose = vec![String::from("-mode"), String::from("collator")];
+        let test_args_verbose = vec![String::from("-mode"), String::from("notary")];
         let config_verbose = args::parse_args(test_args_verbose).unwrap();
         // Short command
-        let test_args_short = vec![String::from("-mode"), String::from("c")];
+        let test_args_short = vec![String::from("-mode"), String::from("n")];
         let config_short = args::parse_args(test_args_short).unwrap();
 
-        assert_eq!(config_verbose.mode, config::Mode::Collator);
-        assert_eq!(config_short.mode, config::Mode::Collator);
+        assert_eq!(config_verbose.mode, config::Mode::Notary);
+        assert_eq!(config_short.mode, config::Mode::Notary);
     }
 
     #[test]
@@ -52,7 +52,7 @@ mod tests {
     #[test]
     fn it_reports_invalid_arguments() {
         // Invalid configuration
-        let test_args_configuration = vec![String::from("-bin"), String::from("collator")];
+        let test_args_configuration = vec![String::from("-bin"), String::from("notary")];
         let error_configuration = args::parse_args(test_args_configuration);
 
         // Invalid value
@@ -74,24 +74,17 @@ mod tests {
     }
 
     #[test]
-    fn it_sets_thread_name_for_config_arguments() {
-        let test_proposer_name = config::Mode::Proposer.value();
-        let test_collator_name = config::Mode::Collator.value();
-
-        assert_eq!(test_proposer_name, "proposer".to_string());
-        assert_eq!(test_collator_name, "collator".to_string());
-    }
-
-    #[test]
+    #[ignore]
     fn it_does_not_panic_running_client_mode_with_proposer() {
         let test_args_short = vec![String::from("-mode"), String::from("p")];
         let config_short = args::parse_args(test_args_short).unwrap();
         let result = diamond_drops::run(config_short);
-
         assert_eq!(result, ());
     }
 
-    fn it_does_not_panic_running_client_mode_with_collator() {
+    #[test]
+    #[ignore]
+    fn it_does_not_panic_running_client_mode_with_notary() {
         let test_args_short = vec![String::from("-mode"), String::from("c")];
         let config_short = args::parse_args(test_args_short).unwrap();
         let result = diamond_drops::run(config_short);

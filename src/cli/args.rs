@@ -23,7 +23,7 @@ pub fn parse_args(args: Vec<String>) -> Result<config::Config, &'static str> {
             // Match provided value to mode type
             match arg.to_lowercase().as_ref() {
                 "proposer" | "p" => { mode = config::Mode::Proposer; },
-                "collator" | "c" => { mode = config::Mode::Collator; },
+                "notary" | "n" => { mode = config::Mode::Notary; },
                 "both" | "b" => { mode = config::Mode::Both; }
                 _ => { return Err("Invalid configuration value"); }
             }

@@ -1,9 +1,18 @@
+//! ![uml](ml.svg)
+
+// External crates
+extern crate ethereum_types;
+
 // Module declarations
 pub mod cli;
-mod proposer;
-mod collator;
+pub mod proposer;
+pub mod notary;
+pub mod smc_listener;
+pub mod collation;
+pub mod message;
 
 use std::thread;
+use std::sync::mpsc;
 
 pub fn run(config: cli::config::Config) -> () {
     /// The main function to run the node.  
@@ -14,11 +23,19 @@ pub fn run(config: cli::config::Config) -> () {
     
     println!("Client Mode: {:?}", config.mode);
 
-    let proposer = proposer::Proposer::new();
-    let collator = collator::Collator::new();
+    // Create the channel for the notary and smc listener
+    let (notary_sender, notary_receiver) = mpsc::channel();
 
+    // Create the SMC listener
+    let smc_listener = smc_listener::SMCListener::new(notary_sender);
+
+    // Create the proposer and notary
+    let mut proposer = proposer::Proposer::new();
+    let mut notary = notary::Notary::new(notary_receiver);
+
+    // Get thread handles
     let mut proposer_handle: Option<thread::JoinHandle<()>> = None;
-    let mut collator_handle: Option<thread::JoinHandle<()>> = None;
+    let mut notary_handle: Option<thread::JoinHandle<()>> = None;
 
     match config.mode {
         cli::config::Mode::Proposer => {
@@ -32,20 +49,20 @@ pub fn run(config: cli::config::Config) -> () {
                 .expect("Failed to spawn a proposer thread")
             );
         },
-        cli::config::Mode::Collator => {
-            println!("Running as a collator");
-            // Start a thread to run the collator
-            collator_handle = Some(thread::Builder::new()
-                .name(cli::config::Mode::Collator.value())
+        cli::config::Mode::Notary => {
+            println!("Running as a notary");
+            // Start a thread to run the notary
+            notary_handle = Some(thread::Builder::new()
+                .name(cli::config::Mode::Notary.value())
                 .spawn(move || {
-                    collator.run();
+                    notary.run();
                 })
-                .expect("Failed to spawn a collator thread")
+                .expect("Failed to spawn a notary thread")
             );
         },
         cli::config::Mode::Both => {
-            println!("Running as both a proposer and collator");
-            // Start threads for both proposer and collator
+            println!("Running as both a proposer and notary");
+            // Start threads for both proposer and notary
             proposer_handle = Some(thread::Builder::new()
                 .name(cli::config::Mode::Proposer.value())
                 .spawn(move || {
@@ -53,12 +70,12 @@ pub fn run(config: cli::config::Config) -> () {
                 })
                 .expect("Failed to spawn a proposer thread")
             );
-            collator_handle = Some(thread::Builder::new()
-                .name(cli::config::Mode::Collator.value())
+            notary_handle = Some(thread::Builder::new()
+                .name(cli::config::Mode::Notary.value())
                 .spawn(move || {
-                    collator.run();
+                    notary.run();
                 })
-                .expect("Failed to spawn a collator thread")
+                .expect("Failed to spawn a notary thread")
             );
         }
     }
@@ -70,10 +87,10 @@ pub fn run(config: cli::config::Config) -> () {
         }
     }
 
-    if let Some(handle) = collator_handle {
+    if let Some(handle) = notary_handle {
         match handle.join() {
-            Ok(x) => { println!("Successful collator thread join {:?}", x); () },
-            Err(e) => { panic!("Failed collator thread join {:?}", e); }
+            Ok(x) => { println!("Successful notary thread join {:?}", x); () },
+            Err(e) => { panic!("Failed notary thread join {:?}", e); }
         }
     }
 }
