@@ -1,6 +1,7 @@
 use ethereum_types;
 use tiny_keccak;
 
+#[derive(PartialEq, Debug, Clone)]
 pub struct Header {
     shard_id: ethereum_types::U256,
     proposer_address: ethereum_types::Address,

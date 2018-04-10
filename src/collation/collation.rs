@@ -1,6 +1,7 @@
 use collation::header;
 use collation::body;
 
+#[derive(PartialEq, Clone, Debug)]
 pub struct Collation {
      header: header::Header,
      body: body::Body

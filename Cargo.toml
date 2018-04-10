@@ -22,7 +22,6 @@ path = "src/lib.rs"
 ethereum-types = "0.3.0"
 ethcore-bytes = "0.1.0"
 tiny-keccak = "1.3"
-indextree = "1.1.0"
 
 [badges]
 travis-ci = { repository = "Drops-of-Diamond/Diamond-drops", branch = "master" }
