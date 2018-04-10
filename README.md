@@ -10,7 +10,7 @@ Get in touch with us on Gitter:
 [![Gitter: DropsOfDiamond/Lobby](https://img.shields.io/badge/gitter-Drops%20of%20Diamond/Lobby-4AB495.svg)](https://gitter.im/Drops-of-Diamond/Lobby)
 [![Gitter: DropsOfDiamond/Development](https://img.shields.io/badge/gitter-Drops%20of%20Diamond/Development-4AB495.svg)](https://gitter.im/Drops-of-Diamond/Development)
 
-Gitter room for discussion on sharding, e.g. the latest developments in research and implementations:
+[Gitter room for discussion on sharding, e.g. the latest developments in research and implementations](https://gitter.im/ethereum/sharding).
 
 
 ### What are we building?
