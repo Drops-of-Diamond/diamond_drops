@@ -7,9 +7,9 @@
     {
       "type": "lldb",
       "request": "launch",
-      "name": "Debug - Mode - Collator",
+      "name": "Debug - Mode - Notary",
       "program": "${workspaceFolder}/target/debug/diamond_drops",
-      "args": "-mode c",
+      "args": "-mode n",
       "cwd": "${workspaceFolder}",
       "terminal": "integrated"
     },
