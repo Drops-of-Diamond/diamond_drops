@@ -1,20 +1,23 @@
-use collation;
+use collation::header;
+use collation::collation;
 use message;
+
+use indextree;
 
 use std::sync::mpsc;
 use std::collections::HashMap;
 
 pub struct Notary {
-    eligible: bool,
+    selected: bool,
     shard_id: usize,
-    collation_trees: HashMap<usize, collation::tree::Tree>,
+    collation_trees: HashMap<usize, indextree::Arena<collation::Collation>>,
     listener: mpsc::Receiver<message::Message>,
 }
 
 impl Notary {
     pub fn new(listener: mpsc::Receiver<message::Message>) -> Notary {
         Notary {
-            eligible: false,
+            selected: false,
             shard_id: 0,
             collation_trees: HashMap::new(),
             listener,
@@ -34,25 +37,25 @@ impl Notary {
 
             // Respond to SMC listener message
             match msg {
-                message::Message::Eligible { value } => { self.eligible = value; }
+                message::Message::Selected { value } => { self.selected = value; }
                 message::Message::Shard { value } => { self.shard_id = value; },
                 message::Message::Header { value } => { self.store_collation_header(value); },
                 message::Message::Collation { value } => { self.store_collation(value); },
                 message::Message::Proposal { value } => { self.store_proposal(value); }
             }
 
-            if self.eligible {
+            if self.selected {
                 self.select_proposal();
                 self.add_header();
             }
         }
     }
 
-    fn store_collation_header(&self, header: collation::header::Header) {}
+    fn store_collation_header(&self, header: header::Header) {}
 
-    fn store_collation(&self, collation: collation::collation::Collation) {}
+    fn store_collation(&self, collation: collation::Collation) {}
 
-    fn store_proposal(&self, collation: collation::collation::Collation) {}
+    fn store_proposal(&self, collation: collation::Collation) {}
 
     fn select_proposal(&self) {}
 

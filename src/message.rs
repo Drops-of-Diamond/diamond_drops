@@ -3,7 +3,7 @@ use collation::body;
 use collation::collation;
 
 pub enum Message {
-    Eligible{value: bool},
+    Selected{value: bool},
     Shard{value: usize},
     Header{value: header::Header},
     Collation{value: collation::Collation},
