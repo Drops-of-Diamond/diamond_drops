@@ -10,16 +10,28 @@ Get in touch with us on Gitter:
 [![Gitter: DropsOfDiamond/Lobby](https://img.shields.io/badge/gitter-Drops%20of%20Diamond/Lobby-4AB495.svg)](https://gitter.im/Drops-of-Diamond/Lobby)
 [![Gitter: DropsOfDiamond/Development](https://img.shields.io/badge/gitter-Drops%20of%20Diamond/Development-4AB495.svg)](https://gitter.im/Drops-of-Diamond/Development)
 
+[Gitter room for discussion on sharding, e.g. the latest developments in research and implementations](https://gitter.im/ethereum/sharding).
+
 ### What are we building?
 
-We're implementing the Ethereum [Draft Sharding Phase 1 Specification](https://ethresear.ch/t/sharding-phase-1-spec/1407) by:
+We are working on a sharding implementation in Rust. The below information may be outdated. For the latest information, please ask on Gitter, while additional information on plans and work tasks is in the issues.
+
+We're implementing sharding according to collaboration with Ethereum research at https://ethresear.ch and other teams which includes tasks outlined in [issue #13](https://github.com/Drops-of-Diamond/diamond_drops/issues/13) as well as:
 
 * Developing a CLI interface for a Sharding Client in Rust for Proposers and Collators to use
-* Developing [Sharding Manager Contract (SMC) in the Vyper language](https://github.com/Drops-of-Diamond/sharding/blob/develop/smc/Sharding_Manager_Contract.v.py), which is a smart contract that will be deployed on the Ethereum Mainnet for the Sharding Clients to interact with. 
+* Developing a [Sharding Manager Contract (SMC) in the Vyper language](https://github.com/Drops-of-Diamond/sharding/blob/develop/smc/Sharding_Manager_Contract.v.py), which is a smart contract that will be deployed on the Ethereum Mainnet for the Sharding Clients to interact with. 
 * Researching how to implement a Sharding P2P Network Protocol.
-* Implementing further planned additions in the sharding roadmap, which is available in the above draft specification.
+* Implementing further planned additions in the sharding roadmap, which is available in the above issue.
   
 For further information please refer to the [Introduction and onboarding process for new developers](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers).
+
+### Help support us!
+
+Send a donation to our multi-sig wallet at [0x6D446f9545dBC380A6BBDde8A285A7A8030D4381](https://etherscan.io/address/0x6d446f9545dbc380a6bbdde8a285a7a8030d4381).
+
+### We're looking for more developers!
+
+See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information.
 
 ### Setup guide
 
@@ -68,10 +80,6 @@ For further information please refer to the [Introduction and onboarding process
     ```
 
 See this wiki article [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Contributing-guidelines).
-
-### We're looking for more developers!
-
-See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information.
 
 ### Introduction
 
