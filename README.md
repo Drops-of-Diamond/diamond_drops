@@ -14,7 +14,7 @@ Get in touch with us on Gitter:
 
 We're implementing the Ethereum [Draft Sharding Phase 1 Specification](https://ethresear.ch/t/sharding-phase-1-spec/1407) by:
 
-* Developing a CLI interface for a Sharding Client in Rust for Proposers and Collators to use
+* Developing a CLI interface for a Sharding Client in Rust for Proposers and Notaries to use
 * Developing [Sharding Manager Contract (SMC) in the Vyper language](https://github.com/Drops-of-Diamond/sharding/blob/develop/smc/Sharding_Manager_Contract.v.py), which is a smart contract that will be deployed on the Ethereum Mainnet for the Sharding Clients to interact with. 
 * Researching how to implement a Sharding P2P Network Protocol.
 * Implementing further planned additions in the sharding roadmap, which is available in the above draft specification.
@@ -59,8 +59,8 @@ For further information please refer to the [Introduction and onboarding process
 
     * Note: CLI Options available may include:
       * Proposer Mode: `cargo run -- -mode p`
-      * Collator Mode: `cargo run -- -mode c`
-      * Both Proposer and Collator Mode: `cargo run -- -mode b`
+      * Notary Mode: `cargo run -- -mode n`
+      * Both Proposer and Notary Mode: `cargo run -- -mode b`
 
   * Run tests
     ```bash
