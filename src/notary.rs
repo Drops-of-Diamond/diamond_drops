@@ -29,7 +29,7 @@ impl Notary {
 
             match msg_result {
                 Ok(m) => { msg = m }
-                Err(e) => { eprintln!("Error receiving message from SMC listener"); continue }
+                Err(e) => { eprintln!("Error receiving message from SMC listener: {}", e); continue }
             }
 
             // Respond to SMC listener message
