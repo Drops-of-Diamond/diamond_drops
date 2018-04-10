@@ -45,8 +45,8 @@ impl Notary {
             }
 
             if self.selected {
-                self.select_proposal();
-                self.add_header();
+                self.get_availability();
+                self.submit_vote();
             }
         }
     }
@@ -57,9 +57,9 @@ impl Notary {
 
     fn store_proposal(&self, collation: collation::Collation) {}
 
-    fn select_proposal(&self) {}
+    fn get_availability(&self) {}
 
-    fn add_header(&self) {}
+    fn submit_vote(&self) {}
 }
 
 #[cfg(test)]
@@ -68,7 +68,6 @@ mod tests {
 
     #[test]
     fn it_stores_collation_header() {
-
         assert!(false);
     }
 
@@ -83,12 +82,12 @@ mod tests {
     }
 
     #[test]
-    fn it_selects_proposal() {
+    fn it_selects_vote() {
         assert!(false);
     }
 
     #[test]
-    fn it_adds_header() {
+    fn it_submits_vote() {
         assert!(false);
     }
 }
