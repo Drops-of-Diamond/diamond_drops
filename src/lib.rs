@@ -1,11 +1,12 @@
 // External crates
 extern crate ethereum_types;
 extern crate tiny_keccak;
+extern crate indextree;
 
 // Module declarations
 pub mod cli;
 pub mod proposer;
-pub mod collator;
+pub mod notary;
 pub mod smc_listener;
 pub mod collation;
 pub mod message;
@@ -22,19 +23,19 @@ pub fn run(config: cli::config::Config) {
     
     println!("Client Mode: {:?}", config.mode);
 
-    // Create the channel for the collator and smc listener
-    let (collator_sender, collator_receiver) = mpsc::channel();
+    // Create the channel for the notary and smc listener
+    let (notary_sender, notary_receiver) = mpsc::channel();
 
     // Create the SMC listener
-    let smc_listener = smc_listener::SMCListener::new(collator_sender);
+    let smc_listener = smc_listener::SMCListener::new(notary_sender);
 
-    // Create the proposer and collator
+    // Create the proposer and notary
     let mut proposer = proposer::Proposer::new();
-    let mut collator = collator::Collator::new(collator_receiver);
+    let mut notary = notary::Notary::new(notary_receiver);
 
     // Get thread handles
     let mut proposer_handle: Option<thread::JoinHandle<()>> = None;
-    let mut collator_handle: Option<thread::JoinHandle<()>> = None;
+    let mut notary_handle: Option<thread::JoinHandle<()>> = None;
 
     match config.mode {
         cli::config::Mode::Proposer => {
@@ -44,21 +45,21 @@ pub fn run(config: cli::config::Config) {
                 proposer.run();
             }));
         },
-        cli::config::Mode::Collator => {
-            println!("Running as a collator");
-            // Start a thread to run the collator
-            collator_handle = Some(thread::spawn(move || {
-                collator.run();
+        cli::config::Mode::Notary => {
+            println!("Running as a notary");
+            // Start a thread to run the notary
+            notary_handle = Some(thread::spawn(move || {
+                notary.run();
             }));
         },
         cli::config::Mode::Both => {
-            println!("Running as both a proposer and collator");
-            // Start threads for both proposer and collator
+            println!("Running as both a proposer and notary");
+            // Start threads for both proposer and notary
             proposer_handle = Some(thread::spawn(move || {
                 proposer.run();
             }));
-            collator_handle = Some(thread::spawn(move || {
-                collator.run();
+            notary_handle = Some(thread::spawn(move || {
+                notary.run();
             }));
         }
     }
@@ -67,7 +68,7 @@ pub fn run(config: cli::config::Config) {
         handle.join();
     }
 
-    if let Some(handle) = collator_handle {
+    if let Some(handle) = notary_handle {
         handle.join();
     }
 }

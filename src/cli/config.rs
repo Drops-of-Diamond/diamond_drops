@@ -1,7 +1,7 @@
 #[derive(Debug, PartialEq)]
 pub enum Mode {
     Proposer,
-    Collator,
+    Notary,
     Both
 }
 
