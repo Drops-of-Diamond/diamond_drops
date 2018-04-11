@@ -26,7 +26,7 @@ pub fn parse_args(args: Vec<String>) -> Result<config::Config, &'static str> {
             match arg.to_lowercase().as_ref() {
                 "proposer" | "p" => { mode = config::Mode::Proposer; },
                 "notary" | "n" => { mode = config::Mode::Notary; },
-                "both" | "b" => { mode = config::Mode::Both; }
+                "both" | "b" => { mode = config::Mode::Both; },
                 _ => { return Err("Invalid configuration value, try cargo run -- -mode <argument>,\
                           where argument is proposer, p, notary, n, both, or b."); }
             }
