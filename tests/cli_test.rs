@@ -87,13 +87,14 @@ mod tests {
         let test_args_short = vec![String::from("-mode"), String::from("p")];
         let config_short = args::parse_args(test_args_short).unwrap();
         let result = diamond_drops::run(config_short);
+
         assert_eq!(result, ());
     }
 
     #[test]
     #[ignore]
     fn it_does_not_panic_running_client_mode_with_notary() {
-        let test_args_short = vec![String::from("-mode"), String::from("c")];
+        let test_args_short = vec![String::from("-mode"), String::from("n")];
         let config_short = args::parse_args(test_args_short).unwrap();
         let result = diamond_drops::run(config_short);
 
