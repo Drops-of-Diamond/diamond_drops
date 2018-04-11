@@ -37,6 +37,6 @@ pub fn parse_args(args: Vec<String>) -> Result<config::Config, &'static str> {
     if config_type == ConfigType::Nil {
         Ok(config::Config::new(mode))
     } else {
-        Err("No configuration value supplied")
+        Err("No configuration value supplied, try proposer/p, notary/n, or both/b.")
     }
 }
