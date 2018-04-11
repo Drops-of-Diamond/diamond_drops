@@ -67,17 +67,17 @@ mod tests {
         let test_args_no_value = vec![String::from("-mode")];
         let error_no_value = args::parse_args(test_args_no_value);
 
-        assert_eq!(error_configuration, Err("Invalid configuration argument,\
-            try cargo run -- -mode <argument>,\
+        assert_eq!(error_configuration, Err("Invalid configuration argument, \
+            try cargo run -- -mode <argument>, \
             where argument is proposer, p, notary, n, both, or b."));
         assert_eq!(error_value, Err("Invalid configuration value, try \
-            cargo run -- -mode <argument>,\
+            cargo run -- -mode <argument>, \
             where argument is proposer, p, notary, n, both, or b."));
         assert_eq!(error_no_arg, Err("No configuration argument supplied, try \
-            cargo run -- -mode <argument>,\
+            cargo run -- -mode <argument>, \
             where argument is proposer, p, notary, n, both, or b."));
         assert_eq!(error_no_value, Err("No configuration value supplied, try \
-            cargo run -- -mode <argument>,\
+            cargo run -- -mode <argument>, \
             where argument is proposer, p, notary, n, both, or b."));
     }
 
