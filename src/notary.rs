@@ -16,8 +16,8 @@ impl Notary {
         Notary {
             eligible: false,
             shard_id: 0,
+            collation_trees: HashMap::new(),
             listener,
-            collation_trees: HashMap::new()
         }
     }
 
