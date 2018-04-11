@@ -13,11 +13,13 @@ pub fn parse_args(args: Vec<String>) -> Result<config::Config, &'static str> {
     let mut mode = config::Mode::Both;
 
     for arg in args {
-        // Match `-` prefixed args to a list of valid configuration points and set their values with the following non `-` prefixed value
+        // Match `-` prefixed args to a list of valid configuration points and set their
+        // values with the following non `-` prefixed value
         if arg.starts_with("-") {
             match arg.to_lowercase().as_ref() {
                     "-mode" => { config_type = ConfigType::Mode; },
-                    _ => { return Err("Invalid configuration argument, try -mode."); }
+                    _ => { return Err("Invalid configuration argument, try cargo run -- -mode <argument>,\
+                          where argument is proposer, p, notary, n, both, or b."); }
                 }
         } else if config_type == ConfigType::Mode {
             // Match provided value to mode type
@@ -25,7 +27,8 @@ pub fn parse_args(args: Vec<String>) -> Result<config::Config, &'static str> {
                 "proposer" | "p" => { mode = config::Mode::Proposer; },
                 "notary" | "n" => { mode = config::Mode::Notary; },
                 "both" | "b" => { mode = config::Mode::Both; }
-                _ => { return Err("Invalid configuration value, try proposer/p, notary/n, or both/b."); }
+                _ => { return Err("Invalid configuration value, try cargo run -- -mode <argument>,\
+                          where argument is proposer, p, notary, n, both, or b."); }
             }
 
             config_type = ConfigType::Nil;
@@ -37,6 +40,7 @@ pub fn parse_args(args: Vec<String>) -> Result<config::Config, &'static str> {
     if config_type == ConfigType::Nil {
         Ok(config::Config::new(mode))
     } else {
-        Err("No configuration value supplied, try proposer/p, notary/n, or both/b.")
+        Err("No configuration value supplied, try cargo run -- -mode <argument>,\
+                          where argument is proposer, p, notary, n, both, or b.")
     }
 }
