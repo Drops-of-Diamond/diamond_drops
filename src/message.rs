@@ -6,7 +6,7 @@ use ethereum_types;
 
 pub enum Message {
     Selected{value: bool},
-    Shard{value: ethereum_types::U256},
+    ShardId{value: ethereum_types::U256},
     Collation{value: collation::Collation},
     Proposal{value: collation::Collation}
 }
