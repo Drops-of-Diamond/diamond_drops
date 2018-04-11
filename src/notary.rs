@@ -39,7 +39,7 @@ impl Notary {
             // Respond to SMC listener message
             match msg {
                 message::Message::Selected { value } => { self.selected = value; }
-                message::Message::Shard { value } => { self.shard_id = value; },
+                message::Message::ShardId { value } => { self.shard_id = value; },
                 message::Message::Collation { value } => { self.store_collation(value); },
                 message::Message::Proposal { value } => { self.store_proposal(value); }
             }
