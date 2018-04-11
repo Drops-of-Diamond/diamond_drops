@@ -30,7 +30,7 @@ pub fn parse_args(args: Vec<String>) -> Result<config::Config, &'static str> {
 
             config_type = ConfigType::Nil;
         } else {
-            return Err("No configuration argument supplied");
+            return Err("No configuration argument supplied, try -mode.");
         }
     }
 
