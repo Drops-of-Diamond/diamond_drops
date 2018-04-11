@@ -18,8 +18,9 @@ pub fn parse_args(args: Vec<String>) -> Result<config::Config, &'static str> {
         if arg.starts_with("-") {
             match arg.to_lowercase().as_ref() {
                     "-mode" => { config_type = ConfigType::Mode; },
-                    _ => { return Err("Invalid configuration argument, try cargo run -- -mode <argument>,\
-                          where argument is proposer, p, notary, n, both, or b."); }
+                    _ => { return Err("Invalid configuration argument, try \
+                        cargo run -- -mode <argument>,\
+                        where argument is proposer, p, notary, n, both, or b."); }
                 }
         } else if config_type == ConfigType::Mode {
             // Match provided value to mode type
@@ -27,20 +28,24 @@ pub fn parse_args(args: Vec<String>) -> Result<config::Config, &'static str> {
                 "proposer" | "p" => { mode = config::Mode::Proposer; },
                 "notary" | "n" => { mode = config::Mode::Notary; },
                 "both" | "b" => { mode = config::Mode::Both; },
-                _ => { return Err("Invalid configuration value, try cargo run -- -mode <argument>,\
-                          where argument is proposer, p, notary, n, both, or b."); }
+                _ => { return Err("Invalid configuration value, try \
+                    cargo run -- -mode <argument>,\
+                    where argument is proposer, p, notary, n, both, or b."); }
             }
 
             config_type = ConfigType::Nil;
         } else {
-            return Err("No configuration argument supplied, try -mode.");
+            return Err("No configuration argument supplied, try \
+                        cargo run -- -mode <argument>,\
+                        where argument is proposer, p, notary, n, both, or b.");
         }
     }
 
     if config_type == ConfigType::Nil {
         Ok(config::Config::new(mode))
     } else {
-        Err("No configuration value supplied, try cargo run -- -mode <argument>,\
-                          where argument is proposer, p, notary, n, both, or b.")
+        Err("No configuration value supplied, try \
+            cargo run -- -mode <argument>,\
+            where argument is proposer, p, notary, n, both, or b.")
     }
 }
