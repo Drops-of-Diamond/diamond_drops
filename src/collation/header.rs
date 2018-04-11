@@ -38,9 +38,8 @@ impl Header {
         let mut sha3 = tiny_keccak::Keccak::new_sha3_256();
         
         // Add the shard id
-        let sid: &mut [u8; 32] = &mut [0; 32]; 
-        u256_to_bytes32(self.shard_id, sid);
-        sha3.update(sid);
+        let sid = u256_to_bytes32(self.shard_id);
+        sha3.update(&sid);
 
         // Add the parent hash
         /*
@@ -55,9 +54,8 @@ impl Header {
         sha3.update(cr);
 
         // Add the period
-        let p: &mut [u8; 32] = &mut [0; 32];
-        u256_to_bytes32(self.period, p);
-        sha3.update(p);
+        let p = u256_to_bytes32(self.period);
+        sha3.update(&p);
 
         // Add the proposer address
         let pa: &mut [u8; 20] = &mut [0; 20];
@@ -73,10 +71,12 @@ impl Header {
 }
 
 // A crude way of converting the ethereum_types::U256 to a u8 byte array to be hashed.  Suggestions to improve this are desired. 
-fn u256_to_bytes32(u256: ethereum_types::U256, dst: &mut [u8; 32]) {
+fn u256_to_bytes32(u256: ethereum_types::U256) -> [u8; 32] {
+    let mut bytes32: [u8; 32] = [0; 32];
     for i in 0..32 {
-        dst[i] = u256.byte(i);
+        bytes32[i] = u256.byte(i);
     }
+    bytes32
 }
 
 
@@ -89,8 +89,7 @@ mod tests {
         // Build the args for collation header creation
         // Shard Id
         let sid = ethereum_types::U256::from_dec_str("1").unwrap();
-        let sid_bytes: &mut [u8; 32] = &mut [0; 32];
-        u256_to_bytes32(sid, sid_bytes);
+        let sid_bytes = u256_to_bytes32(sid);
         
         /*
         // Parent Hash
@@ -110,8 +109,7 @@ mod tests {
 
         // Period
         let period = ethereum_types::U256::from_dec_str("1").unwrap();
-        let period_bytes: &mut [u8; 32] = &mut [0; 32];
-        u256_to_bytes32(period, period_bytes);
+        let period_bytes = u256_to_bytes32(period);
 
         // Proposer Address
         let proposer_bytes: [u8; 20] = [0x39, 0xa4, 0x2d, 0x47, 0x4a,
