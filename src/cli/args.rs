@@ -25,7 +25,7 @@ pub fn parse_args(args: Vec<String>) -> Result<config::Config, &'static str> {
                 "proposer" | "p" => { mode = config::Mode::Proposer; },
                 "notary" | "n" => { mode = config::Mode::Notary; },
                 "both" | "b" => { mode = config::Mode::Both; }
-                _ => { return Err("Invalid configuration value"); }
+                _ => { return Err("Invalid configuration value, try proposer, notary, or both."); }
             }
 
             config_type = ConfigType::Nil;
