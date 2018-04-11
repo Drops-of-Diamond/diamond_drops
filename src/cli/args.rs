@@ -17,7 +17,7 @@ pub fn parse_args(args: Vec<String>) -> Result<config::Config, &'static str> {
         if arg.starts_with("-") {
             match arg.to_lowercase().as_ref() {
                     "-mode" => { config_type = ConfigType::Mode; },
-                    _ => { return Err("Invalid configuration argument"); }
+                    _ => { return Err("Invalid configuration argument, try -mode."); }
                 }
         } else if config_type == ConfigType::Mode {
             // Match provided value to mode type
