@@ -117,7 +117,4 @@ mod tests {
     }
 
     #[test]
-    fn it_submits_vote() {
-        assert!(false);
-    }
-}
+    fn it_submits_vote() { assert!(false); }
