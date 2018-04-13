@@ -11,6 +11,7 @@ pub struct Notary {
     selected: bool,
     shard_id: ethereum_types::U256,
     collation_vectors: HashMap<ethereum_types::U256, Vec<collation::Collation>>,
+    proposal_vectors: HashMap<ethereum_types::U256, Vec<collation::Collation>>,
     smc_listener: mpsc::Receiver<message::Message>,
     manager_listener: mpsc::Receiver<client_thread::Command>
 }
@@ -27,6 +28,7 @@ impl Notary {
             selected: false,
             shard_id: ethereum_types::U256::from_dec_str("0").unwrap(),
             collation_vectors: HashMap::new(),
+            proposal_vectors: HashMap::new(),
             smc_listener,
             manager_listener
         }
@@ -78,7 +80,11 @@ impl Notary {
         vector.push(collation);
     }
 
-    fn store_proposal(&mut self, collation: collation::Collation) {}
+    fn store_proposal(&mut self, proposal: collation::Collation) {
+        self.proposal_vectors.entry(self.shard_id).or_insert(vec![]);
+        let vector = self.proposal_vectors.get_mut(&self.shard_id).unwrap();
+        vector.push(proposal);
+    }
 
     fn get_availability(&mut self) {}
 
@@ -91,6 +97,24 @@ mod tests {
     use collation::header;
     use collation::body;
 
+    fn generate_genesis_collation() -> collation::Collation {
+        let g_shard_id = ethereum_types::U256::from_dec_str("0").unwrap();
+        let g_chunk_root = ethereum_types::H256::zero();
+        let g_period = ethereum_types::U256::from_dec_str("0").unwrap();
+        let g_proposer_address = ethereum_types::Address::zero();
+        let genesis_header = header::Header::new(g_shard_id, g_chunk_root, g_period, g_proposer_address);
+        collation::Collation::new(genesis_header, body::Body)
+    }
+
+    fn generate_collation() -> collation::Collation {
+        let shard_id = ethereum_types::U256::from_dec_str("0").unwrap();
+        let chunk_root = ethereum_types::H256::zero();
+        let period = ethereum_types::U256::from_dec_str("0").unwrap();
+        let proposer_address = ethereum_types::Address::zero();
+        let collation_header = header::Header::new(shard_id, chunk_root, period, proposer_address);
+        collation::Collation::new(collation_header, body::Body)
+    }
+
     #[test]
     fn it_stores_collation() {
         // Create the notary
@@ -98,25 +122,12 @@ mod tests {
         let (mtx, mrx) = mpsc::channel();
         let mut notary = Notary::new(rx, mrx);
 
-        // Collation parameters
-        let g_shard_id = ethereum_types::U256::from_dec_str("0").unwrap();
-        let g_chunk_root = ethereum_types::H256::zero();
-        let g_period = ethereum_types::U256::from_dec_str("0").unwrap();
-        let g_proposer_address = ethereum_types::Address::zero(); 
-
         // Genesis collation
-        let genesis_header = header::Header::new(g_shard_id, g_chunk_root, g_period, g_proposer_address);
-        let genesis_collation = collation::Collation::new(genesis_header, body::Body);
+        let genesis_collation = generate_genesis_collation();
         let genesis_collation_cmp = genesis_collation.clone();
 
-        // First Collation parameters
-        let cr1 = ethereum_types::H256::zero();
-        let period1 = ethereum_types::U256::from_dec_str("1").unwrap();
-        let address1 = ethereum_types::Address::zero();
-
         // First collation
-        let first_header = header::Header::new(g_shard_id, cr1, period1, address1);
-        let first_collation = collation::Collation::new(first_header, body::Body);
+        let first_collation = generate_collation();
         let first_collation_cmp = first_collation.clone();
 
         // Push genesis collation into notary
@@ -124,15 +135,28 @@ mod tests {
         notary.store_collation(first_collation);
 
         // Check that the operations succeded
-        let vector = notary.collation_vectors.get(&g_shard_id).unwrap();
+        let vector = notary.collation_vectors.get(&ethereum_types::U256::from_dec_str("0").unwrap()).unwrap();
         assert_eq!(vector[0], genesis_collation_cmp);
         assert_eq!(vector[1], first_collation_cmp);
     }
 
     #[test]
-    #[ignore]
     fn it_stores_proposals() {
-        assert!(false);
+        // Create the notary
+        let (tx, rx) = mpsc::channel();
+        let (mtx, mrx) = mpsc::channel();
+        let mut notary = Notary::new(rx, mrx);
+
+        // Generate proposal
+        let proposal = generate_collation();
+        let proposal_cmp = proposal.clone();
+
+        // Store proposal in notary
+        notary.store_proposal(proposal);
+
+        // Check that the operations succeeded
+        let vector = notary.proposal_vectors.get(&ethereum_types::U256::from_dec_str("0").unwrap()).unwrap();
+        assert_eq!(vector[0], proposal_cmp);
     }
 
     #[test]
