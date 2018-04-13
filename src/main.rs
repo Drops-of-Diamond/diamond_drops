@@ -12,5 +12,5 @@ fn main() {
         process::exit(1);
     });
 
-    diamond_drops::run(config);
+    let result: u32 = diamond_drops::run(config);
 }
