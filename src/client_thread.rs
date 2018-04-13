@@ -4,6 +4,7 @@ use std::thread;
 use cli::config;
 use notary;
 use proposer;
+use message;
 
 /// A request to terminate a running thread
 pub enum Command {
@@ -37,12 +38,11 @@ impl ClientThread {
         }
     }
 
-    pub fn run(&mut self) {
+    pub fn run(&mut self, smc_receiver: mpsc::Receiver<message::Message>) {
         match self.mode {
             config::Mode::Notary => {
-                let (notary_smc_sender, notary_smc_receiver) = mpsc::channel();
                 let (notary_manager_sender, notary_manager_receiver) = mpsc::channel();
-                let mut notary = notary::Notary::new(notary_smc_receiver, notary_manager_receiver);
+                let mut notary = notary::Notary::new(smc_receiver, notary_manager_receiver);
 
                 self.manager = Some(notary_manager_sender);
                 self.handle = Some(thread::Builder::new()

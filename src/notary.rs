@@ -1,6 +1,4 @@
-use collation::header;
 use collation::collation;
-use collation::body;
 use message;
 use client_thread;
 
@@ -90,6 +88,8 @@ impl Notary {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use collation::header;
+    use collation::body;
 
     #[test]
     fn it_stores_collation() {

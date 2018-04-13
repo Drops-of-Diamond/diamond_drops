@@ -1,5 +1,3 @@
-use collation::header;
-use collation::body;
 use collation::collation;
 
 use ethereum_types;
