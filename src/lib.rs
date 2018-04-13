@@ -62,8 +62,8 @@ pub fn run(config: cli::config::Config) -> () {
         cli::config::Mode::Both => {
             println!("Running as both a proposer and notary");
             // Start threads for both proposer and notary
-            let mut proposer_thread = client_thread::ClientThread::new(&config.mode);
-            let mut notary_thread = client_thread::ClientThread::new(&config.mode);
+            let mut proposer_thread = client_thread::ClientThread::new(&cli::config::Mode::Proposer);
+            let mut notary_thread = client_thread::ClientThread::new(&cli::config::Mode::Notary);
 
             proposer_thread.run();
             notary_thread.run();
