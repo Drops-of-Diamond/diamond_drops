@@ -120,4 +120,5 @@ mod tests {
     fn it_submits_vote() {
         assert!(false);
     }
+
 }
