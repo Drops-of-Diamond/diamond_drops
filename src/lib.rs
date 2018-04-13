@@ -181,7 +181,7 @@ mod tests {
     fn it_returned_combined_count_for_client_mode_of_both() {
         let expected_combined_count: u32 = 4;
         let test_args_short = vec![String::from("-mode"), String::from("b")];
-        let config_short = cli::args::parse_args(test_args_short).unwrap();
+        let config_short = cli::args::parse_cli_args(test_args_short).unwrap();
         let actual_combined_count: u32 = run(config_short);
 
         assert_eq!(actual_combined_count, expected_combined_count);
@@ -191,7 +191,7 @@ mod tests {
     fn it_returned_proposer_count_for_client_mode_of_proposer() {
         let expected_proposer_count: u32 = 2;
         let test_args_short = vec![String::from("-mode"), String::from("p")];
-        let config_short = cli::args::parse_args(test_args_short).unwrap();
+        let config_short = cli::args::parse_cli_args(test_args_short).unwrap();
         let actual_proposer_count: u32 = run(config_short);
 
         assert_eq!(actual_proposer_count, expected_proposer_count);
@@ -201,7 +201,7 @@ mod tests {
     fn it_returned_notary_count_for_client_mode_of_notary() {
         let expected_notary_count: u32 = 2;
         let test_args_short = vec![String::from("-mode"), String::from("p")];
-        let config_short = cli::args::parse_args(test_args_short).unwrap();
+        let config_short = cli::args::parse_cli_args(test_args_short).unwrap();
         let actual_notary_count: u32 = run(config_short);
 
         assert_eq!(actual_notary_count, expected_notary_count);

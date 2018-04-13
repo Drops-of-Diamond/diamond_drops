@@ -6,7 +6,7 @@ enum ConfigType {
     Nil
 }
 
-pub fn parse_args(args: Vec<String>) -> Result<config::Config, &'static str> {
+pub fn parse_cli_args(args: Vec<String>) -> Result<config::Config, &'static str> {
     let mut config_type = ConfigType::Nil;
     
     // Default Case
@@ -58,10 +58,10 @@ mod tests {
     fn it_sets_client_mode_to_proposer() {
         // Verbose command
         let test_args_verbose = vec![String::from("-mode"), String::from("proposer")];
-        let config_verbose = parse_args(test_args_verbose).unwrap();
+        let config_verbose = parse_cli_args(test_args_verbose).unwrap();
         // Short command
         let test_args_short = vec![String::from("-mode"), String::from("p")];
-        let config_short = parse_args(test_args_short).unwrap();
+        let config_short = parse_cli_args(test_args_short).unwrap();
 
         assert_eq!(config_verbose.mode, config::Mode::Proposer);
         assert_eq!(config_short.mode, config::Mode::Proposer);
@@ -71,10 +71,10 @@ mod tests {
     fn it_sets_client_mode_to_notary() {
         // Verbose command
         let test_args_verbose = vec![String::from("-mode"), String::from("notary")];
-        let config_verbose = parse_args(test_args_verbose).unwrap();
+        let config_verbose = parse_cli_args(test_args_verbose).unwrap();
         // Short command
         let test_args_short = vec![String::from("-mode"), String::from("n")];
-        let config_short = parse_args(test_args_short).unwrap();
+        let config_short = parse_cli_args(test_args_short).unwrap();
 
         assert_eq!(config_verbose.mode, config::Mode::Notary);
         assert_eq!(config_short.mode, config::Mode::Notary);
@@ -84,13 +84,13 @@ mod tests {
     fn it_sets_client_mode_to_both() {
         // Verbose command
         let test_args_verbose = vec![String::from("-mode"), String::from("both")];
-        let config_verbose = parse_args(test_args_verbose).unwrap();
+        let config_verbose = parse_cli_args(test_args_verbose).unwrap();
         // Short command
         let test_args_short = vec![String::from("-mode"), String::from("b")];
-        let config_short = parse_args(test_args_short).unwrap();
+        let config_short = parse_cli_args(test_args_short).unwrap();
         // Default mode
         let test_args_default = vec![];
-        let config_default = parse_args(test_args_default).unwrap();
+        let config_default = parse_cli_args(test_args_default).unwrap();
 
         assert_eq!(config_verbose.mode, config::Mode::Both);
         assert_eq!(config_short.mode, config::Mode::Both);
@@ -101,19 +101,19 @@ mod tests {
     fn it_reports_invalid_arguments() {
         // Invalid configuration
         let test_args_configuration = vec![String::from("-bin"), String::from("notary")];
-        let error_configuration = parse_args(test_args_configuration);
+        let error_configuration = parse_cli_args(test_args_configuration);
 
         // Invalid value
         let test_args_value = vec![String::from("-mode"), String::from("bin")];
-        let error_value = parse_args(test_args_value);
+        let error_value = parse_cli_args(test_args_value);
 
         // No configuration
         let test_args_no_arg = vec![String::from("mode"), String::from("both")];
-        let error_no_arg = parse_args(test_args_no_arg);
+        let error_no_arg = parse_cli_args(test_args_no_arg);
 
         // No value
         let test_args_no_value = vec![String::from("-mode")];
-        let error_no_value = parse_args(test_args_no_value);
+        let error_no_value = parse_cli_args(test_args_no_value);
 
         assert_eq!(error_configuration, Err("Invalid configuration argument, \
             try cargo run -- -mode <argument>, \
