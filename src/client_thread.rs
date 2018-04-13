@@ -11,7 +11,7 @@ pub enum Command {
 }
 
 pub struct ClientThread {
-    handle: Option<thread::JoinHandle<()>,
+    handle: Option<thread::JoinHandle<()>>,
     mode: config::Mode,
     manager: mpsc::Sender<Command>
 }
