@@ -107,16 +107,19 @@ mod tests {
     }
 
     #[test]
+    #[ignore]
     fn it_stores_proposals() {
         assert!(false);
     }
 
     #[test]
+    #[ignore]
     fn it_selects_vote() {
         assert!(false);
     }
 
     #[test]
+    #[ignore]
     fn it_submits_vote() {
         assert!(false);
     }
