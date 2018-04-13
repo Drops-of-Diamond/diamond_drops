@@ -7,7 +7,7 @@ use std::process;
 fn main() {
     let args = env::args().skip(1).collect::<Vec<_>>();
 
-    let config = cli::args::parse_args(args).unwrap_or_else(|err| {
+    let config = cli::args::parse_cli_args(args).unwrap_or_else(|err| {
         eprintln!("Problem parsing arguments: {}", err);
         process::exit(1);
     });
