@@ -1,13 +1,13 @@
 digraph ml {
-    ndHeader[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nHeader|- shard_id: ethereum_types::U256\n- proposer_address: ethereum_types::Address\n- chunk_root: ethereum_types::H256\n- period: ethereum_types::U256|+ new(shard_id: ethereum_types::U256, chunk_root: ethereum_types::H256, period: ethereum_types::U256, proposer_address: ethereum_types::Address) -&gt; Header\n+ hash(&amp;self) -&gt; ethereum_types::H256}"][shape="record"];
-    ndCollation[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nCollation|- header: header::Header\n- body: body::Body|+ new(header: header::Header, body: body::Body) -&gt; Collation}"][shape="record"];
-    ndMessage[label="{&lt;&lt;&lt;Enumeration&gt;&gt;&gt;\nMessage|Selected\nShardId\nCollation\nProposal}"][shape="record"];
-    ndSMCListener[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nSMCListener|- period: usize\n- notary_sender: mpsc::Sender&lt;message::Message&gt;|+ new(notary_sender: mpsc::Sender&lt;message::Message&gt;) -&gt; SMCListener\n- register(&amp;self, addr: Address) -&gt; Result&lt;bool, &amp;\'static str&gt;\n- get_selected_notaries(&amp;self, shard_id: usize) -&gt; Vec&lt;Address&gt;}"][shape="record"];
-    ndNotary[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nNotary|- selected: bool\n- shard_id: ethereum_types::U256\n- collation_vectors: HashMap&lt;ethereum_types::U256, Vec&lt;collation::Collation&gt;&gt;\n- listener: mpsc::Receiver&lt;message::Message&gt;|+ new(listener: mpsc::Receiver&lt;message::Message&gt;) -&gt; Notary\n+ run(&amp;mut self)\n- store_collation(&amp;mut self, collation: collation::Collation)\n- store_proposal(&amp;mut self, collation: collation::Collation)\n- get_availability(&amp;mut self)\n- submit_vote(&amp;self)}"][shape="record"];
+    ndConfigType[label="{&lt;&lt;&lt;Enumeration&gt;&gt;&gt;\nConfigType|Mode\nNil}"][shape="record"];
     ndMode[label="{&lt;&lt;&lt;Enumeration&gt;&gt;&gt;\nMode|Proposer\nNotary\nBoth|+ value(&amp;self) -&gt; String}"][shape="record"];
     ndConfig[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nConfig|+ mode: Mode|+ new(mode: Mode) -&gt; Config}"][shape="record"];
-    ndConfigType[label="{&lt;&lt;&lt;Enumeration&gt;&gt;&gt;\nConfigType|Mode\nNil}"][shape="record"];
-    ndHeader -> ndCollation[label=""][style="dashed"][arrowhead="vee"];
-    ndCollation -> ndNotary[label=""][style="dashed"][arrowhead="vee"];
+    ndCollation[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nCollation|- header: header::Header\n- body: body::Body|+ new(header: header::Header, body: body::Body) -&gt; Collation}"][shape="record"];
+    ndHeader[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nHeader|- shard_id: ethereum_types::U256\n- proposer_address: ethereum_types::Address\n- chunk_root: ethereum_types::H256\n- period: ethereum_types::U256|+ new(shard_id: ethereum_types::U256, chunk_root: ethereum_types::H256, period: ethereum_types::U256, proposer_address: ethereum_types::Address) -&gt; Header\n+ hash(&amp;self) -&gt; ethereum_types::H256}"][shape="record"];
+    ndMessage[label="{&lt;&lt;&lt;Enumeration&gt;&gt;&gt;\nMessage|Selected\nShardId\nCollation\nProposal}"][shape="record"];
+    ndNotary[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nNotary|- selected: bool\n- shard_id: ethereum_types::U256\n- collation_vectors: HashMap&lt;ethereum_types::U256, Vec&lt;collation::Collation&gt;&gt;\n- listener: mpsc::Receiver&lt;message::Message&gt;|+ new(listener: mpsc::Receiver&lt;message::Message&gt;) -&gt; Notary\n+ run(&amp;mut self)\n- store_collation(&amp;mut self, collation: collation::Collation)\n- store_proposal(&amp;mut self, collation: collation::Collation)\n- get_availability(&amp;mut self)\n- submit_vote(&amp;self)}"][shape="record"];
+    ndSMCListener[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nSMCListener|- period: usize\n- notary_sender: mpsc::Sender&lt;message::Message&gt;|+ new(notary_sender: mpsc::Sender&lt;message::Message&gt;) -&gt; SMCListener\n- register(&amp;self, addr: Address) -&gt; Result&lt;bool, &amp;\'static str&gt;\n- get_selected_notaries(&amp;self, shard_id: usize) -&gt; Vec&lt;Address&gt;}"][shape="record"];
     ndMode -> ndConfig[label=""][style="dashed"][arrowhead="diamond"];
+    ndCollation -> ndNotary[label=""][style="dashed"][arrowhead="vee"];
+    ndHeader -> ndCollation[label=""][style="dashed"][arrowhead="vee"];
 }
