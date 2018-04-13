@@ -29,7 +29,6 @@ mod tests {
     use super::*;
 
     #[test]
-    #[ignore]
     fn it_registers() {
         let (tx, rx) = mpsc::channel();
         let smc = SMCListener::new(tx);
@@ -40,7 +39,6 @@ mod tests {
     }
 
     #[test]
-    #[ignore]
     fn it_gets_selected_notaries() {
         let (tx, rx) = mpsc::channel();
         let smc = SMCListener::new(tx);
@@ -55,7 +53,6 @@ mod tests {
     }
 
     #[test]
-    #[ignore]
     fn it_listens_for_smc_events() {
         assert!(false);
     }

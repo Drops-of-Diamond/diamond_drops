@@ -1,7 +1,5 @@
 extern crate diamond_drops;
-
 use diamond_drops::cli;
-use diamond_drops::run;
 
 use std::env;
 use std::process;
@@ -14,5 +12,5 @@ fn main() {
         process::exit(1);
     });
 
-    run(config);
+    diamond_drops::run(config);
 }
