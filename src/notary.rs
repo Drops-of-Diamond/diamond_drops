@@ -16,6 +16,12 @@ pub struct Notary {
 }
 
 impl Notary {
+    /// Creates a new Notary
+    /// 
+    /// #Inputs
+    /// 
+    /// listener: mpsc::Receiver<message::Message>
+    /// The listener allows the Notary to receive messages from the SMC Listener.
     pub fn new(listener: mpsc::Receiver<message::Message>) -> Notary {
         Notary {
             selected: false,
@@ -25,6 +31,7 @@ impl Notary {
         }
     }
 
+    /// 
     pub fn run(&mut self) {
         loop {
             // Get message from the SMC listener
