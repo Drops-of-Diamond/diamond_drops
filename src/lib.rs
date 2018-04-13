@@ -18,13 +18,12 @@ use std::thread;
 use std::time::Duration;
 use std::sync::mpsc;
 
+/// The main function to run the node.  
+/// 
+/// # Inputs
+/// 
+/// config - A struct containing the configuration values for the client
 pub fn run(config: cli::config::Config) -> () {
-    /// The main function to run the node.  
-    /// 
-    /// # Inputs
-    /// 
-    /// config - A struct containing the configuration values for the client
-    
     println!("Client Mode: {:?}", config.mode);
 
     match config.mode {
