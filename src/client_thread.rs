@@ -11,46 +11,60 @@ pub enum Command {
 }
 
 pub struct ClientThread {
-    handle: Option<thread::JoinHandle<()>>,
+    pub handle: Option<thread::JoinHandle<()>>,
     mode: config::Mode,
-    manager: mpsc::Sender<Command>
+    pub manager: Option<mpsc::Sender<Command>>
 }
 
 impl ClientThread {
-    pub fn new(mode: config::Mode) -> ClientThread {
-        match mode {
+    pub fn new(mode: &config::Mode) -> ClientThread {
+        match *mode {
             config::Mode::Notary => { 
-                let (notary_smc_sender, notary_smc_receiver) = mpsc::channel();
-                let (notary_manager_sender, notary_manager_receiver) = mpsc::channel();
-                let notary = notary::Notary::new(notary_smc_receiver, notary_manager_receiver);
-
                 ClientThread {
-                    handle: Some(thread::Builder::new()
-                                    .name(cli::config::Mode::Notary.value())
-                                    .spawn(move || {
-                                    notary.run();
-                                    })
-                                    .expect("Failed to spawn a notary thread")),
-                    mode, 
-                    manager: notary_manager_sender
+                    handle: None,
+                    mode: mode.clone(), 
+                    manager: None
                 }
             },
             config::Mode::Proposer => {
-                let proposer = proposer::Proposer::new();
-
                 ClientThread {
-                    let (proposer_manager_sender, proposer_manager_receiver) = mpsc::channel();
-                    handle: Some(thread::Builder::new()
-                                .name(cli::config::Mode::Notary.value())
-                                .spawn(move || {
-                                    notary.run();
-                                })
-                                .expect("Failed to spawn a notary thread")),
-                    mode,
-                    manager: proposer_manager_sender
+                    handle: None,
+                    mode: mode.clone(),
+                    manager: None
                 }
             },
-            _ => { eprintln!("A ClientThread should either be a proposer or a notary"); }
+            _ => { panic!() }
+        }
+    }
+
+    pub fn run(&mut self) {
+        match self.mode {
+            config::Mode::Notary => {
+                let (notary_smc_sender, notary_smc_receiver) = mpsc::channel();
+                let (notary_manager_sender, notary_manager_receiver) = mpsc::channel();
+                let mut notary = notary::Notary::new(notary_smc_receiver, notary_manager_receiver);
+
+                self.manager = Some(notary_manager_sender);
+                self.handle = Some(thread::Builder::new()
+                                    .name(config::Mode::Notary.value())
+                                    .spawn(move || {
+                                    notary.run();
+                                    })
+                                    .expect("Failed to spawn a notary thread"));
+            },
+            config::Mode::Proposer => {
+                let (proposer_manager_sender, proposer_manager_receiver) = mpsc::channel();
+                let mut proposer = proposer::Proposer::new();
+
+                self.manager = Some(proposer_manager_sender);
+                self.handle = Some(thread::Builder::new()
+                                .name(config::Mode::Proposer.value())
+                                .spawn(move || {
+                                    proposer.run();
+                                })
+                                .expect("Failed to spawn a proposer thread"));
+            }
+            _ => { panic!() }
         }
     }
 }

@@ -2,6 +2,7 @@ use collation::header;
 use collation::collation;
 use collation::body;
 use message;
+use client_thread;
 
 use ethereum_types;
 
@@ -12,7 +13,8 @@ pub struct Notary {
     selected: bool,
     shard_id: ethereum_types::U256,
     collation_vectors: HashMap<ethereum_types::U256, Vec<collation::Collation>>,
-    listener: mpsc::Receiver<message::Message>,
+    smc_listener: mpsc::Receiver<message::Message>,
+    manager_listener: mpsc::Receiver<client_thread::Command>
 }
 
 impl Notary {
@@ -22,33 +24,46 @@ impl Notary {
     /// 
     /// listener: mpsc::Receiver<message::Message>
     /// The listener allows the Notary to receive messages from the SMC Listener.
-    pub fn new(listener: mpsc::Receiver<message::Message>) -> Notary {
+    pub fn new(smc_listener: mpsc::Receiver<message::Message>, manager_listener: mpsc::Receiver<client_thread::Command>) -> Notary {
         Notary {
             selected: false,
             shard_id: ethereum_types::U256::from_dec_str("0").unwrap(),
-            listener,
-            collation_vectors: HashMap::new()
+            collation_vectors: HashMap::new(),
+            smc_listener,
+            manager_listener
         }
     }
 
     /// 
     pub fn run(&mut self) {
         loop {
-            // Get message from the SMC listener
-            let msg_result = self.listener.recv();
-            let msg: message::Message;
+            // Asynchronously get message from the thread manager
+            let manager_msg = self.manager_listener.try_iter().next();
 
-            match msg_result {
-                Ok(m) => { msg = m }
-                Err(e) => { eprintln!("Error receiving message from SMC listener: {}", e); continue }
+            // Respond to the thread manager message
+            match manager_msg {
+                Some(msg) => {
+                    match msg {
+                        client_thread::Command::Terminate => { break }
+                    }
+                },
+                None => { }
             }
 
+            // Asynchronously get message from the SMC listener
+            let smc_msg = self.smc_listener.try_iter().next();
+
             // Respond to SMC listener message
-            match msg {
-                message::Message::Selected { value } => { self.selected = value; }
-                message::Message::ShardId { value } => { self.shard_id = value; },
-                message::Message::Collation { value } => { self.store_collation(value); },
-                message::Message::Proposal { value } => { self.store_proposal(value); }
+            match smc_msg {
+                Some(msg) => { 
+                    match msg {
+                        message::Message::Selected { value } => { self.selected = value; }
+                        message::Message::ShardId { value } => { self.shard_id = value; },
+                        message::Message::Collation { value } => { self.store_collation(value); },
+                        message::Message::Proposal { value } => { self.store_proposal(value); }
+                    }
+                },
+                None => { }
             }
 
             if self.selected {
@@ -80,7 +95,8 @@ mod tests {
     fn it_stores_collation() {
         // Create the notary
         let (tx, rx) = mpsc::channel();
-        let mut notary = Notary::new(rx);
+        let (mtx, mrx) = mpsc::channel();
+        let mut notary = Notary::new(rx, mrx);
 
         // Collation parameters
         let g_shard_id = ethereum_types::U256::from_dec_str("0").unwrap();
