@@ -118,8 +118,8 @@ mod tests {
     #[test]
     fn it_stores_collation() {
         // Create the notary
-        let (tx, rx) = mpsc::channel();
-        let (mtx, mrx) = mpsc::channel();
+        let (_tx, rx) = mpsc::channel();
+        let (_mtx, mrx) = mpsc::channel();
         let mut notary = Notary::new(rx, mrx);
 
         // Genesis collation
@@ -143,8 +143,8 @@ mod tests {
     #[test]
     fn it_stores_proposals() {
         // Create the notary
-        let (tx, rx) = mpsc::channel();
-        let (mtx, mrx) = mpsc::channel();
+        let (_tx, rx) = mpsc::channel();
+        let (_mtx, mrx) = mpsc::channel();
         let mut notary = Notary::new(rx, mrx);
 
         // Generate proposal
