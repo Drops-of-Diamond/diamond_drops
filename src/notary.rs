@@ -79,7 +79,7 @@ mod tests {
         let g_shard_id = ethereum_types::U256::from_dec_str("0").unwrap();
         let g_chunk_root = ethereum_types::H256::zero();
         let g_period = ethereum_types::U256::from_dec_str("0").unwrap();
-        let g_proposer_address = ethereum_types::Address::zero(); 
+        let g_proposer_address = ethereum_types::Address::zero();
 
         // Genesis collation
         let genesis_header = header::Header::new(g_shard_id, g_chunk_root, g_period, g_proposer_address);
@@ -118,3 +118,4 @@ mod tests {
 
     #[test]
     fn it_submits_vote() { assert!(false); }
+}
