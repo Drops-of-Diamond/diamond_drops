@@ -1,7 +1,7 @@
 use std::env;
 
-pub fn get_test_env() -> String {
-    let key = "TEST";
+pub fn get_env() -> String {
+    let key = "RUST_ENV";
     match env::var(key) {
         Ok(val) => {
             println!("Found environment variable key {}: {:?}", key, val);
@@ -17,22 +17,22 @@ pub fn get_test_env() -> String {
 pub fn set_test_env() {
     // Set the environment variable key `TEST` to with value of "1"
     // when `cargo test` has been run, otherwise set it to "0"
-    let key = "TEST";
-    let enabled = "1";
-    let disabled = "0";
+    let key = "RUST_ENV";
+    let value_test = "TEST";
+    let value_development = "DEVELOPMENT";
     if let Some(arg0) = env::args().nth(0) {
         if arg0 == "target/debug/diamond_drops" {
-            env::set_var(key, disabled);
-            assert_eq!(env::var(key), Ok(disabled.to_string()));
+            env::set_var(key, value_development);
+            assert_eq!(env::var(key), Ok(value_development.to_string()));
         } else {
-            env::set_var(key, enabled);
-            assert_eq!(env::var(key), Ok(enabled.to_string()));
+            env::set_var(key, value_test);
+            assert_eq!(env::var(key), Ok(value_test.to_string()));
         }
     }
 }
 
 pub fn is_running_with_cargo_test() -> bool {
-    if get_test_env() == "1" {
+    if get_env() == "TEST" {
         true
     } else {
         false
