@@ -21,8 +21,10 @@ impl Notary {
     /// 
     /// #Inputs
     /// 
-    /// listener: mpsc::Receiver<message::Message>
-    /// The listener allows the Notary to receive messages from the SMC Listener.
+    /// smc_listener: mpsc::Receiver<message::Message>
+    /// manager_listener: mpsc::Receiver<client_thread::Command>
+    /// 
+    /// The smc_listener allows the Notary to receive messages from the SMC Listener, and the manager_listener allows the thread to receive commands from outside the thread.
     pub fn new(smc_listener: mpsc::Receiver<message::Message>, manager_listener: mpsc::Receiver<client_thread::Command>) -> Notary {
         Notary {
             selected: false,
