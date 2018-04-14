@@ -38,9 +38,10 @@ pub fn run(config: cli::config::Config) -> () {
             let mut proposer_thread = client_thread::ClientThread::new(&config.mode);
             proposer_thread.run(smc_rx);
 
-            // TODO make this part only run when running 'cargo test'
-            thread::sleep(Duration::from_secs(1));
-            let _result = proposer_thread.manager.unwrap().send(client_thread::Command::Terminate);
+            if cli::config_env::is_running_with_cargo_test() {
+                thread::sleep(Duration::from_secs(1));
+                let _result = proposer_thread.manager.unwrap().send(client_thread::Command::Terminate);
+            }
 
             // Wait for thread termination
             match proposer_thread.handle.unwrap().join() {
@@ -59,9 +60,10 @@ pub fn run(config: cli::config::Config) -> () {
             let mut notary_thread = client_thread::ClientThread::new(&config.mode);
             notary_thread.run(smc_rx);
 
-            // TODO make this part only run when running 'cargo test'
-            thread::sleep(Duration::from_secs(1));
-            let _result = notary_thread.manager.unwrap().send(client_thread::Command::Terminate);
+            if cli::config_env::is_running_with_cargo_test() {
+                thread::sleep(Duration::from_secs(1));
+                let _result = notary_thread.manager.unwrap().send(client_thread::Command::Terminate);
+            }
 
             // Wait for thread termination
             match notary_thread.handle.unwrap().join() {
@@ -85,10 +87,11 @@ pub fn run(config: cli::config::Config) -> () {
             proposer_thread.run(proposer_smc_rx);
             notary_thread.run(notary_smc_rx);
 
-            // TODO make this part only run when running 'cargo test'
-            thread::sleep(Duration::from_secs(1));
-            let _p_result = proposer_thread.manager.unwrap().send(client_thread::Command::Terminate);
-            let _n_result = notary_thread.manager.unwrap().send(client_thread::Command::Terminate);
+            if cli::config_env::is_running_with_cargo_test() {
+                thread::sleep(Duration::from_secs(1));
+                let _p_result = proposer_thread.manager.unwrap().send(client_thread::Command::Terminate);
+                let _n_result = notary_thread.manager.unwrap().send(client_thread::Command::Terminate);
+            }
 
             // Wait for thread termination
             match proposer_thread.handle.unwrap().join() {
@@ -102,5 +105,4 @@ pub fn run(config: cli::config::Config) -> () {
         }
     }
 }
-
 
