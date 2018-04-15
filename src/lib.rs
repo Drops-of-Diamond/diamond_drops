@@ -3,6 +3,8 @@
 // External crates
 extern crate ethereum_types;
 extern crate tiny_keccak;
+#[macro_use]
+extern crate log;
 
 // Module declarations
 pub mod cli;
@@ -24,11 +26,11 @@ use std::sync::mpsc;
 /// 
 /// config - A struct containing the configuration values for the client
 pub fn run(config: cli::config::Config) -> () {
-    println!("Client Mode: {:?}", config.mode);
+    debug!("Client Mode: {:?}", config.mode);
 
     match config.mode {
         cli::config::Mode::Proposer => {
-            println!("Running as a proposer");
+            debug!("Running as a proposer");
 
             // Create the SMC Listener
             let (smc_tx, smc_rx) = mpsc::channel();
@@ -45,12 +47,12 @@ pub fn run(config: cli::config::Config) -> () {
 
             // Wait for thread termination
             match proposer_thread.handle.unwrap().join() {
-                Ok(x) => { println!("Successful proposer thread join {:?}", x); () },
+                Ok(x) => { debug!("Successful proposer thread join {:?}", x); () },
                 Err(e) => { panic!("Failed proposer thread join {:?}", e); }
             }
         },
         cli::config::Mode::Notary => {
-            println!("Running as a notary");
+            debug!("Running as a notary");
 
             // Create the SMC Listener
             let (smc_tx, smc_rx) = mpsc::channel();
@@ -67,12 +69,12 @@ pub fn run(config: cli::config::Config) -> () {
 
             // Wait for thread termination
             match notary_thread.handle.unwrap().join() {
-                Ok(x) => { println!("Successful notary thread join {:?}", x); () },
+                Ok(x) => { debug!("Successful notary thread join {:?}", x); () },
                 Err(e) => { panic!("Failed notary thread join {:?}", e); }
             }
         },
         cli::config::Mode::Both => {
-            println!("Running as both a proposer and notary");
+            debug!("Running as both a proposer and notary");
 
             // Create the SMC Listeners
             let (notary_smc_tx, notary_smc_rx) = mpsc::channel();
@@ -95,11 +97,11 @@ pub fn run(config: cli::config::Config) -> () {
 
             // Wait for thread termination
             match proposer_thread.handle.unwrap().join() {
-                Ok(x) => { println!("Successful proposer thread join {:?}", x); () },
+                Ok(x) => { debug!("Successful proposer thread join {:?}", x); () },
                 Err(e) => { panic!("Failed proposer thread join {:?}", e); }
             }
             match notary_thread.handle.unwrap().join() {
-                Ok(x) => { println!("Successful notary thread join {:?}", x); () },
+                Ok(x) => { debug!("Successful notary thread join {:?}", x); () },
                 Err(e) => { panic!("Failed notary thread join {:?}", e); }
             }
         }

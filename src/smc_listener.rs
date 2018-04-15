@@ -22,8 +22,8 @@ impl SMCListener {
         let result: Result<String, String> = Result::Err(String::from("Error"));
 
         match result {
-            Ok(msg) => { println!("Success registered notary address {:?} with SMC Contract", notary_addr); true },
-            Err(e) => { println!("Error registering notary address {:?} with SMC Contract: {:?}", notary_addr, e); false }
+            Ok(msg) => { info!("Success registered notary address {:?} with SMC Contract", notary_addr); true },
+            Err(e) => { error!("Error registering notary address {:?} with SMC Contract: {:?}", notary_addr, e); false }
         }
     }
 
@@ -36,8 +36,8 @@ impl SMCListener {
         let result: Result<String, String> = Result::Err(String::from("Error"));
 
         match result {
-            Ok(msg) => { println!("Success registered proposer address {:?} with SMC Contract", proposer_addr); true },
-            Err(e) => { println!("Error registering proposer address {:?} with SMC Contract: {:?}", proposer_addr, e); false }
+            Ok(msg) => { info!("Success registered proposer address {:?} with SMC Contract", proposer_addr); true },
+            Err(e) => { error!("Error registering proposer address {:?} with SMC Contract: {:?}", proposer_addr, e); false }
         }
     }
 }

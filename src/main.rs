@@ -1,5 +1,8 @@
 extern crate diamond_drops;
 
+#[macro_use]
+extern crate log;
+
 use diamond_drops::cli;
 use diamond_drops::cli::{args};
 
@@ -9,10 +12,11 @@ use std::process;
 fn main() {
     let args = env::args().skip(1).collect::<Vec<_>>();
 
+    cli::config_log::init();
     cli::config_env::set_test_env();
 
     let config = cli::args::parse_cli_args(args).unwrap_or_else(|err| {
-        eprintln!("Problem parsing arguments: {}", err);
+        error!("Problem parsing arguments: {}", err);
         process::exit(1);
     });
 

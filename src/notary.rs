@@ -48,13 +48,13 @@ impl Notary {
             // Respond to the thread manager message
             match manager_msg {
                 Some(msg) => {
-                    println!("Received pending message {:?} in thread {:?} from another thread", msg, thread::current());
+                    debug!("Received pending message {:?} in thread {:?} from another thread", msg, thread::current());
                     match msg {
                         client_thread::Command::Terminate => { break }
                     }
                 },
                 None => {
-                    // println!("No more pending messages from other threads to thread {:?} or channel hung up", thread::current());
+                     trace!("No more pending messages from other threads to thread {:?} or channel hung up", thread::current());
                 }
             }
 
@@ -64,7 +64,7 @@ impl Notary {
             // Respond to SMC listener message
             match smc_msg {
                 Some(msg) => {
-                    println!("Received pending message {:?} in thread {:?} from SMC Listener", msg, thread::current());
+                    debug!("Received pending message {:?} in thread {:?} from SMC Listener", msg, thread::current());
                     match msg {
                         message::Message::Selected { value } => { self.selected = value; }
                         message::Message::ShardId { value } => { self.shard_id = value; },
@@ -73,7 +73,7 @@ impl Notary {
                     }
                 },
                 None => {
-                    // println!("No more pending messages from SMC Listener to thread {:?} or channel hung", thread::current());
+                     trace!("No more pending messages from SMC Listener to thread {:?} or channel hung", thread::current());
                 }
             }
 
@@ -85,14 +85,14 @@ impl Notary {
     }
 
     fn store_collation(&mut self, collation: collation::Collation) {
-        println!("Storing in notary id {} a new collation mapped to shard id {}", self.id, self.shard_id);
+        debug!("Storing in notary id {} a new collation mapped to shard id {}", self.id, self.shard_id);
         self.collation_vectors.entry(self.shard_id).or_insert(vec![]);
         let vector = self.collation_vectors.get_mut(&self.shard_id).unwrap();
         vector.push(collation);
     }
 
     fn store_proposal(&mut self, proposal: collation::Collation) {
-        println!("Storing in notary id {} a new proposal collation mapped to shard id {}", self.id, self.shard_id);
+        debug!("Storing in notary id {} a new proposal collation mapped to shard id {}", self.id, self.shard_id);
         self.proposal_vectors.entry(self.shard_id).or_insert(vec![]);
         let vector = self.proposal_vectors.get_mut(&self.shard_id).unwrap();
         vector.push(proposal);

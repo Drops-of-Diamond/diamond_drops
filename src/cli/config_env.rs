@@ -4,18 +4,18 @@ pub fn get_env() -> String {
     let key = "RUST_ENV";
     match env::var(key) {
         Ok(val) => {
-            println!("Found environment variable key {}: {:?}", key, val);
+            debug!("Found environment variable key {}: {:?}", key, val);
             val.to_string()
         },
         Err(e) => {
-            println!("Error interpreting environment variable key {}: {}", key, e);
+            error!("Error interpreting environment variable key {}: {}", key, e);
             "".to_string()
         },
     }
 }
 
 pub fn set_test_env() {
-    // Set the environment variable key `TEST` to with value of "1"
+    // Set the environment variable key `TEST` to value of "1"
     // when `cargo test` has been run, otherwise set it to "0"
     let key = "RUST_ENV";
     let value_test = "TEST";

@@ -79,6 +79,12 @@ See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-a
     cargo test
     ```
 
+  * Build and show Docs
+    ```bash
+    cargo build;
+    cargo doc --open
+    ```
+
 See this wiki article [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Contributing-guidelines).
 
 ### View UML Diagram
