@@ -5,6 +5,7 @@ extern crate ethereum_types;
 extern crate tiny_keccak;
 #[macro_use]
 extern crate log;
+extern crate chrono;
 
 // Module declarations
 pub mod cli;

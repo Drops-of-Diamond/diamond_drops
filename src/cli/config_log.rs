@@ -1,5 +1,6 @@
 use log;
 use log::{Record, Level, Metadata, SetLoggerError, LevelFilter};
+use chrono::Local;
 
 static LOGGER: DiamondDropsLogger = DiamondDropsLogger;
 
@@ -12,7 +13,7 @@ impl log::Log for DiamondDropsLogger {
 
     fn log(&self, record: &Record) {
         if self.enabled(record.metadata()) {
-            println!("{} - {}", record.level(), record.args());
+            println!("{} [{}] - {}", Local::now().format("%Y-%m-%dT%H:%M:%S"), record.level(), record.args());
         }
     }
 
