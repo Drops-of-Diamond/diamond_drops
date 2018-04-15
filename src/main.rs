@@ -1,4 +1,5 @@
 extern crate diamond_drops;
+
 use diamond_drops::cli;
 use diamond_drops::cli::{args};
 

@@ -4,10 +4,12 @@ use client_thread;
 
 use ethereum_types;
 
+use std::thread;
 use std::sync::mpsc;
 use std::collections::HashMap;
 
 pub struct Notary {
+    id: ethereum_types::U256,
     selected: bool,
     shard_id: ethereum_types::U256,
     collation_vectors: HashMap<ethereum_types::U256, Vec<collation::Collation>>,
@@ -27,6 +29,7 @@ impl Notary {
     /// The smc_listener allows the Notary to receive messages from the SMC Listener, and the manager_listener allows the thread to receive commands from outside the thread.
     pub fn new(smc_listener: mpsc::Receiver<message::Message>, manager_listener: mpsc::Receiver<client_thread::Command>) -> Notary {
         Notary {
+            id: ethereum_types::U256::from_dec_str("0").unwrap(),
             selected: false,
             shard_id: ethereum_types::U256::from_dec_str("0").unwrap(),
             collation_vectors: HashMap::new(),
@@ -45,11 +48,14 @@ impl Notary {
             // Respond to the thread manager message
             match manager_msg {
                 Some(msg) => {
+                    println!("Received pending message {:?} in thread {:?} from another thread", msg, thread::current());
                     match msg {
                         client_thread::Command::Terminate => { break }
                     }
                 },
-                None => { }
+                None => {
+                    // println!("No more pending messages from other threads to thread {:?} or channel hung up", thread::current());
+                }
             }
 
             // Asynchronously get message from the SMC listener
@@ -57,7 +63,8 @@ impl Notary {
 
             // Respond to SMC listener message
             match smc_msg {
-                Some(msg) => { 
+                Some(msg) => {
+                    println!("Received pending message {:?} in thread {:?} from SMC Listener", msg, thread::current());
                     match msg {
                         message::Message::Selected { value } => { self.selected = value; }
                         message::Message::ShardId { value } => { self.shard_id = value; },
@@ -65,7 +72,9 @@ impl Notary {
                         message::Message::Proposal { value } => { self.store_proposal(value); }
                     }
                 },
-                None => { }
+                None => {
+                    // println!("No more pending messages from SMC Listener to thread {:?} or channel hung", thread::current());
+                }
             }
 
             if self.selected {
@@ -76,13 +85,14 @@ impl Notary {
     }
 
     fn store_collation(&mut self, collation: collation::Collation) {
-        // Insert an entry if the current shard_id is not part of the notary
+        println!("Storing in notary id {} a new collation mapped to shard id {}", self.id, self.shard_id);
         self.collation_vectors.entry(self.shard_id).or_insert(vec![]);
         let vector = self.collation_vectors.get_mut(&self.shard_id).unwrap();
         vector.push(collation);
     }
 
     fn store_proposal(&mut self, proposal: collation::Collation) {
+        println!("Storing in notary id {} a new proposal collation mapped to shard id {}", self.id, self.shard_id);
         self.proposal_vectors.entry(self.shard_id).or_insert(vec![]);
         let vector = self.proposal_vectors.get_mut(&self.shard_id).unwrap();
         vector.push(proposal);
@@ -117,12 +127,15 @@ mod tests {
         collation::Collation::new(collation_header, body::Body)
     }
 
-    #[test]
-    fn it_stores_collation() {
-        // Create the notary
+    fn generate_notary() -> Notary {
         let (_tx, rx) = mpsc::channel();
         let (_mtx, mrx) = mpsc::channel();
-        let mut notary = Notary::new(rx, mrx);
+        Notary::new(rx, mrx)
+    }
+
+    #[test]
+    fn it_stores_collation() {
+        let mut notary = generate_notary();
 
         // Genesis collation
         let genesis_collation = generate_genesis_collation();
@@ -144,10 +157,7 @@ mod tests {
 
     #[test]
     fn it_stores_proposals() {
-        // Create the notary
-        let (_tx, rx) = mpsc::channel();
-        let (_mtx, mrx) = mpsc::channel();
-        let mut notary = Notary::new(rx, mrx);
+        let mut notary = generate_notary();
 
         // Generate proposal
         let proposal = generate_collation();
