@@ -69,8 +69,9 @@ impl Header {
         ethereum_types::H256::from_slice(&result_bytes[..])
     }
 }
-/*
-// A crude way of converting the ethereum_types::U256 to a u8 byte array to be hashed.  Suggestions to improve this are desired. 
+
+// TODO - consider replacing with https://docs.rs/ethereum-types/0.3.1/ethereum_types/struct.U256.html#method.as_u32
+// A crude way of converting the ethereum_types::U256 to a u8 byte array to be hashed.  Suggestions to improve this are desired.
 fn u256_to_bytes32(u256: ethereum_types::U256) -> [u8; 32] {
     let mut bytes32: [u8; 32] = [0; 32];
     for i in 0..32 {
@@ -78,7 +79,6 @@ fn u256_to_bytes32(u256: ethereum_types::U256) -> [u8; 32] {
     }
     bytes32
 }
-*/
 
 #[cfg(test)]
 mod tests {
@@ -89,7 +89,7 @@ mod tests {
         // Build the args for collation header creation
         // Shard Id
         let shard_id = ethereum_types::U256::from_dec_str("1").unwrap();
-        let shard_id_bytes = ethereum_types::U256::as_u32(shard_id);/*u256_to_bytes32(shard_id);*/
+        let shard_id_bytes = u256_to_bytes32(shard_id);
         
         /*
         // Parent Hash
@@ -109,7 +109,7 @@ mod tests {
 
         // Period
         let period = ethereum_types::U256::from_dec_str("1").unwrap();
-        let period_bytes = ethereum_types::U256::as_u32(period)/*u256_to_bytes32(period);*/
+        let period_bytes = u256_to_bytes32(period);
 
         // Proposer Address
         let proposer_address_bytes: [u8; 20] = [0x39, 0xa4, 0x2d, 0x47, 0x4a,
