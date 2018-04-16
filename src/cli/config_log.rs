@@ -1,10 +1,13 @@
 use fern;
+use fern::colors::{Color, ColoredLevelConfig};
 use log::{LevelFilter};
 use chrono;
 
 use std::io;
 
 fn setup_logger(verbosity: u64) -> Result<(), fern::InitError> {
+    let colors = ColoredLevelConfig::new().debug(Color::Magenta);
+
     let mut base_config = fern::Dispatch::new();
 
     base_config = match verbosity {
@@ -33,12 +36,12 @@ fn setup_logger(verbosity: u64) -> Result<(), fern::InitError> {
         .chain(fern::log_file("output.log")?);
 
     let stdout_config = fern::Dispatch::new()
-        .format(|out, message, record| {
+        .format(move |out, message, record| {
             out.finish(format_args!(
                 "{}[{}][{}] {}",
                 chrono::Local::now().format("[%Y-%m-%d][%H:%M:%S]"),
                 record.target(),
-                record.level(),
+                colors.color(record.level()),
                 message
             ))
         })
