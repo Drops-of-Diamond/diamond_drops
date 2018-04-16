@@ -1,50 +1,64 @@
 use fern;
-use log;
-use log::{Record, Level, Metadata, SetLoggerError, LevelFilter};
-use chrono::Local;
+use log::{LevelFilter};
+use chrono;
 
 use std::io;
 
-static LOGGER: DiamondDropsLogger = DiamondDropsLogger;
+fn setup_logger(verbosity: u64) -> Result<(), fern::InitError> {
+    let mut base_config = fern::Dispatch::new();
 
-struct DiamondDropsLogger;
-
-impl log::Log for DiamondDropsLogger {
-    fn enabled(&self, metadata: &Metadata) -> bool {
-        metadata.level() <= Level::Trace
-    }
-
-    fn log(&self, record: &Record) {
-        if self.enabled(record.metadata()) {
-            println!("{} [{}] - {}", Local::now().format("[%Y-%m-%d][T%H:%M:%S]"), record.level(), record.args());
+    base_config = match verbosity {
+        0 => {
+            base_config
+                .level(LevelFilter::Info)
+                .level_for("overly-verbose-target", LevelFilter::Warn)
         }
-    }
+        1 => base_config
+            .level(LevelFilter::Debug)
+            .level_for("overly-verbose-target", LevelFilter::Info),
+        2 => base_config.level(LevelFilter::Debug),
+        _3_or_more => base_config.level(LevelFilter::Trace),
+    };
 
-    fn flush(&self) {}
-}
-
-fn setup_logger() -> Result<(), fern::InitError> {
-    fern::Dispatch::new()
+    let file_config = fern::Dispatch::new()
         .format(|out, message, record| {
             out.finish(format_args!(
                 "{}[{}][{}] {}",
-                Local::now().format("[%Y-%m-%d][T%H:%M:%S]"),
+                chrono::Local::now().format("[%Y-%m-%d][%H:%M:%S]"),
                 record.target(),
                 record.level(),
                 message
             ))
         })
-        .level(log::LevelFilter::Debug)
-        .chain(io::stdout())
-        .chain(fern::log_file("output.log")?)
-        .apply()?;
+        .chain(fern::log_file("output.log")?);
+
+    let stdout_config = fern::Dispatch::new()
+        .format(|out, message, record| {
+            out.finish(format_args!(
+                "{}[{}][{}] {}",
+                chrono::Local::now().format("[%Y-%m-%d][%H:%M:%S]"),
+                record.target(),
+                record.level(),
+                message
+            ))
+        })
+        .chain(io::stdout());
+
+    base_config.chain(file_config).chain(stdout_config).apply()?;
+
     Ok(())
 }
 
 pub fn init() -> () {
     /*! Initialisation of [Log Crate](https://crates.io/crates/log) and [Fern Crate](https://docs.rs/fern/0.5.5/fern/) */
-    /*! with choice of logging level macros from highest priority to lowest: `error!`, `warn!`, `info!`, `debug!` and `trace!`. */
+    /*! to output to both stdout and to a log file with choice of logging level macros from highest priority to lowest: */
+    /*! `error!`, `warn!`, `info!`, `debug!` and `trace!`. */
     /*! [Compile time filters](https://docs.rs/log/0.4.1/log/#compile-time-filters) are configured in Cargo.toml */
 
-    setup_logger();
+    let verbosity: u64 = 2;
+
+    match setup_logger(verbosity) {
+        Ok(res) => { info!("Success initializing Rust Logger to verbosity level: {}", verbosity); () }
+        Err(e) => { error!("Error initializing Rust Logger: {}", e); }
+    }
 }
