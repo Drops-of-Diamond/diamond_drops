@@ -38,7 +38,7 @@ impl Notary {
         }
     }
 
-    /// 
+    /// Runs the notary
     pub fn run(&mut self) {
         loop {
             // Asynchronously get message from the thread manager
@@ -77,6 +77,7 @@ impl Notary {
         }
     }
 
+
     fn store_collation(&mut self, collation: collation::Collation) {
         // Insert an entry if the current shard_id is not part of the notary
         self.collation_vectors.entry(self.shard_id).or_insert(vec![]);
@@ -84,13 +85,16 @@ impl Notary {
         vector.push(collation);
     }
 
+
     fn store_proposal(&mut self, proposal: collation::Collation) {
         self.proposal_vectors.entry(self.shard_id).or_insert(vec![]);
         let vector = self.proposal_vectors.get_mut(&self.shard_id).unwrap();
         vector.push(proposal);
     }
 
+
     fn get_availability(&mut self) {}
+
 
     fn submit_vote(&self) {}
 }

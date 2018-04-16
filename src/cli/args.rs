@@ -6,6 +6,7 @@ enum ConfigType {
     Nil
 }
 
+/// Parse arguments from the command line and produce a configuration from them.
 pub fn parse_cli_args(args: Vec<String>) -> Result<config::Config, &'static str> {
     let mut config_type = ConfigType::Nil;
     
