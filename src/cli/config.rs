@@ -1,3 +1,4 @@
+/// The mode the client is running in
 #[derive(Debug, PartialEq, Clone)]
 pub enum Mode {
     Proposer,
@@ -6,6 +7,7 @@ pub enum Mode {
 }
 
 impl Mode {
+    /// Returns a string value of the current running mode
     pub fn value(&self) -> String {
         match *self {
             Mode::Proposer => "proposer".to_string(),
@@ -15,12 +17,14 @@ impl Mode {
     }
 }
 
+/// This holds configuration options for running the client
 #[derive(Debug, PartialEq)]
 pub struct Config {
     pub mode: Mode
 }
 
 impl Config {
+    /// Creates a new configuration to be run
     pub fn new(mode: Mode) -> Config {
         Config { mode }
     }
