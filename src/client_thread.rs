@@ -11,6 +11,7 @@ pub enum Command {
     Terminate
 }
 
+/// A client thread to run either a notary or a proposer
 pub struct ClientThread {
     pub handle: Option<thread::JoinHandle<()>>,
     mode: config::Mode,
@@ -18,6 +19,7 @@ pub struct ClientThread {
 }
 
 impl ClientThread {
+    /// Creats a new thread to be run
     pub fn new(mode: &config::Mode) -> ClientThread {
         match *mode {
             config::Mode::Notary => { 
@@ -38,6 +40,7 @@ impl ClientThread {
         }
     }
 
+    /// Run the thread with the given receiver
     pub fn run(&mut self, smc_receiver: mpsc::Receiver<message::Message>) {
         match self.mode {
             config::Mode::Notary => {

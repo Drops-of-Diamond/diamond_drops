@@ -2,12 +2,14 @@ use ethereum_types;
 use std::sync::mpsc;
 use message;
 
+/// This will monitor the SMC for changes and then send relevant information to the notary or the proposer.
 pub struct SMCListener {
     period: ethereum_types::U256,
     notary_sender: mpsc::Sender<message::Message>
 }
 
 impl SMCListener {
+    /// Creates a new SMC Listener
     pub fn new(notary_sender: mpsc::Sender<message::Message>) -> SMCListener {
         SMCListener {
             period: ethereum_types::U256::from_dec_str("0").unwrap(),
