@@ -1,4 +1,4 @@
-
+output.log
 /target/
 **/*.rs.bk
 Cargo.lock

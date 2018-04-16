@@ -3,6 +3,8 @@
 // External crates
 extern crate ethereum_types;
 extern crate tiny_keccak;
+
+extern crate fern;
 #[macro_use]
 extern crate log;
 extern crate chrono;
