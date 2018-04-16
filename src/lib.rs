@@ -4,6 +4,11 @@
 extern crate ethereum_types;
 extern crate tiny_keccak;
 
+extern crate fern;
+#[macro_use]
+extern crate log;
+extern crate chrono;
+
 // Module declarations
 pub mod cli;
 pub mod proposer;
@@ -24,11 +29,11 @@ use std::sync::mpsc;
 /// 
 /// config - A struct containing the configuration values for the client
 pub fn run(config: cli::config::Config) -> () {
-    println!("Client Mode: {:?}", config.mode);
+    debug!("Client Mode: {:?}", config.mode);
 
     match config.mode {
         cli::config::Mode::Proposer => {
-            println!("Running as a proposer");
+            debug!("Running as a proposer");
 
             // Create the SMC Listener
             let (smc_tx, smc_rx) = mpsc::channel();
@@ -38,18 +43,19 @@ pub fn run(config: cli::config::Config) -> () {
             let mut proposer_thread = client_thread::ClientThread::new(&config.mode);
             proposer_thread.run(smc_rx);
 
-            // TODO make this part only run when running 'cargo test'
-            thread::sleep(Duration::from_secs(1));
-            let _result = proposer_thread.manager.unwrap().send(client_thread::Command::Terminate);
+            if cli::config_env::is_running_with_cargo_test() {
+                thread::sleep(Duration::from_secs(1));
+                let _result = proposer_thread.manager.unwrap().send(client_thread::Command::Terminate);
+            }
 
             // Wait for thread termination
             match proposer_thread.handle.unwrap().join() {
-                Ok(x) => { println!("Successful proposer thread join {:?}", x); () },
+                Ok(x) => { debug!("Successful proposer thread join {:?}", x); () },
                 Err(e) => { panic!("Failed proposer thread join {:?}", e); }
             }
         },
         cli::config::Mode::Notary => {
-            println!("Running as a notary");
+            debug!("Running as a notary");
 
             // Create the SMC Listener
             let (smc_tx, smc_rx) = mpsc::channel();
@@ -59,18 +65,19 @@ pub fn run(config: cli::config::Config) -> () {
             let mut notary_thread = client_thread::ClientThread::new(&config.mode);
             notary_thread.run(smc_rx);
 
-            // TODO make this part only run when running 'cargo test'
-            thread::sleep(Duration::from_secs(1));
-            let _result = notary_thread.manager.unwrap().send(client_thread::Command::Terminate);
+            if cli::config_env::is_running_with_cargo_test() {
+                thread::sleep(Duration::from_secs(1));
+                let _result = notary_thread.manager.unwrap().send(client_thread::Command::Terminate);
+            }
 
             // Wait for thread termination
             match notary_thread.handle.unwrap().join() {
-                Ok(x) => { println!("Successful notary thread join {:?}", x); () },
+                Ok(x) => { debug!("Successful notary thread join {:?}", x); () },
                 Err(e) => { panic!("Failed notary thread join {:?}", e); }
             }
         },
         cli::config::Mode::Both => {
-            println!("Running as both a proposer and notary");
+            debug!("Running as both a proposer and notary");
 
             // Create the SMC Listeners
             let (notary_smc_tx, notary_smc_rx) = mpsc::channel();
@@ -85,22 +92,22 @@ pub fn run(config: cli::config::Config) -> () {
             proposer_thread.run(proposer_smc_rx);
             notary_thread.run(notary_smc_rx);
 
-            // TODO make this part only run when running 'cargo test'
-            thread::sleep(Duration::from_secs(1));
-            let _p_result = proposer_thread.manager.unwrap().send(client_thread::Command::Terminate);
-            let _n_result = notary_thread.manager.unwrap().send(client_thread::Command::Terminate);
+            if cli::config_env::is_running_with_cargo_test() {
+                thread::sleep(Duration::from_secs(1));
+                let _p_result = proposer_thread.manager.unwrap().send(client_thread::Command::Terminate);
+                let _n_result = notary_thread.manager.unwrap().send(client_thread::Command::Terminate);
+            }
 
             // Wait for thread termination
             match proposer_thread.handle.unwrap().join() {
-                Ok(x) => { println!("Successful proposer thread join {:?}", x); () },
+                Ok(x) => { debug!("Successful proposer thread join {:?}", x); () },
                 Err(e) => { panic!("Failed proposer thread join {:?}", e); }
             }
             match notary_thread.handle.unwrap().join() {
-                Ok(x) => { println!("Successful notary thread join {:?}", x); () },
+                Ok(x) => { debug!("Successful notary thread join {:?}", x); () },
                 Err(e) => { panic!("Failed notary thread join {:?}", e); }
             }
         }
     }
 }
-
 

@@ -1,21 +1,22 @@
-use std::sync::mpsc;
-use std::thread;
-
 use cli::config;
 use notary;
 use proposer;
 use message;
 
+use std::sync::mpsc;
+use std::thread;
+
 /// A request to terminate a running thread
+#[derive(Debug)]
 pub enum Command {
     Terminate
 }
 
 /// A client thread to run either a notary or a proposer
 pub struct ClientThread {
-    pub handle: Option<thread::JoinHandle<()>>,
     mode: config::Mode,
-    pub manager: Option<mpsc::Sender<Command>>
+    pub manager: Option<mpsc::Sender<Command>>,
+    pub handle: Option<thread::JoinHandle<()>>
 }
 
 impl ClientThread {
@@ -24,19 +25,19 @@ impl ClientThread {
         match *mode {
             config::Mode::Notary => { 
                 ClientThread {
-                    handle: None,
-                    mode: mode.clone(), 
-                    manager: None
+                    mode: mode.clone(),
+                    manager: None,
+                    handle: None
                 }
             },
             config::Mode::Proposer => {
                 ClientThread {
-                    handle: None,
                     mode: mode.clone(),
-                    manager: None
+                    manager: None,
+                    handle: None
                 }
             },
-            _ => { panic!() }
+            _ => { panic!("Invalid mode provided to generate client thread instance"); }
         }
     }
 
@@ -51,7 +52,7 @@ impl ClientThread {
                 self.handle = Some(thread::Builder::new()
                                     .name(config::Mode::Notary.value())
                                     .spawn(move || {
-                                    notary.run();
+                                        notary.run();
                                     })
                                     .expect("Failed to spawn a notary thread"));
             },
@@ -67,7 +68,7 @@ impl ClientThread {
                                 })
                                 .expect("Failed to spawn a proposer thread"));
             }
-            _ => { panic!() }
+            _ => { panic!("Invalid mode provided to spawn new child thread from client thread instance") }
         }
     }
 }

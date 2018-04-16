@@ -2,6 +2,8 @@ use collation::collation;
 
 use ethereum_types;
 
+
+#[derive(Debug)]
 /// A message from the SMC Listener
 pub enum Message {
     Selected{value: bool},
