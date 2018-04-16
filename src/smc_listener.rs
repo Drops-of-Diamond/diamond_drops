@@ -53,7 +53,10 @@ mod tests {
     fn it_registered_notary_address_in_notary_registry_of_smc_contract() {
         let (tx, rx) = mpsc::channel();
         let smc = SMCListener::new(tx);
-        let notary_addr_bytes: [u8; 20] = [0x22, 0xFF, 0x31, 0x10, 0xA2, 0x82, 0xc1, 0x19, 0x77, 0x36, 0xb3, 0xfC, 0xe3, 0x4a, 0xD4, 0xFc, 0x5e, 0xEe, 0x75, 0xc8];
+        let notary_addr_bytes: [u8; 20] = [0x22, 0xFF, 0x31, 0x10, 0xA2,
+                                           0x82, 0xc1, 0x19, 0x77, 0x36, 
+                                           0xb3, 0xfC, 0xe3, 0x4a, 0xD4, 
+                                           0xFc, 0x5e, 0xEe, 0x75, 0xc8];
         let notary_addr: ethereum_types::Address = ethereum_types::Address::from_slice(&notary_addr_bytes);
         let result = smc.register_notary_address(notary_addr);
         assert_eq!(true, result);

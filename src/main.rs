@@ -1,12 +1,12 @@
 extern crate diamond_drops;
 
 extern crate fern;
+
 #[macro_use]
 extern crate log;
 extern crate chrono;
 
 use diamond_drops::cli;
-use diamond_drops::cli::{args};
 
 use std::env;
 use std::process;
