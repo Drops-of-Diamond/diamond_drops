@@ -24,8 +24,10 @@ impl Notary {
     /// smc_listener: mpsc::Receiver<message::Message>
     /// manager_listener: mpsc::Receiver<client_thread::Command>
     /// 
-    /// The smc_listener allows the Notary to receive messages from the SMC Listener, and the manager_listener allows the thread to receive commands from outside the thread.
-    pub fn new(smc_listener: mpsc::Receiver<message::Message>, manager_listener: mpsc::Receiver<client_thread::Command>) -> Notary {
+    /// The smc_listener allows the Notary to receive messages from the SMC Listener, 
+    /// and the manager_listener allows the thread to receive commands from outside the thread.
+    pub fn new(smc_listener: mpsc::Receiver<message::Message>, 
+               manager_listener: mpsc::Receiver<client_thread::Command>) -> Notary {
         Notary {
             selected: false,
             shard_id: ethereum_types::U256::from_dec_str("0").unwrap(),
@@ -99,19 +101,17 @@ mod tests {
     use collation::header;
     use collation::body;
 
-    fn generate_genesis_collation() -> collation::Collation {
-        let g_shard_id = ethereum_types::U256::from_dec_str("0").unwrap();
-        let g_chunk_root = ethereum_types::H256::zero();
-        let g_period = ethereum_types::U256::from_dec_str("0").unwrap();
-        let g_proposer_address = ethereum_types::Address::zero();
-        let genesis_header = header::Header::new(g_shard_id, g_chunk_root, g_period, g_proposer_address);
+    fn generate_genesis_collation(shard_id: ethereum_types::U256) -> collation::Collation {
+        let chunk_root = ethereum_types::H256::zero();
+        let period = ethereum_types::U256::from_dec_str("0").unwrap();
+        let proposer_address = ethereum_types::Address::zero();
+        let genesis_header = header::Header::new(shard_id, chunk_root, period, proposer_address);
         collation::Collation::new(genesis_header, body::Body)
     }
 
-    fn generate_collation() -> collation::Collation {
-        let shard_id = ethereum_types::U256::from_dec_str("0").unwrap();
+    fn generate_collation(shard_id: ethereum_types::U256, 
+                          period: ethereum_types::U256) -> collation::Collation {
         let chunk_root = ethereum_types::H256::zero();
-        let period = ethereum_types::U256::from_dec_str("0").unwrap();
         let proposer_address = ethereum_types::Address::zero();
         let collation_header = header::Header::new(shard_id, chunk_root, period, proposer_address);
         collation::Collation::new(collation_header, body::Body)
@@ -125,11 +125,17 @@ mod tests {
         let mut notary = Notary::new(rx, mrx);
 
         // Genesis collation
-        let genesis_collation = generate_genesis_collation();
+        let genesis_collation = generate_genesis_collation(
+            ethereum_types::U256::from_dec_str("0").unwrap());
+
         let genesis_collation_cmp = genesis_collation.clone();
 
         // First collation
-        let first_collation = generate_collation();
+        let first_collation = generate_collation(
+            ethereum_types::U256::from_dec_str("0").unwrap(),
+            ethereum_types::U256::from_dec_str("1").unwrap()
+        );
+
         let first_collation_cmp = first_collation.clone();
 
         // Push genesis collation into notary
@@ -137,7 +143,10 @@ mod tests {
         notary.store_collation(first_collation);
 
         // Check that the operations succeded
-        let vector = notary.collation_vectors.get(&ethereum_types::U256::from_dec_str("0").unwrap()).unwrap();
+        let vector = notary.collation_vectors.get(
+            &ethereum_types::U256::from_dec_str("0").unwrap())
+            .unwrap();
+
         assert_eq!(vector[0], genesis_collation_cmp);
         assert_eq!(vector[1], first_collation_cmp);
     }
@@ -150,14 +159,20 @@ mod tests {
         let mut notary = Notary::new(rx, mrx);
 
         // Generate proposal
-        let proposal = generate_collation();
+        let proposal = generate_collation(
+            ethereum_types::U256::from_dec_str("0").unwrap(),
+            ethereum_types::U256::from_dec_str("1").unwrap()
+        );
         let proposal_cmp = proposal.clone();
 
         // Store proposal in notary
         notary.store_proposal(proposal);
 
         // Check that the operations succeeded
-        let vector = notary.proposal_vectors.get(&ethereum_types::U256::from_dec_str("0").unwrap()).unwrap();
+        let vector = notary.proposal_vectors.get(
+            &ethereum_types::U256::from_dec_str("0").unwrap())
+            .unwrap();
+
         assert_eq!(vector[0], proposal_cmp);
     }
 
