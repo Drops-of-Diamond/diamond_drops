@@ -1,3 +1,2 @@
-pub struct Body {
-    
-}
+#[derive(PartialEq, Debug, Clone)]
+pub struct Body;

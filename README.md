@@ -79,6 +79,12 @@ See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-a
     cargo test
     ```
 
+  * Build and show Docs
+    ```bash
+    cargo build;
+    cargo doc --open
+    ```
+
 See this wiki article [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Contributing-guidelines).
 
 ### View UML Diagram
@@ -89,6 +95,10 @@ See this wiki article [here](https://github.com/Drops-of-Diamond/diamond_drops/w
     ```
 ![](
 https://raw.githubusercontent.com/ltfschoen/Diamond-drops/develop/diagrams/ml.svg?sanitize=true)
+
+### We're looking for more developers!
+
+See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information.
 
 ### Introduction
 

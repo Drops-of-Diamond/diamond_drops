@@ -1,8 +1,14 @@
-pub struct Proposer;
+use ethereum_types;
+
+pub struct Proposer {
+    id: ethereum_types::U256
+}
 
 impl Proposer {
     pub fn new() -> Proposer {
-        Proposer
+        Proposer {
+            id: ethereum_types::U256::from_dec_str("0").unwrap()
+        }
     }
 
     pub fn run(&self) {}
