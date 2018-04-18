@@ -1,0 +1,11 @@
+<<<<<<< HEAD
+*             -licensefile
+/license.pm   licensefile=.githooks/license-maintainer/LICENSE-hash
+/pre-commit   licensefile=.githooks/license-maintainer/LICENSE-hash
+/install      licensefile=.githooks/license-maintainer/LICENSE-hash
+=======
+*               -licensefile
+/license.pm     licensefile=.githooks/license-maintainer/LICENSE-hash
+/pre-commit     licensefile=.githooks/license-maintainer/LICENSE-hash
+/install        licensefile=.githooks/license-maintainer/LICENSE-hash
+>>>>>>> c0a88bc2089b01ab7c36ad2264897f1b7f61ef4a

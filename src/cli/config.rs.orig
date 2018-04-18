@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+/// The mode the client is running in
+#[derive(Debug, PartialEq, Clone)]
+=======
 /* Copyright 2018 AUTHORS, James Ray, Josiah @ChosunOne, and Luke Schoen
 
 This is free and unencumbered software released into the public domain.
@@ -28,43 +32,48 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <http://unlicense.org>
 */
 
-use std::env;
-
-pub fn get_env() -> String {
-    let key = "RUST_ENV";
-    match env::var(key) {
-        Ok(val) => {
-            debug!("Found environment variable key {}: {:?}", key, val);
-            val.to_string()
-        },
-        Err(e) => {
-            error!("Error interpreting environment variable key {}: {}", key, e);
-            "".to_string()
-        },
-    }
+#[derive(Debug, PartialEq)]
+>>>>>>> c0a88bc2089b01ab7c36ad2264897f1b7f61ef4a
+pub enum Mode {
+    Proposer,
+    Notary,
+    Both
 }
 
-pub fn set_test_env() {
-    // Set the environment variable key `TEST` to value of "1"
-    // when `cargo test` has been run, otherwise set it to "0"
-    let key = "RUST_ENV";
-    let value_test = "TEST";
-    let value_development = "DEVELOPMENT";
-    if let Some(arg0) = env::args().nth(0) {
-        if arg0 == "target/debug/diamond_drops" {
-            env::set_var(key, value_development);
-            assert_eq!(env::var(key), Ok(value_development.to_string()));
-        } else {
-            env::set_var(key, value_test);
-            assert_eq!(env::var(key), Ok(value_test.to_string()));
+impl Mode {
+    /// Returns a string value of the current running mode
+    pub fn value(&self) -> String {
+        match *self {
+            Mode::Proposer => "proposer".to_string(),
+            Mode::Notary => "notary".to_string(),
+            _ => "both".to_string()
         }
     }
 }
 
-pub fn is_running_with_cargo_test() -> bool {
-    if get_env() == "TEST" {
-        true
-    } else {
-        false
+/// This holds configuration options for running the client
+#[derive(Debug, PartialEq)]
+pub struct Config {
+    pub mode: Mode
+}
+
+impl Config {
+    /// Creates a new configuration to be run
+    pub fn new(mode: Mode) -> Config {
+        Config { mode }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn it_set_thread_name_for_config_arguments() {
+        let test_proposer_name = Mode::Proposer.value();
+        let test_notary_name = Mode::Notary.value();
+
+        assert_eq!(test_proposer_name, "proposer".to_string());
+        assert_eq!(test_notary_name, "notary".to_string());
     }
 }
