@@ -1,2 +1,5 @@
-*.rs        licensefile=.githooks/license-maintainer/LICENSE-C-style
-*.dot       licensefile=.githooks/license-maintainer/LICENSE-C-style
+*.rs            licensefile=.githooks/license-maintainer/LICENSE-C-style
+*.dot           licensefile=.githooks/license-maintainer/LICENSE-C-style
+*.java    licensefile=.githooks/license-maintainer/LICENSE-javadoc
+*.sh      licensefile=.githooks/license-maintainer/LICENSE-hash
+/install  licensefile=.githooks/license-maintainer/LICENSE-hash
