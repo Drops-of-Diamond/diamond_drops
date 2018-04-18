@@ -1,3 +1,5 @@
+/* Copyright 2018 AUTHORS, James Ray, Josiah @ChosunOne, and Luke Schoen
+
 This is free and unencumbered software released into the public domain.
 
 Anyone is free to copy, modify, publish, use, compile, sell, or
@@ -16,11 +18,15 @@ software under copyright law.
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE James Ray BE LIABLE FOR ANY CLAIM, DAMAGES OR
+IN NO EVENT SHALL THE 
+AUTHORS, James Ray, Josiah @ChosunOne, and Luke Schoen
+BE LIABLE FOR ANY CLAIM, DAMAGES OR
 OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
-
+ 
 For more information, please refer to <http://unlicense.org>
+*/
+
 pub mod config;
 pub mod args;
