@@ -43,7 +43,7 @@ pub struct Notary {
     selected: bool,
     shard_id: ethereum_types::U256,
     collation_vectors: HashMap<ethereum_types::U256, Vec<collation::collation::Collation>>,
-    proposal_vectors: HashMap<ethereum_types::U256, Vec<use collation::collation::Collation>>,
+    proposal_vectors: HashMap<ethereum_types::U256, Vec<collation::collation::Collation>>,
     smc_listener: mpsc::Receiver<message::Message>,
     manager_listener: mpsc::Receiver<client_thread::Command>
 }
@@ -146,7 +146,7 @@ mod tests {
     use collation::header;
     use collation::body;
 
-    fn generate_genesis_collation(shard_id: ethereum_types::U256) -> collation::Collation {
+    fn generate_genesis_collation(shard_id: ethereum_types::U256) -> collation::collation::Collation {
         let chunk_root = ethereum_types::H256::zero();
         let period = ethereum_types::U256::from_dec_str("0").unwrap();
         let proposer_address = ethereum_types::Address::zero();
@@ -155,7 +155,7 @@ mod tests {
     }
 
     fn generate_collation(shard_id: ethereum_types::U256, 
-                          period: ethereum_types::U256) -> collation::Collation {
+                          period: ethereum_types::U256) -> collation::collation::Collation {
         let chunk_root = ethereum_types::H256::zero();
         let proposer_address = ethereum_types::Address::zero();
         let collation_header = header::Header::new(shard_id, chunk_root, period, proposer_address);
