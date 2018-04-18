@@ -1,2 +1,2 @@
-*.rs        licensefile=.githooks/license-maintainer/LICENSE
-*.dot       licensefile=.githooks/license-maintainer/LICENSE
+*.rs        licensefile=.githooks/license-maintainer/LICENSE-C-style
+*.dot       licensefile=.githooks/license-maintainer/LICENSE-C-style
