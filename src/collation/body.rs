@@ -28,5 +28,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <http://unlicense.org>
 */
 
+/// Struct for a collation body.
 #[derive(PartialEq, Debug, Clone)]
 pub struct Body;
