@@ -1,13 +1,30 @@
-digraph ml {
-    ndConfigType[label="{&lt;&lt;&lt;Enumeration&gt;&gt;&gt;\nConfigType|Mode\nNil}"][shape="record"];
-    ndMode[label="{&lt;&lt;&lt;Enumeration&gt;&gt;&gt;\nMode|Proposer\nNotary\nBoth|+ value(&amp;self) -&gt; String}"][shape="record"];
-    ndConfig[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nConfig|+ mode: Mode|+ new(mode: Mode) -&gt; Config}"][shape="record"];
-    ndBody[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nBody}"][shape="record"];
-    ndCollation[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nCollation|- header: header::Header\n- body: body::Body}"][shape="record"];
-    ndTree[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nTree}"][shape="record"];
-    ndMessage[label="{&lt;&lt;&lt;Enumeration&gt;&gt;&gt;\nMessage|Eligible\nShard\nHeader\nCollation\nProposal}"][shape="record"];
-    ndNotary[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nNotary|- eligible: bool\n- shard_id: usize\n- collation_trees: HashMap&lt;usize, collation::tree::Tree&gt;\n- listener: mpsc::Receiver&lt;message::Message&gt;|+ new(listener: mpsc::Receiver&lt;message::Message&gt;) -&gt; Notary\n+ run(&amp;mut self)\n- store_collation_header(&amp;self, header: collation::header::Header)\n- store_collation(&amp;self, collation: collation::collation::Collation)\n- store_proposal(&amp;self, collation: collation::collation::Collation)\n- select_proposal(&amp;self)\n- add_header(&amp;self)}"][shape="record"];
-    ndSMCListener[label="{&lt;&lt;&lt;Structure&gt;&gt;&gt;\nSMCListener|- period: usize\n- collator_sender: mpsc::Sender&lt;message::Message&gt;|+ new(collator_sender: mpsc::Sender&lt;message::Message&gt;) -&gt; SMCListener\n- register(&amp;self, addr: Address) -&gt; Result&lt;bool, &amp;\'static str&gt;\n- get_eligible_collator(&amp;self, shard_id: usize) -&gt; Address}"][shape="record"];
-    ndMode -> ndConfig[label=""][style="dashed"][arrowhead="diamond"];
-    ndCollation -> ndNotary[label=""][style="dashed"][arrowhead="vee"];
-}
+/* Copyright 2018 James Ray
+
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+In jurisdictions that recognize copyright laws, the author or authors
+of this software dedicate any and all copyright interest in the
+software to the public domain. We make this dedication for the benefit
+of the public at large and to the detriment of our heirs and
+successors. We intend this dedication to be an overt act of
+relinquishment in perpetuity of all present and future rights to this
+software under copyright law.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE 
+James Ray
+BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+ 
+For more information, please refer to <http://unlicense.org>
+*/
+

@@ -1,4 +1,4 @@
-/* Copyright 2018 AUTHORS, James Ray, Josiah @ChosunOne, and Luke Schoen
+/* Copyright YEAR AUTHORS
 
 This is free and unencumbered software released into the public domain.
 
@@ -19,7 +19,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 IN NO EVENT SHALL THE 
-AUTHORS, James Ray, Josiah @ChosunOne, and Luke Schoen
+AUTHORS
 BE LIABLE FOR ANY CLAIM, DAMAGES OR
 OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
@@ -28,33 +28,3 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <http://unlicense.org>
 */
 
-use ethereum_types::Address;
-use std::sync::mpsc;
-use message;
-
-pub struct SMCListener {
-    period: usize,
-    collator_sender: mpsc::Sender<message::Message>
-}
-
-impl SMCListener {
-    pub fn new(collator_sender: mpsc::Sender<message::Message>) -> SMCListener {
-        SMCListener {
-            period: 0,
-            collator_sender
-        }
-    }
-
-    fn register(&self, addr: Address) -> Result<bool, &'static str> {
-        Ok(false)
-    }
-
-    fn get_eligible_collator(&self, shard_id: usize) -> Address {
-        Address::zero()
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-}
