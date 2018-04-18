@@ -28,7 +28,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <http://unlicense.org>
 */
 
-use ethereum_types::Address;
+use ethereum_types;
 use std::sync::mpsc;
 use message;
 
