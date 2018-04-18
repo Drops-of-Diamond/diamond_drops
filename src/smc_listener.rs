@@ -32,10 +32,6 @@ use ethereum_types::Address;
 use std::sync::mpsc;
 use message;
 
-use ethereum_types;
-
-use std::sync::mpsc;
-
 /// This will monitor the SMC for changes and then send relevant information to the notary or the proposer.
 pub struct SMCListener {
     period: ethereum_types::U256,
