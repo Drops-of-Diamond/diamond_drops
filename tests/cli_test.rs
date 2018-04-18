@@ -28,58 +28,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <http://unlicense.org>
 */
 
-use cli::config;
+extern crate diamond_drops;
 
-#[derive(PartialEq)]
-enum ConfigType {
-    Mode,
-    Nil
-}
-
-/// Parse arguments from the command line and produce a configuration from them.
-pub fn parse_cli_args(args: Vec<String>) -> Result<config::Config, &'static str> {
-    let mut config_type = ConfigType::Nil;
-    
-    // Default Case
-    let mut mode = config::Mode::Both;
-
-    for arg in args {
-        // Match `-` prefixed args to a list of valid configuration points and set their
-        // values with the following non `-` prefixed value
-        if arg.starts_with("-") {
-            match arg.to_lowercase().as_ref() {
-                    "-mode" => { config_type = ConfigType::Mode; },
-                    _ => { return Err("Invalid configuration argument, try \
-                        cargo run -- -mode <argument>, \
-                        where argument is proposer, p, notary, n, both, or b."); }
-                }
-        } else if config_type == ConfigType::Mode {
-            // Match provided value to mode type
-            match arg.to_lowercase().as_ref() {
-                "proposer" | "p" => { mode = config::Mode::Proposer; },
-                "notary" | "n" => { mode = config::Mode::Notary; },
-                "both" | "b" => { mode = config::Mode::Both; },
-                _ => { return Err("Invalid configuration value, try \
-                    cargo run -- -mode <argument>, \
-                    where argument is proposer, p, notary, n, both, or b."); }
-            }
-
-            config_type = ConfigType::Nil;
-        } else {
-            return Err("No configuration argument supplied, try \
-                        cargo run -- -mode <argument>, \
-                        where argument is proposer, p, notary, n, both, or b.");
-        }
-    }
-
-    if config_type == ConfigType::Nil {
-        Ok(config::Config::new(mode))
-    } else {
-        Err("No configuration value supplied, try \
-            cargo run -- -mode <argument>, \
-            where argument is proposer, p, notary, n, both, or b.")
-    }
-}
+use diamond_drops::cli::{args, config};
 
 #[cfg(test)]
 mod tests {
@@ -89,10 +40,10 @@ mod tests {
     fn it_sets_client_mode_to_proposer() {
         // Verbose command
         let test_args_verbose = vec![String::from("-mode"), String::from("proposer")];
-        let config_verbose = parse_cli_args(test_args_verbose).unwrap();
+        let config_verbose = args::parse_args(test_args_verbose).unwrap();
         // Short command
         let test_args_short = vec![String::from("-mode"), String::from("p")];
-        let config_short = parse_cli_args(test_args_short).unwrap();
+        let config_short = args::parse_args(test_args_short).unwrap();
 
         assert_eq!(config_verbose.mode, config::Mode::Proposer);
         assert_eq!(config_short.mode, config::Mode::Proposer);
@@ -102,10 +53,10 @@ mod tests {
     fn it_sets_client_mode_to_notary() {
         // Verbose command
         let test_args_verbose = vec![String::from("-mode"), String::from("notary")];
-        let config_verbose = parse_cli_args(test_args_verbose).unwrap();
+        let config_verbose = args::parse_args(test_args_verbose).unwrap();
         // Short command
         let test_args_short = vec![String::from("-mode"), String::from("n")];
-        let config_short = parse_cli_args(test_args_short).unwrap();
+        let config_short = args::parse_args(test_args_short).unwrap();
 
         assert_eq!(config_verbose.mode, config::Mode::Notary);
         assert_eq!(config_short.mode, config::Mode::Notary);
@@ -115,13 +66,13 @@ mod tests {
     fn it_sets_client_mode_to_both() {
         // Verbose command
         let test_args_verbose = vec![String::from("-mode"), String::from("both")];
-        let config_verbose = parse_cli_args(test_args_verbose).unwrap();
+        let config_verbose = args::parse_args(test_args_verbose).unwrap();
         // Short command
         let test_args_short = vec![String::from("-mode"), String::from("b")];
-        let config_short = parse_cli_args(test_args_short).unwrap();
+        let config_short = args::parse_args(test_args_short).unwrap();
         // Default mode
         let test_args_default = vec![];
-        let config_default = parse_cli_args(test_args_default).unwrap();
+        let config_default = args::parse_args(test_args_default).unwrap();
 
         assert_eq!(config_verbose.mode, config::Mode::Both);
         assert_eq!(config_short.mode, config::Mode::Both);
@@ -132,19 +83,19 @@ mod tests {
     fn it_reports_invalid_arguments() {
         // Invalid configuration
         let test_args_configuration = vec![String::from("-bin"), String::from("notary")];
-        let error_configuration = parse_cli_args(test_args_configuration);
+        let error_configuration = args::parse_args(test_args_configuration);
 
         // Invalid value
         let test_args_value = vec![String::from("-mode"), String::from("bin")];
-        let error_value = parse_cli_args(test_args_value);
+        let error_value = args::parse_args(test_args_value);
 
         // No configuration
         let test_args_no_arg = vec![String::from("mode"), String::from("both")];
-        let error_no_arg = parse_cli_args(test_args_no_arg);
+        let error_no_arg = args::parse_args(test_args_no_arg);
 
         // No value
         let test_args_no_value = vec![String::from("-mode")];
-        let error_no_value = parse_cli_args(test_args_no_value);
+        let error_no_value = args::parse_args(test_args_no_value);
 
         assert_eq!(error_configuration, Err("Invalid configuration argument, \
             try cargo run -- -mode <argument>, \
@@ -158,5 +109,25 @@ mod tests {
         assert_eq!(error_no_value, Err("No configuration value supplied, try \
             cargo run -- -mode <argument>, \
             where argument is proposer, p, notary, n, both, or b."));
+    }
+
+    #[test]
+    #[ignore]
+    fn it_does_not_panic_running_client_mode_with_proposer() {
+        let test_args_short = vec![String::from("-mode"), String::from("p")];
+        let config_short = args::parse_args(test_args_short).unwrap();
+        let result = diamond_drops::run(config_short);
+
+        assert_eq!(result, ());
+    }
+
+    #[test]
+    #[ignore]
+    fn it_does_not_panic_running_client_mode_with_notary() {
+        let test_args_short = vec![String::from("-mode"), String::from("n")];
+        let config_short = args::parse_args(test_args_short).unwrap();
+        let result = diamond_drops::run(config_short);
+
+        assert_eq!(result, ());
     }
 }
