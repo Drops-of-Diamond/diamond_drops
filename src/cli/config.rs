@@ -28,7 +28,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <http://unlicense.org>
 */
 
-#[derive(Debug, PartialEq)]
+/// The mode the client is running in
+#[derive(Debug, PartialEq, Clone)]
 pub enum Mode {
     Proposer,
     Notary,
