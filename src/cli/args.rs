@@ -136,4 +136,18 @@ mod tests {
         error_msg = msg_with_args("No config value supplied");
         assert_eq!(error_no_value, Err(error_msg));
     }
+
+    #[test]
+    fn it_appends_available_arguments_postfix_to_error_message_prefix() {
+        // Expected
+        let expected_output: &str = "Invalid something or other, try cargo run -- -mode <argument>, \
+                            where argument is proposer, p, notary, n, both, or b.";
+        let expected_error_msg_output = String::from(expected_output);
+
+        // Actual
+        let actual_error_msg_prefix_input = String::from("Invalid something or other");
+        let actual_error_msg_output = msg_with_args(&actual_error_msg_prefix_input);
+
+        assert_eq!(expected_error_msg_output, actual_error_msg_output);
+    }
 }
