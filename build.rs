@@ -1,4 +1,4 @@
-/* Copyright 2018 AUTHORS, James Ray, Josiah @ChosunOne, and Luke Schoen
+/* Copyright 2018 AUTHORS, James Ray, Josiah @ChosunOne, and Luke Schoen @ltfschoen
 
 This is free and unencumbered software released into the public domain.
 
