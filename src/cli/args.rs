@@ -7,7 +7,7 @@ enum ConfigType {
 }
 
 /// Parse arguments from the command line and produce a configuration from them.
-pub fn parse_cli_args(args: Vec<String>) -> Result<config::Config, &'static str> {
+pub fn parse_cli_args(args: Vec<String>) -> Result<config::Config, String> {
     let mut config_type = ConfigType::Nil;
     
     // Default Case
@@ -19,9 +19,10 @@ pub fn parse_cli_args(args: Vec<String>) -> Result<config::Config, &'static str>
         if arg.starts_with("-") {
             match arg.to_lowercase().as_ref() {
                     "-mode" => { config_type = ConfigType::Mode; },
-                    _ => { return Err("Invalid configuration argument, try \
-                        cargo run -- -mode <argument>, \
-                        where argument is proposer, p, notary, n, both, or b."); }
+                    _ => {
+                        let error_msg = msg_with_args("Invalid config argument");
+                        return Err(error_msg);
+                    }
                 }
         } else if config_type == ConfigType::Mode {
             // Match provided value to mode type
@@ -29,26 +30,33 @@ pub fn parse_cli_args(args: Vec<String>) -> Result<config::Config, &'static str>
                 "proposer" | "p" => { mode = config::Mode::Proposer; },
                 "notary" | "n" => { mode = config::Mode::Notary; },
                 "both" | "b" => { mode = config::Mode::Both; },
-                _ => { return Err("Invalid configuration value, try \
-                    cargo run -- -mode <argument>, \
-                    where argument is proposer, p, notary, n, both, or b."); }
+                _ => {
+                    let error_msg = msg_with_args("Invalid config value");
+                    return Err(error_msg);
+                }
             }
 
             config_type = ConfigType::Nil;
         } else {
-            return Err("No configuration argument supplied, try \
-                        cargo run -- -mode <argument>, \
-                        where argument is proposer, p, notary, n, both, or b.");
+            let error_msg = msg_with_args("No config arguments supplied");
+            return Err(error_msg);
         }
     }
 
     if config_type == ConfigType::Nil {
         Ok(config::Config::new(mode))
     } else {
-        Err("No configuration value supplied, try \
-            cargo run -- -mode <argument>, \
-            where argument is proposer, p, notary, n, both, or b.")
+        let error_msg = msg_with_args("No config value supplied");
+        return Err(error_msg);
     }
+}
+
+fn msg_with_args(msg: &str) -> String {
+    let avail_args: &str = ", try cargo run -- -mode <argument>, \
+                            where argument is proposer, p, notary, n, both, or b.";
+    let mut ret = msg.to_string().to_owned();
+    ret.push_str(avail_args);
+    ret
 }
 
 #[cfg(test)]
@@ -116,17 +124,30 @@ mod tests {
         let test_args_no_value = vec![String::from("-mode")];
         let error_no_value = parse_cli_args(test_args_no_value);
 
-        assert_eq!(error_configuration, Err("Invalid configuration argument, \
-            try cargo run -- -mode <argument>, \
-            where argument is proposer, p, notary, n, both, or b."));
-        assert_eq!(error_value, Err("Invalid configuration value, try \
-            cargo run -- -mode <argument>, \
-            where argument is proposer, p, notary, n, both, or b."));
-        assert_eq!(error_no_arg, Err("No configuration argument supplied, try \
-            cargo run -- -mode <argument>, \
-            where argument is proposer, p, notary, n, both, or b."));
-        assert_eq!(error_no_value, Err("No configuration value supplied, try \
-            cargo run -- -mode <argument>, \
-            where argument is proposer, p, notary, n, both, or b."));
+        let mut error_msg = msg_with_args("Invalid config argument");
+        assert_eq!(error_configuration, Err(error_msg));
+
+        error_msg = msg_with_args("Invalid config value");
+        assert_eq!(error_value, Err(error_msg));
+
+        error_msg = msg_with_args("No config arguments supplied");
+        assert_eq!(error_no_arg, Err(error_msg));
+
+        error_msg = msg_with_args("No config value supplied");
+        assert_eq!(error_no_value, Err(error_msg));
+    }
+
+    #[test]
+    fn it_appends_available_arguments_postfix_to_error_message_prefix() {
+        // Expected
+        let expected_output: &str = "Invalid something or other, try cargo run -- -mode <argument>, \
+                            where argument is proposer, p, notary, n, both, or b.";
+        let expected_error_msg_output = String::from(expected_output);
+
+        // Actual
+        let actual_error_msg_prefix_input = String::from("Invalid something or other");
+        let actual_error_msg_output = msg_with_args(&actual_error_msg_prefix_input);
+
+        assert_eq!(expected_error_msg_output, actual_error_msg_output);
     }
 }
