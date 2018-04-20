@@ -16,10 +16,6 @@ repository = "https://github.com/Drops-of-Diamond/diamond_drops"
 readme = "README.md"
 build = "build.rs"
 
-[lib]
-name = "diamond_drops"
-path = "src/lib.rs"
-
 [dependencies]
 ethereum-types = "0.3.0"
 ethcore-bytes = "0.1.0"
