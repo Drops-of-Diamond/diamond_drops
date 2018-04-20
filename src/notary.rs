@@ -1,4 +1,34 @@
-use collation::collation;
+/* Copyright 2018 James Ray (@jamesray1), Josiah Evans (@ChosunOne), Luke Schoen (@ltfschoen)
+
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+In jurisdictions that recognize copyright laws, the author or authors
+of this software dedicate any and all copyright interest in the
+software to the public domain. We make this dedication for the benefit
+of the public at large and to the detriment of our heirs and
+successors. We intend this dedication to be an overt act of
+relinquishment in perpetuity of all present and future rights to this
+software under copyright law.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE 
+AUTHORS, James Ray, Josiah @ChosunOne, and Luke Schoen
+BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+ 
+For more information, please refer to <http://unlicense.org>
+*/
+
+use collation;
 use message;
 use client_thread;
 
@@ -12,8 +42,8 @@ pub struct Notary {
     id: ethereum_types::U256,
     selected: bool,
     shard_id: ethereum_types::U256,
-    collation_vectors: HashMap<ethereum_types::U256, Vec<collation::Collation>>,
-    proposal_vectors: HashMap<ethereum_types::U256, Vec<collation::Collation>>,
+    collation_vectors: HashMap<ethereum_types::U256, Vec<collation::collation::Collation>>,
+    proposal_vectors: HashMap<ethereum_types::U256, Vec<collation::collation::Collation>>,
     smc_listener: mpsc::Receiver<message::Message>,
     manager_listener: mpsc::Receiver<client_thread::Command>
 }
@@ -87,20 +117,21 @@ impl Notary {
     }
 
 
-    fn store_collation(&mut self, collation: collation::Collation) {
+    fn store_collation(&mut self, collation: collation::collation::Collation) {
         debug!("Storing in notary id {} a new collation mapped to shard id {}", self.id, self.shard_id);
         self.collation_vectors.entry(self.shard_id).or_insert(vec![]);
         let vector = self.collation_vectors.get_mut(&self.shard_id).unwrap();
         vector.push(collation);
     }
 
-
-    fn store_proposal(&mut self, proposal: collation::Collation) {
+    fn store_proposal(&mut self, proposal: collation::collation::Collation) {
         debug!("Storing in notary id {} a new proposal collation mapped to shard id {}", self.id, self.shard_id);
         self.proposal_vectors.entry(self.shard_id).or_insert(vec![]);
         let vector = self.proposal_vectors.get_mut(&self.shard_id).unwrap();
         vector.push(proposal);
     }
+
+    fn select_proposal(&self) {}
 
 
     fn get_availability(&mut self) {}
@@ -115,20 +146,20 @@ mod tests {
     use collation::header;
     use collation::body;
 
-    fn generate_genesis_collation(shard_id: ethereum_types::U256) -> collation::Collation {
+    fn generate_genesis_collation(shard_id: ethereum_types::U256) -> collation::collation::Collation {
         let chunk_root = ethereum_types::H256::zero();
         let period = ethereum_types::U256::from_dec_str("0").unwrap();
         let proposer_address = ethereum_types::Address::zero();
         let genesis_header = header::Header::new(shard_id, chunk_root, period, proposer_address);
-        collation::Collation::new(genesis_header, body::Body)
+        collation::collation::Collation::new(genesis_header, body::Body)
     }
 
     fn generate_collation(shard_id: ethereum_types::U256, 
-                          period: ethereum_types::U256) -> collation::Collation {
+                          period: ethereum_types::U256) -> collation::collation::Collation {
         let chunk_root = ethereum_types::H256::zero();
         let proposer_address = ethereum_types::Address::zero();
         let collation_header = header::Header::new(shard_id, chunk_root, period, proposer_address);
-        collation::Collation::new(collation_header, body::Body)
+        collation::collation::Collation::new(collation_header, body::Body)
     }
 
     fn generate_notary() -> Notary {

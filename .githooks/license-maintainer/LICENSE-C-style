@@ -1,4 +1,4 @@
-/* Copyright 2018 James Ray (@jamesray1), Josiah Evans (@ChosunOne), Luke Schoen (@ltfschoen)
+/* Copyright YEAR AUTHORS
 
 This is free and unencumbered software released into the public domain.
 
@@ -19,7 +19,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 IN NO EVENT SHALL THE 
-AUTHORS, James Ray, Josiah @ChosunOne, and Luke Schoen
+AUTHORS
 BE LIABLE FOR ANY CLAIM, DAMAGES OR
 OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
@@ -28,30 +28,3 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <http://unlicense.org>
 */
 
-use ethereum_types;
-
-pub struct Proposer {
-    id: ethereum_types::U256
-}
-
-impl Proposer {
-    pub fn new() -> Proposer {
-        Proposer {
-            id: ethereum_types::U256::from_dec_str("0").unwrap()
-        }
-    }
-
-    pub fn run(&self) {}
-
-    fn register(&self) {}
-
-    fn add_balance(&self) {}
-
-    fn collect_blobs(&self) {}
-
-    fn prepare_collation(&self) {}
-
-    fn reveal_proposal(&self) {}
-
-    fn broadcast_collation_body(&self) {}
-}
