@@ -18,12 +18,12 @@ pub fn parse_cli_args(args: Vec<String>) -> Result<config::Config, String> {
         // values with the following non `-` prefixed value
         if arg.starts_with("-") {
             match arg.to_lowercase().as_ref() {
-                    "-mode" => { config_type = ConfigType::Mode; },
-                    _ => {
-                        let error_msg = msg_with_args("Invalid config argument");
-                        return Err(error_msg);
-                    }
+                "-mode" => { config_type = ConfigType::Mode; },
+                _ => {
+                    let error_msg = msg_with_args("Invalid config argument");
+                    return Err(error_msg);
                 }
+            }
         } else if config_type == ConfigType::Mode {
             // Match provided value to mode type
             match arg.to_lowercase().as_ref() {
