@@ -21,9 +21,6 @@ pub fn parse_cli_args(args: Vec<String>) -> Result<config::Config, String> {
         if arg.starts_with("-") {
             match arg.to_lowercase().as_ref() {
                 "-mode" => { config_type = ConfigType::Mode; },
-                "help" => {
-                    process::exit(1);
-                },
                 _ => {
                     let error_msg = msg_with_args("Invalid modules argument");
                     return Err(error_msg);
