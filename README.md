@@ -107,6 +107,11 @@ See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-a
     cargo make test-all
     ```
 
+  * Watch all tests (polls continuously for code changes during development, automatically running tests, and reports issues)
+    ```bash
+    cargo make watch
+    ```
+
 ### Show Rust Docs
 
 ```bash

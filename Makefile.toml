@@ -37,6 +37,18 @@ dependencies = ["clean", "build-with-verbose"]
 [tasks.t]
 alias = "test-all"
 
+[tasks.test-all-watch]
+script = [
+    "echo \"Running all tests\"",
+    "cargo test",                    # Diamond Drops Main package
+    "cd cli && cargo test && cd ..", # Diamond Drops CLI library
+    "cd env && cargo test && cd ..", # Diamond Drops Environment library
+    "cd node && cargo test && cd .." # Diamond Drops Sharding Node library
+]
+
+[tasks.watch]
+script = ["cargo watch --watch . --clear --debug -s=\"cargo make test-all-watch\""]
+
 [tasks.run-proposer]
 script = ["cargo run -- -mode p"]
 
