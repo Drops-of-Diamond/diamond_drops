@@ -97,7 +97,7 @@ See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-a
   
   * All above
     ```bash
-    cargo make run-all
+    cargo make all
     ```
 
 #### Unit and Integration Tests
@@ -110,7 +110,7 @@ See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-a
 ### Show Rust Docs
 
 ```bash
-cargo make rust-docs
+cargo make docs
 ```
 
 See this wiki article [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Contributing-guidelines).
@@ -118,7 +118,7 @@ See this wiki article [here](https://github.com/Drops-of-Diamond/diamond_drops/w
 ### View UML Diagram
 
 ```bash
-cargo make uml-diagram
+cargo make uml
 ```
 
 ![](

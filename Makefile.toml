@@ -34,7 +34,7 @@ script = [
 ]
 dependencies = ["clean", "build-with-verbose"]
 
-[tasks.ta]
+[tasks.t]
 alias = "test-all"
 
 [tasks.run-proposer]
@@ -64,7 +64,7 @@ script = [
 ]
 dependencies = ["clean"]
 
-[tasks.ra]
+[tasks.all]
 alias = "run-all"
 
 [tasks.run-all-with-bin]
@@ -82,18 +82,12 @@ dependencies = [
     "test-all"
 ]
 
-[tasks.rust-docs]
+[tasks.docs]
 command = "cargo"
 args = ["doc", "--open"]
 dependencies = ["build"]
 
-[tasks.rd]
-alias = "rust-docs"
-
-[tasks.uml-diagram]
+[tasks.uml]
 command = "open"
 args = ["-a", "Google Chrome", "./diagrams/ml.svg"]
 dependencies = ["build"]
-
-[tasks.u]
-alias = "uml-diagram"
