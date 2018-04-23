@@ -1,5 +1,3 @@
-//! ![uml](ml.svg)
-
 #[macro_use]
 extern crate log;
 
