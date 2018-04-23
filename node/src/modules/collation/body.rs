@@ -1,7 +1,7 @@
 // Adapted from Python from https://github.com/ethereum/py-evm/pull/555/files.
 
 use ethereum_types::U256;
-use constants;
+use collation::constants;
 use std::ops::{Generator, GeneratorState};
 
 /*#[derive(PartialEq, Debug, Clone)]
