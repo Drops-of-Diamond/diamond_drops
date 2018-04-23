@@ -1,4 +1,4 @@
-use collation::collation;
+use modules::collation::collation;
 
 use ethereum_types;
 

@@ -64,20 +64,61 @@ See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-a
 
 #### Run and Test the code
 
-  * Build and run the code and provide arguments that it accepts from the CLI
+  * Build
+    ```bash
+    cargo build
+    ```
+
+    * Note:
+      * Build specific binary executable (i.e. src/bin/bin.rs)
+        ```bash
+        cargo build --bin cli
+        ```
+
+  * Build and run providing CLI arguments it accepts
     ```bash
     cargo run -- -mode b
     ```
 
-    * Note: CLI Options available may include:
-      * Proposer Mode: `cargo run -- -mode p`
-      * Notary Mode: `cargo run -- -mode n`
-      * Both Proposer and Notary Mode: `cargo run -- -mode b`
+    * Note: CLI Options available include option to explicitly specify the "cli" binary executable:
+      * Proposer Mode:
+        * Option 1: `cargo run -- -mode p`
+        * Option 2: `cargo run --bin cli -- -mode p`
+      * Notary Mode:
+        * Option 1: `cargo run -- -mode n`
+        * Option 2: `cargo run --bin cli -- -mode n`
+      * Both Proposer and Notary Mode:
+        * Option 1: `cargo run -- -mode b`
+        * Option 2: `cargo run --bin cli -- -mode b`
 
   * Run tests
-    ```bash
-    cargo test
-    ```
+    * All Binary Executables and decoupled Libraries
+      ```bash
+      cargo test && \
+      cd cli && cargo test && cd .. && \
+      cd env && cargo test && cd .. && \
+      cd node && cargo test && cd ..
+      ```
+  
+    * Diamond Drops Binary Executable and Integration Tests
+      ```bash
+      cargo test
+      ```
+ 
+    * Diamond Drops CLI Library
+      ```bash
+      cd cli && cargo test && cd ..
+      ```
+
+    * Diamond Drops Env Library
+        ```bash
+        cd env && cargo test && cd ..
+        ```
+
+    * Diamond Drops Node (Sharding Node) Library
+        ```bash
+        cd node && cargo test && cd ..
+        ```
 
   * Build and show Docs
     ```bash

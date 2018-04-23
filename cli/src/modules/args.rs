@@ -1,4 +1,6 @@
-use cli::config;
+use modules::{config};
+
+use std::process;
 
 #[derive(PartialEq)]
 enum ConfigType {
@@ -9,7 +11,7 @@ enum ConfigType {
 /// Parse arguments from the command line and produce a configuration from them.
 pub fn parse_cli_args(args: Vec<String>) -> Result<config::Config, String> {
     let mut config_type = ConfigType::Nil;
-    
+
     // Default Case
     let mut mode = config::Mode::Both;
 
@@ -18,12 +20,15 @@ pub fn parse_cli_args(args: Vec<String>) -> Result<config::Config, String> {
         // values with the following non `-` prefixed value
         if arg.starts_with("-") {
             match arg.to_lowercase().as_ref() {
-                    "-mode" => { config_type = ConfigType::Mode; },
-                    _ => {
-                        let error_msg = msg_with_args("Invalid config argument");
-                        return Err(error_msg);
-                    }
+                "-mode" => { config_type = ConfigType::Mode; },
+                "help" => {
+                    process::exit(1);
+                },
+                _ => {
+                    let error_msg = msg_with_args("Invalid modules argument");
+                    return Err(error_msg);
                 }
+            }
         } else if config_type == ConfigType::Mode {
             // Match provided value to mode type
             match arg.to_lowercase().as_ref() {
@@ -31,14 +36,14 @@ pub fn parse_cli_args(args: Vec<String>) -> Result<config::Config, String> {
                 "notary" | "n" => { mode = config::Mode::Notary; },
                 "both" | "b" => { mode = config::Mode::Both; },
                 _ => {
-                    let error_msg = msg_with_args("Invalid config value");
+                    let error_msg = msg_with_args("Invalid modules value");
                     return Err(error_msg);
                 }
             }
 
             config_type = ConfigType::Nil;
         } else {
-            let error_msg = msg_with_args("No config arguments supplied");
+            let error_msg = msg_with_args("No modules arguments supplied");
             return Err(error_msg);
         }
     }
@@ -46,7 +51,7 @@ pub fn parse_cli_args(args: Vec<String>) -> Result<config::Config, String> {
     if config_type == ConfigType::Nil {
         Ok(config::Config::new(mode))
     } else {
-        let error_msg = msg_with_args("No config value supplied");
+        let error_msg = msg_with_args("No modules value supplied");
         return Err(error_msg);
     }
 }
@@ -124,16 +129,16 @@ mod tests {
         let test_args_no_value = vec![String::from("-mode")];
         let error_no_value = parse_cli_args(test_args_no_value);
 
-        let mut error_msg = msg_with_args("Invalid config argument");
+        let mut error_msg = msg_with_args("Invalid modules argument");
         assert_eq!(error_configuration, Err(error_msg));
 
-        error_msg = msg_with_args("Invalid config value");
+        error_msg = msg_with_args("Invalid modules value");
         assert_eq!(error_value, Err(error_msg));
 
-        error_msg = msg_with_args("No config arguments supplied");
+        error_msg = msg_with_args("No modules arguments supplied");
         assert_eq!(error_no_arg, Err(error_msg));
 
-        error_msg = msg_with_args("No config value supplied");
+        error_msg = msg_with_args("No modules value supplied");
         assert_eq!(error_no_value, Err(error_msg));
     }
 
