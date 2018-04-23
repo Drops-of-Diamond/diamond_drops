@@ -13,11 +13,10 @@ fn main() {
     println!("ARGS {:?}", args);
     diamond_drops_cli::modules::log::init_logger("4");
     diamond_drops_env::config::set_test_env();
-    let config = diamond_drops_cli::modules::args::parse_cli_args(args)
-        .unwrap_or_else(|err| {
-            error!("Problem parsing arguments: {}", err);
-            process::exit(1);
-        });
+    let config = diamond_drops_cli::modules::args::parse_cli_args(args).unwrap_or_else(|err| {
+        error!("Problem parsing arguments: {}", err);
+        process::exit(1);
+    });
 
     diamond_drops::run(config);
 }
