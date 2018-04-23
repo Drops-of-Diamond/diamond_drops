@@ -16,6 +16,11 @@ repository = "https://github.com/Drops-of-Diamond/diamond_drops"
 readme = "README.md"
 build = "build.rs"
 
+[[bin]]
+name = "cli"
+path = "src/bin/bin.rs"
+doc = false # Resolve documentation conflict
+
 [dependencies]
 ethereum-types = "0.3.0"
 ethcore-bytes = "0.1.0"
