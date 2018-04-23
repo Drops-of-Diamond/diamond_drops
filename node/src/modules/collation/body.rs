@@ -1,13 +1,13 @@
 // Adapted from Python from https://github.com/ethereum/py-evm/pull/555/files.
 
 use ethereum_types::U256;
-use collation::constants;
+use modules::collation::constants;
 use std::ops::{Generator, GeneratorState};
 
-/*#[derive(PartialEq, Debug, Clone)]
+#[derive(PartialEq, Debug, Clone)]
 /// A collation body of 2^15 chunks with 32 bytes (256 bits) per chunk.
 pub struct Body {
-    body: Vec<ethereum_types::U256; constants::CHUNKS_PER_COLLATION>
+    body: [ethereum_types::U256; constants::CHUNKS_PER_COLLATION]
 }
 
 pub impl Body {
@@ -17,7 +17,7 @@ pub impl Body {
 }
 
 impl Iterator for Body {
-    type Item = Vec<ethereum_types::U256; constants::CHUNKS_PER_COLLATION>;
+    type Item = [ethereum_types::U256, constants::CHUNKS_PER_COLLATION];
 
     fn check_body_size(self.body) -> <self.body, Err> {
         if self.body.len() != COLLATION_SIZE {
@@ -52,4 +52,4 @@ impl Iterator for Body {
     }
 
 
-}*/
+}
