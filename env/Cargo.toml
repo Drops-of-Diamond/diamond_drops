@@ -1,0 +1,8 @@
+[package]
+name = "diamond-drops-env"
+version = "0.1.0-a"
+authors = ["James Ray (@jamesray1)", "Josiah (@ChosunOne)", "Luke Schoen (@ltfschoen)"]
+license = "Unlicense"
+
+[dependencies]
+log = { version = "0.4.1", features = ["max_level_debug", "release_max_level_warn"] }

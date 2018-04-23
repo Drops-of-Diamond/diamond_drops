@@ -1,4 +1,4 @@
-use message;
+use modules::message;
 
 use ethereum_types;
 

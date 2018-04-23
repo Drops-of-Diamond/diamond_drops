@@ -1,5 +1,5 @@
-use collation::header;
-use collation::body;
+use modules::collation::header;
+use modules::collation::body;
 
 #[derive(PartialEq, Clone, Debug)]
 pub struct Collation {

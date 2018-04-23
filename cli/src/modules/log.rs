@@ -5,7 +5,7 @@ use chrono;
 
 use std::io;
 
-fn setup_logger(verbosity: u64) -> Result<(), fern::InitError> {
+fn setup_logger(verbosity: u32) -> Result<(), fern::InitError> {
     let colors_line = ColoredLevelConfig::new()
         .error(Color::Red)
         .warn(Color::Yellow)
@@ -20,24 +20,24 @@ fn setup_logger(verbosity: u64) -> Result<(), fern::InitError> {
 
     base_config = match verbosity {
         0 => { base_config
-                .level(LevelFilter::Error)
-                .level_for("pretty_colored", LevelFilter::Error)
+            .level(LevelFilter::Error)
+            .level_for("pretty_colored", LevelFilter::Error)
         }
         1 => { base_config
-                .level(LevelFilter::Warn)
-                .level_for("pretty_colored", LevelFilter::Warn)
+            .level(LevelFilter::Warn)
+            .level_for("pretty_colored", LevelFilter::Warn)
         },
         2 => { base_config
-                .level(LevelFilter::Info)
-                .level_for("pretty_colored", LevelFilter::Info)
+            .level(LevelFilter::Info)
+            .level_for("pretty_colored", LevelFilter::Info)
         },
         3 => { base_config
-                .level(LevelFilter::Debug)
-                .level_for("pretty_colored", LevelFilter::Debug)
+            .level(LevelFilter::Debug)
+            .level_for("pretty_colored", LevelFilter::Debug)
         },
         _ => { base_config
-                .level(LevelFilter::Trace)
-                .level_for("pretty_colored", LevelFilter::Trace)
+            .level(LevelFilter::Trace)
+            .level_for("pretty_colored", LevelFilter::Trace)
         },
     };
 
@@ -71,13 +71,13 @@ fn setup_logger(verbosity: u64) -> Result<(), fern::InitError> {
     Ok(())
 }
 
-pub fn init() -> () {
+pub fn init_logger(pattern: &str) -> () {
     /*! Initialisation of [Log Crate](https://crates.io/crates/log) and [Fern Crate](https://docs.rs/fern/0.5.5/fern/) */
     /*! to output to both stdout and to a log file with choice of logging level macros from highest priority to lowest: */
     /*! `error!`, `warn!`, `info!`, `debug!` and `trace!`. */
     /*! [Compile time filters](https://docs.rs/log/0.4.1/log/#compile-time-filters) are configured in Cargo.toml */
 
-    let verbosity: u64 = 4;
+    let verbosity: u32 = pattern.parse::<u32>().unwrap();
 
     match setup_logger(verbosity) {
         Ok(res) => { info!("Success initializing Rust Logger to verbosity level: {}", verbosity); () }

@@ -1,7 +1,7 @@
-use cli::config;
-use notary;
-use proposer;
-use message;
+use cli::modules::{config};
+use modules::notary;
+use modules::proposer;
+use modules::message;
 
 use std::sync::mpsc;
 use std::thread;

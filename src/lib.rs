@@ -1,22 +1,13 @@
 //! ![uml](ml.svg)
 
-// External crates
-extern crate ethereum_types;
-extern crate tiny_keccak;
-
-extern crate fern;
 #[macro_use]
 extern crate log;
-extern crate chrono;
 
-// Module declarations
-pub mod cli;
-pub mod proposer;
-pub mod notary;
-pub mod smc_listener;
-pub mod collation;
-pub mod message;
-pub mod client_thread;
+extern crate diamond_drops_cli as cli;
+extern crate diamond_drops_env as env;
+extern crate diamond_drops_node as node;
+
+use node::modules::{smc_listener, client_thread};
 
 // std imports
 use std::thread;
@@ -27,12 +18,12 @@ use std::sync::mpsc;
 /// 
 /// # Inputs
 /// 
-/// config - A struct containing the configuration values for the client
-pub fn run(config: cli::config::Config) -> () {
+/// modules - A struct containing the configuration values for the client
+pub fn run(config: cli::modules::config::Config) -> () {
     debug!("Client Mode: {:?}", config.mode);
 
     match config.mode {
-        cli::config::Mode::Proposer => {
+        cli::modules::config::Mode::Proposer => {
             debug!("Running as a proposer");
 
             // Create the SMC Listener
@@ -43,7 +34,7 @@ pub fn run(config: cli::config::Config) -> () {
             let mut proposer_thread = client_thread::ClientThread::new(&config.mode);
             proposer_thread.run(smc_rx);
 
-            if cli::config_env::is_running_with_cargo_test() {
+            if env::config::is_running_with_cargo_test() {
                 thread::sleep(Duration::from_secs(1));
                 let _result = proposer_thread.manager.unwrap().send(client_thread::Command::Terminate);
             }
@@ -54,7 +45,7 @@ pub fn run(config: cli::config::Config) -> () {
                 Err(e) => { panic!("Failed proposer thread join {:?}", e); }
             }
         },
-        cli::config::Mode::Notary => {
+        cli::modules::config::Mode::Notary => {
             debug!("Running as a notary");
 
             // Create the SMC Listener
@@ -65,7 +56,7 @@ pub fn run(config: cli::config::Config) -> () {
             let mut notary_thread = client_thread::ClientThread::new(&config.mode);
             notary_thread.run(smc_rx);
 
-            if cli::config_env::is_running_with_cargo_test() {
+            if env::config::is_running_with_cargo_test() {
                 thread::sleep(Duration::from_secs(1));
                 let _result = notary_thread.manager.unwrap().send(client_thread::Command::Terminate);
             }
@@ -76,7 +67,7 @@ pub fn run(config: cli::config::Config) -> () {
                 Err(e) => { panic!("Failed notary thread join {:?}", e); }
             }
         },
-        cli::config::Mode::Both => {
+        cli::modules::config::Mode::Both => {
             debug!("Running as both a proposer and notary");
 
             // Create the SMC Listeners
@@ -86,13 +77,13 @@ pub fn run(config: cli::config::Config) -> () {
             let proposer_smc = smc_listener::SMCListener::new(proposer_smc_tx);
 
             // Start threads for both proposer and notary
-            let mut proposer_thread = client_thread::ClientThread::new(&cli::config::Mode::Proposer);
-            let mut notary_thread = client_thread::ClientThread::new(&cli::config::Mode::Notary);
+            let mut proposer_thread = client_thread::ClientThread::new(&cli::modules::config::Mode::Proposer);
+            let mut notary_thread = client_thread::ClientThread::new(&cli::modules::config::Mode::Notary);
 
             proposer_thread.run(proposer_smc_rx);
             notary_thread.run(notary_smc_rx);
 
-            if cli::config_env::is_running_with_cargo_test() {
+            if env::config::is_running_with_cargo_test() {
                 thread::sleep(Duration::from_secs(1));
                 let _p_result = proposer_thread.manager.unwrap().send(client_thread::Command::Terminate);
                 let _n_result = notary_thread.manager.unwrap().send(client_thread::Command::Terminate);

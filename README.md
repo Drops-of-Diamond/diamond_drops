@@ -92,9 +92,33 @@ See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-a
         * Option 2: `cargo run --bin cli -- -mode b`
 
   * Run tests
-    ```bash
-    cargo test
-    ```
+    * All Binary Executables and decoupled Libraries
+      ```bash
+      cargo test && \
+      cd cli && cargo test && cd .. && \
+      cd env && cargo test && cd .. && \
+      cd node && cargo test && cd ..
+      ```
+  
+    * Diamond Drops Binary Executable and Integration Tests
+      ```bash
+      cargo test
+      ```
+ 
+    * Diamond Drops CLI Library
+      ```bash
+      cd cli && cargo test && cd ..
+      ```
+
+    * Diamond Drops Env Library
+        ```bash
+        cd env && cargo test && cd ..
+        ```
+
+    * Diamond Drops Node (Sharding Node) Library
+        ```bash
+        cd node && cargo test && cd ..
+        ```
 
   * Build and show Docs
     ```bash

@@ -1,6 +1,6 @@
-use collation::collation;
-use message;
-use client_thread;
+use modules::collation::collation;
+use modules::message;
+use modules::client_thread;
 
 use ethereum_types;
 
@@ -112,8 +112,8 @@ impl Notary {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use collation::header;
-    use collation::body;
+    use modules::collation::header;
+    use modules::collation::body;
 
     fn generate_genesis_collation(shard_id: ethereum_types::U256) -> collation::Collation {
         let chunk_root = ethereum_types::H256::zero();
