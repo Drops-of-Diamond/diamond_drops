@@ -134,9 +134,18 @@ See this wiki article [here](https://github.com/Drops-of-Diamond/diamond_drops/w
 
 ### View UML Diagram
 
-```bash
-cargo make uml
-```
+* View UML with Google Chrome, Mozilla Firefox, or Brave browser
+
+    ```bash
+    cargo make uml-chrome;
+    cargo make uml-firefox;
+    cargo make uml-brave;
+    ```
+
+* Custom 
+  * Choose an application on your computer to open the SVG (i.e. `ls /Applications`)
+  * Run `open -a "<APPLICATION>" "./diagrams/ml.svg"`
+  * Optionally create a Pull Request to update Makefile.toml
 
 ![](
 https://raw.githubusercontent.com/ltfschoen/Diamond-drops/develop/diagrams/ml.svg?sanitize=true)

@@ -99,7 +99,18 @@ command = "cargo"
 args = ["doc", "--open"]
 dependencies = ["build"]
 
-[tasks.uml]
+# Show list of applications installed `ls /Applications`
+[tasks.uml-chrome]
 command = "open"
 args = ["-a", "Google Chrome", "./diagrams/ml.svg"]
+dependencies = ["build"]
+
+[tasks.uml-firefox]
+command = "open"
+args = ["-a", "Firefox", "./diagrams/ml.svg"]
+dependencies = ["build"]
+
+[tasks.uml-brave]
+command = "open"
+args = ["-a", "Brave", "./diagrams/ml.svg"]
 dependencies = ["build"]
