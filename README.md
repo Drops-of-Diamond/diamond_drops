@@ -4,6 +4,7 @@
 [![License: Unlicense](https://img.shields.io/badge/License-Unlicense-lightgrey.svg)](https://github.com/Drops-of-Diamond/diamond_drops/blob/master/LICENSE)
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/Drops-of-Diamond/diamond_drops.svg)](http://isitmaintained.com/project/Drops-of-Diamond/diamond_drops "Average time to resolve an issue")
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/Drops-of-Diamond/diamond_drops.svg)](http://isitmaintained.com/project/Drops-of-Diamond/diamond_drops "Percentage of issues still open")
+[![Built with cargo-make](https://sagiegurari.github.io/cargo-make/assets/badges/cargo-make.svg)](https://sagiegurari.github.io/cargo-make)
 <!--Commenting out because it is unknown, codecov has not been set up. Refer to issue #11 and https://github.com/codecov/example-rust. [![codecov](https://codecov.io/gh/Drops-of-Diamond/diamond_drops/branch/master/graph/badge.svg)](https://codecov.io/gh/Drops-of-Diamond/diamond_drops)-->
 
 Get in touch with us on Gitter: 
@@ -44,6 +45,21 @@ See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-a
     rustup update
     ```
 
+  * Install [Rust Formatter](https://github.com/rust-lang-nursery/rustfmt)
+    ```bash
+    rustup component add rustfmt-preview
+    ```
+
+  * Install [Cargo-make](https://github.com/sagiegurari/cargo-make) Task runner and build tool
+    ```bash
+    cargo install --force cargo-make
+    ```
+
+  * Execute specific task runner flow. Default is Makefile.toml
+    ```bash
+    cargo make --makefile tasks.toml <TASK_NAME>
+    ```
+
 #### Clone a fork of the repository
 
   * Fork the repository https://github.com/Drops-of-Diamond/diamond_drops
@@ -62,78 +78,54 @@ See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-a
 
   * Change from the "master" branch to the "develop" branch to see the latest features that are being integrated but are not officially ready for production
 
-#### Run and Test the code
+#### Build, Run the code
 
-  * Build
+  * Proposer Mode
     ```bash
-    cargo build
+    cargo make p
     ```
 
-    * Note:
-      * Build specific binary executable (i.e. src/bin/bin.rs)
-        ```bash
-        cargo build --bin cli
-        ```
-
-  * Build and run providing CLI arguments it accepts
+  * Notary Mode
     ```bash
-    cargo run -- -mode b
+    cargo make n
     ```
 
-    * Note: CLI Options available include option to explicitly specify the "cli" binary executable:
-      * Proposer Mode:
-        * Option 1: `cargo run -- -mode p`
-        * Option 2: `cargo run --bin cli -- -mode p`
-      * Notary Mode:
-        * Option 1: `cargo run -- -mode n`
-        * Option 2: `cargo run --bin cli -- -mode n`
-      * Both Proposer and Notary Mode:
-        * Option 1: `cargo run -- -mode b`
-        * Option 2: `cargo run --bin cli -- -mode b`
-
-  * Run tests
-    * All Binary Executables and decoupled Libraries
-      ```bash
-      cargo test && \
-      cd cli && cargo test && cd .. && \
-      cd env && cargo test && cd .. && \
-      cd node && cargo test && cd ..
-      ```
+  * Both Proposer and Notary Modes
+    ```bash
+    cargo make b
+    ```
   
-    * Diamond Drops Binary Executable and Integration Tests
-      ```bash
-      cargo test
-      ```
- 
-    * Diamond Drops CLI Library
-      ```bash
-      cd cli && cargo test && cd ..
-      ```
-
-    * Diamond Drops Env Library
-        ```bash
-        cd env && cargo test && cd ..
-        ```
-
-    * Diamond Drops Node (Sharding Node) Library
-        ```bash
-        cd node && cargo test && cd ..
-        ```
-
-  * Build and show Docs
+  * All above
     ```bash
-    cargo build;
-    cargo doc --open
+    cargo make all
     ```
+
+#### Unit and Integration Tests
+
+  * Run all tests (unit and integration tests for main package and libraries) 
+    ```bash
+    cargo make test-all
+    ```
+
+  * Watch all tests (polls continuously for code changes during development, automatically running tests, and reports issues)
+    ```bash
+    cargo make watch
+    ```
+
+### Show Rust Docs
+
+```bash
+cargo make docs
+```
 
 See this wiki article [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Contributing-guidelines).
 
 ### View UML Diagram
 
-  * UML diagram is updated each time `cargo build` is run and stored in /diagrams/ml.svg.
-    ```bash
-    open -a "Google Chrome" ./diagrams/ml.svg
-    ```
+```bash
+cargo make uml
+```
+
 ![](
 https://raw.githubusercontent.com/ltfschoen/Diamond-drops/develop/diagrams/ml.svg?sanitize=true)
 
