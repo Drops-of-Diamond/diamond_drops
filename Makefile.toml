@@ -53,10 +53,10 @@ script = ["cargo watch --watch . --clear --debug -s=\"cargo make test-all-watch\
 script = ["cargo run -- -l 4 mode -p"]
 
 [tasks.run-notary]
-script = ["cargo run -- -l 4 mode n"]
+script = ["cargo run -- -l 4 mode -n"]
 
 [tasks.run-both]
-script = ["cargo run -- -l 4 mode b"]
+script = ["cargo run -- -l 4 mode -b"]
 
 [tasks.p]
 alias = "run-proposer"
