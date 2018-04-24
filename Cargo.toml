@@ -24,6 +24,7 @@ doc = false # Resolve documentation conflict
 diamond-drops-cli = { path = "cli" }
 diamond-drops-env = { path = "env" }
 diamond-drops-node = { path = "node" }
+clap = { version = "2.31.2", features = [] } # only for integration tests
 log = { version = "0.4.1", features = ["max_level_debug", "release_max_level_warn"] }
 
 [dev-dependencies]

@@ -1,0 +1,28 @@
+name: diamond-drops-cli
+version: "0.1.0-a"
+author: "James Ray (@jamesray1), Josiah (@ChosunOne), Luke Schoen (@ltfschoen)"
+about: Implementation of Ethereum Sharding in Rust
+args:
+  - log:
+      short: l
+      long: log
+      value_name: LOG
+      help: Set logging verbosity to error 0, warn 1, debug 2, info 3, or trace 4
+      required: false
+      takes_value: true
+subcommands:
+  - mode:
+      about: Choose mode(s) to run the sharding node
+      args:
+        - proposer:
+            short: p
+            long: proposer
+            help: proposer mode
+        - notary:
+            short: n
+            long: notary
+            help: notary mode
+        - both:
+            short: b
+            long: both
+            help: both proposer and notary modes
