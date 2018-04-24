@@ -36,6 +36,18 @@ See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-a
 
 ### Setup guide
 
+#### Show help menus
+
+* Command help
+```
+cargo run -- --help
+```
+
+* Sub-command "mode" help
+```bash
+cargo run -- mode --help
+```
+
 #### Install dependencies
 
   * [Install Rust](https://github.com/rust-lang/book/blob/master/2018-edition/src/ch01-01-installation.md)
