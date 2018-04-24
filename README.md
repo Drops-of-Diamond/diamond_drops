@@ -24,7 +24,7 @@ We're implementing sharding according to collaboration with Ethereum research at
 * Researching how to implement a Sharding P2P Network Protocol.
 * Implementing further planned additions in the sharding roadmap, which is available in the above issue.
   
-For further information please refer to the [Introduction and onboarding process for new developers](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers).
+For further information please refer to [our wiki](https://github.com/Drops-of-Diamond/diamond_drops/wiki).
 
 ### Help support us!
 
