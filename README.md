@@ -121,7 +121,9 @@ cargo run -- mode --help
 
   * Watch all tests (polls continuously for code changes during development, automatically running tests, and reports issues)
     ```bash
-    cargo make watch
+    cargo make build;
+    cargo install cargo-watch;
+    cargo make watch;
     ```
 
 ### Show Rust Docs
