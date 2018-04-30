@@ -132,8 +132,6 @@ cargo run -- mode --help
 cargo make docs
 ```
 
-See this wiki article [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Contributing-guidelines).
-
 ### View UML Diagram
 
 * View UML with Google Chrome, Mozilla Firefox, or Brave browser
@@ -152,9 +150,9 @@ See this wiki article [here](https://github.com/Drops-of-Diamond/diamond_drops/w
 ![](
 https://raw.githubusercontent.com/ltfschoen/Diamond-drops/develop/diagrams/ml.svg?sanitize=true)
 
-### We're looking for more developers!
+### Contibuting guidelines
 
-See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information.
+See this wiki article [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Contributing-guidelines).
 
 ### Introduction
 
