@@ -1,5 +1,6 @@
+/* Probably remove this, but leave for now.
 use modules::collation:body::{CollationVariables}
-
+Move back to constants, without .pow(20)
 fn main() {
     // pow is not a constant function, so this can't be a constant or static.
     pub let collation_variables = CollationVariables {
@@ -8,4 +9,4 @@ fn main() {
         /// size of a blob filling a full collation
         max_blob_size: chunks_per_collation * CHUNK_DATA_SIZE,
     }
-}
+}*/
