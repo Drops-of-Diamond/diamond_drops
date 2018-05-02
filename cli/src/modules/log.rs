@@ -80,7 +80,7 @@ pub fn init_logger(pattern: &str) -> () {
     let verbosity: u32 = pattern.parse::<u32>().unwrap();
 
     match setup_logger(verbosity) {
-        Ok(res) => { info!("Success initializing Rust Logger to verbosity level: {}", verbosity); () }
+        Ok(_) => { info!("Success initializing Rust Logger to verbosity level: {:?}", verbosity); () }
         Err(e) => { error!("Error initializing Rust Logger: {}", e); }
     }
 }

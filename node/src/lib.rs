@@ -1,3 +1,5 @@
+//! ![uml](ml.svg)
+
 extern crate diamond_drops_cli as cli;
 
 extern crate ethereum_types;

@@ -1,27 +1,39 @@
 use ethereum_types;
+
+use modules::primitives::{
+    ShardIdHash,
+    ChunkRootHash,
+    ChunkPeriodHash,
+    ProposerAddress,
+    CollationHeaderHash,
+    ParentCollationHeaderHash,
+    ProposerBidHash,
+    ProposerSignature
+};
+
 use tiny_keccak;
 
 #[derive(PartialEq, Debug, Clone)]
 pub struct Header {
-    shard_id: ethereum_types::U256,
-    proposer_address: ethereum_types::Address,
-    chunk_root: ethereum_types::H256,
-    period: ethereum_types::U256,
+    shard_id: ShardIdHash,
+    proposer_address: ProposerAddress,
+    chunk_root: ChunkRootHash,
+    period: ChunkPeriodHash,
 
     // The following fields are pending updates to the sharding spec and are currently ignored
-    //parent_hash: ethereum_types::H256,
-    //proposer_bid: ethereum_types::U256,
-    //proposer_signature: ethereum_types::Signature
+    //parent_hash: ParentCollationHeaderHash,
+    //proposer_bid: ProposerBidHash,
+    //proposer_signature: ProposerSignature
 }
 
 impl Header {
-    pub fn new(shard_id: ethereum_types::U256,
-               //parent_hash: ethereum_types::H256,
-               chunk_root: ethereum_types::H256,
-               period: ethereum_types::U256,
-               proposer_address: ethereum_types::Address,
-               //proposer_bid: ethereum_types::U256,
-               /*proposer_signature: ethereum_types::Signature*/) -> Header {
+    pub fn new(shard_id: ShardIdHash,
+               //parent_hash: ParentCollationHeaderHash,
+               chunk_root: ChunkRootHash,
+               period: ChunkPeriodHash,
+               proposer_address: ProposerAddress,
+               //proposer_bid: ProposerBidHash,
+               /*proposer_signature: ProposerSignature*/) -> Header {
         
         Header {
             shard_id,
@@ -34,7 +46,7 @@ impl Header {
         }
     }
 
-    pub fn hash(&self) -> ethereum_types::H256 {
+    pub fn hash(&self) -> CollationHeaderHash {
         let mut sha3 = tiny_keccak::Keccak::new_sha3_256();
         
         // Add the shard id
@@ -66,7 +78,7 @@ impl Header {
         let mut result_bytes: [u8; 32] = [0; 32];
         sha3.finalize(&mut result_bytes);
 
-        ethereum_types::H256::from_slice(&result_bytes[..])
+        CollationHeaderHash::from_slice(&result_bytes[..])
     }
 }
 
@@ -88,7 +100,7 @@ mod tests {
     fn it_produces_correct_hash() {
         // Build the args for collation header creation
         // Shard Id
-        let shard_id = ethereum_types::U256::from_dec_str("1").unwrap();
+        let shard_id = ShardIdHash::from_dec_str("1").unwrap();
         let shard_id_bytes = u256_to_bytes32(shard_id);
         
         /*
@@ -97,7 +109,7 @@ mod tests {
                                            0x54, 0x14, 0x7a, 0xd2, 0x89, 0x61, 0x75, 0xb0, 
                                            0x7d, 0x43, 0x7f, 0x9e, 0x58, 0xfa, 0x3c, 0x44, 
                                            0x86, 0xc0, 0x42, 0xf4, 0xc3, 0xd5, 0x05, 0x9b];
-        let parent_hash = ethereum_types::H256::from_slice(&parent_hash_bytes[..]);
+        let parent_hash = ParentCollationHeaderHash::from_slice(&parent_hash_bytes[..]);
         */
 
         // Chunk Root
@@ -105,10 +117,10 @@ mod tests {
                                           0x65, 0x25, 0xc2, 0xa0, 0x39, 0xa3, 0xa9, 0x95,
                                           0x34, 0x90, 0x35, 0xb2, 0xa8, 0x23, 0xa4, 0x99,
                                           0x0b, 0x27, 0xf6, 0xd7, 0xd5, 0x5e, 0xec, 0x6b];
-        let chunk_root = ethereum_types::H256::from_slice(&chunk_root_bytes[..]);
+        let chunk_root = ChunkRootHash::from_slice(&chunk_root_bytes[..]);
 
         // Period
-        let period = ethereum_types::U256::from_dec_str("1").unwrap();
+        let period = ChunkPeriodHash::from_dec_str("1").unwrap();
         let period_bytes = u256_to_bytes32(period);
 
         // Proposer Address
@@ -116,13 +128,13 @@ mod tests {
                                                 0x52, 0x96, 0xab, 0x98, 0x52, 
                                                 0x3b, 0x1a, 0x3d, 0xef, 0x8f, 
                                                 0x18, 0x67, 0xad, 0x32, 0xb0];
-        let proposer_address = ethereum_types::H160::from_slice(&proposer_address_bytes[..]);
+        let proposer_address = ProposerAddress::from_slice(&proposer_address_bytes[..]);
 
         // Create the header
         let header = Header::new(shard_id, /*parent_hash,*/ chunk_root, period, proposer_address);
 
         // Calculate its generated hash
-        let header_hash = header.hash();
+        let header_hash: CollationHeaderHash = header.hash();
 
         // Calculate the expected hash
         let mut sha3 = tiny_keccak::Keccak::new_sha3_256();
@@ -135,7 +147,7 @@ mod tests {
         let mut expected_bytes: [u8; 32] = [0; 32];
         sha3.finalize(&mut expected_bytes);
 
-        let expected = ethereum_types::H256::from_slice(&expected_bytes[..]);
+        let expected: CollationHeaderHash = CollationHeaderHash::from_slice(&expected_bytes[..]);
 
         // Ensure manually calculated hash matches the generated hash
         assert_eq!(expected, header_hash);

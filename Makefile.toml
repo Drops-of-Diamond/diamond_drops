@@ -1,0 +1,132 @@
+# Cargo Make config https://github.com/sagiegurari/cargo-make
+
+[env]
+ON = "1"
+OFF = "0"
+RUST_BACKTRACE = "${ON}"
+
+[tasks.format]
+install_crate = "rustfmt" # https://github.com/rust-lang-nursery/rustfmt
+command = "cargo"
+args = ["fmt", "--all", "--", "--write-mode=diff", "--verbose"]
+
+[tasks.clean]
+command = "cargo"
+args = ["clean"]
+
+[tasks.build]
+command = "cargo"
+args = ["build"]
+dependencies = ["clean"]
+
+[tasks.build-with-verbose]
+command = "cargo"
+args = ["build", "--verbose", "--all-features"]
+dependencies = ["clean"]
+
+[tasks.test-all]
+script = [
+    "echo \"Running all tests\"",
+    "cargo test",                    # Diamond Drops Main package
+    "cd cli && cargo test && cd ..", # Diamond Drops CLI library
+    "cd env && cargo test && cd ..", # Diamond Drops Environment library
+    "cd node && cargo test && cd .." # Diamond Drops Sharding Node library
+]
+dependencies = ["clean", "build-with-verbose"]
+
+[tasks.t]
+alias = "test-all"
+
+[tasks.test-all-watch]
+script = [
+    "echo \"Running all tests\"",
+    "cargo test",                    # Diamond Drops Main package
+    "cd cli && cargo test && cd ..", # Diamond Drops CLI library
+    "cd env && cargo test && cd ..", # Diamond Drops Environment library
+    "cd node && cargo test && cd .." # Diamond Drops Sharding Node library
+]
+
+[tasks.watch]
+script = ["cargo watch --watch . --clear --debug -s=\"cargo make test-all-watch\""]
+
+[tasks.run-proposer]
+script = ["cargo run -- -l 4 mode -p"]
+
+[tasks.run-notary]
+script = ["cargo run -- -l 4 mode -n"]
+
+[tasks.run-both]
+script = ["cargo run -- -l 4 mode -b"]
+
+[tasks.p]
+alias = "run-proposer"
+
+[tasks.n]
+alias = "run-notary"
+
+[tasks.b]
+alias = "run-both"
+
+[tasks.run-all]
+script = [
+    "echo \"Running all modes\"",
+    "cargo run -- -l 4 mode -p",          # Proposer Mode Only
+    "cargo run -- -l 4 mode -n",          # Notary Mode Only
+    "cargo run -- -l 4 mode -b"           # Both Proposer and Notary Modes
+]
+dependencies = ["clean"]
+
+[tasks.all]
+alias = "run-all"
+
+[tasks.run-all-with-bin]
+script = [
+    "echo \"Running all modes\"",
+    "cargo run --bin cli -- -l 4 mode -p", # Proposer Mode Only
+    "cargo run --bin cli -- -l 4 mode -n", # Notary Mode Only
+    "cargo run --bin cli -- -l 4 mode -b"  # Both Proposer and Notary Modes
+]
+dependencies = ["clean"]
+
+[tasks.flow-full]
+dependencies = [
+    "build-with-verbose",
+    "test-all"
+]
+
+[tasks.docs]
+command = "cargo"
+args = ["doc", "--open"]
+dependencies = ["build"]
+
+# TODO: reduce repetition, refactor
+# Show list of applications installed `ls /Applications`
+[tasks.uml-chrome-mac]
+command = "open"
+args = ["-a", "Google Chrome", "./diagrams/ml.svg"]
+dependencies = ["build"]
+
+[tasks.uml-firefox-mac]
+command = "open"
+args = ["-a", "Firefox", "./diagrams/ml.svg"]
+dependencies = ["build"]
+
+[tasks.uml-brave-mac]
+command = "open"
+args = ["-a", "Brave", "./diagrams/ml.svg"]
+dependencies = ["build"]
+
+[tasks.uml-inkscape-linux]
+command = "inkscape"
+args = ["./diagrams/ml.svg"]
+dependencies = ["build"]
+
+[tasks.uml-firefox-linux] 
+command = "firefox"
+args = ["./diagrams/ml.svg"]
+dependencies = ["build"]
+
+[tasks.uml-chrome-linux]
+command = "chrome"
+args = ["./diagrams/ml.svg"]
+dependencies = ["build"]

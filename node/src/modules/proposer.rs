@@ -1,13 +1,13 @@
-use ethereum_types;
+use modules::primitives::ProposerIdHash;
 
 pub struct Proposer {
-    id: ethereum_types::U256
+    id: ProposerIdHash
 }
 
 impl Proposer {
     pub fn new() -> Proposer {
         Proposer {
-            id: ethereum_types::U256::from_dec_str("0").unwrap()
+            id: ProposerIdHash::from_dec_str("0").unwrap()
         }
     }
 

@@ -14,7 +14,6 @@ keywords = ["Ethereum",
 license = "Unlicense"
 repository = "https://github.com/Drops-of-Diamond/diamond_drops"
 readme = "README.md"
-build = "build.rs"
 
 [[bin]]
 name = "cli"
@@ -25,13 +24,14 @@ doc = false # Resolve documentation conflict
 diamond-drops-cli = { path = "cli" }
 diamond-drops-env = { path = "env" }
 diamond-drops-node = { path = "node" }
+clap = { version = "2.31.2", features = [] } # only for integration tests
 log = { version = "0.4.1", features = ["max_level_debug", "release_max_level_warn"] }
+
+[dev-dependencies]
+cargo-watch = { version = "6.0.0" }
 
 [badges]
 travis-ci = { repository = "Drops-of-Diamond/Diamond-drops", branch = "master" }
 codecov = { repository = "Drops-of-Diamond/Diamond-drops", branch = "master", service = "github" }
 is-it-maintained-issue-resolution = { repository = "Drops-of-Diamond/Diamond-drops" }
 is-it-maintained-open-issues = { repository = "Drops-of-Diamond/Diamond-drops" }
-
-[build-dependencies.mml]
-version = "0.1"

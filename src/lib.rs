@@ -1,5 +1,3 @@
-//! ![uml](ml.svg)
-
 #[macro_use]
 extern crate log;
 
@@ -15,9 +13,9 @@ use std::time::Duration;
 use std::sync::mpsc;
 
 /// The main function to run the node.  
-/// 
+///
 /// # Inputs
-/// 
+///
 /// modules - A struct containing the configuration values for the client
 pub fn run(config: cli::modules::config::Config) -> () {
     debug!("Client Mode: {:?}", config.mode);
@@ -101,4 +99,3 @@ pub fn run(config: cli::modules::config::Config) -> () {
         }
     }
 }
-

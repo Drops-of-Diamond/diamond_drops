@@ -1,13 +1,11 @@
 use modules::collation::collation;
-
-use ethereum_types;
-
+use modules::primitives::{ShardIdHash};
 
 #[derive(Debug)]
 /// A message from the SMC Listener
 pub enum Message {
     Selected{value: bool},
-    ShardId{value: ethereum_types::U256},
+    ShardId{value: ShardIdHash},
     Collation{value: collation::Collation},
     Proposal{value: collation::Collation}
 }
