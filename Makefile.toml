@@ -100,17 +100,34 @@ args = ["doc", "--open"]
 dependencies = ["build"]
 
 # Show list of applications installed `ls /Applications`
-[tasks.uml-chrome]
+[tasks.uml_chrome]
+linux_alias = "linux_uml_chrome"
+windows_alias = "windows_uml_chrome"
+mac_alias = "mac_uml_chrome"
+
+[tasks.linux_uml_chrome]
+command = "xdg-open" # this also works with OS X or any freedesktop compatible environment.
+# https://superuser.com/a/39013/410684
+args = ["./diagrams/ml.svg"]
+dependencies = ["build"]
+
+[tasks.mac_uml_chrome]
 command = "open"
 args = ["-a", "Google Chrome", "./diagrams/ml.svg"]
 dependencies = ["build"]
 
-[tasks.uml-firefox]
+[tasks.uml_firefox]
+linux_alias = "linux_uml_firefox"
+windows_alias = "windows_uml_firefox"
+mac_alias = "mac_uml_firefox"
 command = "open"
 args = ["-a", "Firefox", "./diagrams/ml.svg"]
 dependencies = ["build"]
 
-[tasks.uml-brave]
+[tasks.uml_brave]
+linux_alias = "linux_uml_brave"
+windows_alias = "windows_uml_brave"
+mac_alias = "mac_uml_brave"
 command = "open"
 args = ["-a", "Brave", "./diagrams/ml.svg"]
 dependencies = ["build"]
