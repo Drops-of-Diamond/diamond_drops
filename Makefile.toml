@@ -214,8 +214,13 @@ mac_alias = "mac_uml_chrome"
 command = "xdg-open" # this also works with OS X or any freedesktop compatible environment.
 # https://superuser.com/a/39013/410684
 <<<<<<< HEAD
+<<<<<<< HEAD
 args = ["./diagrams/ml.svg"]
 =======
+=======
+# can't specify, chooses a default app, 
+# has opened an empty text file or with an error on different systems
+>>>>>>> Fix: Add UML tasks for different OSes, although they still have issues.
 args = ["./diagrams/ml.svg"] 
 # The default application for SVG files may need to be configured
 >>>>>>> Enhancement: WIP, UML for different OSs
@@ -226,18 +231,47 @@ command = "open"
 args = ["-a", "Google Chrome", "./diagrams/ml.svg"]
 dependencies = ["build"]
 
+[tasks.windows_uml_chrome]
+command = "start"
+args = ["./diagrams/ml.svg"]
+dependencies = ["build"]
+
 [tasks.uml_firefox]
 linux_alias = "linux_uml_firefox"
 windows_alias = "windows_uml_firefox"
 mac_alias = "mac_uml_firefox"
+
+[tasks.linux_uml_firefox]
+command = "xdg-open"
+args = ["./diagrams/ml.svg"]
+dependencies = ["build"]
+
+[tasks.mac_uml_firefox]
 command = "open"
 args = ["-a", "Firefox", "./diagrams/ml.svg"]
+dependencies = ["build"]
+
+[tasks.windows_uml_firefox]
+command = "start"
+args = ["./diagrams/ml.svg"]
 dependencies = ["build"]
 
 [tasks.uml_brave]
 linux_alias = "linux_uml_brave"
 windows_alias = "windows_uml_brave"
 mac_alias = "mac_uml_brave"
+
+[tasks.linux_uml_brave]
+command = "xdg-open"
+args = ["./diagrams/ml.svg"]
+dependencies = ["build"]
+
+[tasks.mac_uml_brave]
 command = "open"
 args = ["-a", "Brave", "./diagrams/ml.svg"]
+dependencies = ["build"]
+
+[tasks.windows_uml_brave]
+command = "start"
+args = ["./diagrams/ml.svg"]
 dependencies = ["build"]
