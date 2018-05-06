@@ -37,6 +37,19 @@ impl Chunk {
         }
         bytes
     }
+
+    /// Convert 32 bytes into a chunk
+    pub fn from_bytes(chunk_bytes: [u8; 32]) -> Chunk {
+        let indicator = chunk_bytes[0];
+        let mut data: [u8; 31] = [0; 31];
+        for i in 1..32 {
+            data[i-1] = chunk_bytes[i];
+        }
+        Chunk {
+            indicator,
+            data
+        }
+    }
 }
 
 #[cfg(test)]
@@ -71,6 +84,14 @@ mod tests {
                                             1, 1, 1, 1, 1, 1];
 
         assert_eq!(chunk_bytes, correct_chunk_bytes);
+    }
+
+    #[test]
+    fn it_converts_from_bytes() {
+        let chunk = Chunk::new(0b1000_0000, [1; 31]);
+        let chunk_bytes = chunk.clone().as_bytes();
+        let same_chunk = Chunk::from_bytes(chunk_bytes);
+        assert_eq!(chunk, same_chunk);
     }
 
 }
