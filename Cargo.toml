@@ -38,6 +38,9 @@ features = [ "suggestions", "vec_map" ]
 [dev-dependencies]
 cargo-watch = { version = "6.0.0" }
 
+[target.'cfg(windows)'.dependencies]
+winapi = { version = "0.3.4", features = ["winsock2", "winuser", "shellapi"] }
+
 [badges]
 travis-ci = { repository = "Drops-of-Diamond/Diamond-drops", branch = "master" }
 codecov = { repository = "Drops-of-Diamond/Diamond-drops", branch = "master", service = "github" }

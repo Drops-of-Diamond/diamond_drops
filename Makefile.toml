@@ -100,111 +100,6 @@ args = ["doc", "--open"]
 dependencies = ["build"]
 
 # Show list of applications installed `ls /Applications`
-<<<<<<< HEAD
-=======
-# Cargo Make config https://github.com/sagiegurari/cargo-make
-
-[env]
-ON = "1"
-OFF = "0"
-RUST_BACKTRACE = "${ON}"
-
-[tasks.format]
-install_crate = "rustfmt" # https://github.com/rust-lang-nursery/rustfmt
-command = "cargo"
-args = ["fmt", "--all", "--", "--write-mode=diff", "--verbose"]
-
-[tasks.clean]
-command = "cargo"
-args = ["clean"]
-
-[tasks.build]
-command = "cargo"
-args = ["build"]
-dependencies = ["clean"]
-
-[tasks.build-with-verbose]
-command = "cargo"
-args = ["build", "--verbose", "--all-features"]
-dependencies = ["clean"]
-
-[tasks.test-all]
-script = [
-    "echo \"Running all tests\"",
-    "cargo test",                    # Diamond Drops Main package
-    "cd cli && cargo test && cd ..", # Diamond Drops CLI library
-    "cd env && cargo test && cd ..", # Diamond Drops Environment library
-    "cd node && cargo test && cd .." # Diamond Drops Sharding Node library
-]
-dependencies = ["clean", "build-with-verbose"]
-
-[tasks.t]
-alias = "test-all"
-
-[tasks.test-all-watch]
-script = [
-    "echo \"Running all tests\"",
-    "cargo test",                    # Diamond Drops Main package
-    "cd cli && cargo test && cd ..", # Diamond Drops CLI library
-    "cd env && cargo test && cd ..", # Diamond Drops Environment library
-    "cd node && cargo test && cd .." # Diamond Drops Sharding Node library
-]
-
-[tasks.watch]
-script = ["cargo watch --watch . --clear --debug -s=\"cargo make test-all-watch\""]
-
-[tasks.run-proposer]
-script = ["cargo run -- -l 4 mode -p"]
-
-[tasks.run-notary]
-script = ["cargo run -- -l 4 mode -n"]
-
-[tasks.run-both]
-script = ["cargo run -- -l 4 mode -b"]
-
-[tasks.p]
-alias = "run-proposer"
-
-[tasks.n]
-alias = "run-notary"
-
-[tasks.b]
-alias = "run-both"
-
-[tasks.run-all]
-script = [
-    "echo \"Running all modes\"",
-    "cargo run -- -l 4 mode -p",          # Proposer Mode Only
-    "cargo run -- -l 4 mode -n",          # Notary Mode Only
-    "cargo run -- -l 4 mode -b"           # Both Proposer and Notary Modes
-]
-dependencies = ["clean"]
-
-[tasks.all]
-alias = "run-all"
-
-[tasks.run-all-with-bin]
-script = [
-    "echo \"Running all modes\"",
-    "cargo run --bin cli -- -l 4 mode -p", # Proposer Mode Only
-    "cargo run --bin cli -- -l 4 mode -n", # Notary Mode Only
-    "cargo run --bin cli -- -l 4 mode -b"  # Both Proposer and Notary Modes
-]
-dependencies = ["clean"]
-
-[tasks.flow-full]
-dependencies = [
-    "build-with-verbose",
-    "test-all"
-]
-
-[tasks.docs]
-command = "cargo"
-args = ["doc", "--open"]
-dependencies = ["build"]
-
-# Show list of applications installed `ls /Applications`
->>>>>>> Enhancement: WIP, UML for different OSs
 [tasks.uml_chrome]
 linux_alias = "linux_uml_chrome"
 windows_alias = "windows_uml_chrome"
@@ -213,17 +108,8 @@ mac_alias = "mac_uml_chrome"
 [tasks.linux_uml_chrome]
 command = "xdg-open" # this also works with OS X or any freedesktop compatible environment.
 # https://superuser.com/a/39013/410684
-<<<<<<< HEAD
-<<<<<<< HEAD
-args = ["./diagrams/ml.svg"]
-=======
-=======
-# can't specify, chooses a default app, 
-# has opened an empty text file or with an error on different systems
->>>>>>> Fix: Add UML tasks for different OSes, although they still have issues.
 args = ["./diagrams/ml.svg"] 
 # The default application for SVG files may need to be configured
->>>>>>> Enhancement: WIP, UML for different OSs
 dependencies = ["build"]
 
 [tasks.mac_uml_chrome]
@@ -231,47 +117,18 @@ command = "open"
 args = ["-a", "Google Chrome", "./diagrams/ml.svg"]
 dependencies = ["build"]
 
-[tasks.windows_uml_chrome]
-command = "start"
-args = ["./diagrams/ml.svg"]
-dependencies = ["build"]
-
 [tasks.uml_firefox]
 linux_alias = "linux_uml_firefox"
 windows_alias = "windows_uml_firefox"
 mac_alias = "mac_uml_firefox"
-
-[tasks.linux_uml_firefox]
-command = "xdg-open"
-args = ["./diagrams/ml.svg"]
-dependencies = ["build"]
-
-[tasks.mac_uml_firefox]
 command = "open"
 args = ["-a", "Firefox", "./diagrams/ml.svg"]
-dependencies = ["build"]
-
-[tasks.windows_uml_firefox]
-command = "start"
-args = ["./diagrams/ml.svg"]
 dependencies = ["build"]
 
 [tasks.uml_brave]
 linux_alias = "linux_uml_brave"
 windows_alias = "windows_uml_brave"
 mac_alias = "mac_uml_brave"
-
-[tasks.linux_uml_brave]
-command = "xdg-open"
-args = ["./diagrams/ml.svg"]
-dependencies = ["build"]
-
-[tasks.mac_uml_brave]
 command = "open"
 args = ["-a", "Brave", "./diagrams/ml.svg"]
-dependencies = ["build"]
-
-[tasks.windows_uml_brave]
-command = "start"
-args = ["./diagrams/ml.svg"]
 dependencies = ["build"]
