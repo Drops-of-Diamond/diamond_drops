@@ -1,3 +1,4 @@
+#[derive(PartialEq, Debug, Clone)]
 pub struct Chunk {
     indicator: u8,
     data: [u8; 31]
