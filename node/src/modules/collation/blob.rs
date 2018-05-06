@@ -1,5 +1,6 @@
 use modules::collation::chunk;
 
+#[derive(PartialEq, Debug, Clone)]
 pub struct Blob {
     size: usize,
     data: Vec<u8>
@@ -44,6 +45,34 @@ impl Blob {
         }
         chunks
     }
+
+    /// Create a blob from a set of chunks
+    pub fn from_chunks(chunks: Vec<chunk::Chunk>) -> Blob {
+        let mut size: usize = 0;
+        let mut data = vec![];
+        for ch in chunks {
+            let mask: u8 = 0b00011111;
+            let length = &ch.indicator & mask;
+            if length == 0 {
+                // Chunk is not terminal, read all 31 bytes into data
+                for i in 0..31 {
+                    data.push(ch.data[i as usize]);
+                }
+                size += 31
+            } else {
+                // Chunk is terminal, read length bytes into data
+                for i in 0..length {
+                    data.push(ch.data[i as usize]);
+                }
+                size += length as usize;
+            }
+        }
+
+        Blob {
+            size,
+            data
+        }
+    }
 }
 
 #[cfg(test)]
@@ -62,5 +91,18 @@ mod tests {
                                                                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                                                                 0, 0, 0, 0, 0, 0, 0]));
         assert_eq!(blob_chunks, correct_blob_chunks);
+    }
+
+    #[test]
+    fn it_converts_from_chunks() {
+        let ind = chunk::Chunk::build_indicator(true, false, 0);
+        let term_ind = chunk::Chunk::build_indicator(true, true, 31);
+
+        let mut chunks = vec![chunk::Chunk::new(ind, [255; 31]); 4];
+        chunks.push(chunk::Chunk::new(term_ind, [255; 31]));
+
+        let blob_from_chunks = Blob::from_chunks(chunks);
+        let blob = Blob::new(155, vec![255; 155]);
+        assert_eq!(blob, blob_from_chunks);
     }
 }

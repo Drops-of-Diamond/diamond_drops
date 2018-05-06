@@ -1,7 +1,7 @@
 #[derive(PartialEq, Debug, Clone)]
 pub struct Chunk {
-    indicator: u8,
-    data: [u8; 31]
+    pub indicator: u8,
+    pub data: [u8; 31]
 }
 
 impl Chunk {
@@ -18,7 +18,8 @@ impl Chunk {
         let mut indicator: u8 = 0;
 
         if skip_evm {
-            indicator += 128;
+            // Set SKIP_EVM flag to 1
+            indicator += 0b1000_0000;
         }
         if terminal {
             assert!(0 < length && length < 32);
@@ -45,24 +46,24 @@ mod tests {
     #[test]
     fn it_builds_indicator() {
         let full_ind: u8 = Chunk::build_indicator(true, true, 31);
-        let correct_full_ind: u8 = 159;
+        let correct_full_ind: u8 = 0b1001_1111;
         assert_eq!(full_ind, correct_full_ind);
         let full_non_terminal_ind: u8 = Chunk::build_indicator(true, false, 1);
-        let correct_full_non_terminal_ind: u8 = 128;
+        let correct_full_non_terminal_ind: u8 = 0b1000_0000;
         assert_eq!(full_non_terminal_ind, correct_full_non_terminal_ind);
         let two_bit_ind: u8 = Chunk::build_indicator(true, true, 1);
-        let correct_two_bit_ind: u8 = 129;
+        let correct_two_bit_ind: u8 = 0b1000_0001;
         assert_eq!(two_bit_ind, correct_two_bit_ind);
         let run_evm_ind: u8 = Chunk::build_indicator(false, true, 16);
-        let correct_run_evm_ind: u8 = 16;
+        let correct_run_evm_ind: u8 = 0b0001_0000;;
         assert_eq!(run_evm_ind, correct_run_evm_ind);
     }
 
     #[test]
     fn it_converts_to_bytes() {
-        let chunk = Chunk::new(128, [1; 31]);
+        let chunk = Chunk::new(0b1000_0000, [1; 31]);
         let chunk_bytes = chunk.as_bytes();
-        let correct_chunk_bytes: [u8; 32] = [128, 1, 1, 1, 
+        let correct_chunk_bytes: [u8; 32] = [0b1000_0000, 1, 1, 1, 
                                             1, 1, 1, 1, 1, 
                                             1, 1, 1, 1, 1,
                                             1, 1, 1, 1, 1, 1,
