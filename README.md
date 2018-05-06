@@ -32,7 +32,7 @@ Send a donation to our multi-sig wallet at [0x6D446f9545dBC380A6BBDde8A285A7A803
 
 ### We're looking for more developers!
 
-See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information.
+See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information. There is a lot of work to do in the [sharding roadmap](https://github.com/ethereum/wiki/wiki/Sharding-roadmap).
 
 ### Setup guide
 
