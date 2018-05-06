@@ -51,7 +51,7 @@ impl Blob {
         let mut size: usize = 0;
         let mut data = vec![];
         for ch in chunks {
-            let mask: u8 = 0b00011111;
+            let mask: u8 = 0b0001_1111;
             let length = &ch.indicator & mask;
             if length == 0 {
                 // Chunk is not terminal, read all 31 bytes into data
