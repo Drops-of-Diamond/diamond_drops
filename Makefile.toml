@@ -99,18 +99,34 @@ command = "cargo"
 args = ["doc", "--open"]
 dependencies = ["build"]
 
+# TODO: reduce repetition, refactor
 # Show list of applications installed `ls /Applications`
-[tasks.uml-chrome]
+[tasks.uml-chrome-mac]
 command = "open"
 args = ["-a", "Google Chrome", "./diagrams/ml.svg"]
 dependencies = ["build"]
 
-[tasks.uml-firefox]
+[tasks.uml-firefox-mac]
 command = "open"
 args = ["-a", "Firefox", "./diagrams/ml.svg"]
 dependencies = ["build"]
 
-[tasks.uml-brave]
+[tasks.uml-brave-mac]
 command = "open"
 args = ["-a", "Brave", "./diagrams/ml.svg"]
+dependencies = ["build"]
+
+[tasks.uml-inkscape-linux]
+command = "inkscape"
+args = ["./diagrams/ml.svg"]
+dependencies = ["build"]
+
+[tasks.uml-firefox-linux] 
+command = "firefox"
+args = ["./diagrams/ml.svg"]
+dependencies = ["build"]
+
+[tasks.uml-chrome-linux]
+command = "chrome"
+args = ["./diagrams/ml.svg"]
 dependencies = ["build"]
