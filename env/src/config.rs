@@ -1,3 +1,6 @@
+extern crate error_chain;
+
+use errors;
 use std::env;
 
 pub fn get_env() -> String {
