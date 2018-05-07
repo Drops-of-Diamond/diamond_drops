@@ -15,14 +15,9 @@ Get in touch with us on Gitter:
 
 ### What are we building?
 
-We are working on a sharding implementation in Rust. The below information may be outdated. For the latest information, please ask on Gitter, while additional information on plans and work tasks is in the issues.
+We are working on a [sharding](https://github.com/ethereum/wiki/wiki/Sharding-introduction-R&D-compendium) implementation for [Ethereum](https://ethereum.org) with the [Rust](https://www.rust-lang.org/en-US/), which is fast, safe and concurrent. The below information may be outdated. For the latest information, please ask on Gitter, while additional information on plans and work tasks is in the issues and [projects](https://github.com/Drops-of-Diamond/diamond_drops/projects).
 
-We're implementing sharding according to collaboration with Ethereum research at https://ethresear.ch and other teams which includes tasks outlined in the [projects](https://github.com/Drops-of-Diamond/diamond_drops/projects), including:
-
-* Developing a CLI interface for a Sharding Client in Rust for Proposers and Notaries to use
-* Developing [Sharding Manager Contract (SMC) in the Vyper language](https://github.com/Drops-of-Diamond/sharding/blob/develop/smc/Sharding_Manager_Contract.v.py), which is a smart contract that will be deployed on the Ethereum Mainnet for the Sharding Clients to interact with. 
-* Researching how to implement a Sharding P2P Network Protocol.
-* Implementing further planned additions in the sharding roadmap, which is available in the above issue.
+We're implementing sharding according to collaboration with Ethereum research at https://ethresear.ch and other teams, which includes tasks outlined in the projects.
   
 For further information please refer to [our wiki](https://github.com/Drops-of-Diamond/diamond_drops/wiki).
 
