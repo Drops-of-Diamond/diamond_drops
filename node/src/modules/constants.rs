@@ -11,7 +11,7 @@ pub const MAX_BLOB_SIZE: usize = CHUNKS_PER_COLLATION * CHUNK_DATA_SIZE;
 
 #[cfg(test)]
 mod tests {
-
+    use super::*;
     #[test]
     fn collation_size_mod_chunk_size_is_zero() {
         assert_eq!(COLLATION_SIZE % CHUNK_SIZE, 0, "Test: COLLATION_SIZE {} % 
