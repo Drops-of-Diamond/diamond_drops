@@ -270,3 +270,44 @@ fn easy_sha3(value: &[u8]) -> ethereum_types::H256 {
     sha3.finalize(&mut hash_bytes);
     ethereum_types::H256::from_slice(&hash_bytes[..])
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    #[ignore]
+    fn it_gets_entries() {
+        panic!();
+    }
+
+    #[test]
+    #[ignore]
+    fn it_updates_entries() {
+        panic!();
+    }
+
+    #[test]
+    #[ignore]
+    fn it_makes_merkle_proofs() {
+        panic!();
+    }
+
+    #[test]
+    #[ignore]
+    fn it_verifies_merkle_proofs() {
+        panic!();
+    }
+
+    #[test]
+    #[ignore]
+    fn it_compresses_merkle_proofs() {
+        panic!();
+    }
+
+    #[test]
+    #[ignore]
+    fn it_decompresses_merkle_proofs() {
+        panic!();
+    }
+}
