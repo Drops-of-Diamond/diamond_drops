@@ -6,7 +6,8 @@ use ethereum_types;
 /// A binary Merkle trie for storing blobs based off of Vitalik's implementation at:
 /// https://github.com/ethereum/research/blob/master/trie_research/bintrie2/new_bintrie.py
 pub struct BinTrie {
-    db: HashMap<ethereum_types::H256, [u8; 64]>
+    db: HashMap<ethereum_types::H256, [u8; 64]>,
+    zerohashes: Vec<[u8; 32]>
 }
 
 impl BinTrie {
@@ -34,8 +35,24 @@ impl BinTrie {
             h = newh;
         }
 
+        // initialize zerohashes
+        let mut zerohashes: Vec<[u8; 32]> = vec![[0; 32]];
+
+        for i in 0..255 {
+            // zerohashes[0] + zerohashes[0]
+            let mut z2: [u8; 64] = [0; 64];
+            for j in 0..32 {
+                z2[j] = zerohashes[0][j];
+                z2[j + 32] = zerohashes[0][j];
+            }
+            let mut new_zerohash: [u8; 32] = [0; 32];
+            easy_sha3(&z2).copy_to(&mut new_zerohash);
+            zerohashes.insert(0, new_zerohash);
+        }
+
         BinTrie {
-            db
+            db,
+            zerohashes
         }
     }
 
@@ -196,6 +213,29 @@ impl BinTrie {
             v = newv;
         }
         root == v
+    }
+
+    /// Compress a Merkle proof
+    pub fn compress_proof(&self, proof: Vec<[u8; 32]>) -> Vec<u8> {
+        let mut bits: [u8; 32] = [0; 32];
+        let mut oproof: Vec<[u8; 32]> = vec![];
+        for (i, p) in proof.iter().enumerate() {
+            if *p == self.zerohashes[i] {
+                bits[i / 8] = bits[i / 8] ^ (1 << i ^ 8);
+            } else {
+                oproof.push(*p);
+            }
+        }
+        let mut compressed_proof: Vec<u8> = vec![];
+        for i in 0..32 {
+            compressed_proof.push(bits[i]);
+        }
+        for i in 0..oproof.len() {
+            for j in 0..32 {
+                compressed_proof.push(oproof[i][j]);
+            }
+        }
+        compressed_proof
     }
 }
 
