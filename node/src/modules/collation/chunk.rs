@@ -1,6 +1,7 @@
 use bitreader::BitReader;
 use modules::constants::{CHUNK_SIZE, CHUNK_DATA_SIZE, 
     COLLATION_SIZE, CHUNKS_PER_COLLATION, MAX_BLOB_SIZE};
+use modules::errors::*;
 
 #[derive(PartialEq, Debug, Clone)]
 pub struct Chunk {
@@ -18,7 +19,6 @@ impl Chunk {
 
     /// Build the indicator byte with the supplied data.  Length can be
     /// any value if the chunk is not terminal (the value is ignored)
-    }
     /*
     pub fn build_indicator(skip_evm: bool, terminal: bool, length: u8) -> u8{
         let mut indicator: u8 = 0;
@@ -46,13 +46,15 @@ impl Chunk {
     }
 
     /// Convert CHUNK_SIZE bytes into a chunk
-    pub fn from_bytes(chunk_bytes: [u8; CHUNK_SIZE]) -> Chunk {
+    pub fn from_bytes(chunk_bytes: [u8; CHUNK_SIZE]) -> Result<Chunk> {
         let indicator = chunk_bytes[0];
         let mut data: [u8; CHUNK_DATA_SIZE] = [0; CHUNK_DATA_SIZE];
         let indicator_ref = &[chunk_bytes[0]];
         let mut indicator_reader = BitReader::new(indicator_ref);
 
-        indicator = indicator_reader.reader_u8(3)?
+        let skip_evm = indicator_reader.read_u8(1)?;//.chain_err(|| "Failed to read the 
+            // first three bits of the indicator");
+
         for i in 0..CHUNK_DATA_SIZE {
             data[i] = chunk_bytes[i+1];
         }

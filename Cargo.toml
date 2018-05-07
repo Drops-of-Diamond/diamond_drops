@@ -26,13 +26,13 @@ diamond-drops-env = { path = "env" }
 diamond-drops-node = { path = "node" }
 log = { version = "0.4.1", features = ["max_level_debug", "release_max_level_warn"] }
 
+# TODO: modify once https://github.com/kbknapp/clap-rs/pull/1271 is merged.
 [dependencies.clap]
 version = "^2"
 default-features = false
 
 # Cherry-pick the features you'd like to use
 features = [ "suggestions", "vec_map" ]
-
 
 [dev-dependencies]
 cargo-watch = { version = "6.0.0" }
