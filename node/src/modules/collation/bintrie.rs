@@ -237,6 +237,29 @@ impl BinTrie {
         }
         compressed_proof
     }
+
+    /// Decompress a Merkle proof
+    pub fn decompress_proof(&self, oproof: Vec<u8>) -> Vec<[u8; 32]> {
+        let mut proof: Vec<[u8; 32]> = vec![];
+        let mut bits: [u8; 32] = [0; 32];
+        for i in 0..32 {
+            bits[i] = oproof[i];
+        }
+        let mut pos = 32;
+        for i in 0..256 {
+            if (bits[i / 8] & (1 << (i % 8))) == 1 {
+                proof.push(self.zerohashes[i]);
+            } else {
+                let mut proof_elem: [u8; 32] = [0; 32];
+                for j in 0..32 {
+                    proof_elem[j] = oproof[j + pos];
+                }
+                proof.push(proof_elem);
+                pos = pos + 32;
+            }
+        }
+        proof
+    }
 }
 
 // Function to deal with sha3 functions with only one value to hash
