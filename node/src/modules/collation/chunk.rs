@@ -46,29 +46,30 @@ impl Chunk {
     }
 
     /// Convert CHUNK_SIZE bytes into a chunk
-    pub fn from_bytes(chunk_bytes: [u8; CHUNK_SIZE]) -> Result<Chunk> {
+    pub fn from_bytes(chunk_bytes: [u8; CHUNK_SIZE]) -> Result<()> {
         let indicator = chunk_bytes[0];
         let mut data: [u8; CHUNK_DATA_SIZE] = [0; CHUNK_DATA_SIZE];
+        /*
         let indicator_ref = &[chunk_bytes[0]];
         let mut indicator_reader = BitReader::new(indicator_ref);
 
         let skip_evm = indicator_reader.read_u8(1)?;//.chain_err(|| "Failed to read the 
             // first three bits of the indicator");
-
+        */
         for i in 0..CHUNK_DATA_SIZE {
             data[i] = chunk_bytes[i+1];
         }
-        Chunk {
+        Ok(Chunk {
             indicator,
             data
-        }
+        })
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-
+/*
     #[test]
     fn it_builds_indicator() {
         let full_ind: u8 = Chunk::build_indicator(true, true, CHUNK_DATA_SIZE);
@@ -84,7 +85,7 @@ mod tests {
         let correct_run_evm_ind: u8 = 0b0001_0000;;
         assert_eq!(run_evm_ind, correct_run_evm_ind);
     }
-
+*/
     #[test]
     fn it_converts_to_bytes() {
         let chunk = Chunk::new(0b1000_0000, [1; CHUNK_DATA_SIZE]);
