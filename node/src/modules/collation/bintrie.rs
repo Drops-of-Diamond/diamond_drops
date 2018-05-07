@@ -131,6 +131,35 @@ impl BinTrie {
             v = newv;
         }
     }
+
+    /// Make a Merkle proof of the key
+    pub fn make_merkle_proof(&mut self, root: ethereum_types::H256, key: ethereum_types::H256) 
+        -> Vec<[u8; 32]> {
+        let mut v = root;
+        let mut path = ethereum_types::U256::from(key);
+        let mut sidenodes = vec![];
+        let mut entry: [u8; 64] = [0; 64];
+        for i in 0..256 {
+            entry = *self.db.get(&v).unwrap();
+            let mut sn: [u8; 32] = [0; 32];
+            if (path >> 255) & ethereum_types::U256::from_dec_str("1").unwrap() == 
+                ethereum_types::U256::from_dec_str("1").unwrap() {
+                for j in 0..32 {
+                    sn[j] = entry[j];
+                }
+                sidenodes.push(sn);
+                v = ethereum_types::H256::from_slice(&entry[32..]);
+            } else {
+                for j in 0..32 {
+                    sn[j] = entry[j + 32];
+                }
+                sidenodes.push(sn);
+                v = ethereum_types::H256::from_slice(&entry[..32]);
+            }
+            path = path << 1;
+        }
+        sidenodes
+    }
 }
 
 // Function to deal with sha3 functions with only one value to hash
