@@ -160,6 +160,43 @@ impl BinTrie {
         }
         sidenodes
     }
+
+    /// Verify a merkle proof
+    pub fn verify_proof(&mut self, 
+                        proof: Vec<[u8; 32]>, 
+                        root: ethereum_types::H256, 
+                        key: ethereum_types::H256,
+                        value: [u8; 32]) -> bool {
+        let mut path = ethereum_types::U256::from(key);
+        let mut v = ethereum_types::H256::from(value);
+        for i in 0..256 {
+            let mut newv = ethereum_types::H256::zero();
+            // proof[-1-i], or proof[length - i]
+            let proof_entry = proof[256 - i];
+
+            if (path & ethereum_types::U256::from_dec_str("1").unwrap()) == 
+                ethereum_types::U256::from_dec_str("1").unwrap() {
+                // proof[-1-i] + v
+                let mut pv: [u8; 64] = [0; 64];
+                for j in 0..32 {
+                    pv[j] = proof_entry[j];
+                    pv[j + 32] = v[j];
+                }
+                newv = easy_sha3(&pv);
+            } else {
+                // v + proof[-1-i] + v
+                let mut vp: [u8; 64] = [0; 64];
+                for j in 0..32 {
+                    vp[j] = v[j];
+                    vp[j + 32] = proof_entry[j];
+                }
+                newv = easy_sha3(&vp);
+            }
+            path = path >> 1;
+            v = newv;
+        }
+        root == v
+    }
 }
 
 // Function to deal with sha3 functions with only one value to hash
