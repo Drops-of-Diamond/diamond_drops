@@ -1,9 +1,16 @@
+extern crate chrono;
 extern crate env_logger;
+extern crate fern;
+
 #[macro_use]
 extern crate clap;
-extern crate fern;
+#[macro_use]
+extern crate error_chain;
 #[macro_use]
 extern crate log;
-extern crate chrono;
+
+pub mod error {
+    error_chain! { }
+}
 
 pub mod modules;
