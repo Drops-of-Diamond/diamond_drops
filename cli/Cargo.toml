@@ -5,8 +5,9 @@ authors = ["James Ray (@jamesray1)", "Josiah (@ChosunOne)", "Luke Schoen (@ltfsc
 license = "Unlicense"
 
 [dependencies]
+chrono = { version = "0.4", features = ["serde"] }
 clap = { version = "2.31.2", features = ["yaml", "debug"] } # https://clap.rs/
 env_logger = "0.5.8"
-log = { version = "0.4.1", features = ["max_level_debug", "release_max_level_warn"] }
-chrono = { version = "0.4", features = ["serde"] }
+error-chain = "0.11.0"
 fern = { version = "0.5", features = ["colored"] }
+log = { version = "0.4.1", features = ["max_level_debug", "release_max_level_warn"] }
