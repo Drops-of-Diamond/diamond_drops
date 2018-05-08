@@ -4,3 +4,4 @@ pub mod message;
 pub mod notary;
 pub mod proposer;
 pub mod smc_listener;
+pub mod primitives;

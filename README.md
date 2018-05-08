@@ -15,14 +15,9 @@ Get in touch with us on Gitter:
 
 ### What are we building?
 
-We are working on a sharding implementation in Rust. The below information may be outdated. For the latest information, please ask on Gitter, while additional information on plans and work tasks is in the issues.
+We are working on a [sharding](https://github.com/ethereum/wiki/wiki/Sharding-introduction-R&D-compendium) implementation for [Ethereum](https://ethereum.org) with the [Rust](https://www.rust-lang.org/en-US/), which is fast, safe and concurrent. The below information may be outdated. For the latest information, please ask on Gitter, while additional information on plans and work tasks is in the issues and [projects](https://github.com/Drops-of-Diamond/diamond_drops/projects).
 
-We're implementing sharding according to collaboration with Ethereum research at https://ethresear.ch and other teams which includes tasks outlined in [issue #13](https://github.com/Drops-of-Diamond/diamond_drops/issues/13) as well as:
-
-* Developing a CLI interface for a Sharding Client in Rust for Proposers and Notaries to use
-* Developing [Sharding Manager Contract (SMC) in the Vyper language](https://github.com/Drops-of-Diamond/sharding/blob/develop/smc/Sharding_Manager_Contract.v.py), which is a smart contract that will be deployed on the Ethereum Mainnet for the Sharding Clients to interact with. 
-* Researching how to implement a Sharding P2P Network Protocol.
-* Implementing further planned additions in the sharding roadmap, which is available in the above issue.
+We're implementing sharding according to collaboration with Ethereum research at https://ethresear.ch and other teams, which includes tasks outlined in the projects.
   
 For further information please refer to [our wiki](https://github.com/Drops-of-Diamond/diamond_drops/wiki).
 
@@ -32,7 +27,7 @@ Send a donation to our multi-sig wallet at [0x6D446f9545dBC380A6BBDde8A285A7A803
 
 ### We're looking for more developers!
 
-See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information.
+See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information. There is a lot of work to do in the [sharding roadmap](https://github.com/ethereum/wiki/wiki/Sharding-roadmap).
 
 ### Setup guide
 
@@ -121,7 +116,9 @@ cargo run -- mode --help
 
   * Watch all tests (polls continuously for code changes during development, automatically running tests, and reports issues)
     ```bash
-    cargo make watch
+    cargo make build;
+    cargo install cargo-watch;
+    cargo make watch;
     ```
 
 ### Show Rust Docs
@@ -129,8 +126,6 @@ cargo run -- mode --help
 ```bash
 cargo make docs
 ```
-
-See this wiki article [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Contributing-guidelines).
 
 ### View UML Diagram
 
@@ -150,9 +145,9 @@ See this wiki article [here](https://github.com/Drops-of-Diamond/diamond_drops/w
 ![](
 https://raw.githubusercontent.com/ltfschoen/Diamond-drops/develop/diagrams/ml.svg?sanitize=true)
 
-### We're looking for more developers!
+### Contibuting guidelines
 
-See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information.
+See this wiki article [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Contributing-guidelines).
 
 ### Introduction
 

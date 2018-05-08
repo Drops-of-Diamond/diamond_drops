@@ -1,12 +1,16 @@
 use modules::message;
-
-use ethereum_types;
+use modules::primitives::{
+    ShardIdHash,
+    ChunkPeriodHash,
+    NotaryAddress,
+    ProposerAddress
+};
 
 use std::sync::mpsc;
 
 /// This will monitor the SMC for changes and then send relevant information to the notary or the proposer.
 pub struct SMCListener {
-    period: ethereum_types::U256,
+    period: ShardIdHash,
     notary_sender: mpsc::Sender<message::Message>
 }
 
@@ -14,12 +18,12 @@ impl SMCListener {
     /// Creates a new SMC Listener
     pub fn new(notary_sender: mpsc::Sender<message::Message>) -> SMCListener {
         SMCListener {
-            period: ethereum_types::U256::from_dec_str("0").unwrap(),
+            period: ChunkPeriodHash::from_dec_str("0").unwrap(),
             notary_sender
         }
     }
 
-    fn register_notary_address(&self, notary_addr: ethereum_types::Address) -> bool {
+    fn register_notary_address(&self, notary_addr: NotaryAddress) -> bool {
         // TODO - Implement registration of notary address in notary registry of SMC Contract
         let result: Result<String, String> = Result::Err(String::from("Error"));
 
@@ -29,11 +33,11 @@ impl SMCListener {
         }
     }
 
-    fn get_selected_notaries(&self, shard_id: ethereum_types::U256) -> Vec<ethereum_types::Address> {
-        vec![ethereum_types::Address::zero()]
+    fn get_selected_notaries(&self, shard_id: ShardIdHash) -> Vec<NotaryAddress> {
+        vec![NotaryAddress::zero()]
     }
 
-    fn register_proposer_address(&self, proposer_addr: ethereum_types::Address) -> bool {
+    fn register_proposer_address(&self, proposer_addr: ProposerAddress) -> bool {
         // TODO - Implement registration of proposer address in proposer registry of SMC Contract
         let result: Result<String, String> = Result::Err(String::from("Error"));
 
@@ -57,7 +61,7 @@ mod tests {
                                            0x82, 0xc1, 0x19, 0x77, 0x36, 
                                            0xb3, 0xfC, 0xe3, 0x4a, 0xD4, 
                                            0xFc, 0x5e, 0xEe, 0x75, 0xc8];
-        let notary_addr: ethereum_types::Address = ethereum_types::Address::from_slice(&notary_addr_bytes);
+        let notary_addr: NotaryAddress = NotaryAddress::from_slice(&notary_addr_bytes);
         let result = smc.register_notary_address(notary_addr);
         assert_eq!(true, result);
     }
@@ -71,7 +75,7 @@ mod tests {
                                              0x82, 0xc1, 0x19, 0x77, 0x36, 
                                              0xb3, 0xfC, 0xe3, 0x4a, 0xD4, 
                                              0xFc, 0x5e, 0xEe, 0x75, 0xc8];
-        let proposer_addr: ethereum_types::Address = ethereum_types::Address::from_slice(&proposer_addr_bytes);
+        let proposer_addr: ProposerAddress = ProposerAddress::from_slice(&proposer_addr_bytes);
         let result = smc.register_proposer_address(proposer_addr);
         assert_eq!(true, result);
     }
@@ -81,7 +85,7 @@ mod tests {
     fn it_gets_selected_notaries() {
         let (tx, rx) = mpsc::channel();
         let smc = SMCListener::new(tx);
-        let shard_id = ethereum_types::U256::from_dec_str("0").unwrap();
+        let shard_id = ShardIdHash::from_dec_str("0").unwrap();
         let notary_addr = smc.get_selected_notaries(shard_id);
 
         // The dummy "selected notary"
@@ -89,7 +93,7 @@ mod tests {
                                            0x24, 0xA8, 0xaf, 0xC2, 0xb1, 
                                            0x57, 0xCe, 0xbA, 0x3c, 0xDd, 
                                            0x2a, 0x27, 0xc4, 0xE2, 0x1f];
-        let selected_notary_addr = ethereum_types::Address::from_slice(&notary_addr_bytes);
+        let selected_notary_addr: NotaryAddress = NotaryAddress::from_slice(&notary_addr_bytes);
 
         assert_eq!(vec![selected_notary_addr], notary_addr);
     }
