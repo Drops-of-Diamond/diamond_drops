@@ -15,7 +15,7 @@ Get in touch with us on Gitter:
 
 ### What are we building?
 
-We are working on a [sharding](https://github.com/ethereum/wiki/wiki/Sharding-introduction-R&D-compendium) implementation for [Ethereum](https://ethereum.org) with the [Rust](https://www.rust-lang.org/en-US/), which is fast, safe and concurrent. The below information may be outdated. For the latest information, please ask on Gitter, while additional information on plans and work tasks is in the issues and [projects](https://github.com/Drops-of-Diamond/diamond_drops/projects).
+We are working on a [sharding](https://github.com/ethereum/wiki/wiki/Sharding-introduction-R&D-compendium) implementation for [Ethereum](https://ethereum.org) with the [Rust](https://www.rust-lang.org/en-US/) programming language, which is fast, safe and concurrent. The below information may be outdated. For the latest information, please ask on Gitter, while additional information on plans and work tasks is in the issues and [projects](https://github.com/Drops-of-Diamond/diamond_drops/projects).
 
 We're implementing sharding according to collaboration with Ethereum research at https://ethresear.ch and other teams, which includes tasks outlined in the projects.
   
