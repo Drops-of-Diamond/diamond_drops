@@ -1,5 +1,7 @@
 pub mod client_thread;
 pub mod collation;
+pub mod constants;
+pub mod errors;
 pub mod message;
 pub mod notary;
 pub mod proposer;
