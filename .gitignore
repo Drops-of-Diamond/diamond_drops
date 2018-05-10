@@ -6,3 +6,4 @@ output.log
 **/*.rs.bk
 Cargo.lock
 diagrams/ml.dot
+diagrams/ml.svg
