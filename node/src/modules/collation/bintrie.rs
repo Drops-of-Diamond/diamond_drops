@@ -6,6 +6,7 @@ use ethereum_types;
 /// A binary Merkle trie for storing blobs based off of Vitalik's implementation at:
 /// https://github.com/ethereum/research/blob/master/trie_research/bintrie2/new_bintrie.py
 pub struct BinTrie {
+    root: ethereum_types::H256,
     db: HashMap<ethereum_types::H256, [u8; 64]>,
     zerohashes: Vec<[u8; 32]>
 }
@@ -51,15 +52,16 @@ impl BinTrie {
         }
 
         BinTrie {
+            root: h,
             db,
             zerohashes
         }
     }
 
     /// Get a value from the trie
-    pub fn get(&mut self, root: ethereum_types::H256, key: ethereum_types::H256) 
+    pub fn get(&mut self, key: ethereum_types::H256) 
         -> [u8; 32] {
-        let mut v = root;
+        let mut v = self.root;
         let mut path = ethereum_types::U256::from(key);
         for _ in 0..256 {
             if ((path >> 255) & ethereum_types::U256::from_dec_str("1").unwrap()) == 
@@ -76,10 +78,8 @@ impl BinTrie {
     }
 
     /// Update a value in the trie
-    pub fn update(&mut self, root: ethereum_types::H256, 
-                             key: ethereum_types::H256, 
-                             value: [u8; 32]) {
-        let mut v = root;
+    pub fn update(&mut self, key: ethereum_types::H256, value: [u8; 32]) {
+        let mut v = self.root;
         let mut entry: [u8; 64] = [0; 64];
         let mut path = ethereum_types::U256::from(key);
         let mut path2 = ethereum_types::U256::from(key);
@@ -147,12 +147,13 @@ impl BinTrie {
             path2 = path2 >> 1;
             v = newv;
         }
+        self.root = v;
     }
 
     /// Make a Merkle proof of the key
-    pub fn make_merkle_proof(&mut self, root: ethereum_types::H256, key: ethereum_types::H256) 
+    pub fn make_merkle_proof(&mut self, key: ethereum_types::H256) 
         -> Vec<[u8; 32]> {
-        let mut v = root;
+        let mut v = self.root;
         let mut path = ethereum_types::U256::from(key);
         let mut sidenodes = vec![];
         let mut entry: [u8; 64] = [0; 64];
@@ -276,15 +277,26 @@ mod tests {
     use super::*;
 
     #[test]
-    #[ignore]
-    fn it_gets_entries() {
-        panic!();
+    fn it_creates_bintries() {
+        let btree = BinTrie::new();
     }
 
     #[test]
-    #[ignore]
+    fn it_gets_entries() {
+        let mut btree = BinTrie::new();
+        let key = ethereum_types::H256::random();
+        let correct_value: [u8; 32] = [12; 32];
+        btree.update(key, correct_value);
+        let got_value: [u8; 32] = btree.get(key);
+        assert_eq!(got_value, correct_value);
+    }
+
+    #[test]
     fn it_updates_entries() {
-        panic!();
+        let mut btree = BinTrie::new();
+        let key = ethereum_types::H256::random();
+        let value: [u8; 32] = [12; 32];
+        btree.update(key, value);
     }
 
     #[test]

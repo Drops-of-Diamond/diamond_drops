@@ -4,6 +4,7 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
+
     // This is just for testing really;
     // it filters out all tests in the below cli target debug binary.
     {
@@ -21,6 +22,17 @@
       "name": "Launch node tests",
       "target": "node/target/debug/diamond_drops_node-7072f4dfac21a407",
       "cwd": "${workspaceRoot}"
+    },
+    {
+      "name": "Launch node tests (Windows)",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/node/target/debug/diamond_drops_node-567ac6d35b205046.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": true
     },
     {
       "type": "lldb-mi",
