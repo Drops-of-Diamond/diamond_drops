@@ -24,9 +24,16 @@ doc = false # Resolve documentation conflict
 diamond-drops-cli = { path = "cli" }
 diamond-drops-env = { path = "env" }
 diamond-drops-node = { path = "node" }
-clap = { version = "2.31.2", features = [] } # only for integration tests
 log = { version = "0.4.1", features = ["max_level_debug", "release_max_level_warn"] }
 error-chain = "0.11.0"
+
+[dependencies.clap]
+version = "^2"
+default-features = false
+
+# Cherry-pick the features you'd like to use
+features = [ "suggestions", "vec_map" ]
+
 
 [dev-dependencies]
 cargo-watch = { version = "6.0.0" }
