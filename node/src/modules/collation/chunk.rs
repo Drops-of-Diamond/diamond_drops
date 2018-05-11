@@ -1,7 +1,8 @@
-//use bitreader::BitReader;
+use bitreader::BitReader;
 use modules::constants::{CHUNK_SIZE, CHUNK_DATA_SIZE, 
     /*COLLATION_SIZE, */CHUNKS_PER_COLLATION, MAX_BLOB_SIZE};
 use modules::errors::*;
+// use modules::collation::blob::clone_into_array;
 
 #[derive(PartialEq, Debug, Clone)]
 pub struct Chunk {
@@ -17,22 +18,6 @@ impl Chunk {
         }
     }
 
-    /// Build the indicator byte with the supplied data.  Length can be
-    /// any value if the chunk is not terminal (the value is ignored).
-    /// Only used in tests.
-    pub fn build_indicator(skip_evm: bool, terminal: bool, length: u8) -> u8{
-        let mut indicator: u8 = 0;
-
-        if skip_evm {
-            // Set SKIP_EVM flag to 1
-            indicator += 0b1000_0000;
-        }
-        if terminal {
-            assert!(0 < length && length < 32);
-            indicator += length;
-        }
-        indicator
-    }
     /*
     /// Build the indicator byte with the supplied data.  Length can be
     /// any value if the chunk is not terminal (the value is ignored).
@@ -52,7 +37,7 @@ impl Chunk {
     }
     */
     /// Convert the Chunk into bytes
-    pub fn as_bytes(self) -> [u8; CHUNK_SIZE] {
+    pub fn chunk_to_bytes(self) -> [u8; CHUNK_SIZE] {
         let mut bytes: [u8; CHUNK_SIZE] = [0; CHUNK_SIZE];
         bytes[0] = self.indicator;
         for i in 1..CHUNK_SIZE {
@@ -62,7 +47,7 @@ impl Chunk {
     }
 
     /// Convert CHUNK_SIZE bytes into a chunk
-    pub fn from_bytes(chunk_bytes: [u8; CHUNK_SIZE]) -> Chunk {
+    pub fn bytes_to_chunk(chunk_bytes: [u8; CHUNK_SIZE]) -> Chunk {
         let indicator = chunk_bytes[0];
         let mut data: [u8; 31] = [0; 31];
         /*
@@ -78,45 +63,71 @@ impl Chunk {
         let skip_evm = indicator_reader.read_u8(1)?;//.chain_err(|| "Failed to read the 
             // first three bits of the indicator");
         */
-
         for i in 0..CHUNK_DATA_SIZE {
             data[i] = chunk_bytes[i+1];
         }
-
         Chunk {
             indicator,
             data
         }
     }
+    /// Build an indicator byte with the supplied parameters:
+    /// `skip_evm`, `terminal` and `terminal_length` .  Length can be
+    /// any value if the chunk is not terminal (the value is ignored).
+    /// Only used in tests.
+    pub fn build_indicator(skip_evm: bool, terminal: bool, terminal_length: u8) -> u8{
+        let mut indicator: u8 = 0b0000_0000;
+
+        if skip_evm {
+            // Set SKIP_EVM flag to 1
+            indicator += 0b1000_0000;
+        }
+        /* Could use this if we want to build an indicator byte from a chunk,
+        then we wouldn't need terminal and terminal_length.
+        // Check if it's a terminal chunk and if so, set the length bits.
+        if 0 < self.data.len() && self.data.len() < CHUNK_SIZE {
+            indicator += self.data.len();
+        }
+        */
+        if terminal {
+            assert!(0 < terminal_length && terminal_length < CHUNK_SIZE as u8);
+            indicator += terminal_length;
+        }
+        indicator
+    }
 }
 
+
 #[cfg(test)]
-mod tests {
+pub mod tests {
     use super::*;
 
-     #[test]
+    #[test]
     fn it_builds_indicator() {
-        let full_ind: u8 = Chunk::build_indicator(true, true, CHUNK_DATA_SIZE as u8);
-        let correct_full_ind: u8 = 0b1001_1111;
-        assert_eq!(full_ind, correct_full_ind);
-        let full_non_terminal_ind: u8 = Chunk::build_indicator(true, false, 1);
-        let correct_full_non_terminal_ind: u8 = 0b1000_0000;
-        assert_eq!(full_non_terminal_ind, correct_full_non_terminal_ind);
-        let two_bit_ind: u8 = Chunk::build_indicator(true, true, 1);
-        let correct_two_bit_ind: u8 = 0b1000_0001;
-        assert_eq!(two_bit_ind, correct_two_bit_ind);
-        let run_evm_ind: u8 = Chunk::build_indicator(false, true, 16);
-        let correct_run_evm_ind: u8 = 0b0001_0000;;
-        assert_eq!(run_evm_ind, correct_run_evm_ind);
+        let full_indicator: u8 = Chunk::build_indicator(true, true, CHUNK_DATA_SIZE as u8);
+        let correct_full_indicator: u8 = 0b1001_1111;
+        assert_eq!(full_indicator, correct_full_indicator);
+
+        let full_non_terminal_indicator: u8 = Chunk::build_indicator(true, false, 1);
+        let correct_full_non_terminal_indicator: u8 = 0b1000_0000;
+        assert_eq!(full_non_terminal_indicator, correct_full_non_terminal_indicator);
+
+        let one_bit_length_indicator_skip: u8 = Chunk::build_indicator(true, true, 1);
+        let correct_one_bit_length_indicator_skip: u8 = 0b1000_0001;
+        assert_eq!(one_bit_length_indicator_skip, correct_one_bit_length_indicator_skip);
+
+        let run_evm_indicator: u8 = Chunk::build_indicator(false, true, 16);
+        let correct_run_evm_indicator: u8 = 0b0001_0000;
+        assert_eq!(run_evm_indicator, correct_run_evm_indicator);
     }
 
     #[test]
     fn it_converts_to_bytes() {
         let chunk = Chunk::new(0b1000_0000, [1; CHUNK_DATA_SIZE as usize]);
-        let chunk_bytes = chunk.as_bytes();
-        let correct_chunk_bytes: [u8; CHUNK_SIZE] = [0b1000_0000, 1, 1, 1, 
-                                            1, 1, 1, 1, 1, 
-                                            1, 1, 1, 1, 1,
+        let chunk_bytes = chunk.chunk_to_bytes();
+        let correct_chunk_bytes: [u8; CHUNK_SIZE] = [0b1000_0000, 1, 
+                                            1, 1, 1, 1, 1, 1,
+                                            1, 1, 1, 1, 1, 1, 
                                             1, 1, 1, 1, 1, 1,
                                             1, 1, 1, 1, 1, 1,
                                             1, 1, 1, 1, 1, 1];
@@ -127,8 +138,8 @@ mod tests {
     #[test]
     fn it_converts_from_bytes() {
         let chunk = Chunk::new(0b1000_0000, [1; CHUNK_DATA_SIZE]);
-        let chunk_bytes = chunk.clone().as_bytes();
-        let same_chunk = Chunk::from_bytes(chunk_bytes);
+        let chunk_bytes = chunk.clone().chunk_to_bytes();
+        let same_chunk = Chunk::bytes_to_chunk(chunk_bytes);
         assert_eq!(chunk, same_chunk);
     }
 

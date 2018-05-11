@@ -59,7 +59,7 @@ fn process_log_matches(matches: &clap::ArgMatches) -> () {
 }
 
 /// Parse arguments from the command line and produce a configuration from them.
-pub fn parse_cli_args(args: Vec<String>) -> Result<config::Config, String> {
+pub fn parse_cli_args(_args: Vec<String>) -> Result<config::Config, String> {
     let yaml = load_yaml!("../../cli.yml");
     let matches = clap::App::from_yaml(yaml).get_matches();
 

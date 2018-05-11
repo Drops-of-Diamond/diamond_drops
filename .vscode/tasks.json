@@ -26,135 +26,166 @@
       ]`
     },
     */
-      {
-        "label": "cargo make all",
-        "args": [
-          "cargo","make", "all"
-        ],
-        "group":  "build",
-        "problemMatcher": [
-          "$rustc"
-        ]
+    {
+      "label": "cargo make all",
+      "args": [
+        "cargo","make", "all"
+      ],
+      "group":  "build",
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo make test-all",
+      "args": [
+        "cargo","make", "test-all"
+      ],
+      "group":  "test",
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    // This takes a long time, better to cd to each crate folder, build before testing,
+    // then test. E.g. cd node; cargo build; cargo test
+    {
+      "label": "cargo make test-node",
+      "args": [
+        "cargo","make", "test-node"
+      ],
+      "group":  "test",
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo make test-cli",
+      "args": [
+        "cargo","make", "test-cli"
+      ],
+      "group":  "test",
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo make test-env",
+      "args": [
+        "cargo","make", "test-env"
+      ],
+      "group":  "test",
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo make build; cargo make watch",
+      // cargo install cargo-watch; is omitted for performance
+      "args": [
+        "cargo make build; cargo make watch"//"make", "p"
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo make docs",
+      "args": [
+        "cargo make docs"
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    // cargo make uml-X only works on a Mac,
+    // https://github.com/Drops-of-Diamond/diamond_drops/issues/48
+    {
+      "label": "cargo make uml-chrome",
+      "args": [
+        "cargo make uml-chrome"
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo make uml-firefox",
+      "args": [
+        "cargo make uml-firefox"
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo make uml-brave",
+      "args": [
+        "cargo make uml-brave"
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo make n",
+      "command": "cargo",
+      "args": [
+        "make", "n"
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo make b",
+      "command": "cargo",
+      "args": [
+        "make", "b"
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo build",
+      "command": "cargo build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
       },
-      {
-        "label": "cargo make test-all",
-        "args": [
-          "cargo","make", "test-all"
-        ],
-        "group":  "test",
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
-      {
-        "label": "cargo make build; cargo make watch",
-        // cargo install cargo-watch; is omitted for performance
-        "args": [
-          "cargo make build; cargo make watch"//"make", "p"
-        ],
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
-      {
-        "label": "cargo make docs",
-        "args": [
-          "cargo make docs"
-        ],
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
-      // cargo make uml-X only works on a Mac,
-      // https://github.com/Drops-of-Diamond/diamond_drops/issues/48
-      {
-        "label": "cargo make uml-chrome",
-        "args": [
-          "cargo make uml-chrome"
-        ],
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
-      {
-        "label": "cargo make uml-firefox",
-        "args": [
-          "cargo make uml-firefox"
-        ],
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
-      {
-        "label": "cargo make uml-brave",
-        "args": [
-          "cargo make uml-brave"
-        ],
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
-      {
-        "label": "cargo make n",
-        "command": "cargo",
-        "args": [
-          "make", "n"
-        ],
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
-      {
-        "label": "cargo make b",
-        "command": "cargo",
-        "args": [
-          "make", "b"
-        ],
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
-      {
-        "label": "cargo build",
-        "command": "cargo build",
-        "group": {
-          "kind": "build",
-          "isDefault": true
-        },
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
-      {
-        "label": "cargo run -- mode --help",
-        "command": "cargo",
-        "args": [
-          "run", "--", "mode", "--help" 
-        ],
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
-      {
-        "label": "cargo run -- mode -b",
-        "command": "cargo",
-        "args": [
-          "run", "--", "mode", "-b" 
-        ],
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
-      {
-        "label": "cargo run -- --help",
-        "command": "cargo",
-        "args": [
-          "run", "--", "--help" 
-        ],
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo run -- mode --help",
+      "command": "cargo",
+      "args": [
+        "run", "--", "mode", "--help" 
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo run -- mode -b",
+      "command": "cargo",
+      "args": [
+        "run", "--", "mode", "-b" 
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo run -- --help",
+      "command": "cargo",
+      "args": [
+        "run", "--", "--help" 
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ]
     },
   ]
 }

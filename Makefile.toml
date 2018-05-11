@@ -37,6 +37,27 @@ dependencies = ["clean", "build-with-verbose"]
 [tasks.t]
 alias = "test-all"
 
+[tasks.test-node]
+script = [
+    "echo \"Running node tests\"",
+    "cd node && cargo test" # Diamond Drops Sharding Node library
+]
+dependencies = ["clean", "build-with-verbose"]
+
+[tasks.test-cli]
+script = [
+    "echo \"Running cli tests\"",
+    "cd cli && cargo test" # Diamond Drops Sharding cli library
+]
+dependencies = ["clean", "build-with-verbose"]
+
+[tasks.test-env]
+script = [
+    "echo \"Running cli tests\"",
+    "cd env && cargo test" # Diamond Drops Sharding env library
+]
+dependencies = ["clean", "build-with-verbose"]
+
 [tasks.test-all-watch]
 script = [
     "echo \"Running all tests\"",
@@ -99,7 +120,7 @@ command = "cargo"
 args = ["doc", "--open"]
 dependencies = ["build"]
 
-[tasks.uml_chrome]
+[tasks.uml-chrome]
 linux_alias = "linux_uml_chrome"
 windows_alias = "windows_uml_chrome"
 mac_alias = "mac_uml_chrome"
@@ -124,7 +145,7 @@ command = "start"
 args = ["./diagrams/ml.svg"]
 dependencies = ["build"]
 
-[tasks.uml_firefox]
+[tasks.uml-firefox]
 linux_alias = "linux_uml_firefox"
 windows_alias = "windows_uml_firefox"
 mac_alias = "mac_uml_firefox"
@@ -144,7 +165,7 @@ command = "start"
 args = ["./diagrams/ml.svg"]
 dependencies = ["build"]
 
-[tasks.uml_brave]
+[tasks.uml-brave]
 linux_alias = "linux_uml_brave"
 windows_alias = "windows_uml_brave"
 mac_alias = "mac_uml_brave"
