@@ -48,14 +48,13 @@ fn main() {
             writeln!(stderr, "backtrace: {:?}", backtrace).expect(errmsg);
         }
 
-        ::std::process::exit(1);
+        process::exit(1);
     }
 }
 
 // Use this macro to auto-generate the main above. You may want to
 // set the `RUST_BACKTRACE` env variable to see a backtrace.
 // quick_main!(run);
-
 
 // Most functions will return the `Result` type, imported from the
 // `errors` module. It is a typedef of the standard `Result` type
@@ -73,12 +72,5 @@ fn run() -> Result<()> {
         });
     diamond_drops::run(config);
 
-    /*
-    Example from error_chain    use std::fs::File;
-
-    // This operation will fail
-    File::open("tretrete")
-        .chain_err(|| "unable to open tretrete file")?;
-    */
     Ok(())
 }

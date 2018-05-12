@@ -5,14 +5,26 @@
   "version": "0.2.0",
   "configurations": [
 
-    // This is just for testing really;
-    // it filters out all tests in the below cli target debug binary.
     {
       "type": "lldb-mi",
       "request": "launch",
       "name": "preLaunchTask (no arguments), will err",
       "target": "./target/debug/cli",
       "cwd": "${workspaceRoot}"
+    },
+    {
+      "type": "lldb-mi",
+      "request": "launch",
+      "name": "node tests",
+      "target": "./node/target/debug/diamond_drops_node-1cf2ba5a865817ea",
+      "cwd": "${workspaceRoot}",
+    },
+    {
+      "type": "lldb-mi",
+      "request": "launch",
+      "name": "env tests",
+      "target": "./env/target/debug/diamond_drops_env-1d282c4e9006e757",
+      "cwd": "${workspaceRoot}",
     },
     {
       "type": "lldb-mi",
