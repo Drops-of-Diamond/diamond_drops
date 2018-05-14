@@ -1,6 +1,6 @@
 //! ![uml](ml.svg)
 
-#![feature(slice_get_slice)]
+//unused: #![feature(slice_get_slice)]
 
 // Make sure to actually handle these before production. 
 // https://github.com/Drops-of-Diamond/diamond_drops/issues/66

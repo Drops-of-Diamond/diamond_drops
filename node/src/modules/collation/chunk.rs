@@ -2,11 +2,12 @@ use bitreader::BitReader;
 use modules::constants::{CHUNK_SIZE, CHUNK_DATA_SIZE, 
     /*COLLATION_SIZE, */CHUNKS_PER_COLLATION, MAX_BLOB_SIZE};
 use modules::errors::*;
-use ::std::fmt::{Binary, Formatter, Result};
-use ::std::slice::SliceIndex;
+
 // Not used:
 //use modules::primitives::{BinaryU8};
 // use modules::collation::blob::clone_into_array;
+// not used: use ::std::fmt::{Binary, Formatter, Result};
+// nightly, not used: use ::std::slice::SliceIndex;
 
 #[derive(PartialEq, Debug, Clone)]
 pub struct Chunk {
