@@ -4,46 +4,45 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
-
     {
       "type": "lldb-mi",
       "request": "launch",
-      "name": "preLaunchTask (no arguments), will err",
+      "name": "LLDB-MI preLaunchTask (no arguments), will err",
       "target": "./target/debug/cli",
       "cwd": "${workspaceRoot}"
     },
     {
       "type": "lldb-mi",
       "request": "launch",
-      "name": "node tests",
+      "name": "LLDB-MI node tests",
       "target": "./node/target/debug/diamond_drops_node-1cf2ba5a865817ea",
       "cwd": "${workspaceRoot}",
     },
     {
       "type": "lldb-mi",
       "request": "launch",
-      "name": "env tests",
+      "name": "LLDB-MI env tests",
       "target": "./env/target/debug/diamond_drops_env-1d282c4e9006e757",
       "cwd": "${workspaceRoot}",
     },
     {
       "type": "lldb-mi",
       "request": "launch",
-      "name": "cli tests",
+      "name": "LLDB-MI cli tests",
       "target": "./cli/target/debug/diamond_drops_cli-92f72ac9ea84ded0",
       "cwd": "${workspaceRoot}",
     },
     {
       "type": "lldb-mi",
       "request": "launch",
-      "name": "cli tests dup",
+      "name": "LLDB-MI cli tests dup",
       "target": "./cli/target/debug/diamond_drops_cli-c74703dbc2273aa2",
       "cwd": "${workspaceRoot}",
     },
     {
       "type": "lldb-mi",
       "request": "launch",
-      "name": "mode -b",
+      "name": "LLDB-MI mode -b",
       "target": "./target/debug/cli",
       "cwd": "${workspaceRoot}",
       "arguments": "mode -b"
@@ -51,7 +50,7 @@
     {
       "type": "lldb-mi",
       "request": "launch",
-      "name": "mode -n",
+      "name": "LLDB-MI mode -n",
       "target": "./target/debug/cli",
       "cwd": "${workspaceRoot}",
       "arguments": "mode -n"
@@ -59,7 +58,7 @@
     {
       "type": "lldb-mi",
       "request": "launch",
-      "name": "mode -p",
+      "name": "LLDB-MI mode -p",
       "target": "./target/debug/cli",
       "cwd": "${workspaceRoot}",
       "arguments": "mode -p"
@@ -67,7 +66,7 @@
     {
       "type": "lldb-mi",
       "request": "launch",
-      "name": "mode -h",
+      "name": "LLDB-MI mode -h",
       "target": "./target/debug/cli",
       "cwd": "${workspaceRoot}",
       "arguments": "mode -h"
@@ -75,10 +74,37 @@
     {
       "type": "lldb-mi",
       "request": "launch",
-      "name": "mode -v",
+      "name": "LLDB-MI mode -v",
       "target": "./target/debug/cli",
       "cwd": "${workspaceRoot}",
       "arguments": "mode -v"
     },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "LLDB mode -p",
+      "program": "${workspaceFolder}/target/debug/cli",
+      "cwd": "${workspaceFolder}",
+      "args": "mode -p",
+      "terminal": "integrated"
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "LLDB mode -n",
+      "program": "${workspaceFolder}/target/debug/cli",
+      "cwd": "${workspaceFolder}",
+      "args": "mode -n",
+      "terminal": "integrated"
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "LLDB mode -b",
+      "program": "${workspaceFolder}/target/debug/cli",
+      "cwd": "${workspaceFolder}",
+      "args": "mode -b",
+      "terminal": "integrated"
+    }
   ]
 }
