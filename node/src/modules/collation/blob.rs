@@ -1,24 +1,13 @@
 // Defined according to https://ethresear.ch/t/blob-serialisation/1705.
 // Some stuff is commented out from ChosunOne's additions for comparison.
+// There are a lot of assert_eq!(...) statements for debugging purposes,
+// since I haven't linked this file to src/bin.rs, and thus it can't be
+// stepped through in debugging.
 use bitreader::BitReader;
 use modules::collation::chunk;
 use modules::constants::{CHUNK_SIZE, CHUNK_DATA_SIZE, 
     COLLATION_SIZE, CHUNKS_PER_COLLATION, MAX_BLOB_SIZE};
 //use std::convert::AsMut;
-
-/* From trying to use an array instead of a vector in the data field
-of chunks and blobs, but this is probably unnecessary.
-/// Convert a slice of an array to a fixed size array.
-/// From https://stackoverflow.com/a/37682288/7438857.
-pub fn clone_into_array<A, T>(slice: &[T]) -> A
-        where A: Sized + Default + AsMut<[T]>,
-            T: Clone
-    {
-        let mut a = Default::default();
-        <A as AsMut<[T]>>::as_mut(&mut a).clone_from_slice(slice);
-        a
-    }
-*/
 
 /// Struct of a blob containing data of arbitrary size.
 #[derive(PartialEq, Debug, Clone)]
@@ -61,24 +50,6 @@ impl Blob {
         //let blob_data = self.data; 
         let blob_length = self.data.len();
         //assert_eq!{blob_length, 100, "blob_length: {:?}", blob_length}
-        //let last_31_bytes_in_blob_in_reverse = blob_data[blob_length-31..].reverse();
-        //println!("{:?}", last_31_bytes_in_blob_in_reverse)
-        for i in ((blob_length - 31)..blob_length).rev() {
-            //println!("blob_data[blob_length-31..]: {:?}", blob_data[blob_length-31..]);
-            //println!("blob_data[blob_length-31..].iter().rev(): {:?}", blob_data[blob_length-31..].iter().rev());
-            //println!("\n\n{:?}\n\n", length_of_data_in_the_last_31_bytes_of_a_blob_without_consecutive_final_zeros);
-            //assert_eq!{self.data[i], 100, "self.data[i]: {:?}\n", self.data[i]}
-            //assert_eq!{i, 100, "i: {:?}", i}
-            if self.data[i] == 0 {
-                length_of_data_in_the_last_31_bytes_of_a_blob_without_consecutive_final_zeros -= 1;
-                /*assert_eq!(length_of_data_in_the_last_31_bytes_of_a_blob_without_consecutive_final_zeros,
-                    30,
-                    "\n\n{:?}\n\n", length_of_data_in_the_last_31_bytes_of_a_blob_without_consecutive_final_zeros);
-                */
-            } else {
-                break;
-            }
-        }
         if !(0 < length_of_data_in_the_last_31_bytes_of_a_blob_without_consecutive_final_zeros
             && length_of_data_in_the_last_31_bytes_of_a_blob_without_consecutive_final_zeros 
             <= CHUNK_DATA_SIZE as u8) {
@@ -114,16 +85,40 @@ impl Blob {
                 }
             } else {
                 // Build the terminal chunk
-                // Set the 5 least significant bits of the indicator byte
-                //assert_eq!(length_of_data_in_the_last_31_bytes_of_a_blob_without_consecutive_final_zeros, 50, "indicator: {:?}", indicator);
-                indicator = indicator
-                    | length_of_data_in_the_last_31_bytes_of_a_blob_without_consecutive_final_zeros;
-                // assert_eq!(indicator, 50, "indicator: {:?}", indicator);
+                
                 // Set the chunk data, saving iterating the last 0 consecutive bits of
                 // the terminal chunk, which are set to 0 anyway above.
                 for j in i_data_start..bytes_per_blob {
                     chunk_data[j - i_data_start] = self.data[j];
                 }
+                
+                //let last_31_bytes_in_blob_in_reverse = blob_data[blob_length-31..].reverse();
+                //println!("{:?}", last_31_bytes_in_blob_in_reverse)
+                for i in (0..CHUNK_DATA_SIZE).rev() {
+                    //println!("blob_data[blob_length-31..]: {:?}", blob_data[blob_length-31..]);
+                    //println!("blob_data[blob_length-31..].iter().rev(): {:?}", blob_data[blob_length-31..].iter().rev());
+                    //println!("\n\n{:?}\n\n", length_of_data_in_the_last_31_bytes_of_a_blob_without_consecutive_final_zeros);
+                    //assert_eq!{self.data[i], 100, "self.data: {:?}\nself.data[i]: {:?}\ni: {:?}", self.data, self.data[i], i}
+                    //assert_eq!{i, 100, "i: {:?}", i}
+                    if chunk_data[i] == 0 {
+                        length_of_data_in_the_last_31_bytes_of_a_blob_without_consecutive_final_zeros -= 1;
+                        /*
+                        assert_eq!(length_of_data_in_the_last_31_bytes_of_a_blob_without_consecutive_final_zeros,
+                            3.14,
+                            "\n\nlength_of_data_in_the_last_31_bytes_of_a_blob_without_consecutive_final_zeros: {:?}\ni:{:?}\nself.data[i]:{:?}\n\n",
+                            length_of_data_in_the_last_31_bytes_of_a_blob_without_consecutive_final_zeros, i, self.data[i]);
+                        */
+                    } else {
+                        break;
+                    }
+                }
+
+                // Set the 5 least significant bits of the indicator byte
+                //assert_eq![chunk_data, [0; 31], "left = chunk_data"];
+                //assert_eq!(length_of_data_in_the_last_31_bytes_of_a_blob_without_consecutive_final_zeros, 50, "indicator: {:?}", indicator);
+                indicator = indicator
+                    | length_of_data_in_the_last_31_bytes_of_a_blob_without_consecutive_final_zeros;
+                //assert_eq!(indicator, 50, "indicator: {:?}", indicator);
             }
             // Set the first bit of the indicator byte, the skip_evm flag,
             // if a skip_evm opcode was called.
@@ -373,3 +368,18 @@ mod tests {
             blob.data.len() - blob_from_chunks.data.len());
     }
 }
+
+// Not used
+/* From trying to use an array instead of a vector in the data field
+of chunks and blobs, but this is probably unnecessary.
+/// Convert a slice of an array to a fixed size array.
+/// From https://stackoverflow.com/a/37682288/7438857.
+pub fn clone_into_array<A, T>(slice: &[T]) -> A
+        where A: Sized + Default + AsMut<[T]>,
+            T: Clone
+    {
+        let mut a = Default::default();
+        <A as AsMut<[T]>>::as_mut(&mut a).clone_from_slice(slice);
+        a
+    }
+*/

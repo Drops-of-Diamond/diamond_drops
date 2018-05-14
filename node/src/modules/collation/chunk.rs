@@ -7,140 +7,16 @@ use ::std::slice::SliceIndex;
 //use modules::primitives::{BinaryU8};
 // use modules::collation::blob::clone_into_array;
 
-#[derive(PartialEq, Copy, Debug, Clone)]
-pub struct Binaryu8(u8);
-
-impl Binary for Binaryu8 {
-    fn fmt(&self, f: &mut Formatter) -> ::std::fmt::Result {
-        let val = self.0;
-
-        write!(f, "{:b}", val) // delegate to i32's implementation
-    }
-}
-
-impl From<u8> for Binaryu8 {
-    fn from(val: u8) -> Binaryu8 {
-        Binaryu8(val)
-    }
-}
-
-impl<'a> SliceIndex<u8> for Binaryu8 {
-    type Output = [u8];
-
-    #[inline]
-    fn get(self, slice: &u8) -> Option<&Self::Output> {
-        Binaryu8(*slice)
-    }
-
-    #[inline]
-    fn get_mut(self, slice: &mut u8) -> Option<&mut Self::Output> {
-        Binaryu8(slice)
-    }
-
-    #[inline]
-    unsafe fn get_unchecked(self, slice: &u8) -> &Self::Output {
-        Binaryu8(slice)
-    }
-
-    #[inline]
-    unsafe fn get_unchecked_mut(self, slice: &mut u8) -> &mut Self::Output {
-        Binaryu8(slice)
-    }
-
-    #[inline]
-    fn index(self, slice: &u8) -> &Self::Output {
-        Binaryu8(slice)
-    }
-
-    #[inline]
-    fn index_mut(self, slice: &mut u8) -> &mut Self::Output {
-        Binaryu8(slice)
-    }
-}
-
-
-/*
-impl<'a> SliceIndex<u8> for Binaryu8 {
-    type Output = [u8];
-
-    #[inline]
-    fn get(self, slice: &u8) -> Option<&Self::Output> {
-        Binaryu8(slice)
-    }
-
-    #[inline]
-    fn get_mut(self, slice: &mut u8) -> Option<&mut Self::Output> {
-        Binaryu8(slice)
-    }
-
-    #[inline]
-    unsafe fn get_unchecked(self, slice: u8) -> &'a Self::Output {
-        Binaryu8(slice)
-    }
-
-    #[inline]
-    unsafe fn get_unchecked_mut(self, slice: &mut u8) -> &'a mut Self::Output {
-        Binaryu8(slice)
-    }
-
-    #[inline]
-    fn index(self, slice: u8) -> &'a Self::Output {
-        Binaryu8(slice)
-    }
-
-    #[inline]
-    fn index_mut(self, slice: &mut u8) -> &'a mut Self::Output {
-        Binaryu8(slice)
-    }
-}
-*/
-
-/*
-impl SliceIndex<[u8]> for Binaryu8 {
-    type Output = [u8];
-
-    #[inline]
-    fn get(self, slice: &[u8]) -> Option<&Self::Output> {
-        Binaryu8(slice)
-    }
-
-    #[inline]
-    fn get_mut(self, slice: &mut [u8]) -> Option<&mut Self::Output> {
-        Binaryu8(slice)
-    }
-
-    #[inline]
-    unsafe fn get_unchecked(self, slice: &[u8]) -> &Self::Output {
-        Binaryu8(slice)
-    }
-
-    #[inline]
-    unsafe fn get_unchecked_mut(self, slice: &mut [u8]) -> &mut Self::Output {
-        Binaryu8(slice)
-    }
-
-    #[inline]
-    fn index(self, slice: &[u8]) -> &Self::Output {
-        Binaryu8(slice)
-    }
-
-    #[inline]
-    fn index_mut(self, slice: &mut [u8]) -> &mut Self::Output {
-        Binaryu8(slice)
-    }
-}
-*/
-
 #[derive(PartialEq, Debug, Clone)]
 pub struct Chunk {
-    pub indicator: Binaryu8,
+    pub indicator: u8,
     pub data: [u8; CHUNK_DATA_SIZE]
 }
 
 impl Chunk {
-    pub fn new<T: Into<Binaryu8>>(indicator: T, data: [u8; CHUNK_DATA_SIZE]) -> Chunk {
+    pub fn new(indicator: u8, data: [u8; CHUNK_DATA_SIZE]) -> Chunk {
         Chunk {
-            indicator: indicator.into(),
+            indicator,
             data
         }
     }
@@ -165,10 +41,10 @@ impl Chunk {
     */
     /// Convert the Chunk into bytes
     pub fn chunk_to_bytes(self) -> [u8; CHUNK_SIZE] {
-        let mut bytes: [Binaryu8; CHUNK_SIZE] = [Binaryu8(0); CHUNK_SIZE];
+        let mut bytes: [u8; CHUNK_SIZE] = [0; CHUNK_SIZE];
         bytes[0] = self.indicator;
         for i in 1..CHUNK_SIZE {
-            bytes[i] = self.data[Binaryu8((i-1) as u8)];
+            bytes[i] = self.data[i-1];
         }
         bytes
     }
@@ -271,3 +147,129 @@ pub mod tests {
     }
 
 }
+
+/* Commented out because there are errors e.g. on slices
+#[derive(PartialEq, Copy, Debug, Clone)]
+pub struct Binaryu8(u8);
+
+impl Binary for Binaryu8 {
+    fn fmt(&self, f: &mut Formatter) -> ::std::fmt::Result {
+        let val = self.0;
+
+        write!(f, "{:b}", val) // delegate to i32's implementation
+    }
+}
+
+impl From<u8> for Binaryu8 {
+    fn from(val: u8) -> Binaryu8 {
+        Binaryu8(val)
+    }
+}
+
+impl<'a> SliceIndex<u8> for Binaryu8 {
+    type Output = [u8];
+
+    #[inline]
+    fn get(self, slice: &u8) -> Option<&Self::Output> {
+        Binaryu8(*slice)
+    }
+
+    #[inline]
+    fn get_mut(self, slice: &mut u8) -> Option<&mut Self::Output> {
+        Binaryu8(slice)
+    }
+
+    #[inline]
+    unsafe fn get_unchecked(self, slice: &u8) -> &Self::Output {
+        Binaryu8(slice)
+    }
+
+    #[inline]
+    unsafe fn get_unchecked_mut(self, slice: &mut u8) -> &mut Self::Output {
+        Binaryu8(slice)
+    }
+
+    #[inline]
+    fn index(self, slice: &u8) -> &Self::Output {
+        Binaryu8(slice)
+    }
+
+    #[inline]
+    fn index_mut(self, slice: &mut u8) -> &mut Self::Output {
+        Binaryu8(slice)
+    }
+}
+*/
+
+
+/*
+impl<'a> SliceIndex<u8> for Binaryu8 {
+    type Output = [u8];
+
+    #[inline]
+    fn get(self, slice: &u8) -> Option<&Self::Output> {
+        Binaryu8(slice)
+    }
+
+    #[inline]
+    fn get_mut(self, slice: &mut u8) -> Option<&mut Self::Output> {
+        Binaryu8(slice)
+    }
+
+    #[inline]
+    unsafe fn get_unchecked(self, slice: u8) -> &'a Self::Output {
+        Binaryu8(slice)
+    }
+
+    #[inline]
+    unsafe fn get_unchecked_mut(self, slice: &mut u8) -> &'a mut Self::Output {
+        Binaryu8(slice)
+    }
+
+    #[inline]
+    fn index(self, slice: u8) -> &'a Self::Output {
+        Binaryu8(slice)
+    }
+
+    #[inline]
+    fn index_mut(self, slice: &mut u8) -> &'a mut Self::Output {
+        Binaryu8(slice)
+    }
+}
+*/
+
+/*
+impl SliceIndex<[u8]> for Binaryu8 {
+    type Output = [u8];
+
+    #[inline]
+    fn get(self, slice: &[u8]) -> Option<&Self::Output> {
+        Binaryu8(slice)
+    }
+
+    #[inline]
+    fn get_mut(self, slice: &mut [u8]) -> Option<&mut Self::Output> {
+        Binaryu8(slice)
+    }
+
+    #[inline]
+    unsafe fn get_unchecked(self, slice: &[u8]) -> &Self::Output {
+        Binaryu8(slice)
+    }
+
+    #[inline]
+    unsafe fn get_unchecked_mut(self, slice: &mut [u8]) -> &mut Self::Output {
+        Binaryu8(slice)
+    }
+
+    #[inline]
+    fn index(self, slice: &[u8]) -> &Self::Output {
+        Binaryu8(slice)
+    }
+
+    #[inline]
+    fn index_mut(self, slice: &mut [u8]) -> &mut Self::Output {
+        Binaryu8(slice)
+    }
+}
+*/
