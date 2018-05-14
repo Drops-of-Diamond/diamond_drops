@@ -1,3 +1,12 @@
+/* Instructions:
+ * - Set the RUSTC environment variable to the Rust Compiler binary location
+ *   by running `export RUSTC=$(which rustc)`
+ * - Check that RUSTC environment variable has been set correctly with: 
+ *   `echo $RUSTC`
+ * - Open Visual Studio Code. Run Command Palette (i.e. CMD+SHIFT+P)
+ * - Find and select "Tasks: Run Task"
+ * - Choose a task from the list of tasks configured in this tasks.json file
+ */
 {
   // See https://go.microsoft.com/fwlink/?LinkId=733558
   // for the documentation about the tasks.json format
