@@ -3,6 +3,8 @@
 // There are a lot of assert_eq!(...) statements for debugging purposes,
 // since I haven't linked this file to src/bin.rs, and thus it can't be
 // stepped through in debugging.
+// Stuff that I have tried but didn't complete with getting to work
+// is also commented out.
 use bitreader::BitReader;
 use modules::collation::chunk;
 use modules::constants::{CHUNK_SIZE, CHUNK_DATA_SIZE, 
@@ -93,11 +95,7 @@ impl Blob {
                 }
                 
                 //let last_31_bytes_in_blob_in_reverse = blob_data[blob_length-31..].reverse();
-                //println!("{:?}", last_31_bytes_in_blob_in_reverse)
                 for i in (0..CHUNK_DATA_SIZE).rev() {
-                    //println!("blob_data[blob_length-31..]: {:?}", blob_data[blob_length-31..]);
-                    //println!("blob_data[blob_length-31..].iter().rev(): {:?}", blob_data[blob_length-31..].iter().rev());
-                    //println!("\n\n{:?}\n\n", length_of_data_in_the_last_31_bytes_of_a_blob_without_consecutive_final_zeros);
                     //assert_eq!{self.data[i], 100, "self.data: {:?}\nself.data[i]: {:?}\ni: {:?}", self.data, self.data[i], i}
                     //assert_eq!{i, 100, "i: {:?}", i}
                     if chunk_data[i] == 0 {
@@ -147,7 +145,7 @@ impl Blob {
             for i in 0..CHUNK_DATA_SIZE {
                 data.push(ch.data[i as usize]);
             }
-            /* This is commented out because it the else block for a terminal chunk is not
+            /* This is commented out because the else block for a terminal chunk is not
             writing the final 0 bytes, where data above was instantiated as an empty vector.
             There is a better way to do this. We can instantiate data as vec![0; 31],
             and just have one for loop, regardless of the value of data_bytes_length_in_terminal_chunk.
@@ -193,8 +191,6 @@ mod tests {
             \ndifference = {:?}\n",
             blob_chunks[0].data.len(), correct_blob_chunks[0].data.len(),
             blob_chunks[0].data.len() - correct_blob_chunks[0].data.len());
-        //println!("blob_chunks: {:?},\n blob_chunks[0].data.len(): {:?}", 
-        //    blob_chunks, blob_chunks[0].data.len())
     }
 
     #[test]
@@ -266,15 +262,9 @@ mod tests {
 
     #[test]
     fn it_converts_from_chunks_with_skip_evm_false_and_a_four_byte_blob() {
-        // 0b0000_0000
-        //let non_terminal_chunk_indicator = chunk::Chunk::build_indicator(false, false, 0);
         // 0b0001_1111
         let terminal_chunk_indicator = chunk::Chunk::build_indicator(
             false, true, 4);
-        // 4 chunks, with every non-indicator byte as 255
-        //let mut chunks = vec![chunk::Chunk::new(non_terminal_chunk_indicator,
-        //   [255; CHUNK_DATA_SIZE]); 4];
-        // 5th terminal chunk, also with every non-indicator byte as 255
         let mut chunk_1_data = [0; 31]; 
         for i in 0..4 {
             chunk_1_data[i] = 255;

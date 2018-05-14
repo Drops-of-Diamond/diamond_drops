@@ -4,6 +4,7 @@ use modules::constants::{CHUNK_SIZE, CHUNK_DATA_SIZE,
 use modules::errors::*;
 use ::std::fmt::{Binary, Formatter, Result};
 use ::std::slice::SliceIndex;
+// Not used:
 //use modules::primitives::{BinaryU8};
 // use modules::collation::blob::clone_into_array;
 
@@ -21,24 +22,6 @@ impl Chunk {
         }
     }
 
-    /*
-    /// Build the indicator byte with the supplied data.  Length can be
-    /// any value if the chunk is not terminal (the value is ignored).
-    /// Only used in tests since skip_evm doesn't need to be used now.
-    pub fn build_indicator(skip_evm: bool/*, terminal: bool, length: u8*/) -> u8{
-        let mut indicator: u8 = 0;
-
-        if skip_evm {
-            // Set SKIP_EVM flag to 1
-            indicator += 0b1000_0000;
-        }
-        // Check if it's a terminal chunk and if so, set the length bits.
-        if 0 < self.data.len() && self.data.len() < CHUNK_SIZE {
-            indicator += self.data.len();
-        }
-        indicator
-    }
-    */
     /// Convert the Chunk into bytes
     pub fn chunk_to_bytes(self) -> [u8; CHUNK_SIZE] {
         let mut bytes: [u8; CHUNK_SIZE] = [0; CHUNK_SIZE];
@@ -53,13 +36,11 @@ impl Chunk {
     pub fn bytes_to_chunk(chunk_bytes: [u8; CHUNK_SIZE]) -> Chunk {
         let indicator = chunk_bytes[0];
         let mut data: [u8; 31] = [0; 31];
-        /*
+        /* UNNECESSARY, was from trying this alternative and trying to work around Chunk and it's fields being immutable.
         let mut chunk = Chunk {
             indicator: chunk_bytes[0],
             data: [0x00; CHUNK_DATA_SIZE]
         };
-        */
-        /*
         let indicator_ref = &[chunk_bytes[0]];
         let mut indicator_reader = BitReader::new(indicator_ref);
 
@@ -78,7 +59,6 @@ impl Chunk {
     /// `skip_evm`, `terminal` and `terminal_length` .  Length can be
     /// any value if the chunk is not terminal (the value is ignored).
     /// Only used in tests.
-    /// This does not 
     pub fn build_indicator(skip_evm: bool, terminal: bool, terminal_length: u8) -> u8{
         let mut indicator: u8 = 0b0000_0000;
         if skip_evm {
@@ -99,6 +79,24 @@ impl Chunk {
         indicator
     }
 }
+
+    /* This is an alternative I was trying to build, without needing terminal and length inputs,
+     but since I've changed the above to only use in tests, I've commented this out.
+
+    pub fn build_indicator(skip_evm: bool/*, terminal: bool, length: u8*/) -> u8{
+        let mut indicator: u8 = 0;
+
+        if skip_evm {
+            // Set SKIP_EVM flag to 1
+            indicator += 0b1000_0000;
+        }
+        // Check if it's a terminal chunk and if so, set the length bits.
+        if 0 < self.data.len() && self.data.len() < CHUNK_SIZE {
+            indicator += self.data.len();
+        }
+        indicator
+    }
+    */
 
 
 #[cfg(test)]
@@ -148,7 +146,8 @@ pub mod tests {
 
 }
 
-/* Commented out because there are errors e.g. on slices
+/* Everything below is commented out because trying to use this causes errors e.g. on slices,
+which I can't be bothered to fix.
 #[derive(PartialEq, Copy, Debug, Clone)]
 pub struct Binaryu8(u8);
 
