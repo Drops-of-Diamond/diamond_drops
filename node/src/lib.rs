@@ -6,7 +6,7 @@
 // https://github.com/Drops-of-Diamond/diamond_drops/issues/66
 #![allow(unused_imports)]
 
-extern crate bitreader;
+//extern crate bitreader;
 extern crate diamond_drops_cli as cli;
 extern crate ethereum_types;
 extern crate tiny_keccak;
