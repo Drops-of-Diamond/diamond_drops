@@ -85,7 +85,7 @@
       "name": "LLDB mode -p",
       "program": "${workspaceFolder}/target/debug/cli",
       "cwd": "${workspaceFolder}",
-      "args": "-l 4 mode -p",
+      "args": "mode -p",
       "terminal": "integrated"
     },
     {
@@ -94,7 +94,7 @@
       "name": "LLDB mode -n",
       "program": "${workspaceFolder}/target/debug/cli",
       "cwd": "${workspaceFolder}",
-      "args": "-l 4 mode -n",
+      "args": "mode -n",
       "terminal": "integrated"
     },
     {
@@ -103,7 +103,7 @@
       "name": "LLDB mode -b",
       "program": "${workspaceFolder}/target/debug/cli",
       "cwd": "${workspaceFolder}",
-      "args": "-l 4 mode -b",
+      "args": "mode -b",
       "terminal": "integrated"
     }
   ]
