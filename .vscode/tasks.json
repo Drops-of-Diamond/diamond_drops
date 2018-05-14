@@ -46,8 +46,8 @@
         "$rustc"
       ]
     },
-    // This takes a long time, better to cd to each crate folder, build before testing,
-    // then test. E.g. cd node; cargo build; cargo test
+    // This takes a long time, better to cd to each crate folder, test that,
+    // then run this before pushing. E.g. cd node; cargo test.
     {
       "label": "cargo make test-node",
       "args": [

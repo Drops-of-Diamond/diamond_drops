@@ -1,0 +1,187 @@
+OPT_LEVEL = Some("0")
+TARGET = Some("x86_64-unknown-linux-gnu")
+HOST = Some("x86_64-unknown-linux-gnu")
+TARGET = Some("x86_64-unknown-linux-gnu")
+TARGET = Some("x86_64-unknown-linux-gnu")
+HOST = Some("x86_64-unknown-linux-gnu")
+CC_x86_64-unknown-linux-gnu = None
+CC_x86_64_unknown_linux_gnu = None
+HOST_CC = None
+CC = None
+HOST = Some("x86_64-unknown-linux-gnu")
+TARGET = Some("x86_64-unknown-linux-gnu")
+HOST = Some("x86_64-unknown-linux-gnu")
+CFLAGS_x86_64-unknown-linux-gnu = None
+CFLAGS_x86_64_unknown_linux_gnu = None
+HOST_CFLAGS = None
+CFLAGS = None
+DEBUG = Some("true")
+running: "sh" "/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/configure" "--with-pic" "--disable-multilib" "--disable-shared" "--disable-host-shared" "--host=x86_64-unknown-linux-gnu" "--build=x86_64-unknown-linux-gnu"
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking target system type... x86_64-unknown-linux-gnu
+checking for x86_64-unknown-linux-gnu-gcc... cc
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables... 
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether cc accepts -g... yes
+checking for cc option to accept ISO C89... none needed
+checking how to run the C preprocessor... cc -E
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking minix/config.h usability... no
+checking minix/config.h presence... no
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /usr/bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking whether to enable maintainer-specific portions of Makefiles... no
+checking for x86_64-unknown-linux-gnu-gcc... (cached) cc
+checking whether we are using the GNU C compiler... (cached) yes
+checking whether cc accepts -g... (cached) yes
+checking for cc option to accept ISO C89... (cached) none needed
+checking for x86_64-unknown-linux-gnu-ranlib... ranlib
+checking for gawk... (cached) gawk
+checking how to print strings... printf
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for fgrep... /usr/bin/grep -F
+checking for ld used by cc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 1572864
+checking whether the shell understands some XSI constructs... yes
+checking whether the shell understands "+="... yes
+checking for /usr/bin/ld option to reload object files... -r
+checking for x86_64-unknown-linux-gnu-objdump... no
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for x86_64-unknown-linux-gnu-ar... ar
+checking for x86_64-unknown-linux-gnu-strip... no
+checking for strip... strip
+checking for x86_64-unknown-linux-gnu-ranlib... (cached) ranlib
+checking command to parse /usr/bin/nm -B output from cc object... ok
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if cc supports -fno-rtti -fno-exceptions... no
+checking for cc option to produce PIC... -fPIC -DPIC
+checking if cc PIC flag -fPIC -DPIC works... yes
+checking if cc static flag -static works... yes
+checking if cc supports -c -o file.o... yes
+checking if cc supports -c -o file.o... (cached) yes
+checking whether the cc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... no
+checking whether to build static libraries... yes
+checking unwind.h usability... yes
+checking unwind.h presence... yes
+checking for unwind.h... yes
+checking for _Unwind_Backtrace... yes
+checking for -funwind-tables option... yes
+checking for -frandom-seed=string option... yes
+checking whether cc supports -W... yes
+checking whether cc supports -Wall... yes
+checking whether cc supports -Wwrite-strings... yes
+checking whether cc supports -Wstrict-prototypes... yes
+checking whether cc supports -Wmissing-prototypes... yes
+checking whether cc supports -Wold-style-definition... yes
+checking whether cc supports -Wmissing-format-attribute... yes
+checking whether cc supports -Wcast-qual... yes
+checking for _Unwind_GetIPInfo... yes
+checking __sync extensions... yes
+checking __atomic extensions... yes
+checking output filetype... elf64
+looking for a compliant stdint.h in stdint.h, checking for uintmax_t... yes
+checking for uintptr_t... yes
+checking for int_least32_t... yes
+checking for int_fast32_t... yes
+checking for uint64_t... yes
+checking what to include in gstdint.h... stdint.h (already complete)
+checking sys/mman.h usability... yes
+checking sys/mman.h presence... yes
+checking for sys/mman.h... yes
+checking for mmap... yes
+checking link.h usability... yes
+checking link.h presence... yes
+checking for link.h... yes
+checking for dl_iterate_phdr... yes
+checking for fcntl... yes
+checking whether strnlen is declared... yes
+checking for getexecname... no
+checking whether tests can run... yes
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating backtrace-supported.h
+config.status: creating config.h
+config.status: executing libtool commands
+config.status: executing gstdint.h commands
+config.status: executing default commands
+running: "make" "INCDIR=/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace"
+make  all-am
+make[1]: Entering directory '/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out'
+/bin/sh ./libtool --tag=CC   --mode=compile cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace  -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc  -funwind-tables -frandom-seed=atomic.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c -o atomic.lo /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/atomic.c
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc -funwind-tables -frandom-seed=atomic.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/atomic.c  -fPIC -DPIC -o atomic.o
+true  DO=all multi-do # make
+/bin/sh ./libtool --tag=CC   --mode=compile cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace  -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc  -funwind-tables -frandom-seed=dwarf.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c -o dwarf.lo /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/dwarf.c
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc -funwind-tables -frandom-seed=dwarf.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/dwarf.c  -fPIC -DPIC -o dwarf.o
+/bin/sh ./libtool --tag=CC   --mode=compile cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace  -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc  -funwind-tables -frandom-seed=fileline.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c -o fileline.lo /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/fileline.c
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc -funwind-tables -frandom-seed=fileline.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/fileline.c  -fPIC -DPIC -o fileline.o
+/bin/sh ./libtool --tag=CC   --mode=compile cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace  -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc  -funwind-tables -frandom-seed=posix.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c -o posix.lo /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/posix.c
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc -funwind-tables -frandom-seed=posix.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/posix.c  -fPIC -DPIC -o posix.o
+/bin/sh ./libtool --tag=CC   --mode=compile cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace  -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc  -funwind-tables -frandom-seed=print.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c -o print.lo /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/print.c
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc -funwind-tables -frandom-seed=print.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/print.c  -fPIC -DPIC -o print.o
+/bin/sh ./libtool --tag=CC   --mode=compile cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace  -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc  -funwind-tables -frandom-seed=sort.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c -o sort.lo /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/sort.c
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc -funwind-tables -frandom-seed=sort.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/sort.c  -fPIC -DPIC -o sort.o
+/bin/sh ./libtool --tag=CC   --mode=compile cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace  -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc  -funwind-tables -frandom-seed=state.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c -o state.lo /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/state.c
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc -funwind-tables -frandom-seed=state.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/state.c  -fPIC -DPIC -o state.o
+/bin/sh ./libtool --tag=CC   --mode=compile cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace  -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc  -funwind-tables -frandom-seed=backtrace.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c -o backtrace.lo /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/backtrace.c
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc -funwind-tables -frandom-seed=backtrace.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/backtrace.c  -fPIC -DPIC -o backtrace.o
+/bin/sh ./libtool --tag=CC   --mode=compile cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace  -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc  -funwind-tables -frandom-seed=simple.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c -o simple.lo /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/simple.c
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc -funwind-tables -frandom-seed=simple.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/simple.c  -fPIC -DPIC -o simple.o
+/bin/sh ./libtool --tag=CC   --mode=compile cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace  -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc  -funwind-tables -frandom-seed=elf.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c -o elf.lo /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/elf.c
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc -funwind-tables -frandom-seed=elf.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/elf.c  -fPIC -DPIC -o elf.o
+/bin/sh ./libtool --tag=CC   --mode=compile cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace  -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc  -funwind-tables -frandom-seed=mmapio.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c -o mmapio.lo /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/mmapio.c
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc -funwind-tables -frandom-seed=mmapio.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/mmapio.c  -fPIC -DPIC -o mmapio.o
+/bin/sh ./libtool --tag=CC   --mode=compile cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace  -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc  -funwind-tables -frandom-seed=alloc.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c -o alloc.lo /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/alloc.c
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I/home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../include -I /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/../libgcc -I ../libgcc -funwind-tables -frandom-seed=alloc.lo -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra -c /home/james/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-sys-0.1.16/src/libbacktrace/alloc.c  -fPIC -DPIC -o alloc.o
+/bin/sh ./libtool --tag=CC   --mode=link cc -funwind-tables -frandom-seed=libbacktrace.la -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wmissing-format-attribute -Wcast-qual -fPIC -O0 -ffunction-sections -fdata-sections -fPIC -g -m64 -Wall -Wextra   -o libbacktrace.la  atomic.lo dwarf.lo fileline.lo posix.lo print.lo sort.lo state.lo backtrace.lo simple.lo elf.lo mmapio.lo alloc.lo 
+libtool: link: ar cru .libs/libbacktrace.a  atomic.o dwarf.o fileline.o posix.o print.o sort.o state.o backtrace.o simple.o elf.o mmapio.o alloc.o
+libtool: link: ranlib .libs/libbacktrace.a
+libtool: link: ( cd ".libs" && rm -f "libbacktrace.la" && ln -s "../libbacktrace.la" "libbacktrace.la" )
+make[1]: Leaving directory '/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out'
+cargo:rustc-link-search=native=/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/.libs
+cargo:rustc-link-lib=static=backtrace
+running: "ar" "x" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/.libs/libbacktrace.a"
+running: "objcopy" "--redefine-syms=symbol-map" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/alloc.o"
+running: "objcopy" "--redefine-syms=symbol-map" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/sort.o"
+running: "objcopy" "--redefine-syms=symbol-map" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/state.o"
+running: "objcopy" "--redefine-syms=symbol-map" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/elf.o"
+running: "objcopy" "--redefine-syms=symbol-map" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/print.o"
+running: "objcopy" "--redefine-syms=symbol-map" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/dwarf.o"
+running: "objcopy" "--redefine-syms=symbol-map" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/mmapio.o"
+running: "objcopy" "--redefine-syms=symbol-map" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/posix.o"
+running: "objcopy" "--redefine-syms=symbol-map" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/simple.o"
+running: "objcopy" "--redefine-syms=symbol-map" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/backtrace.o"
+running: "objcopy" "--redefine-syms=symbol-map" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/fileline.o"
+running: "objcopy" "--redefine-syms=symbol-map" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/atomic.o"
+running: "ar" "crus" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/.libs/libbacktrace.a" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/alloc.o" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/sort.o" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/state.o" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/elf.o" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/print.o" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/dwarf.o" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/mmapio.o" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/posix.o" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/simple.o" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/backtrace.o" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/fileline.o" "/home/james/dod/rls/debug/build/backtrace-sys-0e5930a953e585c2/out/__tmp/atomic.o"

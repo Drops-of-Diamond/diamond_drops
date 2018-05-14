@@ -1,0 +1,1 @@
+{"rustc":8681940741563347845,"features":"[\"max_level_debug\", \"release_max_level_warn\", \"std\"]","target":14232692612847095533,"profile":2479238963835404001,"path":12035260591326488701,"deps":[["cfg-if v0.1.2",1271304963859467390]],"local":[{"Precalculated":"0.4.1"}],"rustflags":[],"edition":"Edition2015"}
