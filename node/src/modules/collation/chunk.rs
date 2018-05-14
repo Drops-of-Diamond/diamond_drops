@@ -1,4 +1,4 @@
-use bitreader::BitReader;
+//use bitreader::BitReader;
 use modules::constants::{CHUNK_SIZE, CHUNK_DATA_SIZE, 
     /*COLLATION_SIZE, */CHUNKS_PER_COLLATION, MAX_BLOB_SIZE};
 use modules::errors::*;

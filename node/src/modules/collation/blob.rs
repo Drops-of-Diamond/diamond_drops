@@ -5,7 +5,7 @@
 // stepped through in debugging.
 // Stuff that I have tried but didn't complete with getting to work
 // is also commented out.
-use bitreader::BitReader;
+//use bitreader::BitReader;
 use modules::collation::chunk;
 use modules::constants::{CHUNK_SIZE, CHUNK_DATA_SIZE, 
     COLLATION_SIZE, CHUNKS_PER_COLLATION, MAX_BLOB_SIZE};
