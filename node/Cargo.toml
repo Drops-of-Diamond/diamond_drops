@@ -4,6 +4,7 @@ version = "0.1.0-a"
 authors = ["James Ray (@jamesray1)", "Josiah (@ChosunOne)", "Luke Schoen (@ltfschoen)"]
 license = "Unlicense"
 build = "build.rs"
+description = "Has the core functionality to run a node as a proposer, notary or both."
 
 [dependencies]
 diamond-drops-cli = { path = "../cli" }

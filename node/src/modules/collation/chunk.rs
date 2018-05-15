@@ -1,10 +1,10 @@
 //use bitreader::BitReader;
 use modules::constants::{CHUNK_SIZE, CHUNK_DATA_SIZE, 
     /*COLLATION_SIZE, */CHUNKS_PER_COLLATION, MAX_BLOB_SIZE};
-use modules::errors::*;
+// use modules::errors::*;
 
 // Not used:
-//use modules::primitives::{BinaryU8};
+// use modules::primitives::{BinaryU8};
 // use modules::collation::blob::clone_into_array;
 // not used: use ::std::fmt::{Binary, Formatter, Result};
 // nightly, not used: use ::std::slice::SliceIndex;
@@ -37,7 +37,8 @@ impl Chunk {
     pub fn bytes_to_chunk(chunk_bytes: [u8; CHUNK_SIZE]) -> Chunk {
         let indicator = chunk_bytes[0];
         let mut data: [u8; 31] = [0; 31];
-        /* UNNECESSARY, was from trying this alternative and trying to work around Chunk and it's fields being immutable.
+        /* UNNECESSARY
+        This was from trying this alternative and trying to work around Chunk and it's fields being immutable.
         let mut chunk = Chunk {
             indicator: chunk_bytes[0],
             data: [0x00; CHUNK_DATA_SIZE]
@@ -60,7 +61,7 @@ impl Chunk {
     /// `skip_evm`, `terminal` and `terminal_length` .  Length can be
     /// any value if the chunk is not terminal (the value is ignored).
     /// Only used in tests.
-    pub fn build_indicator(skip_evm: bool, terminal: bool, terminal_length: u8) -> u8{
+    pub fn build_indicator(skip_evm: bool, terminal: bool, terminal_length: u8) -> u8 {
         let mut indicator: u8 = 0b0000_0000;
         if skip_evm {
             // Set SKIP_EVM flag to 1
@@ -101,7 +102,7 @@ impl Chunk {
 
 
 #[cfg(test)]
-pub mod tests {
+mod tests {
     use super::*;
 
     #[test]
