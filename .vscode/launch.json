@@ -79,6 +79,7 @@
       "cwd": "${workspaceRoot}",
       "arguments": "mode -v"
     },
+    //lldb is for Mac OS X, they don't work on Linux—use the above lldb-mi tasks for Linux.
     {
       "type": "lldb",
       "request": "launch",

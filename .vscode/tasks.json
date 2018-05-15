@@ -6,6 +6,7 @@
  * - Open Visual Studio Code. Run Command Palette (i.e. CMD+SHIFT+P)
  * - Find and select "Tasks: Run Task"
  * - Choose a task from the list of tasks configured in this tasks.json file
+ * - If a task doesn't appear after adding it, try restarting the program (saving work if you don't have autosave enabled)
  */
 {
   // See https://go.microsoft.com/fwlink/?LinkId=733558
@@ -17,30 +18,21 @@
   "presentation": {
     "echo": true,
     "reveal": "always",
-    "focus": false,
+    "focus": true,
     "panel": "shared"
   },
   "args": [
       "-c"
   ],
   "tasks": [
-    /* template
-    {
-      "label": "cargo ",
-      "args": [
-        "cargo","make", "all"
-      ],
-      "problemMatcher": [
-        "$rustc"
-      ]`
-    },
-    */
     {
       "label": "cargo make all",
       "args": [
-        "cargo","make", "all"
+        "cargo",
+        "make",
+        "all"
       ],
-      "group":  "build",
+      "group": "build",
       "problemMatcher": [
         "$rustc"
       ]
@@ -48,21 +40,23 @@
     {
       "label": "cargo make test-all",
       "args": [
-        "cargo","make", "test-all"
+        "cargo",
+        "make",
+        "test-all"
       ],
-      "group":  "test",
+      "group": "test",
       "problemMatcher": [
         "$rustc"
       ]
     },
-    // This takes a long time, better to cd to each crate folder, test that,
-    // then run this before pushing. E.g. cd node; cargo test.
     {
       "label": "cargo make test-node",
       "args": [
-        "cargo","make", "test-node"
+        "cargo",
+        "make",
+        "test-node"
       ],
-      "group":  "test",
+      "group": "test",
       "problemMatcher": [
         "$rustc"
       ]
@@ -70,9 +64,11 @@
     {
       "label": "cargo make test-cli",
       "args": [
-        "cargo","make", "test-cli"
+        "cargo",
+        "make",
+        "test-cli"
       ],
-      "group":  "test",
+      "group": "test",
       "problemMatcher": [
         "$rustc"
       ]
@@ -80,18 +76,19 @@
     {
       "label": "cargo make test-env",
       "args": [
-        "cargo","make", "test-env"
+        "cargo",
+        "make",
+        "test-env"
       ],
-      "group":  "test",
+      "group": "test",
       "problemMatcher": [
         "$rustc"
       ]
     },
     {
       "label": "cargo make build; cargo make watch",
-      // cargo install cargo-watch; is omitted for performance
       "args": [
-        "cargo make build; cargo make watch"//"make", "p"
+        "cargo make build; cargo make watch"
       ],
       "problemMatcher": [
         "$rustc"
@@ -106,8 +103,16 @@
         "$rustc"
       ]
     },
-    // cargo make uml-X only works on a Mac,
-    // https://github.com/Drops-of-Diamond/diamond_drops/issues/48
+    {
+      "label": "cargo make uml-default-recommended",
+      "args": [
+        "cargo make uml-default-recommended" // if running this task from Tasks > Run Task instead of via entering 
+        // cargo make uml-default-recommended in the terminal, the output will not display.
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
     {
       "label": "cargo make uml-chrome",
       "args": [
@@ -139,7 +144,8 @@
       "label": "cargo make n",
       "command": "cargo",
       "args": [
-        "make", "n"
+        "make",
+        "n"
       ],
       "problemMatcher": [
         "$rustc"
@@ -149,7 +155,8 @@
       "label": "cargo make b",
       "command": "cargo",
       "args": [
-        "make", "b"
+        "make",
+        "b"
       ],
       "problemMatcher": [
         "$rustc"
@@ -170,7 +177,10 @@
       "label": "cargo run -- mode --help",
       "command": "cargo",
       "args": [
-        "run", "--", "mode", "--help" 
+        "run",
+        "--",
+        "mode",
+        "--help"
       ],
       "problemMatcher": [
         "$rustc"
@@ -180,7 +190,10 @@
       "label": "cargo run -- mode -b",
       "command": "cargo",
       "args": [
-        "run", "--", "mode", "-b" 
+        "run",
+        "--",
+        "mode",
+        "-b"
       ],
       "problemMatcher": [
         "$rustc"
@@ -190,11 +203,25 @@
       "label": "cargo run -- --help",
       "command": "cargo",
       "args": [
-        "run", "--", "--help" 
+        "run",
+        "--",
+        "--help"
       ],
       "problemMatcher": [
         "$rustc"
       ]
     },
+    {
+      "type": "shell",
+      "label": "cargo bench",
+      "command": "cargo",
+      "args": [
+        "+nightly",
+        "bench"
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ]
+    }
   ]
 }
