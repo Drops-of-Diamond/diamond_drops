@@ -22,6 +22,7 @@ If applicable, add screenshots to help explain your problem.
 
 **Desktop (please complete the following information):**
  - OS: [e.g. iOS]
+ - the versions of Cargo, the Rust Compiler and Vyper you are using, as applicable.
 
 **Additional context**
 Add any other context about the problem here.
