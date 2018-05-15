@@ -2,7 +2,6 @@
 
 // `error_chain!` can recurse deeply
 #![recursion_limit = "1024"]
-
 // Remove these allow warnings before a production release
 #![allow(unused_imports)]
 #![allow(dead_code)]
@@ -30,7 +29,8 @@ use std::process;
 
 pub use errors::*;
 
-fn main() {
+/// Just has error-handling with error-chain
+pub fn main() {
     if let Err(ref e) = run() {
         use std::io::Write;
         let stderr = &mut ::std::io::stderr();
@@ -48,7 +48,7 @@ fn main() {
             writeln!(stderr, "backtrace: {:?}", backtrace).expect(errmsg);
         }
 
-        ::std::process::exit(1);
+        process::exit(1);
     }
 }
 
@@ -56,29 +56,20 @@ fn main() {
 // set the `RUST_BACKTRACE` env variable to see a backtrace.
 // quick_main!(run);
 
-
 // Most functions will return the `Result` type, imported from the
 // `errors` module. It is a typedef of the standard `Result` type
 // for which the error type is always our own `Error`.
 
-fn run() -> Result<()> {
-
+/// Gets arguments from the environment and from the terminal
+pub fn run() -> Result<()> {
     let args = env::args().skip(1).collect::<Vec<_>>();
     println!("Processing arguments: {:?}", args);
     diamond_drops_env::config::set_test_env();
-    let config = diamond_drops_cli::modules::args::parse_cli_args(args)
-        .unwrap_or_else(|err| {
-            error!("Problem parsing arguments: {}", err);
-            process::exit(1);
-        });
+    let config = diamond_drops_cli::modules::args::parse_cli_args(args).unwrap_or_else(|err| {
+        error!("Problem parsing arguments: {}", err);
+        process::exit(1);
+    });
     diamond_drops::run(config);
 
-    /*
-    Example from error_chain    use std::fs::File;
-
-    // This operation will fail
-    File::open("tretrete")
-        .chain_err(|| "unable to open tretrete file")?;
-    */
     Ok(())
 }

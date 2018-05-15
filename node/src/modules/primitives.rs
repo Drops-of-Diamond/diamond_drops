@@ -16,3 +16,5 @@ pub type ParentCollationHeaderHash = ethereum_types::H256;
 
 pub type ProposerBidHash = ethereum_types::U256;
 pub type ProposerSignature = ethereum_types::Signature;
+
+//pub type BinaryU8 = modules::collation::chunk::Binaryu8;

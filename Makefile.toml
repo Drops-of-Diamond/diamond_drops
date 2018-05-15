@@ -37,6 +37,27 @@ dependencies = ["clean", "build-with-verbose"]
 [tasks.t]
 alias = "test-all"
 
+[tasks.test-node]
+script = [
+    "echo \"Running node tests\"",
+    "cd node && cargo test" # Diamond Drops Sharding Node library
+]
+dependencies = ["clean", "build-with-verbose"]
+
+[tasks.test-cli]
+script = [
+    "echo \"Running cli tests\"",
+    "cd cli && cargo test" # Diamond Drops Sharding cli library
+]
+dependencies = ["clean", "build-with-verbose"]
+
+[tasks.test-env]
+script = [
+    "echo \"Running cli tests\"",
+    "cd env && cargo test" # Diamond Drops Sharding env library
+]
+dependencies = ["clean", "build-with-verbose"]
+
 [tasks.test-all-watch]
 script = [
     "echo \"Running all tests\"",
@@ -99,7 +120,32 @@ command = "cargo"
 args = ["doc", "--open"]
 dependencies = ["build"]
 
-[tasks.uml_chrome]
+[tasks.uml-default-recommended]
+script = ["cd diagrams && sudo ./openml.sh && xdg-open ./ml.svg && cd .."]
+#linux_alias = "linux-uml-default"
+#windows_alias = "windows-uml-default"
+#mac_alias = "mac-uml-default"
+
+[tasks.linux-uml-default]
+command = "cd diagrams && ./openml.sh && xdg-open && cd .." # this also works with OS X or any freedesktop compatible environment.
+# https://superuser.com/a/39013/410684
+# can't specify, chooses a default app, 
+# has opened an empty text file or with an error on different systems
+args = ["./ml.svg"] #will just use the default svg application, chrome.desktop needs to be configured
+# Could just manually open the file or use xdg-mime or another alternative
+dependencies = ["build"]
+
+[tasks.mac-uml-default]
+command = "open"
+args = ["./diagrams/ml.svg"]
+dependencies = ["build"]
+
+[tasks.windows-uml-default]
+command = "start"
+args = ["./diagrams/ml.svg"]
+dependencies = ["build"]
+
+[tasks.uml-chrome]
 linux_alias = "linux_uml_chrome"
 windows_alias = "windows_uml_chrome"
 mac_alias = "mac_uml_chrome"
@@ -109,7 +155,7 @@ command = "xdg-open" # this also works with OS X or any freedesktop compatible e
 # https://superuser.com/a/39013/410684
 # can't specify, chooses a default app, 
 # has opened an empty text file or with an error on different systems
-args = ["./diagrams/ml.svg"] 
+args = ["./diagrams/ml.svg"] #will just use the default svg application, chrome.desktop needs to be configured
 # The default application for SVG files may need to be configured
 dependencies = ["build"]
 
@@ -121,37 +167,37 @@ dependencies = ["build"]
 
 [tasks.windows_uml_chrome]
 command = "start"
-args = ["./diagrams/ml.svg"]
+args = ["./diagrams/ml.svg"] # will just use the default svg application
 dependencies = ["build"]
 
-[tasks.uml_firefox]
+[tasks.uml-firefox]
 linux_alias = "linux_uml_firefox"
 windows_alias = "windows_uml_firefox"
 mac_alias = "mac_uml_firefox"
 
 [tasks.linux_uml_firefox]
 command = "xdg-open"
-args = ["./diagrams/ml.svg"]
+args = ["./diagrams/ml.svg"] #will just use the default svg application, firefox.desktop needs to be configured
 dependencies = ["build"]
 
 [tasks.mac_uml_firefox]
 command = "open"
-args = ["-a", "Firefox", "./diagrams/ml.svg"]
+args = ["-a", "Firefox", "./diagrams/ml.svg"] 
 dependencies = ["build"]
 
 [tasks.windows_uml_firefox]
 command = "start"
-args = ["./diagrams/ml.svg"]
+args = ["./diagrams/ml.svg"] # will just use the default svg application
 dependencies = ["build"]
 
-[tasks.uml_brave]
+[tasks.uml-brave]
 linux_alias = "linux_uml_brave"
 windows_alias = "windows_uml_brave"
 mac_alias = "mac_uml_brave"
 
 [tasks.linux_uml_brave]
 command = "xdg-open"
-args = ["./diagrams/ml.svg"]
+args = ["./diagrams/ml.svg"] #will just use the default svg application, brave.desktop needs to be configured
 dependencies = ["build"]
 
 [tasks.mac_uml_brave]
@@ -161,5 +207,5 @@ dependencies = ["build"]
 
 [tasks.windows_uml_brave]
 command = "start"
-args = ["./diagrams/ml.svg"]
+args = ["./diagrams/ml.svg"] # will just use the default svg application
 dependencies = ["build"]

@@ -6,9 +6,9 @@ use modules::primitives::{
     ChunkPeriodHash,
     ProposerAddress,
     CollationHeaderHash,
-    ParentCollationHeaderHash,
-    ProposerBidHash,
-    ProposerSignature
+    //ParentCollationHeaderHash,
+    //ProposerBidHash,
+    //ProposerSignature
 };
 
 use tiny_keccak;

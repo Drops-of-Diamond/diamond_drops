@@ -2,8 +2,8 @@ use modules::collation::{header, body};
 
 #[derive(PartialEq, Clone, Debug)]
 pub struct Collation {
-     header: header::Header,
-     body: body::Body
+    pub header: header::Header,
+    pub body: body::Body
 }
 
 impl Collation {
