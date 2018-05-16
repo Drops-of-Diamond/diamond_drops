@@ -1,13 +1,14 @@
-use modules::collation::{header, body};
+use modules::collation::body::{Body/* , BlobBodies */};
+use modules::collation::header::Header;
 
 #[derive(PartialEq, Clone, Debug)]
 pub struct Collation {
-    pub header: header::Header,
-    pub body: body::Body
+    pub header: Header,
+    pub body: Body
 }
 
 impl Collation {
-    pub fn new(header: header::Header, body: body::Body) -> Collation {
+    pub fn new(header: Header, body: Body) -> Collation {
         Collation {
             header,
             body

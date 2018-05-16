@@ -2,14 +2,14 @@ use modules::collation::chunk::Chunk;
 
 /// Collation body storing arbitrary data or blobs, serialized into 32-byte chunks.
 #[derive(PartialEq, Debug, Clone)]
-pub struct Body;/*this doesn't work, presumably because  {
-    chunk: Chunk
+pub struct Body{/*; this doesn't work, presumably because */ 
+    pub chunks: Vec<Chunk>
 }
 
 impl Body {
-    pub fn new(chunk: Chunk) -> Body {
+    pub fn new(chunks: Vec<Chunk>) -> Body {
         Body {
-            chunk
+            chunks
         }
     }
 }
@@ -23,7 +23,7 @@ pub struct BlobBodies {
 impl BlobBodies {
     pub fn new(body: Body) -> BlobBodies {
         BlobBodies {
-            Body
+            body
         }
     }
-} */
+}

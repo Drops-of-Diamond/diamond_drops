@@ -1,6 +1,10 @@
 //use bitreader::BitReader;
-use modules::constants::{CHUNK_SIZE, CHUNK_DATA_SIZE, 
-    /*COLLATION_SIZE, */CHUNKS_PER_COLLATION, MAX_BLOB_SIZE};
+use modules::constants::{CHUNK_SIZE,
+    CHUNK_DATA_SIZE,
+    /*COLLATION_SIZE, */
+    CHUNKS_PER_COLLATION,
+    MAX_BLOB_SIZE
+};
 // use modules::errors::*;
 
 // Not used:
@@ -9,7 +13,7 @@ use modules::constants::{CHUNK_SIZE, CHUNK_DATA_SIZE,
 // not used: use ::std::fmt::{Binary, Formatter, Result};
 // nightly, not used: use ::std::slice::SliceIndex;
 
-#[derive(PartialEq, Debug, Clone)]
+#[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Chunk {
     pub indicator: u8,
     pub data: [u8; CHUNK_DATA_SIZE]

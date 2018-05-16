@@ -7,9 +7,10 @@
 use modules::collation::chunk::Chunk;
 use modules::constants::{CHUNK_SIZE, CHUNK_DATA_SIZE, 
     COLLATION_SIZE, CHUNKS_PER_COLLATION, MAX_BLOB_SIZE};
-//use modules::collation::body::{Body, BlobBodies};
-//use modules::collation::header::Header;
-//use modules::errors::*;
+use modules::collation::body::{Body/* , BlobBodies */};
+use modules::collation::header::Header;
+use modules::primitives::CollationHeaderHash;
+use modules::errors::*;
 //use std::convert::AsMut;
 
 /// Struct of a blob containing data of arbitrary size. This and the Chunks struct are
@@ -172,33 +173,36 @@ impl Blob {
             data
         }
     }
-
+    
     /// Put blob chunks into (a) collation body(ies).
     /// This is incomplete.
     /// TODO:  functionality for packing multiple blobs into
     /// one collation body.
     /// Further details, see:
-    /// https://ethresear.ch/t/blob-serialisation/1705/17
-    # pub fn blob_into_collation_body() {}
+    /// https://ethresear.ch/t/blob-serialisation/1705/17 */
     /* if to_chunks(blob).length > CHUNKS_PER_COLLATION {
         Serialize a blob into multiple collation bodies.
     } else {
         Pack the blob chunks into the collation body.
-    }
-    */
-    /*
-    pub fn blob_into_collation_body(self,
-        collation_header_hash: CollationHeaderHash) -> Result<()> {
+    }*/
+    pub fn blob_to_collation_body(self,
+        /* collation_header_hash: CollationHeaderHash */) -> Result<()> {
         // We can't just create a collation body, then put a blob into that,
         // since we need to maintain an order of putting blobs into collation bodies,
         // and bodies into collations, and collations ordered in each shard.
+        // So this is more for testing, it will need to be modified to find a collation body that has been created
+        // by it's CollationHeaderHash.
         // Instantiate a var. to represent a collation body from the input collation_header_hash.
         let bytes_per_blob: usize = self.data.len();
-        // let blob_as_chunks = to_chunks(self);
+        let blob_as_chunks = self.to_chunks(false);
         if bytes_per_blob > COLLATION_SIZE {
             //let mut chunk = [0; 31]
             //let mut body = Body::new(chunk);
             //let mut blob_bodies = BlobBodies::new(body);
+            panic!("Sorry, sharding developers and researchers haven't agreed on a way to serialize blobs that are \
+                larger than a COLLATION_SIZE ({:?} bytes), please split this blob up into blobs that are smaller \
+                than this and try again, or lobby us to do this.", COLLATION_SIZE);
+            /* 
             for chunk in blob_as_chunks {
                 if chunk % CHUNKS_PER_COLLATION == 0 {
                     // 0..CHUNKS_PER_COLLATION - 1 = first collation body
@@ -214,44 +218,62 @@ impl Blob {
                     BlobBodies.push(body)
                 }
             }
+            */
         } else {
+            // Find a collation body that has been created.
+            // Search the shard binary Merkle trie for a collation that has the input collation_header_hash.
+            // TODO
+
+            // Check that the blob will fit into this particular body (it may be partially full or full).
+            // TODO
+
+            // Skip these two steps for now, since storage hasn't finished development.
+            // Just create a new collation body.
+
+            // Put the blob into this collation body.
+            let body = Body::new(blob_as_chunks);
+            /*
             for chunk in blob_as_chunks {
-                if chunk == 0 {
+                if chunk == blob_as_chunks[0] {
+                    // This applies when serializing a blob into a new collation body
                     // 0..CHUNKS_PER_COLLATION - 1 = first collation body
                     // CHUNKS_PER_COLLATION * n = start of a new collation body
                     // Therefore, start a new collation body.
-                    let mut body = Body::new(chunk);
+                    
                 } else {
-                    body.push(chunk)
+                    body.chunks.push(chunk);
                 }
             }
+            */
         }
+        Ok(())
     }
-    */
+    
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
-    /*
     #[test]
-    fn it_puts_a_blob_that_is_one_byte_less_than_a_megabyte_into_a_collation_body() {
-        let mut blob = Blob::new(vec![0; COLLATION_SIZE - 1]);
-        // watch out, this will be big, but not bigger than a collation, so it may take a long time to test
-        let mut blob_as_chunks = to_chunks(blob);
-        let body = put_a_blob_into_a_collation_body_or_bodies(blob_as_chunks);
+    fn mb_blob_to_collation_body() {
+        let blob = Blob::new(vec![0; COLLATION_SIZE]);
+        // let mut blob_as_chunks = blob.to_chunks();
+        let body = blob.blob_to_collation_body();
+    }
+    
+    #[test]
+    #[should_panic]
+    fn mb_1_b_blob_to_2_colltn_bodies() {
+        let blob = Blob::new(vec![0; COLLATION_SIZE + 1]);
+        // assert_eq!(blob.data.len(), COLLATION_SIZE + 1); // this actually passes
+        // assert!(blob.data.len() > COLLATION_SIZE); // this passes if you uncomment this, but fails otherwise.
+        // let mut blob_as_chunks = to_chunks(blob);
+        let body = blob.blob_to_collation_body();
     }
 
-        fn it_puts_a_blob_that_is_one_byte_more_than_a_megabyte_into_two_collation_bodies() {
-        let mut blob = Blob::new(vec![0; COLLATION_SIZE - 1]);
-        // watch out, this will be big, but not bigger than a collation, so it may take a long time to test
-        let mut blob_as_chunks = to_chunks(blob);
-        let body = put_a_blob_into_a_collation_body_or_bodies(blob_as_chunks);
-    } */
-
     #[test]
-    fn it_converts_to_chunks_with_skip_evm_false_and_a_4_byte_blob() {
+    fn to_chunks_skip_evm_0_4_b_blob() {
         let mut blob = Blob::new(vec![0; 31]);
         for i in 0..4 {
             blob.data[i] = 0xff;
@@ -259,7 +281,7 @@ mod tests {
         let blob_chunks = blob.to_chunks(false);
         // If you set the length to 4, it will not include the zeros in blob.data.
         let terminal_chunk_indicator = Chunk::build_indicator(false, true, 4);
-        let mut correct_blob_chunks = vec![Chunk::new(terminal_chunk_indicator, 
+        let correct_blob_chunks = vec![Chunk::new(terminal_chunk_indicator, 
                                                                 [0xff, 0xff, 0xff, 0xff,
                                                                 0, 0, 0, 0, 0, 0, 0, 0, 0, 
                                                                 0, 0, 0, 0, 0, 0, 0, 0, 0, 
@@ -272,7 +294,7 @@ mod tests {
     }
 
     #[test]
-    fn it_converts_to_chunks_with_skip_evm_false_and_a_32_byte_blob() {
+    fn to_chunks_skip_evm_0_32_b_blob() {
         let blob = Blob::new(vec![0xff; 32]);
         let blob_chunks = blob.to_chunks(false);
         let non_terminal_chunk_indicator = Chunk::build_indicator(false, false, 0);
@@ -298,7 +320,7 @@ mod tests {
     }
 
     #[test]
-    fn it_converts_to_chunks_with_skip_evm_false_and_a_128_byte_blob() {
+    fn to_chunks_skip_evm_0_128_b_blob() {
         let blob = Blob::new(vec![0xff; CHUNK_DATA_SIZE*4 + 4]);
         let blob_chunks = blob.to_chunks(false);
         let non_terminal_chunk_indicator = Chunk::build_indicator(false, false, 0);
@@ -319,7 +341,7 @@ mod tests {
     }
 
     #[test]
-    fn it_converts_to_chunks_with_skip_evm_true_and_a_128_byte_blob() {
+    fn to_chunks_skip_evm_1_128_b_blob() {
         let blob = Blob::new(vec![0xff; CHUNK_DATA_SIZE*4+4]);
         let blob_chunks = blob.to_chunks(true);
         let non_terminal_chunk_indicator = Chunk::build_indicator(true, false, 0);
@@ -339,7 +361,7 @@ mod tests {
     }
 
     #[test]
-    fn it_converts_from_chunks_with_skip_evm_false_and_a_four_byte_blob() {
+    fn from_chunks_skip_evm_0_4_b_blob() {
         // 0b0001_1111
         let terminal_chunk_indicator = Chunk::build_indicator(
             false, true, 4);
@@ -349,18 +371,7 @@ mod tests {
         }
         // Alternative: https://play.rust-lang.org/?gist=53969b6c3cad694d219091e8550c8ccc&version=undefined&mode=undefined
         // Less efficient: https://play.rust-lang.org/?gist=8ca17ca652ab781b5c4e1fe14ef4f919&version=stable&mode=debug
-        /* However if you uncomment this instantiation below then you get an error:
-        error[E0308]: mismatched types
-    --> src/modules/collation/blob.rs:256:75
-    |
-256 |         let mut chunks = vec![Chunk::new(terminal_chunk_indicator, chunk_1_data)];
-    |                                                                           ^^^^^^^^^^^^ expected an array with a fixed size of 31 elements, found one with 4 elements
-    |
-    = note: expected type `[u8; 31]`
-               found type `[{integer}; 4]`
-        let mut chunk_1_data = [0xff; 4];
-        */
-        let mut chunks = vec![Chunk::new(terminal_chunk_indicator, chunk_1_data)];
+        let chunks = vec![Chunk::new(terminal_chunk_indicator, chunk_1_data)];
         let blob_from_chunks = Blob::from_chunks(chunks);
         let blob = Blob::new(chunk_1_data.to_vec());
         assert_eq!(blob, blob_from_chunks, 
@@ -371,7 +382,7 @@ mod tests {
     }
 
     #[test]
-    fn it_converts_from_chunks_with_skip_evm_false_and_a_32_byte_blob() {
+    fn from_chunks_skip_evm_0_32_b_blob() {
         // 0b0000_0000
         let non_terminal_chunk_indicator = Chunk::build_indicator(false, false, 0);
         let terminal_chunk_indicator = Chunk::build_indicator(
@@ -395,7 +406,7 @@ mod tests {
     }
 
     #[test]
-    fn it_converts_from_chunks_with_skip_evm_false_and_a_155_byte_blob() {
+    fn from_chunks_skip_evm_0_155_b_blob() {
         // 0b0000_0000
         let non_terminal_chunk_indicator = Chunk::build_indicator(false, false, 0);
         // 0b0001_1111
@@ -416,7 +427,7 @@ mod tests {
     }
 
     #[test]
-    fn it_converts_from_chunks_with_skip_evm_true_and_a_155_byte_blob() {
+    fn from_chunks_skip_evm_1_155_b_blob() {
         // 0b1000_0000
         let non_terminal_chunk_indicator = Chunk::build_indicator(true, false, 0);
         // 0b1001_1111

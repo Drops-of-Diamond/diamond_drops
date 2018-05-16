@@ -5,6 +5,8 @@
 // Make sure to actually handle these before production. 
 // https://github.com/Drops-of-Diamond/diamond_drops/issues/66
 #![allow(unused_imports)]
+#![allow(unused_variables)]
+#![allow(dead_code)]
 
 //extern crate bitreader;
 extern crate diamond_drops_cli as cli;
