@@ -20,13 +20,17 @@ impl Mode {
 /// This holds configuration options for running the client
 #[derive(Debug, PartialEq)]
 pub struct Config {
-    pub mode: Mode
+    pub mode: Mode,
+    pub collation_active: bool
 }
 
 impl Config {
     /// Creates a new configuration to be run
-    pub fn new(mode: Mode) -> Config {
-        Config { mode }
+    pub fn new(mode: Mode, collation_active: bool) -> Config {
+        Config {
+            mode,
+            collation_active
+        }
     }
 }
 

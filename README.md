@@ -107,6 +107,11 @@ cargo run -- mode --help
     cargo make all
     ```
 
+  * All above with collation example
+    ```bash
+    cargo make all-with-collation
+    ```
+
 #### Unit and Integration Tests
 
   * Run all tests (unit and integration tests for main package and libraries) 

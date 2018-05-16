@@ -100,6 +100,18 @@ dependencies = ["clean"]
 [tasks.all]
 alias = "run-all"
 
+[tasks.run-all-with-collation]
+script = [
+    "echo \"Running all modes with collation active\"",
+    "cargo run -- --collation -l 4 mode -p",          # Proposer Mode Only with Collation Active
+    "cargo run -- --collation -l 4 mode -n",          # Notary Mode Only with Collation Active
+    "cargo run -- --collation -l 4 mode -b"           # Both Proposer and Notary Modes with Collation Active
+]
+dependencies = ["clean"]
+
+[tasks.all-with-collation]
+alias = "run-all-with-collation"
+
 [tasks.run-all-with-bin]
 script = [
     "echo \"Running all modes\"",
