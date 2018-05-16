@@ -15,6 +15,12 @@ pub fn process_mode_matches(matches: &clap::ArgMatches) -> Result<config::Config
 
     // Default Case
     let mut mode = config::Mode::Both;
+    let mut collation_active = false;
+
+    if matches.is_present("collation") {
+        info!("Collation mode activated...");
+        collation_active = true;
+    }
 
     // Handle subcommand info by conditionally getting the value and requesting matches by name
     match matches.subcommand() {
@@ -42,7 +48,7 @@ pub fn process_mode_matches(matches: &clap::ArgMatches) -> Result<config::Config
     }
 
     if config_type == ConfigType::Mode {
-        Ok(config::Config::new(mode))
+        Ok(config::Config::new(mode, collation_active))
     } else {
         let error_msg = msg_with_args("Invalid mode argument provided");
         return Err(error_msg);
@@ -65,9 +71,9 @@ pub fn parse_cli_args(_args: Vec<String>) -> Result<config::Config, String> {
 
     process_log_matches(&matches);
 
-    let mode = process_mode_matches(&matches).unwrap();
+    let full_config = process_mode_matches(&matches).unwrap();
 
-    return Ok(mode);
+    return Ok(full_config);
 }
 
 fn msg_with_args(msg: &str) -> String {
@@ -80,6 +86,27 @@ fn msg_with_args(msg: &str) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn it_sets_collation_to_active() {
+        let matches = App::new("diamond-drops-cli")
+            .arg(Arg::with_name("collation")
+                .long("collation")
+                .required(false)
+                .takes_value(false))
+            .subcommand(SubCommand::with_name("mode")
+                .arg(Arg::with_name("proposer")
+                    .long("proposer")
+                ))
+            .get_matches_from(vec![
+                "diamond-drops-cli", "--collation", "mode", "--proposer"
+            ]);
+
+        let test_args = matches;
+        let config = process_mode_matches(&test_args).unwrap();
+
+        assert_eq!(config.collation_active, true);
+    }
 
     #[test]
     fn it_sets_client_mode_to_proposer() {

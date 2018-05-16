@@ -106,6 +106,15 @@
       "cwd": "${workspaceFolder}",
       "args": "mode -b",
       "terminal": "integrated"
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "LLDB with collation active",
+      "program": "${workspaceFolder}/target/debug/cli",
+      "cwd": "${workspaceFolder}",
+      "args": "--collation mode -b",
+      "terminal": "integrated"
     }
   ]
 }
