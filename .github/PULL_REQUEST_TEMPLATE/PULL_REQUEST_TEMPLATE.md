@@ -1,13 +1,21 @@
 <!--When opening a pull request to submit a new EIP, please use the suggested template: https://github.com/Drops-of-Diamond/diamond_drops/blob/develop/.github/DIP_TEMPLATE.md.-->
 
-### - What I did
+### What I did
 
-### - How I did it
 
-### - How to verify it
 
-### - Description for the changelog
+### How I did it
 
-### - Cute Animal Picture
 
-![put a cute animal picture link inside the parentheses]()<!--e.g. from https://duckduckgo.com/?q=cute+animal&t=ffab&iar=images&iax=images&ia=images-=?-->
+
+### How to verify it
+
+
+
+### Description for the changelog
+
+
+
+### Cute Animal Picture
+
+![put a cute animal picture link inside the parentheses]() <!--e.g. from https://duckduckgo.com/?q=cute+animal&t=ffab&iar=images&iax=images&ia=images-=?-->
