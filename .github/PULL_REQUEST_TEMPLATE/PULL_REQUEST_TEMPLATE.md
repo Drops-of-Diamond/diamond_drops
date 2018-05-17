@@ -10,4 +10,4 @@
 
 ### - Cute Animal Picture
 
-![put a cute animal picture link inside the parentheses]()
+![put a cute animal picture link inside the parentheses]()<!--e.g. from https://duckduckgo.com/?q=cute+animal&t=ffab&iar=images&iax=images&ia=images-=?-->
