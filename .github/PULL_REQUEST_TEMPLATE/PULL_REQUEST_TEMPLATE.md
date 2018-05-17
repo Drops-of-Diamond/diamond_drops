@@ -1,3 +1,5 @@
+When opening a pull request to submit a new EIP, please use the suggested template: https://github.com/Drops-of-Diamond/diamond_drops/blob/develop/.github/DIP_TEMPLATE.md.
+
 ### - What I did
 
 ### - How I did it
