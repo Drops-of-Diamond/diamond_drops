@@ -11,12 +11,12 @@ requires (*optional): <DIP number(s)>
 replaces (*optional): <DIP number(s)>
 ---
 
-<!--You can leave these HTML comments in your merged DIP and delete the visible duplicate text guides, they will not appear and may be helpful to refer to if you edit it again. This is the suggested template for new DIPs. Note that a DIP number will be assigned by an editor. When opening a pull request to submit your DIP, please use an abbreviated title in the filename, `dip-draft_title_abbrev.md`. The title should be 44 characters or less.-->
-This is the suggested template for new DIPs (Drops of DIamond Improvement Proposals).
+<!--You can leave these HTML comments in your merged DIP and delete the visible duplicate text guides, they will not appear and may be helpful to refer to if you edit it again. This is the suggested template for new DIPs. Note that a DIP number will be assigned by an editor. When opening a pull request to submit your DIP, please use an abbreviated title in the filename, `dip-draft_title_abbrev.md`. The title should be 44 characters or less.
+This is the suggested template for new DIPs (Drops of DIamond Improvement Proposals).-->
 
-Note that a DIP number will be assigned by an editor. When opening a pull request to submit your DIP, please use an abbreviated title in the filename, `dip-draft_title_abbrev.md`.
+<!--Note that a DIP number will be assigned by an editor. When opening a pull request to submit your DIP, please use an abbreviated title in the filename, `dip-draft_title_abbrev.md`.-->
 
-The title should be 44 characters or less.
+<!--The title should be 44 characters or less.-->
 
 ## Simple Summary
 <!--"If you can't explain it simply, you don't understand it well enough." Provide a simplified and layman-accessible explanation of the DIP.-->
