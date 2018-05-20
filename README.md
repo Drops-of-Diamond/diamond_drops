@@ -107,6 +107,11 @@ cargo run -- mode --help
     cargo make all
     ```
 
+  * All above with collation example
+    ```bash
+    cargo make all-with-collation
+    ```
+
 #### Unit and Integration Tests
 
   * Run all tests (unit and integration tests for main package and libraries) 
@@ -132,15 +137,14 @@ cargo make docs
 * View UML with Google Chrome, Mozilla Firefox, or Brave browser
 
     ```bash
+    cargo make uml-default-recommended;
+    # The below options will only work for Mac OS X, otherwise use the above.
     cargo make uml-chrome;
     cargo make uml-firefox;
     cargo make uml-brave;
     ```
-
-* Custom 
-  * Choose an application on your computer to open the SVG (i.e. `ls /Applications`)
-  * Run `open -a "<APPLICATION>" "./diagrams/ml.svg"`
-  * Optionally create a Pull Request to update Makefile.toml
+  * On a Mac you can also use `ls /Applications; open SVG-COMPATIBLE-APPLICATION ./diagrams/ml.svg`.
+  * Optionally create a Pull Request to update Makefile.toml or open the diagrams/ml.svg file manually after building with the graphviz dependency for MML or an alternative installed.
 
 ![](
 https://raw.githubusercontent.com/ltfschoen/Diamond-drops/develop/diagrams/ml.svg?sanitize=true)

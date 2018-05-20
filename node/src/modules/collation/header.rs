@@ -6,9 +6,15 @@ use modules::primitives::{
     ChunkPeriodHash,
     ProposerAddress,
     CollationHeaderHash,
-    ParentCollationHeaderHash,
-    ProposerBidHash,
-    ProposerSignature
+    //ParentCollationHeaderHash,
+    //ProposerBidHash,
+    //ProposerSignature
+};
+
+use modules::constants::{
+    SAMPLE_COLLATION_PARENT_HASH_BYTES,
+    SAMPLE_COLLATION_CHUNK_ROOT_BYTES,
+    SAMPLE_COLLATION_PROPOSER_ADDRESS_BYTES
 };
 
 use tiny_keccak;
@@ -92,57 +98,37 @@ fn u256_to_bytes32(u256: ethereum_types::U256) -> [u8; 32] {
     bytes32
 }
 
+pub fn create_sample_collation_header() -> Header {
+    // Build the args for collation header creation
+    let shard_id = ShardIdHash::from_dec_str("1").unwrap();
+    // let parent_hash = ParentCollationHeaderHash::from_slice(&SAMPLE_COLLATION_PARENT_HASH_BYTES[..]);
+    let chunk_root = ChunkRootHash::from_slice(&SAMPLE_COLLATION_CHUNK_ROOT_BYTES[..]);
+    let period = ChunkPeriodHash::from_dec_str("1").unwrap();
+    let proposer_address = ProposerAddress::from_slice(&SAMPLE_COLLATION_PROPOSER_ADDRESS_BYTES[..]);
+    let header = Header::new(shard_id, /*parent_hash,*/ chunk_root, period, proposer_address);
+    return header;
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
     fn it_produces_correct_hash() {
-        // Build the args for collation header creation
-        // Shard Id
-        let shard_id = ShardIdHash::from_dec_str("1").unwrap();
-        let shard_id_bytes = u256_to_bytes32(shard_id);
-        
-        /*
-        // Parent Hash
-        let parent_hash_bytes: [u8; 32] = [0x50, 0xa1, 0xb3, 0xd5, 0x14, 0xd4, 0x99, 0x63,
-                                           0x54, 0x14, 0x7a, 0xd2, 0x89, 0x61, 0x75, 0xb0, 
-                                           0x7d, 0x43, 0x7f, 0x9e, 0x58, 0xfa, 0x3c, 0x44, 
-                                           0x86, 0xc0, 0x42, 0xf4, 0xc3, 0xd5, 0x05, 0x9b];
-        let parent_hash = ParentCollationHeaderHash::from_slice(&parent_hash_bytes[..]);
-        */
-
-        // Chunk Root
-        let chunk_root_bytes: [u8; 32] = [0x50, 0xce, 0xc0, 0x49, 0x54, 0x77, 0xfb, 0x7e,
-                                          0x65, 0x25, 0xc2, 0xa0, 0x39, 0xa3, 0xa9, 0x95,
-                                          0x34, 0x90, 0x35, 0xb2, 0xa8, 0x23, 0xa4, 0x99,
-                                          0x0b, 0x27, 0xf6, 0xd7, 0xd5, 0x5e, 0xec, 0x6b];
-        let chunk_root = ChunkRootHash::from_slice(&chunk_root_bytes[..]);
-
-        // Period
-        let period = ChunkPeriodHash::from_dec_str("1").unwrap();
-        let period_bytes = u256_to_bytes32(period);
-
-        // Proposer Address
-        let proposer_address_bytes: [u8; 20] = [0x39, 0xa4, 0x2d, 0x47, 0x4a,
-                                                0x52, 0x96, 0xab, 0x98, 0x52, 
-                                                0x3b, 0x1a, 0x3d, 0xef, 0x8f, 
-                                                0x18, 0x67, 0xad, 0x32, 0xb0];
-        let proposer_address = ProposerAddress::from_slice(&proposer_address_bytes[..]);
-
-        // Create the header
-        let header = Header::new(shard_id, /*parent_hash,*/ chunk_root, period, proposer_address);
+        let header = create_sample_collation_header();
 
         // Calculate its generated hash
         let header_hash: CollationHeaderHash = header.hash();
+        let shard_id_bytes = u256_to_bytes32(header.shard_id);
+        let period_bytes = u256_to_bytes32(header.period);
 
         // Calculate the expected hash
         let mut sha3 = tiny_keccak::Keccak::new_sha3_256();
         sha3.update(&shard_id_bytes[..]);
-        //sha3.update(&parent_hash_bytes[..]);
-        sha3.update(&chunk_root_bytes[..]);
+        //sha3.update(&SAMPLE_COLLATION_PARENT_HASH_BYTES[..]);
+        sha3.update(&SAMPLE_COLLATION_CHUNK_ROOT_BYTES[..]);
         sha3.update(&period_bytes[..]);
-        sha3.update(&proposer_address_bytes[..]);
+        sha3.update(&SAMPLE_COLLATION_PROPOSER_ADDRESS_BYTES[..]);
 
         let mut expected_bytes: [u8; 32] = [0; 32];
         sha3.finalize(&mut expected_bytes);
