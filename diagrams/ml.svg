@@ -98,7 +98,6 @@
 <text text-anchor="middle" x="2180.5" y="-482.8" font-family="Times,serif" font-size="14.00" fill="#000000">+ build_indicator(skip_evm: bool, terminal: bool, terminal_length: u8) &#45;&gt; u8</text>
 </g>
 <!-- ndBlob -->
-<g id="node5" class="node">
 <title>ndBlob</title>
 <polygon fill="none" stroke="#000000" points="2479,-490 2479,-604 2914,-604 2914,-490 2479,-490"/>
 <text text-anchor="middle" x="2696.5" y="-588.8" font-family="Times,serif" font-size="14.00" fill="#000000">&lt;&lt;&lt;Structure&gt;&gt;&gt;</text>
