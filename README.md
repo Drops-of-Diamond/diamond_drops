@@ -147,7 +147,7 @@ cargo make docs
   * Optionally create a Pull Request to update Makefile.toml or open the diagrams/ml.svg file manually after building with the graphviz dependency for MML or an alternative installed.
 
 ![](
-https://raw.githubusercontent.com/ltfschoen/Diamond-drops/develop/diagrams/ml.svg?sanitize=true)
+https://raw.githubusercontent.com/Drops-of-Diamond/diamond_drops/develop/diagrams/ml.svg?sanitize=true)
 
 ### Contibuting guidelines
 
