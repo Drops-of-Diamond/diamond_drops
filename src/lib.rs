@@ -1,3 +1,5 @@
+#![allow(unused_variables)]
+
 #[macro_use]
 extern crate log;
 
@@ -16,14 +18,14 @@ use std::time::Duration;
 ///
 /// # Inputs
 ///
-/// modules - A struct containing the configuration values for the client
+/// Config - A struct containing the configuration values for the client
 pub fn run(config: cli::modules::config::Config) -> () {
     debug!("Client Config - Mode: {:?}", config.mode);
     debug!("Client Config - Collation Active: {:?}", config.collation_active);
 
     if config.collation_active == true {
         let header = collation::header::create_sample_collation_header();
-        let body = collation::body::Body;
+        let body = collation::body::create_sample_collation_body();
         let collation = collation::collation::Collation::new(header, body);
         debug!("Successfully created collation: {:?}", collation);
     }

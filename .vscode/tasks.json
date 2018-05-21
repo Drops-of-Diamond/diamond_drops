@@ -97,7 +97,9 @@
     {
       "label": "cargo make docs",
       "args": [
-        "cargo make docs"
+        "cargo make docs" // if running this task from Tasks > Run Task instead of via entering
+        // cargo make uml-default-recommended in the terminal, the output will not display, at least
+        // on James Ray's Manjaro Linux PC.
       ],
       "problemMatcher": [
         "$rustc"

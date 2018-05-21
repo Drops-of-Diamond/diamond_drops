@@ -29,7 +29,8 @@ use std::process;
 
 pub use errors::*;
 
-fn main() {
+/// Just has error-handling with error-chain
+pub fn main() {
     if let Err(ref e) = run() {
         use std::io::Write;
         let stderr = &mut ::std::io::stderr();
@@ -59,7 +60,8 @@ fn main() {
 // `errors` module. It is a typedef of the standard `Result` type
 // for which the error type is always our own `Error`.
 
-fn run() -> Result<()> {
+/// Gets arguments from the environment and from the terminal
+pub fn run() -> Result<()> {
     let args = env::args().skip(1).collect::<Vec<_>>();
     println!("Processing arguments: {:?}", args);
     diamond_drops_env::config::set_test_env();
