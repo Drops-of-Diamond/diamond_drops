@@ -21,11 +21,11 @@ We're implementing sharding according to collaboration with Ethereum research at
   
 For further information please refer to [our wiki](https://github.com/Drops-of-Diamond/diamond_drops/wiki).
 
-### Help support us!
+### Help support us
 
 Send a donation to our multi-sig wallet at [0x6D446f9545dBC380A6BBDde8A285A7A8030D4381](https://etherscan.io/address/0x6d446f9545dbc380a6bbdde8a285a7a8030d4381).
 
-### We're looking for more developers!
+### We're looking for more developers
 
 See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information. There is a lot of work to do in the [sharding roadmap](https://github.com/ethereum/wiki/wiki/Sharding-roadmap).
 
