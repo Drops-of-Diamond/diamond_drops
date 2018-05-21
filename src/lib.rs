@@ -5,7 +5,7 @@ extern crate diamond_drops_cli as cli;
 extern crate diamond_drops_env as env;
 extern crate diamond_drops_node as node;
 
-use node::modules::{client_thread, smc_listener};
+use node::modules::{client_thread, smc_listener, collation};
 
 // std imports
 use std::sync::mpsc;
@@ -18,7 +18,15 @@ use std::time::Duration;
 ///
 /// Config - A struct containing the configuration values for the client
 pub fn run(config: cli::modules::config::Config) -> () {
-    debug!("Client Mode: {:?}", config.mode);
+    debug!("Client Config - Mode: {:?}", config.mode);
+    debug!("Client Config - Collation Active: {:?}", config.collation_active);
+
+    if config.collation_active == true {
+        let header = collation::header::create_sample_collation_header();
+        let body = collation::body::Body;
+        let collation = collation::collation::Collation::new(header, body);
+        debug!("Successfully created collation: {:?}", collation);
+    }
 
     match config.mode {
         cli::modules::config::Mode::Proposer => {
