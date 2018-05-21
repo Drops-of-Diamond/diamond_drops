@@ -79,7 +79,8 @@ impl Chunk {
         }
         */
         if terminal {
-            assert!(0 < terminal_length && terminal_length < CHUNK_SIZE as u8);
+            // This needs to be <= for when we have a the last 32 bytes of a blob as all 0s.
+            assert!(0 as u8 <= terminal_length && terminal_length < CHUNK_SIZE as u8);
             indicator += terminal_length;
         }
         indicator

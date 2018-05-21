@@ -3,15 +3,19 @@
 // stepped through in debugging.
 // Stuff that I have tried but didn't complete with getting to work
 // is also commented out.
+
 // use bitreader::BitReader;
 use modules::collation::chunk::Chunk;
 use modules::constants::{CHUNK_SIZE, CHUNK_DATA_SIZE, 
-    COLLATION_SIZE, CHUNKS_PER_COLLATION, MAX_BLOB_SIZE};
+    COLLATION_SIZE, CHUNKS_PER_COLLATION, MAX_BLOB_SIZE, DATA_BYTES_PER_COLLATION};
 use modules::collation::body::{Body/* , BlobBodies */};
 use modules::collation::header::Header;
 use modules::primitives::CollationHeaderHash;
 use modules::errors::*;
-//use std::convert::AsMut;
+
+// use std::ops::Try; // for trying to use with structs for error-handling,
+// however this is a nightly feature.
+// use std::convert::AsMut;
 
 /// Struct of a blob containing data of arbitrary size. This and the Chunks struct are
 /// defined according to https://ethresear.ch/t/blob-serialisation/1705. Provides a more efficient
@@ -52,6 +56,8 @@ impl Blob {
         // 125 % 31 = 1.
 
         // Assume initially that the blob has no consecutive final zeros (i.e. not [..., 0, 0, 0])
+        // However, this has the adverse side effect of when we actually want all the data to be zero in the last blob,
+        // the indicator will be set to 0.
         let mut data_length_last_31_bytes: u8
             = CHUNK_DATA_SIZE as u8;
         //let blob_data: &mut Vec<u8> = &mut self.data; 
@@ -122,7 +128,7 @@ impl Blob {
                 //assert_eq!(data_length_last_31_bytes, 50, "indicator: {:?}", indicator);
                 indicator = indicator
                     | data_length_last_31_bytes;
-                //assert_eq!(indicator, 50, "indicator: {:?}", indicator);
+                // assert_eq!(indicator, 50, "indicator: {:?}", indicator);
             }
             // Set the first bit of the indicator byte, the skip_evm flag,
             // if a skip_evm opcode was called.
@@ -186,22 +192,23 @@ impl Blob {
         Pack the blob chunks into the collation body.
     }*/
     pub fn blob_to_collation_body(self,
-        /* collation_header_hash: CollationHeaderHash */) -> Result<()> {
+        /* collation_header_hash: CollationHeaderHash */) -> Body {
         // We can't just create a collation body, then put a blob into that,
-        // since we need to maintain an order of putting blobs into collation bodies,
-        // and bodies into collations, and collations ordered in each shard.
-        // So this is more for testing, it will need to be modified to find a collation body that has been created
-        // by it's CollationHeaderHash.
-        // Instantiate a var. to represent a collation body from the input collation_header_hash.
+        // since we need to maintain an order of putting blobs into
+        // collation bodies, and bodies into collations, and collations
+        // ordered in each shard. So this is more for testing, it will need
+        // to be modified to find a collation body that has been created by
+        // it's CollationHeaderHash. Instantiate a var. to represent a
+        // collation body from the input collation_header_hash.
         let bytes_per_blob: usize = self.data.len();
         let blob_as_chunks = self.to_chunks(false);
-        if bytes_per_blob > COLLATION_SIZE {
+        if bytes_per_blob > DATA_BYTES_PER_COLLATION {
             //let mut chunk = [0; 31]
             //let mut body = Body::new(chunk);
             //let mut blob_bodies = BlobBodies::new(body);
             panic!("Sorry, sharding developers and researchers haven't agreed on a way to serialize blobs that are \
-                larger than a COLLATION_SIZE ({:?} bytes), please split this blob up into blobs that are smaller \
-                than this and try again, or lobby us to do this.", COLLATION_SIZE);
+                larger than a DATA_BYTES_PER_COLLATION ({:?} bytes), please split this blob up into blobs that are  \
+                smaller than this and try again, or lobby us to do this.", DATA_BYTES_PER_COLLATION);
             /* 
             for chunk in blob_as_chunks {
                 if chunk % CHUNKS_PER_COLLATION == 0 {
@@ -219,47 +226,84 @@ impl Blob {
                 }
             }
             */
-        } else {
-            // Find a collation body that has been created.
-            // Search the shard binary Merkle trie for a collation that has the input collation_header_hash.
-            // TODO
-
-            // Check that the blob will fit into this particular body (it may be partially full or full).
-            // TODO
-
-            // Skip these two steps for now, since storage hasn't finished development.
-            // Just create a new collation body.
-
-            // Put the blob into this collation body.
-            let body = Body::new(blob_as_chunks);
-            /*
-            for chunk in blob_as_chunks {
-                if chunk == blob_as_chunks[0] {
-                    // This applies when serializing a blob into a new collation body
-                    // 0..CHUNKS_PER_COLLATION - 1 = first collation body
-                    // CHUNKS_PER_COLLATION * n = start of a new collation body
-                    // Therefore, start a new collation body.
-                    
-                } else {
-                    body.chunks.push(chunk);
-                }
-            }
-            */
         }
-        Ok(())
+        // Find a collation body that has been created.
+        // Search the shard binary Merkle trie for a collation that has the input collation_header_hash.
+        // TODO
+
+        // Check that the blob will fit into this particular body (it may be partially full or full).
+        // TODO
+
+        // Skip these two steps for now, since storage hasn't finished development.
+        // Just create a new collation body.
+
+        // Put the blob into this collation body.
+        let body: Body = Body::new(blob_as_chunks);
+        /*
+        for chunk in blob_as_chunks {
+            if chunk == blob_as_chunks[0] {
+                // This applies when serializing a blob into a new collation body
+                // 0..CHUNKS_PER_COLLATION - 1 = first collation body
+                // CHUNKS_PER_COLLATION * n = start of a new collation body
+                // Therefore, start a new collation body.
+                
+            } else {
+                body.chunks.push(chunk);
+            }
+        }
+        */
+        body
     }
-    
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    
 
     #[test]
-    fn mb_blob_to_collation_body() {
-        let blob = Blob::new(vec![0; COLLATION_SIZE]);
+    #[ignore]
+    fn mb_blob_zeros_to_collation_body() {
+        // run as cargo test mb_blob_zeros_to_collation_body -- --ignored -> mb_blob_zeros_to_collation_body.log
+        let blob = Blob::new(vec![0; DATA_BYTES_PER_COLLATION]);
         // let mut blob_as_chunks = blob.to_chunks();
-        let body = blob.blob_to_collation_body();
+        let sample_body = blob.blob_to_collation_body();
+
+/*         let sample_chunk = Chunk::new(0, [0; 31]);
+        let sample_chunks = vec![sample_chunk; CHUNKS_PER_COLLATION];
+        let blob2 = Blob::new(vec![1; DATA_BYTES_PER_COLLATION]);
+        let blob_chunks = blob2.to_chunks(false);*/
+        let non_terminal_chunk_indicator = Chunk::build_indicator(false, false, 0); 
+        // Since all bytes are 0, the length is 0.
+        let terminal_chunk_indicator = Chunk::build_indicator(false, true, 0);
+        let mut correct_blob_chunks = vec![Chunk::new(non_terminal_chunk_indicator, 
+            [0; CHUNK_DATA_SIZE]); CHUNKS_PER_COLLATION - 1];
+        correct_blob_chunks.push(Chunk::new(terminal_chunk_indicator, [0; 31]));
+        let expected_body = Body::new(correct_blob_chunks);
+
+        assert_eq!(sample_body, expected_body);
+    }
+
+    #[test]
+    #[ignore]
+    fn mb_blob_to_collation_body() {
+        // run as cargo test mb_blob_to_collation_body -- --ignored -> mb_blob_to_collation_body.log
+        let blob = Blob::new(vec![1; DATA_BYTES_PER_COLLATION]);
+        // let mut blob_as_chunks = blob.to_chunks();
+        let sample_body = blob.blob_to_collation_body();
+
+/*         let sample_chunk = Chunk::new(0, [0; 31]);
+        let sample_chunks = vec![sample_chunk; CHUNKS_PER_COLLATION];
+        let blob2 = Blob::new(vec![1; DATA_BYTES_PER_COLLATION]);
+        let blob_chunks = blob2.to_chunks(false);*/
+        let non_terminal_chunk_indicator = Chunk::build_indicator(false, false, 0); 
+        let terminal_chunk_indicator = Chunk::build_indicator(false, true, 31);
+        let mut correct_blob_chunks = vec![Chunk::new(non_terminal_chunk_indicator, 
+            [1; CHUNK_DATA_SIZE]); CHUNKS_PER_COLLATION - 1];
+        correct_blob_chunks.push(Chunk::new(terminal_chunk_indicator, [1; 31]));
+        let expected_body = Body::new(correct_blob_chunks);
+
+        assert_eq!(sample_body, expected_body);
     }
     
     #[test]

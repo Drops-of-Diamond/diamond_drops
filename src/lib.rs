@@ -1,3 +1,5 @@
+#![allow(unused_variables)]
+
 #[macro_use]
 extern crate log;
 
@@ -23,7 +25,7 @@ pub fn run(config: cli::modules::config::Config) -> () {
 
     if config.collation_active == true {
         let header = collation::header::create_sample_collation_header();
-        let body = collation::body::Body;
+        let body = collation::body::create_sample_collation_body();
         let collation = collation::collation::Collation::new(header, body);
         debug!("Successfully created collation: {:?}", collation);
     }

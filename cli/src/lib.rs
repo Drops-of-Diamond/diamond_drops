@@ -1,3 +1,6 @@
+#![allow(unused_imports)]
+#![allow(unused_assignments)]
+
 extern crate chrono;
 extern crate env_logger;
 extern crate fern;

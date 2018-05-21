@@ -1,0 +1,18 @@
+
+running 1 test
+test modules::collation::blob::tests::mb_blob_to_collation_body ... FAILED
+
+failures:
+
+---- modules::collation::blob::tests::mb_blob_to_collation_body stdout ----
+	thread 'modules::collation::blob::tests::mb_blob_to_collation_body' panicked at 'assertion failed: `(left == right)`
+  left: `1`,
+ right: `50`: indicator: 1', src/modules/collation/blob.rs:131:17
+note: Run with `RUST_BACKTRACE=1` for a backtrace.
+
+
+failures:
+    modules::collation::blob::tests::mb_blob_to_collation_body
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 23 filtered out
+

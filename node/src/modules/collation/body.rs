@@ -1,4 +1,7 @@
 use modules::collation::chunk::Chunk;
+use modules::collation::blob::Blob;
+use modules::constants::COLLATION_SIZE;
+use modules::errors::*;
 
 /// Collation body storing arbitrary data or blobs, serialized into 32-byte chunks.
 #[derive(PartialEq, Debug, Clone)]
@@ -14,6 +17,13 @@ impl Body {
     }
 }
 
+pub fn create_sample_collation_body() -> Body {
+    let blob = Blob::new(vec![4; COLLATION_SIZE]);
+    let sample_body = blob.blob_to_collation_body();
+    //println!("{:?}", body);
+    sample_body
+}
+
 /// Serialize collation bodies that correspond to the same blob. In practice a blob should contain
 ///  a hash and this struct should then contain that hash as a field.
 pub struct BlobBodies {
@@ -27,3 +37,4 @@ impl BlobBodies {
         }
     }
 }
+
