@@ -1,3 +1,13 @@
+/* Instructions:
+ * - Set the RUSTC environment variable to the Rust Compiler binary location
+ *   by running `export RUSTC=$(which rustc)`
+ * - Check that RUSTC environment variable has been set correctly with: 
+ *   `echo $RUSTC`
+ * - Open Visual Studio Code. Run Command Palette (i.e. CMD+SHIFT+P)
+ * - Find and select "Tasks: Run Task"
+ * - Choose a task from the list of tasks configured in this tasks.json file
+ * - If a task doesn't appear after adding it, try restarting the program (saving work if you don't have autosave enabled)
+ */
 {
   // See https://go.microsoft.com/fwlink/?LinkId=733558
   // for the documentation about the tasks.json format
@@ -8,153 +18,212 @@
   "presentation": {
     "echo": true,
     "reveal": "always",
-    "focus": false,
+    "focus": true,
     "panel": "shared"
   },
   "args": [
       "-c"
   ],
   "tasks": [
-    /* template
     {
-      "label": "cargo ",
+      "label": "cargo make all",
       "args": [
-        "cargo","make", "all"
+        "cargo",
+        "make",
+        "all"
+      ],
+      "group": "build",
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo make test-all",
+      "args": [
+        "cargo",
+        "make",
+        "test-all"
+      ],
+      "group": "test",
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo make test-node",
+      "args": [
+        "cargo",
+        "make",
+        "test-node"
+      ],
+      "group": "test",
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo make test-cli",
+      "args": [
+        "cargo",
+        "make",
+        "test-cli"
+      ],
+      "group": "test",
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo make test-env",
+      "args": [
+        "cargo",
+        "make",
+        "test-env"
+      ],
+      "group": "test",
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo make build; cargo make watch",
+      "args": [
+        "cargo make build; cargo make watch"
       ],
       "problemMatcher": [
         "$rustc"
-      ]`
+      ]
     },
-    */
-      {
-        "label": "cargo make all",
-        "args": [
-          "cargo","make", "all"
-        ],
-        "group":  "build",
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
-      {
-        "label": "cargo make test-all",
-        "args": [
-          "cargo","make", "test-all"
-        ],
-        "group":  "test",
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
-      {
-        "label": "cargo make build; cargo make watch",
-        // cargo install cargo-watch; is omitted for performance
-        "args": [
-          "cargo make build; cargo make watch"//"make", "p"
-        ],
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
-      {
-        "label": "cargo make docs",
-        "args": [
-          "cargo make docs"
-        ],
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
-      // cargo make uml-X only works on a Mac,
-      // https://github.com/Drops-of-Diamond/diamond_drops/issues/48
-      {
-        "label": "cargo make uml-chrome",
-        "args": [
-          "cargo make uml-chrome"
-        ],
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
-      {
-        "label": "cargo make uml-firefox",
-        "args": [
-          "cargo make uml-firefox"
-        ],
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
-      {
-        "label": "cargo make uml-brave",
-        "args": [
-          "cargo make uml-brave"
-        ],
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
-      {
-        "label": "cargo make n",
-        "command": "cargo",
-        "args": [
-          "make", "n"
-        ],
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
-      {
-        "label": "cargo make b",
-        "command": "cargo",
-        "args": [
-          "make", "b"
-        ],
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
-      {
-        "label": "cargo build",
-        "command": "cargo build",
-        "group": {
-          "kind": "build",
-          "isDefault": true
-        },
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
-      {
-        "label": "cargo run -- mode --help",
-        "command": "cargo",
-        "args": [
-          "run", "--", "mode", "--help" 
-        ],
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
-      {
-        "label": "cargo run -- mode -b",
-        "command": "cargo",
-        "args": [
-          "run", "--", "mode", "-b" 
-        ],
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
-      {
-        "label": "cargo run -- --help",
-        "command": "cargo",
-        "args": [
-          "run", "--", "--help" 
-        ],
-        "problemMatcher": [
-          "$rustc"
-        ]
-      },
+    {
+      "label": "cargo make docs",
+      "args": [
+        "cargo make docs" // if running this task from Tasks > Run Task instead of via entering
+        // cargo make uml-default-recommended in the terminal, the output will not display, at least
+        // on James Ray's Manjaro Linux PC.
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ]
     },
+    {
+      "label": "cargo make uml-default-recommended",
+      "args": [
+        "cargo make uml-default-recommended" // if running this task from Tasks > Run Task instead of via entering 
+        // cargo make uml-default-recommended in the terminal, the output will not display.
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo make uml-chrome",
+      "args": [
+        "cargo make uml-chrome"
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo make uml-firefox",
+      "args": [
+        "cargo make uml-firefox"
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo make uml-brave",
+      "args": [
+        "cargo make uml-brave"
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo make n",
+      "command": "cargo",
+      "args": [
+        "make",
+        "n"
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo make b",
+      "command": "cargo",
+      "args": [
+        "make",
+        "b"
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo build",
+      "command": "cargo build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo run -- mode --help",
+      "command": "cargo",
+      "args": [
+        "run",
+        "--",
+        "mode",
+        "--help"
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo run -- mode -b",
+      "command": "cargo",
+      "args": [
+        "run",
+        "--",
+        "mode",
+        "-b"
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "label": "cargo run -- --help",
+      "command": "cargo",
+      "args": [
+        "run",
+        "--",
+        "--help"
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ]
+    },
+    {
+      "type": "shell",
+      "label": "cargo bench",
+      "command": "cargo",
+      "args": [
+        "+nightly",
+        "bench"
+      ],
+      "problemMatcher": [
+        "$rustc"
+      ]
+    }
   ]
 }

@@ -15,17 +15,17 @@ Get in touch with us on Gitter:
 
 ### What are we building?
 
-We are working on a [sharding](https://github.com/ethereum/wiki/wiki/Sharding-introduction-R&D-compendium) implementation for [Ethereum](https://ethereum.org) with the [Rust](https://www.rust-lang.org/en-US/), which is fast, safe and concurrent. The below information may be outdated. For the latest information, please ask on Gitter, while additional information on plans and work tasks is in the issues and [projects](https://github.com/Drops-of-Diamond/diamond_drops/projects).
+We are working on a [sharding](https://github.com/ethereum/wiki/wiki/Sharding-introduction-R&D-compendium) implementation for [Ethereum](https://ethereum.org) with the [Rust](https://www.rust-lang.org/en-US/) programming language, which is fast, safe and concurrent. The below information may be outdated. For the latest information, please ask on Gitter, while additional information on plans and work tasks is in the issues and [projects](https://github.com/Drops-of-Diamond/diamond_drops/projects).
 
 We're implementing sharding according to collaboration with Ethereum research at https://ethresear.ch and other teams, which includes tasks outlined in the projects.
   
 For further information please refer to [our wiki](https://github.com/Drops-of-Diamond/diamond_drops/wiki).
 
-### Help support us!
+### Help support us
 
 Send a donation to our multi-sig wallet at [0x6D446f9545dBC380A6BBDde8A285A7A8030D4381](https://etherscan.io/address/0x6d446f9545dbc380a6bbdde8a285a7a8030d4381).
 
-### We're looking for more developers!
+### We're looking for more developers
 
 See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information. There is a lot of work to do in the [sharding roadmap](https://github.com/ethereum/wiki/wiki/Sharding-roadmap).
 
@@ -107,6 +107,11 @@ cargo run -- mode --help
     cargo make all
     ```
 
+  * All above with collation example
+    ```bash
+    cargo make all-with-collation
+    ```
+
 #### Unit and Integration Tests
 
   * Run all tests (unit and integration tests for main package and libraries) 
@@ -132,18 +137,17 @@ cargo make docs
 * View UML with Google Chrome, Mozilla Firefox, or Brave browser
 
     ```bash
+    cargo make uml-default-recommended;
+    # The below options will only work for Mac OS X, otherwise use the above.
     cargo make uml-chrome;
     cargo make uml-firefox;
     cargo make uml-brave;
     ```
-
-* Custom 
-  * Choose an application on your computer to open the SVG (i.e. `ls /Applications`)
-  * Run `open -a "<APPLICATION>" "./diagrams/ml.svg"`
-  * Optionally create a Pull Request to update Makefile.toml
+  * On a Mac you can also use `ls /Applications; open SVG-COMPATIBLE-APPLICATION ./diagrams/ml.svg`.
+  * Optionally create a Pull Request to update Makefile.toml or open the diagrams/ml.svg file manually after building with the graphviz dependency for MML or an alternative installed.
 
 ![](
-https://raw.githubusercontent.com/ltfschoen/Diamond-drops/develop/diagrams/ml.svg?sanitize=true)
+https://raw.githubusercontent.com/Drops-of-Diamond/diamond_drops/develop/diagrams/ml.svg?sanitize=true)
 
 ### Contibuting guidelines
 
