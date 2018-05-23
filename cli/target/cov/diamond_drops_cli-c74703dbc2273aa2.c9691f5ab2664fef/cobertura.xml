@@ -1,0 +1,249 @@
+<?xml version="1.0" ?>
+<!DOCTYPE coverage SYSTEM 'http://cobertura.sourceforge.net/xml/coverage-03.dtd'>
+<coverage line-rate="0.000" version="1.9" timestamp="1527035461">
+	<sources>
+		<source>/home/james/dod/cli/src/</source>
+	</sources>
+	<packages>
+		<package name="diamond_drops_cli_c74703dbc2273aa2" line-rate="0.000" branch-rate="1.0" complexity="1.0">
+			<classes>
+				<class name="log_rs" filename="modules/log.rs" line-rate="0.792">
+					<lines>
+						<line number="8" hits="1"/>
+						<line number="9" hits="6"/>
+						<line number="10" hits="1"/>
+						<line number="11" hits="1"/>
+						<line number="12" hits="1"/>
+						<line number="13" hits="1"/>
+						<line number="14" hits="1"/>
+						<line number="16" hits="2"/>
+						<line number="17" hits="1"/>
+						<line number="19" hits="1"/>
+						<line number="21" hits="2"/>
+						<line number="22" hits="1"/>
+						<line number="23" hits="0"/>
+						<line number="24" hits="0"/>
+						<line number="26" hits="0"/>
+						<line number="27" hits="0"/>
+						<line number="28" hits="0"/>
+						<line number="30" hits="0"/>
+						<line number="31" hits="0"/>
+						<line number="32" hits="0"/>
+						<line number="34" hits="0"/>
+						<line number="35" hits="0"/>
+						<line number="36" hits="0"/>
+						<line number="38" hits="3"/>
+						<line number="39" hits="1"/>
+						<line number="40" hits="1"/>
+						<line number="44" hits="3"/>
+						<line number="45" hits="1"/>
+						<line number="46" hits="2"/>
+						<line number="48" hits="2"/>
+						<line number="49" hits="1"/>
+						<line number="50" hits="2"/>
+						<line number="53" hits="2"/>
+						<line number="54" hits="4"/>
+						<line number="56" hits="3"/>
+						<line number="57" hits="2"/>
+						<line number="58" hits="2"/>
+						<line number="60" hits="2"/>
+						<line number="61" hits="1"/>
+						<line number="62" hits="1"/>
+						<line number="63" hits="2"/>
+						<line number="66" hits="2"/>
+						<line number="67" hits="2"/>
+						<line number="69" hits="3"/>
+						<line number="71" hits="1"/>
+						<line number="72" hits="4"/>
+						<line number="74" hits="1"/>
+						<line number="80" hits="2"/>
+						<line number="82" hits="3"/>
+						<line number="83" hits="4"/>
+						<line number="84" hits="3"/>
+						<line number="85" hits="3"/>
+						<line number="86" hits="2"/>
+					</lines>
+				</class>
+				<class name="args_rs" filename="modules/args.rs" line-rate="0.986">
+					<lines>
+						<line number="6" hits="2"/>
+						<line number="13" hits="1"/>
+						<line number="14" hits="1"/>
+						<line number="17" hits="1"/>
+						<line number="20" hits="1"/>
+						<line number="21" hits="2"/>
+						<line number="22" hits="2"/>
+						<line number="23" hits="3"/>
+						<line number="24" hits="2"/>
+						<line number="25" hits="1"/>
+						<line number="26" hits="4"/>
+						<line number="27" hits="2"/>
+						<line number="28" hits="1"/>
+						<line number="29" hits="2"/>
+						<line number="30" hits="2"/>
+						<line number="31" hits="1"/>
+						<line number="33" hits="1"/>
+						<line number="34" hits="2"/>
+						<line number="36" hits="1"/>
+						<line number="39" hits="1"/>
+						<line number="40" hits="1"/>
+						<line number="44" hits="2"/>
+						<line number="45" hits="2"/>
+						<line number="47" hits="0"/>
+						<line number="48" hits="0"/>
+						<line number="50" hits="2"/>
+						<line number="53" hits="1"/>
+						<line number="54" hits="2"/>
+						<line number="55" hits="2"/>
+						<line number="56" hits="2"/>
+						<line number="57" hits="1"/>
+						<line number="59" hits="1"/>
+						<line number="73" hits="1"/>
+						<line number="74" hits="1"/>
+						<line number="75" hits="2"/>
+						<line number="76" hits="1"/>
+						<line number="77" hits="1"/>
+						<line number="78" hits="1"/>
+						<line number="85" hits="3"/>
+						<line number="86" hits="3"/>
+						<line number="87" hits="2"/>
+						<line number="88" hits="1"/>
+						<line number="90" hits="2"/>
+						<line number="91" hits="1"/>
+						<line number="93" hits="1"/>
+						<line number="95" hits="3"/>
+						<line number="96" hits="3"/>
+						<line number="97" hits="1"/>
+						<line number="99" hits="2"/>
+						<line number="100" hits="1"/>
+						<line number="102" hits="1"/>
+						<line number="105" hits="1"/>
+						<line number="106" hits="3"/>
+						<line number="109" hits="1"/>
+						<line number="110" hits="2"/>
+						<line number="112" hits="1"/>
+						<line number="113" hits="2"/>
+						<line number="114" hits="3"/>
+						<line number="117" hits="3"/>
+						<line number="118" hits="3"/>
+						<line number="119" hits="2"/>
+						<line number="120" hits="1"/>
+						<line number="122" hits="2"/>
+						<line number="123" hits="1"/>
+						<line number="125" hits="1"/>
+						<line number="127" hits="3"/>
+						<line number="128" hits="3"/>
+						<line number="129" hits="1"/>
+						<line number="131" hits="2"/>
+						<line number="132" hits="1"/>
+						<line number="134" hits="1"/>
+						<line number="137" hits="1"/>
+						<line number="138" hits="3"/>
+						<line number="141" hits="1"/>
+						<line number="142" hits="2"/>
+						<line number="144" hits="1"/>
+						<line number="145" hits="2"/>
+						<line number="146" hits="3"/>
+						<line number="149" hits="3"/>
+						<line number="150" hits="3"/>
+						<line number="151" hits="2"/>
+						<line number="152" hits="1"/>
+						<line number="154" hits="2"/>
+						<line number="155" hits="1"/>
+						<line number="157" hits="1"/>
+						<line number="159" hits="3"/>
+						<line number="160" hits="3"/>
+						<line number="161" hits="1"/>
+						<line number="163" hits="2"/>
+						<line number="164" hits="1"/>
+						<line number="166" hits="1"/>
+						<line number="169" hits="1"/>
+						<line number="170" hits="3"/>
+						<line number="173" hits="1"/>
+						<line number="174" hits="2"/>
+						<line number="176" hits="1"/>
+						<line number="177" hits="2"/>
+						<line number="178" hits="3"/>
+						<line number="181" hits="3"/>
+						<line number="182" hits="3"/>
+						<line number="183" hits="1"/>
+						<line number="186" hits="1"/>
+						<line number="187" hits="1"/>
+						<line number="189" hits="1"/>
+						<line number="192" hits="1"/>
+						<line number="193" hits="1"/>
+						<line number="195" hits="2"/>
+						<line number="196" hits="3"/>
+						<line number="199" hits="3"/>
+						<line number="200" hits="3"/>
+						<line number="201" hits="1"/>
+						<line number="204" hits="1"/>
+						<line number="205" hits="1"/>
+						<line number="207" hits="1"/>
+						<line number="210" hits="1"/>
+						<line number="211" hits="1"/>
+						<line number="213" hits="2"/>
+						<line number="214" hits="3"/>
+						<line number="217" hits="3"/>
+						<line number="218" hits="1"/>
+						<line number="221" hits="3"/>
+						<line number="222" hits="2"/>
+						<line number="223" hits="1"/>
+						<line number="225" hits="2"/>
+						<line number="226" hits="1"/>
+						<line number="228" hits="1"/>
+						<line number="229" hits="1"/>
+						<line number="230" hits="1"/>
+						<line number="231" hits="2"/>
+						<line number="233" hits="1"/>
+						<line number="236" hits="3"/>
+						<line number="237" hits="2"/>
+						<line number="238" hits="1"/>
+						<line number="240" hits="2"/>
+						<line number="241" hits="1"/>
+						<line number="243" hits="1"/>
+						<line number="244" hits="1"/>
+						<line number="245" hits="1"/>
+						<line number="246" hits="2"/>
+						<line number="248" hits="1"/>
+						<line number="249" hits="2"/>
+						<line number="252" hits="3"/>
+						<line number="254" hits="1"/>
+						<line number="255" hits="1"/>
+						<line number="258" hits="1"/>
+						<line number="259" hits="2"/>
+						<line number="261" hits="1"/>
+						<line number="262" hits="3"/>
+					</lines>
+				</class>
+				<class name="lib_rs" filename="lib.rs" line-rate="1.000">
+					<lines>
+						<line number="1" hits="2"/>
+					</lines>
+				</class>
+				<class name="config_rs" filename="modules/config.rs" line-rate="0.833">
+					<lines>
+						<line number="2" hits="2"/>
+						<line number="11" hits="1"/>
+						<line number="12" hits="2"/>
+						<line number="13" hits="1"/>
+						<line number="14" hits="1"/>
+						<line number="15" hits="0"/>
+						<line number="17" hits="1"/>
+						<line number="21" hits="0"/>
+						<line number="23" hits="0"/>
+						<line number="28" hits="1"/>
+						<line number="29" hits="1"/>
+						<line number="30" hits="1"/>
+						<line number="38" hits="3"/>
+						<line number="39" hits="1"/>
+						<line number="40" hits="1"/>
+						<line number="42" hits="3"/>
+						<line number="43" hits="1"/>
+						<line number="44" hits="2"/>
+					</lines>
+				</class>
+			</classes>
+		</package>
+	</packages>
+</coverage>

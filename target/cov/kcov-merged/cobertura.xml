@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<!DOCTYPE coverage SYSTEM 'http://cobertura.sourceforge.net/xml/coverage-03.dtd'>
+<coverage line-rate="0.000" version="1.9" timestamp="1527035199">
+	<sources>
+		<source>/home/james/dod/src/</source>
+	</sources>
+	<packages>
+		<package name="diamond_drops_8fcdd49d992dd1d5" line-rate="0.000" branch-rate="1.0" complexity="1.0">
+			<classes>
+				<class name="bin_rs" filename="bin/bin.rs" line-rate="1.000">
+					<lines>
+						<line number="1" hits="1"/>
+					</lines>
+				</class>
+				<class name="lib_rs" filename="lib.rs" line-rate="1.000">
+					<lines>
+						<line number="1" hits="1"/>
+					</lines>
+				</class>
+			</classes>
+		</package>
+	</packages>
+</coverage>

@@ -1,0 +1,19 @@
+var data = {lines:[
+{"lineNum":"    1","line":"#[macro_use]","class":"linePartCov","hits":"2","order":"1015","possible_hits":"3",},
+{"lineNum":"    2","line":"extern crate error_chain;"},
+{"lineNum":"    3","line":""},
+{"lineNum":"    4","line":"#[macro_use]"},
+{"lineNum":"    5","line":"extern crate log;"},
+{"lineNum":"    6","line":""},
+{"lineNum":"    7","line":"pub mod config;"},
+{"lineNum":"    8","line":""},
+{"lineNum":"    9","line":"pub mod errors {"},
+{"lineNum":"   10","line":"    // Create the Error, ErrorKind, ResultExt, and Result types"},
+{"lineNum":"   11","line":"    error_chain!{}"},
+{"lineNum":"   12","line":"}"},
+{"lineNum":"   13","line":""},
+{"lineNum":"   14","line":"pub use errors::*;"},
+]};
+var percent_low = 25;var percent_high = 75;
+var header = { "command" : "diamond_drops_env-8aa55ccfa7ae6322", "date" : "2018-05-23 10:31:58", "instrumented" : 1, "covered" : 1,};
+var merged_data = [];

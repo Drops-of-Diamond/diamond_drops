@@ -1,0 +1,15 @@
+{
+  "files": [
+    {"file": "/home/james/dod/cli/src/modules/log.rs", "percent_covered": "79.25", "covered_lines": "42", "total_lines": "53"},
+    {"file": "/home/james/dod/cli/src/modules/args.rs", "percent_covered": "98.65", "covered_lines": "146", "total_lines": "148"},
+    {"file": "/home/james/dod/cli/src/lib.rs", "percent_covered": "100.00", "covered_lines": "1", "total_lines": "1"},
+    {"file": "/home/james/dod/cli/src/modules/config.rs", "percent_covered": "83.33", "covered_lines": "15", "total_lines": "18"}
+  ],
+  "percent_covered": "92.73",
+  "covered_lines": 204,
+  "total_lines": 220,
+  "percent_low": 25,
+  "percent_high": 75,
+  "command": "diamond_drops_cli-c74703dbc2273aa2",
+  "date": "2018-05-23 10:31:01"
+}

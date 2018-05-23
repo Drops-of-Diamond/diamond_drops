@@ -1,0 +1,9 @@
+var data = {files:[
+{"link":"log.rs.e22e775d.html","title":"log.rs","summary_name":"[...]/cli/src/modules/log.rs","covered_class":"lineCov","covered":"79.2","covered_lines":"42","uncovered_lines":"11","total_lines" : "53"},
+{"link":"args.rs.95738d5a.html","title":"args.rs","summary_name":"[...]/cli/src/modules/args.rs","covered_class":"lineCov","covered":"98.6","covered_lines":"146","uncovered_lines":"2","total_lines" : "148"},
+{"link":"lib.rs.b7902b1f.html","title":"lib.rs","summary_name":"[...]/cli/src/lib.rs","covered_class":"lineCov","covered":"100.0","covered_lines":"1","uncovered_lines":"0","total_lines" : "1"},
+{"link":"config.rs.a03ab2ad.html","title":"config.rs","summary_name":"[...]/cli/src/modules/config.rs","covered_class":"lineCov","covered":"83.3","covered_lines":"15","uncovered_lines":"3","total_lines" : "18"},
+]};
+var percent_low = 25;var percent_high = 75;
+var header = { "command" : "diamond_drops_cli-92f72ac9ea84ded0", "date" : "2018-05-23 10:30:45", "instrumented" : 220, "covered" : 204,};
+var merged_data = [];

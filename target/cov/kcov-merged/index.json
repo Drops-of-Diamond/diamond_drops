@@ -1,0 +1,7 @@
+var data = {files:[
+{"link":"bin.rs.78d4a81b.html","title":"bin.rs","summary_name":"[...]/dod/src/bin/bin.rs","covered_class":"lineCov","covered":"100.0","covered_lines":"1","uncovered_lines":"0","total_lines" : "1"},
+{"link":"lib.rs.38da41b7.html","title":"lib.rs","summary_name":"[...]/dod/src/lib.rs","covered_class":"lineCov","covered":"100.0","covered_lines":"1","uncovered_lines":"0","total_lines" : "1"},
+]};
+var percent_low = 25;var percent_high = 75;
+var header = { "command" : "diamond_drops-8fcdd49d992dd1d5", "date" : "2018-05-23 10:26:39", "instrumented" : 2, "covered" : 2,};
+var merged_data = [];
