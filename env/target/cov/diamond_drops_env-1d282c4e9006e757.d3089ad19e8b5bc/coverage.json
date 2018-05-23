@@ -1,0 +1,12 @@
+{
+  "files": [
+    {"file": "/home/james/dod/env/src/lib.rs", "percent_covered": "100.00", "covered_lines": "1", "total_lines": "1"}
+  ],
+  "percent_covered": "100.00",
+  "covered_lines": 1,
+  "total_lines": 1,
+  "percent_low": 25,
+  "percent_high": 75,
+  "command": "diamond_drops_env-1d282c4e9006e757",
+  "date": "2018-05-23 10:31:45"
+}

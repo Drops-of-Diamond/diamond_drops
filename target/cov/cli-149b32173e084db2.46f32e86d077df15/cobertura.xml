@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<!DOCTYPE coverage SYSTEM 'http://cobertura.sourceforge.net/xml/coverage-03.dtd'>
+<coverage line-rate="0.000" version="1.9" timestamp="1527035169">
+	<sources>
+		<source>/home/james/dod/src/bin/bin.rs/</source>
+	</sources>
+	<packages>
+		<package name="cli_149b32173e084db2" line-rate="0.000" branch-rate="1.0" complexity="1.0">
+			<classes>
+				<class name="bin_rs" filename="/home/james/dod/src/bin/bin.rs" line-rate="1.000">
+					<lines>
+						<line number="1" hits="2"/>
+					</lines>
+				</class>
+			</classes>
+		</package>
+	</packages>
+</coverage>

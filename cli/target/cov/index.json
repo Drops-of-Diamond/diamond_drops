@@ -1,0 +1,7 @@
+var data = {files:[
+{"link":"diamond_drops_cli-92f72ac9ea84ded0.c9691f5ab2664fef/index.html","title":"diamond_drops_cli-92f72ac9ea84ded0","summary_name":"diamond_drops_cli-92f72ac9ea84ded0","covered_class":"lineCov","covered":"92.7","covered_lines":"204","uncovered_lines":"16","total_lines" : "220"},
+{"link":"diamond_drops_cli-c74703dbc2273aa2.c9691f5ab2664fef/index.html","title":"diamond_drops_cli-c74703dbc2273aa2","summary_name":"diamond_drops_cli-c74703dbc2273aa2","covered_class":"lineCov","covered":"92.7","covered_lines":"204","uncovered_lines":"16","total_lines" : "220"},
+], merged_files:[{"link":"kcov-merged/index.html","title":"[merged]","summary_name":"[merged]","covered_class":"lineCov","covered":"92.7","covered_lines":"204","uncovered_lines":"16","total_lines" : "220"},
+]};
+var percent_low = 25;var percent_high = 75;
+var header = { "command" : "diamond_drops_cli-c74703dbc2273aa2", "date" : "2018-05-23 10:31:01", "instrumented" : 440, "covered" : 408,};

@@ -1,0 +1,24 @@
+var data = {lines:[
+{"lineNum":"    1","line":"#![allow(unused_imports)]","class":"lineCov","hits":"1","order":"1",},
+{"lineNum":"    2","line":"#![allow(unused_assignments)]"},
+{"lineNum":"    3","line":""},
+{"lineNum":"    4","line":"extern crate chrono;"},
+{"lineNum":"    5","line":"extern crate env_logger;"},
+{"lineNum":"    6","line":"extern crate fern;"},
+{"lineNum":"    7","line":""},
+{"lineNum":"    8","line":"#[macro_use]"},
+{"lineNum":"    9","line":"extern crate clap;"},
+{"lineNum":"   10","line":"#[macro_use]"},
+{"lineNum":"   11","line":"extern crate error_chain;"},
+{"lineNum":"   12","line":"#[macro_use]"},
+{"lineNum":"   13","line":"extern crate log;"},
+{"lineNum":"   14","line":""},
+{"lineNum":"   15","line":"pub mod error {"},
+{"lineNum":"   16","line":"    error_chain! { }"},
+{"lineNum":"   17","line":"}"},
+{"lineNum":"   18","line":""},
+{"lineNum":"   19","line":"pub mod modules;"},
+]};
+var percent_low = 25;var percent_high = 75;
+var header = { "command" : "diamond_drops_cli-c74703dbc2273aa2", "date" : "2018-05-23 10:31:01", "instrumented" : 1, "covered" : 1,};
+var merged_data = [];

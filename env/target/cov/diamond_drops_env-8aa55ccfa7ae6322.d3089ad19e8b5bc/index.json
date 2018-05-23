@@ -1,0 +1,6 @@
+var data = {files:[
+{"link":"lib.rs.5182a76f.html","title":"lib.rs","summary_name":"[...]/src/lib.rs","covered_class":"lineCov","covered":"100.0","covered_lines":"1","uncovered_lines":"0","total_lines" : "1"},
+]};
+var percent_low = 25;var percent_high = 75;
+var header = { "command" : "diamond_drops_env-8aa55ccfa7ae6322", "date" : "2018-05-23 10:31:58", "instrumented" : 1, "covered" : 1,};
+var merged_data = [];

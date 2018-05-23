@@ -1,0 +1,6 @@
+var data = {files:[
+{"link":"bin.rs.78d4a81b.html","title":"bin.rs","summary_name":"[...]/bin/bin.rs","covered_class":"lineCov","covered":"100.0","covered_lines":"1","uncovered_lines":"0","total_lines" : "1"},
+]};
+var percent_low = 25;var percent_high = 75;
+var header = { "command" : "cli-149b32173e084db2", "date" : "2018-05-23 10:26:09", "instrumented" : 1, "covered" : 1,};
+var merged_data = [];
