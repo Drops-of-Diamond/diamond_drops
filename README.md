@@ -5,7 +5,7 @@
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/Drops-of-Diamond/diamond_drops.svg)](http://isitmaintained.com/project/Drops-of-Diamond/diamond_drops "Average time to resolve an issue")
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/Drops-of-Diamond/diamond_drops.svg)](http://isitmaintained.com/project/Drops-of-Diamond/diamond_drops "Percentage of issues still open")
 [![Built with cargo-make](https://sagiegurari.github.io/cargo-make/assets/badges/cargo-make.svg)](https://sagiegurari.github.io/cargo-make)
-<!--Commenting out because it is unknown, codecov has not been set up. Refer to issue #11 and https://github.com/codecov/example-rust. [![codecov](https://codecov.io/gh/Drops-of-Diamond/diamond_drops/branch/master/graph/badge.svg)](https://codecov.io/gh/Drops-of-Diamond/diamond_drops)-->
+[![codecov](https://codecov.io/gh/Drops-of-Diamond/diamond_drops/branch/master/graph/badge.svg)](https://codecov.io/gh/Drops-of-Diamond/diamond_drops)
 
 Get in touch with us on Gitter: 
 [![Gitter: DropsOfDiamond/Lobby](https://img.shields.io/badge/gitter-Drops%20of%20Diamond/Lobby-4AB495.svg)](https://gitter.im/Drops-of-Diamond/Lobby)
