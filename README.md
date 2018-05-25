@@ -1,4 +1,6 @@
-# Diamond Drops
+# Diamond Drops _(diamond_drops)_
+![Diamond Drops image](https://raw.githubusercontent.com/Drops-of-Diamond/diamond_drops/develop/images/diamond_drops.png)
+
 [![Twitter](https://img.shields.io/twitter/follow/DropsofDiamond.svg?style=social)](https://twitter.com/DropsOfDiamond)
 [![TravisCI](https://img.shields.io/travis/Drops-of-Diamond/diamond_drops/master.svg)](https://travis-ci.org/Drops-of-Diamond/diamond_drops)
 [![License: Unlicense](https://img.shields.io/badge/License-Unlicense-lightgrey.svg)](https://github.com/Drops-of-Diamond/diamond_drops/blob/master/LICENSE)
@@ -6,44 +8,45 @@
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/Drops-of-Diamond/diamond_drops.svg)](http://isitmaintained.com/project/Drops-of-Diamond/diamond_drops "Percentage of issues still open")
 [![Built with cargo-make](https://sagiegurari.github.io/cargo-make/assets/badges/cargo-make.svg)](https://sagiegurari.github.io/cargo-make)
 [![codecov](https://codecov.io/gh/Drops-of-Diamond/diamond_drops/branch/master/graph/badge.svg)](https://codecov.io/gh/Drops-of-Diamond/diamond_drops)
-
-Get in touch with us on Gitter: 
 [![Gitter: DropsOfDiamond/Lobby](https://img.shields.io/badge/gitter-Drops%20of%20Diamond/Lobby-4AB495.svg)](https://gitter.im/Drops-of-Diamond/Lobby)
 [![Gitter: DropsOfDiamond/Development](https://img.shields.io/badge/gitter-Drops%20of%20Diamond/Development-4AB495.svg)](https://gitter.im/Drops-of-Diamond/Development)
+[![Gitter: sharding](https://img.shields.io/badge/gitter-sharding-4AB495.svg)](https://gitter.im/ethereum/sharding)
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-[Gitter room for discussion on sharding, e.g. the latest developments in research and implementations](https://gitter.im/ethereum/sharding).
+> WIP on sharding and Ethereum 2.0 with enshrined-in-consensus data availability and Rust: a fast, safe, concurrent and practical programming language
 
-### What are we building?
+We are working on a [sharding](https://github.com/ethereum/wiki/wiki/Sharding-introduction-R&D-compendium) implementation for [Ethereum](https://ethereum.org) with the [Rust](https://www.rust-lang.org/en-US/) programming language, which is fast, safe and concurrent. [Ethereum](https://github.com/ethereum/wiki/wiki/White-Paper) can theoretically be used for any kind of economic and governance activity, at lower costs than conventional approaches, in a decentralized, trustless, and censorship-resistant fashion. Sharding plans to scale [Ethereum](https://github.com/ethereum/wiki/wiki/Ethereum-introduction), at first quadratically, then exponentially.
 
-We are working on a [sharding](https://github.com/ethereum/wiki/wiki/Sharding-introduction-R&D-compendium) implementation for [Ethereum](https://ethereum.org) with the [Rust](https://www.rust-lang.org/en-US/) programming language, which is fast, safe and concurrent. The below information may be outdated. For the latest information, please ask on Gitter, while additional information on plans and work tasks is in the issues and [projects](https://github.com/Drops-of-Diamond/diamond_drops/projects).
+We're implementing sharding according to collaboration with Ethereum research at https://ethresear.ch and other teams, which includes tasks outlined in the projects and issues. In the first phase of the [roadmap](https://github.com/ethereum/wiki/wiki/Sharding-roadmap), we only enshrine data availabilty, without execution, thus abstracting execution, and enabling faster  and simpler implementation, with each phase being useful. For further information, please refer to [our wiki](https://github.com/Drops-of-Diamond/diamond_drops/wiki). The plan is for this codebase to eventually be integrated into the Rust implementation of the [EVM](https://github.com/ethereum/wiki/wiki/Ethereum-Virtual-Machine-(EVM)-Awesome-List), [Parity](https://github.com/paritytech/parity). diamond_drops is used as the name of the cargo crate for compatibility, and so the repo name also follows this.
 
-We're implementing sharding according to collaboration with Ethereum research at https://ethresear.ch and other teams, which includes tasks outlined in the projects.
-  
-For further information please refer to [our wiki](https://github.com/Drops-of-Diamond/diamond_drops/wiki).
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-### Help support us
+- [Background](#background)
+- [Install](#install)
+  - [Install dependencies](#install-dependencies)
+  - [Clone a fork of the repository](#clone-a-fork-of-the-repository)
+  - [Follow us on Twitter for release updates](#follow-us-on-twitter-for-release-updates)
+- [Usage](#usage)
+  - [Build and Run the code](#build-and-run-the-code)
+  - [Unit and Integration Tests](#unit-and-integration-tests)
+  - [Show Rust Docs](#show-rust-docs)
+  - [View UML Diagram](#view-uml-diagram)
+  - [Contibuting guidelines](#contibuting-guidelines)
+- [Security](#security)
+- [Help support us](#help-support-us)
+- [We're looking for more developers](#were-looking-for-more-developers)
+- [Why Rust?](#why-rust)
 
-Send a donation to our multi-sig wallet at [0x6D446f9545dBC380A6BBDde8A285A7A8030D4381](https://etherscan.io/address/0x6d446f9545dbc380a6bbdde8a285a7a8030d4381).
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-### We're looking for more developers
+## Background
 
-See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information. There is a lot of work to do in the [sharding roadmap](https://github.com/ethereum/wiki/wiki/Sharding-roadmap).
+For an introduction to Ethereum, see https://ethereum.org/ or https://github.com/ethereum/wiki/wiki/Ethereum-introduction. For information on sharding and implementations, refer to [here](https://github.com/ethereum/wiki/wiki/Sharding-introduction-and-implementations).
 
-### Setup guide
+## Install
 
-#### Show help menus
-
-* Command help
-```
-cargo run -- --help
-```
-
-* Sub-command "mode" help
-```bash
-cargo run -- mode --help
-```
-
-#### Install dependencies
+### Install dependencies
 
   * [Install Rust](https://github.com/rust-lang/book/blob/master/2018-edition/src/ch01-01-installation.md)
 
@@ -66,15 +69,27 @@ cargo run -- mode --help
     ```bash
     cargo make --makefile tasks.toml <TASK_NAME>
     ```
+### Show help menus
 
-#### Clone a fork of the repository
+* Command help
+```bash
+cd ~/diamond_drops; # you may wish to rename this to dod for convenience
+cargo run -- --help
+```
+
+* Sub-command "mode" help
+```bash
+cargo run -- mode --help
+```
+
+### Clone a fork of the repository
 
   * Fork the repository https://github.com/Drops-of-Diamond/diamond_drops
 
   * Clone your fork of the repository (replace <USERNAME> below with your Github username):
     ```bash
-    git clone https://github.com/<USERNAME>/Diamond-drops;
-    cd Diamond-drops
+    git clone https://github.com/<USERNAME>/diamond_drops;
+    cd diamond_drops
     ```
 
   * Add the "upstream" repository to your remotes and show your list of remotes verbosely
@@ -84,8 +99,13 @@ cargo run -- mode --help
     ```
 
   * Change from the "master" branch to the "develop" branch to see the latest features that are being integrated but are not officially ready for production
+  
+### Follow us on Twitter for release updates
 
-#### Build, Run the code
+Click on the Twitter badge above.
+
+## Usage
+### Build and Run the code
 
   * Proposer Mode
     ```bash
@@ -112,7 +132,7 @@ cargo run -- mode --help
     cargo make all-with-collation
     ```
 
-#### Unit and Integration Tests
+### Unit and Integration Tests
 
   * Run all tests (unit and integration tests for main package and libraries) 
     ```bash
@@ -153,14 +173,24 @@ https://raw.githubusercontent.com/Drops-of-Diamond/diamond_drops/develop/diagram
 
 See this wiki article [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Contributing-guidelines).
 
-### Introduction
+## Security
 
-For an introduction to Ethereum, see https://ethereum.org/ or https://github.com/ethereum/wiki/wiki/Ethereum-introduction. For information on sharding and implementations, refer to [here](https://github.com/ethereum/wiki/wiki/Sharding-introduction-and-implementations).
+This is WIP, pre-release software. It is planned to be integrated into Parity. There is a lot of research available on security alone; for example, CTRL+F "security" [here](https://github.com/ethereum/wiki/wiki/Sharding-FAQ) or search in the pages [here](https://github.com/ethereum/wiki/wiki/Sharding-introduction-R&D-compendium#information)
 
-### Why Rust?
+## Help support us
 
-After comparing Rust, C++, Go, Javascript and Python, as well as corresponding implementations (Parity, cppethereum, Go-ethereum, ethereumJS and Py-EVM), Rust is most preferable, while I haven't tried being a user of other implementations, so I can't comment on a comparison. Rust has advantages such as safety, concurrency, practicality, better memory safety, zero-cost abstractions, and support for functional and imperative-procedural paradigms.
+Send a donation to our multi-sig wallet at [0x6D446f9545dBC380A6BBDde8A285A7A8030D4381](https://etherscan.io/address/0x6d446f9545dbc380a6bbdde8a285a7a8030d4381).
 
+## We're looking for more developers
+
+See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information. There is a lot of work to do in the [sharding roadmap](https://github.com/ethereum/wiki/wiki/Sharding-roadmap).
+
+## Why Rust?
+
+After comparing languages such as Rust, C++, Go, Javascript and Python, as well as implementations (e.g. Parity, cppethereum, Go-ethereum, ethereumJS and Py-EVM), Rust is most preferable, while I haven't tried being a user much of other implementations, so I can't comment on a comparison. Rust has advantages such as safety, concurrency, practicality, better memory safety, zero-cost abstractions, and support for functional and imperative-procedural paradigms.
+
+<!-- Not necessary
 ### Further information
 
 This repo and the Drops of Diamond project it belongs to is not a part of or owned by the Ethereum Foundation, nor is it endorsed by the Foundation. A different project name and logo may be used (the logo could use a more modern design rather than just using a photo in the public domain), and alternative proposals are welcome. The Drops of Diamond project is not legally incorporated as of yet, so legally it is not an organisation. That should be done, but probably only as needed once the project is more well-developed.
+-->
