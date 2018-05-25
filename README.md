@@ -179,7 +179,7 @@ This is WIP, pre-release software. It is planned to be integrated into Parity. T
 
 ## Help support us
 
-Send a donation to our multi-sig wallet at [0x6D446f9545dBC380A6BBDde8A285A7A8030D4381](https://etherscan.io/address/0x6d446f9545dbc380a6bbdde8a285a7a8030d4381).
+Send a donation to jamesray.eth. Other contributors will be paid according to their contributions and timesheets. A multisig will be used when other developers are regularly contributing, preferably full-time.<!omitting until other regular contributors are well established, although I still vouch that contributions will be paid for according to assessing hours on timesheets--our multi-sig wallet at [0x6D446f9545dBC380A6BBDde8A285A7A8030D4381](https://etherscan.io/address/0x6d446f9545dbc380a6bbdde8a285a7a8030d4381)-->
 
 ## We're looking for more developers
 
