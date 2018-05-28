@@ -88,7 +88,6 @@ impl Header {
     }
 }
 
-// TODO - consider replacing with https://docs.rs/ethereum-types/0.3.1/ethereum_types/struct.U256.html#method.as_u32
 // A crude way of converting the ethereum_types::U256 to a u8 byte array to be hashed.  Suggestions to improve this are desired.
 fn u256_to_bytes32(u256: ethereum_types::U256) -> [u8; 32] {
     let mut bytes32: [u8; 32] = [0; 32];
@@ -138,5 +137,4 @@ mod tests {
         // Ensure manually calculated hash matches the generated hash
         assert_eq!(expected, header_hash);
     }
-
 }

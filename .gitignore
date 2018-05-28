@@ -21,4 +21,7 @@ rls/
 
 # Generated via Clap CLI
 output.log
+<<<<<<< HEAD
+=======
 
+>>>>>>> upstream/develop
