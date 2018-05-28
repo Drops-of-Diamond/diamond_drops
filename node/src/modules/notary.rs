@@ -1,6 +1,8 @@
-use modules::collation::collation;
-use modules::message;
-use modules::client_thread;
+use modules::collation::body::Body;
+use modules::collation::chunk::Chunk;
+use modules::collation::collation::Collation;
+use modules::message::Message;
+use modules::client_thread::Command;
 use modules::primitives::{
     ShardIdHash,
     ChunkRootHash,
@@ -17,10 +19,10 @@ pub struct Notary {
     id: NotaryIdHash,
     selected: bool,
     shard_id: ShardIdHash,
-    collation_vectors: HashMap<ShardIdHash, Vec<collation::Collation>>,
-    proposal_vectors: HashMap<ShardIdHash, Vec<collation::Collation>>,
-    smc_listener: mpsc::Receiver<message::Message>,
-    manager_listener: mpsc::Receiver<client_thread::Command>
+    collation_vectors: HashMap<ShardIdHash, Vec<Collation>>,
+    proposal_vectors: HashMap<ShardIdHash, Vec<Collation>>,
+    smc_listener: mpsc::Receiver<Message>,
+    manager_listener: mpsc::Receiver<Command>
 }
 
 impl Notary {
@@ -28,13 +30,13 @@ impl Notary {
     /// 
     /// #Inputs
     /// 
-    /// smc_listener: mpsc::Receiver<message::Message>
-    /// manager_listener: mpsc::Receiver<client_thread::Command>
+    /// smc_listener: mpsc::Receiver<Message>
+    /// manager_listener: mpsc::Receiver<Command>
     /// 
     /// The smc_listener allows the Notary to receive messages from the SMC Listener, 
     /// and the manager_listener allows the thread to receive commands from outside the thread.
-    pub fn new(smc_listener: mpsc::Receiver<message::Message>, 
-               manager_listener: mpsc::Receiver<client_thread::Command>) -> Notary {
+    pub fn new(smc_listener: mpsc::Receiver<Message>, 
+               manager_listener: mpsc::Receiver<Command>) -> Notary {
         Notary {
             id: NotaryIdHash::from_dec_str("0").unwrap(),
             selected: false,
@@ -57,7 +59,7 @@ impl Notary {
                 Some(msg) => {
                     debug!("Received pending message {:?} in thread {:?} from another thread", msg, thread::current());
                     match msg {
-                        client_thread::Command::Terminate => { break }
+                        Command::Terminate => { break }
                     }
                 },
                 None => {
@@ -73,10 +75,10 @@ impl Notary {
                 Some(msg) => {
                     debug!("Received pending message {:?} in thread {:?} from SMC Listener", msg, thread::current());
                     match msg {
-                        message::Message::Selected { value } => { self.selected = value; }
-                        message::Message::ShardId { value } => { self.shard_id = value; },
-                        message::Message::Collation { value } => { self.store_collation(value); },
-                        message::Message::Proposal { value } => { self.store_proposal(value); }
+                        Message::Selected { value } => { self.selected = value; }
+                        Message::ShardId { value } => { self.shard_id = value; },
+                        Message::Collation { value } => { self.store_collation(value); },
+                        Message::Proposal { value } => { self.store_proposal(value); }
                     }
                 },
                 None => {
@@ -92,7 +94,7 @@ impl Notary {
     }
 
 
-    fn store_collation(&mut self, collation: collation::Collation) {
+    fn store_collation(&mut self, collation: Collation) {
         debug!("Storing in notary id {} a new collation mapped to shard id {}", self.id, self.shard_id);
         self.collation_vectors.entry(self.shard_id).or_insert(vec![]);
         let vector = self.collation_vectors.get_mut(&self.shard_id).unwrap();
@@ -100,7 +102,7 @@ impl Notary {
     }
 
 
-    fn store_proposal(&mut self, proposal: collation::Collation) {
+    fn store_proposal(&mut self, proposal: Collation) {
         debug!("Storing in notary id {} a new proposal collation mapped to shard id {}", self.id, self.shard_id);
         self.proposal_vectors.entry(self.shard_id).or_insert(vec![]);
         let vector = self.proposal_vectors.get_mut(&self.shard_id).unwrap();
@@ -119,21 +121,39 @@ mod tests {
     use super::*;
     use modules::collation::header;
     use modules::collation::body;
+    use modules::constants::{/* CHUNK_SIZE, */
+        CHUNK_DATA_SIZE,
+        /*COLLATION_SIZE, */
+        CHUNKS_PER_COLLATION,
+        /* MAX_BLOB_SIZE, */
+        /* You can't use these: CHUNK_ZEROS,
+        EMPTY_CHUNKS_COLLATION_SIZE */
+    };
 
-    fn generate_genesis_collation(shard_id: ShardIdHash) -> collation::Collation {
+    fn generate_genesis_collation(shard_id: ShardIdHash) -> Collation {
         let chunk_root = ChunkRootHash::zero();
         let period = ChunkPeriodHash::from_dec_str("0").unwrap();
         let proposer_address = ProposerAddress::zero();
         let genesis_header = header::Header::new(shard_id, chunk_root, period, proposer_address);
-        collation::Collation::new(genesis_header, body::Body)
+        let chunk = Chunk::new(0x00, [0x00; CHUNK_DATA_SIZE]);
+        let chunks = vec![chunk; CHUNKS_PER_COLLATION];
+        Collation::new(
+            genesis_header, 
+            Body::new(chunks/* EMPTY_CHUNKS_COLLATION_SIZE */))
     }
 
     fn generate_collation(shard_id: ShardIdHash,
-                          period: ChunkPeriodHash) -> collation::Collation {
+                          period: ChunkPeriodHash) -> Collation {
         let chunk_root = ChunkRootHash::zero();
         let proposer_address = ProposerAddress::zero();
         let collation_header = header::Header::new(shard_id, chunk_root, period, proposer_address);
-        collation::Collation::new(collation_header, body::Body)
+        // refactor, duplication.
+        let chunk = Chunk::new(0x00, [0x00; CHUNK_DATA_SIZE]);
+        let chunks = vec![chunk; CHUNKS_PER_COLLATION];
+        Collation::new(
+            collation_header, 
+            Body::new(chunks)
+        )
     }
 
     fn generate_notary() -> Notary {

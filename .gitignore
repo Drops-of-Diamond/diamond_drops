@@ -1,9 +1,0 @@
-output.log
-/target/
-/cli/target/
-/env/target/
-/node/target/
-**/*.rs.bk
-Cargo.lock
-diagrams/ml.dot
-diagrams/ml.svg

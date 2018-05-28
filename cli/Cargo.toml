@@ -4,6 +4,8 @@ version = "0.1.0-a"
 authors = ["James Ray (@jamesray1)", "Josiah (@ChosunOne)", "Luke Schoen (@ltfschoen)"]
 license = "Unlicense"
 
+description = "Enables use via a terminal of core functionality in diamond-drops-node."
+
 [dependencies]
 chrono = { version = "0.4", features = ["serde"] }
 clap = { version = "2.31.2", features = ["yaml", "debug"] } # https://clap.rs/
