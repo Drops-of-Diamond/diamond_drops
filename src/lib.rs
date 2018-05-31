@@ -26,7 +26,7 @@ pub fn run(config: cli::modules::config::Config) -> () {
 
     if config.collation_active == true {
         let header = header::create_sample_collation_header();
-        let body = body::create_sample_collation_body();
+        let body = body::Body::create_sample_collation_body();
         let collation = collation::Collation::new(header, body);
         debug!("Successfully created collation: {:?}", collation);
     }
