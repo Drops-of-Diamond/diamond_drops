@@ -8,7 +8,7 @@ pub mod config;
 
 pub mod errors {
     // Create the Error, ErrorKind, ResultExt, and Result types
-    //error_chain!{}
+    error_chain!{}
 }
 
 pub use errors::*;
