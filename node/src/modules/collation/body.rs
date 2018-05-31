@@ -5,7 +5,7 @@ use modules::errors::*;
 
 /// Collation body storing arbitrary data or blobs, serialized into 32-byte chunks.
 #[derive(PartialEq, Debug, Clone)]
-pub struct Body{/*; this doesn't work, presumably because */ 
+pub struct Body{/*; this doesn't work, presumably because */
     pub chunks: Vec<Chunk>
 }
 
@@ -17,11 +17,13 @@ impl Body {
     }
 }
 
+// This must be outside the impl Body, since you can't create a 
+// specific instance in an impl, AFAIK.
 pub fn create_sample_collation_body() -> Body {
-    let blob = Blob::new(vec![4; COLLATION_SIZE]);
-    let sample_body = blob.blob_to_collation_body();
-    //println!("{:?}", body);
-    sample_body
+        let blob = Blob::new(vec![4; COLLATION_SIZE]);
+        let sample_body = blob.blob_to_collation_body();
+        //println!("{:?}", body);
+        sample_body
 }
 
 /// Serialize collation bodies that correspond to the same blob. In practice a blob should contain

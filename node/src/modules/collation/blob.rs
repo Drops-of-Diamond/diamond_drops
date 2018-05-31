@@ -6,7 +6,7 @@
 
 // use bitreader::BitReader;
 use modules::collation::chunk::Chunk;
-use modules::constants::{CHUNK_SIZE, CHUNK_DATA_SIZE, 
+use modules::constants::{CHUNK_SIZE, CHUNK_DATA_SIZE,
     COLLATION_SIZE, CHUNKS_PER_COLLATION, MAX_BLOB_SIZE, DATA_BYTES_PER_COLLATION};
 use modules::collation::body::{Body/* , BlobBodies */};
 use modules::collation::header::Header;
@@ -32,8 +32,8 @@ impl Blob {
         Blob  {
             data
         }
-    }
 
+    }
     /// Create a set of chunks to represent this blob.
     pub fn to_chunks(self, skip_evm: bool) -> Vec<Chunk>/* Result<Vec<Chunk>> */ {
         // Since each element is one byte then getting the length (the number of elements)
@@ -44,10 +44,10 @@ impl Blob {
         // self.size is the number of bytes per blob
         // Dimensional analysis:
         // chunks_per_blob = [bytes per blob] / [blob bytes that fit into each chunk].
-        let chunks_per_blob: usize = (((bytes_per_blob as f32 / CHUNK_DATA_SIZE as f32) 
+        let chunks_per_blob: usize = (((bytes_per_blob as f32 / CHUNK_DATA_SIZE as f32)
             as f32).ceil()) as usize;
-        // E.g.: for a 125 byte blob at 31 bytes per chunk, that's 124 bytes that fit 
-        // into 4 chunks, plus the last chunk for the last byte, i.e. 5 chunks. 
+        // E.g.: for a 125 byte blob at 31 bytes per chunk, that's 124 bytes that fit
+        // into 4 chunks, plus the last chunk for the last byte, i.e. 5 chunks.
         // 125 / 31 rounded up is 5.
 
         // This won't work when we have a blob with 0 value bytes on the end of it,
@@ -60,14 +60,14 @@ impl Blob {
         // the indicator will be set to 0.
         let mut data_length_last_31_bytes: u8
             = CHUNK_DATA_SIZE as u8;
-        //let blob_data: &mut Vec<u8> = &mut self.data; 
-        //let blob_data = self.data; 
+        //let blob_data: &mut Vec<u8> = &mut self.data;
+        //let blob_data = self.data;
         //let blob_length = self.data.len()?;
         //assert_eq!{blob_length, 100, "blob_length: {:?}", blob_length}
         if !(0 < data_length_last_31_bytes
-            && data_length_last_31_bytes 
+            && data_length_last_31_bytes
             <= CHUNK_DATA_SIZE as u8) {
-                error!("{:?} is not more than 0 bytes and less than or equal to {:?}", 
+                error!("{:?} is not more than 0 bytes and less than or equal to {:?}",
                 data_length_last_31_bytes,
                 CHUNK_DATA_SIZE)
             }
@@ -83,29 +83,29 @@ impl Blob {
             let i_data_start: usize = (i * CHUNK_DATA_SIZE) as usize;
             // 0, 31, 62, ... chunks_per_blob * CHUNK_DATA_SIZE
             let mut chunk_data: [u8; CHUNK_DATA_SIZE] = [0; CHUNK_DATA_SIZE];
-            if i != chunks_per_blob - 1 { 
+            if i != chunks_per_blob - 1 {
                 // Build non-terminal chunks
                 // i_data_end_plus_1 = i_data_start_of_next_31_bytes
                 let i_data_end_plus_1: usize = ((i + 1) * CHUNK_DATA_SIZE) as usize;
                 // 31, 62, 93, ..., (chunks_per_blob + 1) * CHUNK_DATA_SIZE
                 // Again, it doesn't do the last step.
                 for j in i_data_start..(i_data_end_plus_1) {
-                    // j = (loop 1) 0..30, (loop 2), 31..61, 
+                    // j = (loop 1) 0..30, (loop 2), 31..61,
                     // 62..92, ..., (chunks_per_blob - 2)*CHUNK_DATA_SIZE
                     // .. (chunks_per_blob - 1) * CHUNK_DATA_SIZE - 1
-                    // chunks_per_blob won't run in this if loop, it will go up to 
+                    // chunks_per_blob won't run in this if loop, it will go up to
                     // chunks_per_blob - 1, which will then not go into the block.
                     chunk_data[j - i_data_start] = self.data[j];
                 }
             } else {
                 // Build the terminal chunk
-                
+
                 // Set the chunk data, saving iterating the last 0 consecutive bits of
                 // the terminal chunk, which are set to 0 anyway above.
                 for j in i_data_start..bytes_per_blob {
                     chunk_data[j - i_data_start] = self.data[j];
                 }
-                
+
                 //let last_31_bytes_in_blob_in_reverse = blob_data[blob_length-31..].reverse();
                 for i in (0..CHUNK_DATA_SIZE).rev() {
                     //assert_eq!{self.data[i], 100, "self.data: {:?}\nself.data[i]: {:?}\ni: {:?}", self.data, self.data[i], i}
@@ -153,7 +153,7 @@ impl Blob {
             // read the first 3 bits of the indicator and discard the result.
             //BitReader::new(&[ch.indicator]).read_u8(3).unwrap();
             // read the remaining 5 bits into length bits
-            //let mut data_bytes_length_in_terminal_chunk 
+            //let mut data_bytes_length_in_terminal_chunk
             //    = BitReader::new(&[ch.indicator]).read_u8(5).unwrap();
             for i in 0..CHUNK_DATA_SIZE {
                 data.push(ch.data[i as usize]);
@@ -167,7 +167,7 @@ impl Blob {
                 for i in 0..CHUNK_DATA_SIZE {
                     data.push(ch.data[i as usize]);
                 }
-            } else {                
+            } else {
                 // Chunk is terminal, read data_bytes_length_in_terminal_chunk bytes into data
                 for i in 0..data_bytes_length_in_terminal_chunk {
                     data.push(ch.data[i as usize]);
@@ -179,7 +179,7 @@ impl Blob {
             data
         }
     }
-    
+
     /// Put blob chunks into (a) collation body(ies).
     /// This is incomplete.
     /// TODO:  functionality for packing multiple blobs into
@@ -209,7 +209,7 @@ impl Blob {
             panic!("Sorry, sharding developers and researchers haven't agreed on a way to serialize blobs that are \
                 larger than a DATA_BYTES_PER_COLLATION ({:?} bytes), please split this blob up into blobs that are  \
                 smaller than this and try again, or lobby us to do this.", DATA_BYTES_PER_COLLATION);
-            /* 
+            /*
             for chunk in blob_as_chunks {
                 if chunk % CHUNKS_PER_COLLATION == 0 {
                     // 0..CHUNKS_PER_COLLATION - 1 = first collation body
@@ -246,7 +246,7 @@ impl Blob {
                 // 0..CHUNKS_PER_COLLATION - 1 = first collation body
                 // CHUNKS_PER_COLLATION * n = start of a new collation body
                 // Therefore, start a new collation body.
-                
+
             } else {
                 body.chunks.push(chunk);
             }
@@ -259,10 +259,9 @@ impl Blob {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
 
     #[test]
-    #[ignore]
     fn mb_blob_zeros_to_collation_body() {
         // run as cargo test mb_blob_zeros_to_collation_body -- --ignored -> mb_blob_zeros_to_collation_body.log
         let blob = Blob::new(vec![0; DATA_BYTES_PER_COLLATION]);
@@ -273,10 +272,10 @@ mod tests {
         let sample_chunks = vec![sample_chunk; CHUNKS_PER_COLLATION];
         let blob2 = Blob::new(vec![1; DATA_BYTES_PER_COLLATION]);
         let blob_chunks = blob2.to_chunks(false);*/
-        let non_terminal_chunk_indicator = Chunk::build_indicator(false, false, 0); 
+        let non_terminal_chunk_indicator = Chunk::build_indicator(false, false, 0);
         // Since all bytes are 0, the length is 0.
         let terminal_chunk_indicator = Chunk::build_indicator(false, true, 0);
-        let mut correct_blob_chunks = vec![Chunk::new(non_terminal_chunk_indicator, 
+        let mut correct_blob_chunks = vec![Chunk::new(non_terminal_chunk_indicator,
             [0; CHUNK_DATA_SIZE]); CHUNKS_PER_COLLATION - 1];
         correct_blob_chunks.push(Chunk::new(terminal_chunk_indicator, [0; 31]));
         let expected_body = Body::new(correct_blob_chunks);
@@ -285,7 +284,6 @@ mod tests {
     }
 
     #[test]
-    #[ignore]
     fn mb_blob_to_collation_body() {
         // run as cargo test mb_blob_to_collation_body -- --ignored -> mb_blob_to_collation_body.log
         let blob = Blob::new(vec![1; DATA_BYTES_PER_COLLATION]);
@@ -296,16 +294,16 @@ mod tests {
         let sample_chunks = vec![sample_chunk; CHUNKS_PER_COLLATION];
         let blob2 = Blob::new(vec![1; DATA_BYTES_PER_COLLATION]);
         let blob_chunks = blob2.to_chunks(false);*/
-        let non_terminal_chunk_indicator = Chunk::build_indicator(false, false, 0); 
+        let non_terminal_chunk_indicator = Chunk::build_indicator(false, false, 0);
         let terminal_chunk_indicator = Chunk::build_indicator(false, true, 31);
-        let mut correct_blob_chunks = vec![Chunk::new(non_terminal_chunk_indicator, 
+        let mut correct_blob_chunks = vec![Chunk::new(non_terminal_chunk_indicator,
             [1; CHUNK_DATA_SIZE]); CHUNKS_PER_COLLATION - 1];
         correct_blob_chunks.push(Chunk::new(terminal_chunk_indicator, [1; 31]));
         let expected_body = Body::new(correct_blob_chunks);
 
         assert_eq!(sample_body, expected_body);
     }
-    
+
     #[test]
     #[should_panic]
     fn mb_1_b_blob_to_2_colltn_bodies() {
@@ -325,10 +323,10 @@ mod tests {
         let blob_chunks = blob.to_chunks(false);
         // If you set the length to 4, it will not include the zeros in blob.data.
         let terminal_chunk_indicator = Chunk::build_indicator(false, true, 4);
-        let correct_blob_chunks = vec![Chunk::new(terminal_chunk_indicator, 
+        let correct_blob_chunks = vec![Chunk::new(terminal_chunk_indicator,
                                                                 [0xff, 0xff, 0xff, 0xff,
-                                                                0, 0, 0, 0, 0, 0, 0, 0, 0, 
-                                                                0, 0, 0, 0, 0, 0, 0, 0, 0, 
+                                                                0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                                                0, 0, 0, 0, 0, 0, 0, 0, 0,
                                                                 0, 0, 0, 0, 0, 0, 0, 0, 0])];
         assert_eq!(blob_chunks, correct_blob_chunks,
             "\nblob_chunks[0].data.len(): {:?}, correct_blob_chunks[0].data.len(): {:?}\
@@ -343,7 +341,7 @@ mod tests {
         let blob_chunks = blob.to_chunks(false);
         let non_terminal_chunk_indicator = Chunk::build_indicator(false, false, 0);
         let terminal_chunk_indicator = Chunk::build_indicator(false, true, 1);
-        let mut correct_blob_chunks = vec![Chunk::new(non_terminal_chunk_indicator, 
+        let mut correct_blob_chunks = vec![Chunk::new(non_terminal_chunk_indicator,
                                                                 [0xff, 0xff, 0xff, 0xff,
                                                                 0xff, 0xff, 0xff, 0xff,
                                                                 0xff, 0xff, 0xff, 0xff,
@@ -355,7 +353,7 @@ mod tests {
         correct_blob_chunks.push(Chunk::new(terminal_chunk_indicator, [0xff,
                                                                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                                                                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0]));                                                                                      
+                                                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0]));
         assert_eq!(blob_chunks, correct_blob_chunks,
             "\nblob_chunks[0].data.len(): {:?}, correct_blob_chunks[0].data.len(): {:?}\
             \ndifference = {:?}\n",
@@ -369,12 +367,12 @@ mod tests {
         let blob_chunks = blob.to_chunks(false);
         let non_terminal_chunk_indicator = Chunk::build_indicator(false, false, 0);
         let terminal_chunk_indicator = Chunk::build_indicator(false, true, 4);
-        let mut correct_blob_chunks = vec![Chunk::new(non_terminal_chunk_indicator, 
+        let mut correct_blob_chunks = vec![Chunk::new(non_terminal_chunk_indicator,
             [0xff; CHUNK_DATA_SIZE]); 4];
-        correct_blob_chunks.push(Chunk::new(terminal_chunk_indicator, 
+        correct_blob_chunks.push(Chunk::new(terminal_chunk_indicator,
                                                                 [0xff, 0xff, 0xff, 0xff,
-                                                                0, 0, 0, 0, 0, 0, 0, 0, 0, 
-                                                                0, 0, 0, 0, 0, 0, 0, 0, 0, 
+                                                                0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                                                0, 0, 0, 0, 0, 0, 0, 0, 0,
                                                                 0, 0, 0, 0, 0, 0, 0, 0, 0]));
         assert_eq!(blob_chunks, correct_blob_chunks,
             "\nblob_chunks[0].data.len(): {:?}, correct_blob_chunks[0].data.len(): {:?}\
@@ -390,12 +388,12 @@ mod tests {
         let blob_chunks = blob.to_chunks(true);
         let non_terminal_chunk_indicator = Chunk::build_indicator(true, false, 0);
         let terminal_chunk_indicator = Chunk::build_indicator(true, true, 4);
-        let mut correct_blob_chunks = vec![Chunk::new(non_terminal_chunk_indicator, 
+        let mut correct_blob_chunks = vec![Chunk::new(non_terminal_chunk_indicator,
             [0xff; CHUNK_DATA_SIZE]); 4];
-        correct_blob_chunks.push(Chunk::new(terminal_chunk_indicator, 
-                                                                [0xff, 0xff, 0xff, 0xff, 
+        correct_blob_chunks.push(Chunk::new(terminal_chunk_indicator,
+                                                                [0xff, 0xff, 0xff, 0xff,
                                                                 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                                                0, 0, 0, 0, 0, 0, 0, 0, 0, 
+                                                                0, 0, 0, 0, 0, 0, 0, 0, 0,
                                                                 0, 0, 0, 0, 0, 0, 0, 0, 0]));
         assert_eq!(blob_chunks, correct_blob_chunks,
             "\nblob_chunks[0].data.len(): {:?}, correct_blob_chunks[0].data.len(): {:?}\
@@ -409,7 +407,7 @@ mod tests {
         // 0b0001_1111
         let terminal_chunk_indicator = Chunk::build_indicator(
             false, true, 4);
-        let mut chunk_1_data = [0; 31]; 
+        let mut chunk_1_data = [0; 31];
         for i in 0..4 {
             chunk_1_data[i] = 255;
         }
@@ -418,7 +416,7 @@ mod tests {
         let chunks = vec![Chunk::new(terminal_chunk_indicator, chunk_1_data)];
         let blob_from_chunks = Blob::from_chunks(chunks);
         let blob = Blob::new(chunk_1_data.to_vec());
-        assert_eq!(blob, blob_from_chunks, 
+        assert_eq!(blob, blob_from_chunks,
             "\nblob.data.len(): {:?}, blob_from_chunks.data.len(): {:?}\
             \ndifference = {:?}\n",
             blob.data.len(), blob_from_chunks.data.len(),
@@ -442,7 +440,7 @@ mod tests {
         for i in 0..32 {
             blob.data[i] = 255;
         }
-        assert_eq!(blob, blob_from_chunks, 
+        assert_eq!(blob, blob_from_chunks,
             "\nblob.data.len(): {:?}, blob_from_chunks.data.len(): {:?}\
             \ndifference = {:?}\n",
             blob.data.len(), blob_from_chunks.data.len(),
@@ -463,7 +461,7 @@ mod tests {
         chunks.push(Chunk::new(terminal_chunk_indicator, [255; CHUNK_DATA_SIZE]));
         let blob_from_chunks = Blob::from_chunks(chunks);
         let blob = Blob::new(vec![255; CHUNK_DATA_SIZE*5]);//155
-        assert_eq!(blob, blob_from_chunks, 
+        assert_eq!(blob, blob_from_chunks,
             "\nblob.data.len(): {:?}, blob_from_chunks.data.len(): {:?}\
             \ndifference = {:?}\n",
             blob.data.len(), blob_from_chunks.data.len(),
@@ -478,13 +476,13 @@ mod tests {
         let terminal_chunk_indicator = Chunk::build_indicator(
             true, true, CHUNK_DATA_SIZE as u8);
         // as above: 4 chunks, with every non-indicator byte as 255
-        let mut chunks = vec![Chunk::new(non_terminal_chunk_indicator,  
+        let mut chunks = vec![Chunk::new(non_terminal_chunk_indicator,
             [255; CHUNK_DATA_SIZE]); 4];
         // ditto: 5th terminal chunk, also with every non-indicator byte as 255
         chunks.push(Chunk::new(terminal_chunk_indicator, [255; CHUNK_DATA_SIZE]));
         let blob_from_chunks = Blob::from_chunks(chunks);
         let blob = Blob::new(vec![255; CHUNK_DATA_SIZE*5]);
-        assert_eq!(blob, blob_from_chunks, 
+        assert_eq!(blob, blob_from_chunks,
             "\nblob.data.len(): {:?}, blob_from_chunks.data.len(): {:?}\
             \ndifference = {:?}\n",
             blob.data.len(), blob_from_chunks.data.len(),

@@ -3,3 +3,4 @@ pub mod header;
 pub mod body;
 pub mod chunk;
 pub mod blob;
+pub mod collation_index;
