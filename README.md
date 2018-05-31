@@ -179,11 +179,11 @@ This is WIP, pre-release software. It is planned to be integrated into Parity. T
 
 ## Help support us
 
-Send a donation to our multi-sig wallet at [0x6D446f9545dBC380A6BBDde8A285A7A8030D4381](https://etherscan.io/address/0x6d446f9545dbc380a6bbdde8a285a7a8030d4381).
+Send a donation to jamesray.eth. All contributors will be paid according to their contributions and timesheets, once a grant is received. As an example, my timesheet is available [here](https://docs.google.com/spreadsheets/d/1Fv8XqLkMjdBkGPkVWfJulJU-5Qv6TSUR4oD5uKSEHW0/edit#gid=1828020164). A multisig will be used when other developers are contributing full-time.<!omitting until other regular contributors are well established, although I still vouch that contributions will be paid for according to assessing hours on timesheets--our multi-sig wallet at [0x6D446f9545dBC380A6BBDde8A285A7A8030D4381](https://etherscan.io/address/0x6d446f9545dbc380a6bbdde8a285a7a8030d4381)-->
 
 ## We're looking for more developers
 
-See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information. There is a lot of work to do in the [sharding roadmap](https://github.com/ethereum/wiki/wiki/Sharding-roadmap).
+See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-and-onboarding-process-for-new-developers) for information. There is a lot of work to do in the [sharding roadmap](https://github.com/ethereum/wiki/wiki/Sharding-roadmap). 
 
 ## Why Rust?
 
