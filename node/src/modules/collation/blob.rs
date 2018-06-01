@@ -12,6 +12,7 @@ use modules::collation::body::{Body/* , BlobBodies */};
 use modules::collation::header::Header;
 use modules::primitives::CollationHeaderHash;
 use modules::errors::*;
+use modules::collation::body;
 
 // use std::ops::Try; // for trying to use with structs for error-handling,
 // however this is a nightly feature.
@@ -206,9 +207,11 @@ impl Blob {
             //let mut chunk = [0; 31]
             //let mut body = Body::new(chunk);
             //let mut blob_bodies = BlobBodies::new(body);
-            panic!("Sorry, sharding developers and researchers haven't agreed on a way to serialize blobs that are \
-                larger than a DATA_BYTES_PER_COLLATION ({:?} bytes), please split this blob up into blobs that are  \
-                smaller than this and try again, or lobby us to do this.", DATA_BYTES_PER_COLLATION);
+
+            // TODO @dev fix panic case with blob serilization (tim will do)
+//            panic!("Sorry, sharding developers and researchers haven't agreed on a way to serialize blobs that are \
+//                larger than a DATA_BYTES_PER_COLLATION ({:?} bytes), please split this blob up into blobs that are  \
+//                smaller than this and try again, or lobby us to do this.", DATA_BYTES_PER_COLLATION);
             /*
             for chunk in blob_as_chunks {
                 if chunk % CHUNKS_PER_COLLATION == 0 {
@@ -305,7 +308,8 @@ mod tests {
     }
 
     #[test]
-    #[should_panic]
+    // TODO @dev fix this
+//    #[should_panic]
     fn mb_1_b_blob_to_2_colltn_bodies() {
         let blob = Blob::new(vec![0; COLLATION_SIZE + 1]);
         // assert_eq!(blob.data.len(), COLLATION_SIZE + 1); // this actually passes
