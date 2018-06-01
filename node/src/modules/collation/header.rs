@@ -41,6 +41,7 @@ impl Header {
                proposer_address: ProposerAddress,
                //proposer_bid: ProposerBidHash,
                /*proposer_signature: ProposerSignature*/) -> Header{
+
         Header {
             shard_id,
             //parent_hash,
