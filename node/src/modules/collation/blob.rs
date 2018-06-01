@@ -208,11 +208,14 @@ impl Blob {
             //let mut chunk = [0; 31]
             //let mut body = Body::new(chunk);
             //let mut blob_bodies = BlobBodies::new(body);
-
+            /* TODO: this is more of a hack than a proper fix. We still want this to panic to avoid unexpected behaviour,
+            or be able to serialize a blob that is larger than a collation (although perhaps not many will do that due
+            to the expense, and implementing this is not a high priority, it can probably be done in like phase 6 or 
+            later).*/
             warn!("Sorry, sharding developers and researchers haven't agreed on a way to serialize blobs that are \
                 larger than a DATA_BYTES_PER_COLLATION ({:?} bytes), please split this blob up into blobs that are  \
                 smaller than this and try again, or lobby us to do this.", DATA_BYTES_PER_COLLATION);
-            // TODO @dev fix panic case with blob serilization (tim will do)
+            // TODO @dev fix panic case with blob serialization (tim will do)
             /*error!("Sorry, sharding developers and researchers haven't agreed on a way to serialize blobs that are \
                 larger than a DATA_BYTES_PER_COLLATION ({:?} bytes), please split this blob up into blobs that are  \
                 smaller than this and try again, or lobby us to do this.", DATA_BYTES_PER_COLLATION);
