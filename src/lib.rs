@@ -7,13 +7,14 @@ extern crate diamond_drops_cli as cli;
 extern crate diamond_drops_env as env;
 extern crate diamond_drops_node as node;
 
-use node::modules::{client_thread, smc_listener, collation};
+use node::modules::{client_thread, smc_listener};
+use node::modules::collation::{header, body, collation};
+
 
 // std imports
 use std::sync::mpsc;
 use std::thread;
 use std::time::Duration;
-
 /// The main function to run the node.  
 ///
 /// # Inputs
@@ -24,9 +25,9 @@ pub fn run(config: cli::modules::config::Config) -> () {
     debug!("Client Config - Collation Active: {:?}", config.collation_active);
 
     if config.collation_active == true {
-        let header = collation::header::create_sample_collation_header();
-        let body = collation::body::create_sample_collation_body();
-        let collation = collation::collation::Collation::new(header, body);
+        let header = header::create_sample_collation_header();
+        let body = body::create_sample_collation_body();
+        let collation = collation::Collation::new(header, body);
         debug!("Successfully created collation: {:?}", collation);
     }
 

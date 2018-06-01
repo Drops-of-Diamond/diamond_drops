@@ -2,6 +2,7 @@ use std::collections::BTreeMap;
 use modules::collation::collation;
 use modules::primitives::CollationHeaderHash;
 use modules::collation::collation::{Collation};
+use modules::collation::body;
 use modules::collation::body::{Body};
 use modules::collation::blob::{Blob};
 use modules::collation::header::{Header};
@@ -41,8 +42,8 @@ impl CollationIndex {
         // 2. body
 
         let header = Header::create_sample_collation_header();
-        let body = Body::create_sample_collation_body();
-
+        let body = body::create_sample_collation_body();
+ 
         let key: ShardIdHash = header.shard_id;
         let value = Collation::new(header, body);
 

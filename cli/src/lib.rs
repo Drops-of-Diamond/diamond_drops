@@ -13,7 +13,7 @@ extern crate error_chain;
 extern crate log;
 
 pub mod error {
-//    error_chain! { }
+    error_chain! { }
 }
 
 pub mod modules;

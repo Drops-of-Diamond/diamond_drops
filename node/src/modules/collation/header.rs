@@ -40,8 +40,7 @@ impl Header {
                period: ChunkPeriodHash,
                proposer_address: ProposerAddress,
                //proposer_bid: ProposerBidHash,
-               /*proposer_signature: ProposerSignature*/) -> Header {
-
+               /*proposer_signature: ProposerSignature*/) -> Header{
         Header {
             shard_id,
             //parent_hash,

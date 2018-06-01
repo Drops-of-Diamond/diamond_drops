@@ -15,16 +15,16 @@ impl Body {
             chunks
         }
     }
+}
 
-    pub fn create_sample_collation_body() -> Body {
+// This must be outside the impl Body, since you can't create a 
+// specific instance in an impl, AFAIK.
+pub fn create_sample_collation_body() -> Body {
         let blob = Blob::new(vec![4; COLLATION_SIZE]);
         let sample_body = blob.blob_to_collation_body();
         //println!("{:?}", body);
         sample_body
-    }
 }
-
-
 
 /// Serialize collation bodies that correspond to the same blob. In practice a blob should contain
 ///  a hash and this struct should then contain that hash as a field.
