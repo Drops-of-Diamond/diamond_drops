@@ -1,3 +1,8 @@
+// https://github.com/rust-lang-nursery/error-chain/issues/245
+// https://github.com/Drops-of-Diamond/diamond_drops/issues/86
+#![allow(renamed_and_removed_lints)]
+#![allow(unused_doc_comment)]
+
 #[macro_use]
 extern crate error_chain;
 

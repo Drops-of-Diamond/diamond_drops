@@ -7,6 +7,10 @@
 #![allow(unused_imports)]
 #![allow(unused_variables)]
 #![allow(dead_code)]
+// https://github.com/rust-lang-nursery/error-chain/issues/245
+// https://github.com/Drops-of-Diamond/diamond_drops/issues/86
+#![allow(renamed_and_removed_lints)]
+#![allow(unused_doc_comment)]
 
 //extern crate bitreader;
 extern crate diamond_drops_cli as cli;

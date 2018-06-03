@@ -1,4 +1,6 @@
 #![allow(unused_variables)]
+#![allow(renamed_and_removed_lints)]
+#![allow(unused_doc_comment)]
 
 #[macro_use]
 extern crate log;

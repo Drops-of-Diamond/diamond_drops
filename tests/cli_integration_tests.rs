@@ -2,6 +2,7 @@ extern crate diamond_drops;
 extern crate diamond_drops_cli as cli;
 extern crate diamond_drops_env as env;
 
+#[allow(unused_imports)]
 #[macro_use]
 extern crate clap;
 

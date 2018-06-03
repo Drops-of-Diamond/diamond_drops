@@ -21,7 +21,8 @@ use tiny_keccak;
 
 #[derive(PartialEq, Debug, Clone)]
 pub struct Header {
-    shard_id: ShardIdHash,
+
+    pub shard_id: ShardIdHash,
     proposer_address: ProposerAddress,
     chunk_root: ChunkRootHash,
     period: ChunkPeriodHash,
@@ -39,8 +40,8 @@ impl Header {
                period: ChunkPeriodHash,
                proposer_address: ProposerAddress,
                //proposer_bid: ProposerBidHash,
-               /*proposer_signature: ProposerSignature*/) -> Header {
-        
+               /*proposer_signature: ProposerSignature*/) -> Header{
+
         Header {
             shard_id,
             //parent_hash,
@@ -54,7 +55,7 @@ impl Header {
 
     pub fn hash(&self) -> CollationHeaderHash {
         let mut sha3 = tiny_keccak::Keccak::new_sha3_256();
-        
+
         // Add the shard id
         let sid = u256_to_bytes32(self.shard_id);
         sha3.update(&sid);
@@ -85,6 +86,17 @@ impl Header {
         sha3.finalize(&mut result_bytes);
 
         CollationHeaderHash::from_slice(&result_bytes[..])
+    }
+
+    pub fn create_sample_collation_header() -> Header {
+        // Build the args for collation header creation
+        let shard_id = ShardIdHash::from_dec_str("1").unwrap();
+        // let parent_hash = ParentCollationHeaderHash::from_slice(&SAMPLE_COLLATION_PARENT_HASH_BYTES[..]);
+        let chunk_root = ChunkRootHash::from_slice(&SAMPLE_COLLATION_CHUNK_ROOT_BYTES[..]);
+        let period = ChunkPeriodHash::from_dec_str("1").unwrap();
+        let proposer_address = ProposerAddress::from_slice(&SAMPLE_COLLATION_PROPOSER_ADDRESS_BYTES[..]);
+        let header = Header::new(shard_id, /*parent_hash,*/ chunk_root, period, proposer_address);
+        return header;
     }
 }
 
