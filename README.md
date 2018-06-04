@@ -180,7 +180,7 @@ This is WIP, pre-release software. It is planned to be integrated into Parity. T
 ## Help support us
 
 Send a donation to jamesray.eth. All contributors will be paid according to their contributions and timesheets, once funds are received. As an example, my timesheet is available [here](https://docs.google.com/spreadsheets/d/1Fv8XqLkMjdBkGPkVWfJulJU-5Qv6TSUR4oD5uKSEHW0/edit#gid=1828020164). A multisig will be used when other developers are contributing full-time. Funds are needed to pay researchers and developers a reasonable hourly rate or salary, which may fairly be quite high due to the time required to learn about Ethereum, sharding, etc.; 
-and because of the scarcity of those interested and qualified to be able to contribute in the blockchain industry. <!omitting until other regular contributors are well established, although I still vouch that contributions will be paid for according to assessing hours on timesheets--our multi-sig wallet at [0x6D446f9545dBC380A6BBDde8A285A7A8030D4381](https://etherscan.io/address/0x6d446f9545dbc380a6bbdde8a285a7a8030d4381)-->
+and because of the scarcity of those interested and qualified to be able to contribute in the blockchain industry. For more details see [this issue](https://github.com/Drops-of-Diamond/diamond_drops/issues/18).<!omitting until other regular contributors are well established, although I still vouch that contributions will be paid for according to assessing hours on timesheets--our multi-sig wallet at [0x6D446f9545dBC380A6BBDde8A285A7A8030D4381](https://etherscan.io/address/0x6d446f9545dbc380a6bbdde8a285a7a8030d4381)-->
 
 ## We're looking for more developers
 
@@ -188,7 +188,7 @@ See [here](https://github.com/Drops-of-Diamond/diamond_drops/wiki/Introduction-a
 
 ## Why Rust?
 
-After comparing languages such as Rust, C++, Go, Javascript and Python, as well as implementations (e.g. Parity, cppethereum, Go-ethereum, ethereumJS and Py-EVM), Rust is most preferable, while I haven't tried being a user much of other implementations, so I can't comment on a comparison. Rust has advantages such as safety, concurrency, practicality, better memory safety, zero-cost abstractions, and support for functional and imperative-procedural paradigms.
+After comparing languages such as Rust, C++, Go, Javascript and Python, as well as implementations (e.g. Parity, cppethereum, Go-ethereum, ethereumJS and Py-EVM), Rust is most preferable, while I haven't tried being a user much of other implementations, so I can't comment on a comparison. Rust has advantages such as safety, concurrency, practicality, better memory safety (thanks to its ownership rules), zero-cost abstractions, and support for functional and imperative-procedural paradigms.
 
 <!-- Not necessary
 ### Further information
