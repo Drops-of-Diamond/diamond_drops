@@ -1,3 +1,19 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Contents**
+
+- [Simple Summary](#simple-summary)
+- [Abstract](#abstract)
+- [Motivation](#motivation)
+- [Specification](#specification)
+- [Rationale](#rationale)
+- [Backwards Compatibility](#backwards-compatibility)
+- [Test Cases](#test-cases)
+- [Implementation](#implementation)
+- [Copyright](#copyright)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ---
 dip: <to be assigned>
 title: <DIP title>
