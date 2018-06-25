@@ -196,3 +196,7 @@ After comparing languages such as Rust, C++, Go, Javascript and Python, as well 
 
 This repo and the Drops of Diamond project it belongs to is not a part of or owned by the Ethereum Foundation, nor is it endorsed by the Foundation. A different project name and logo may be used (the logo could use a more modern design rather than just using a photo in the public domain), and alternative proposals are welcome. The Drops of Diamond project is not legally incorporated as of yet, so legally it is not an organisation. That should be done, but probably only as needed once the project is more well-developed.
 -->
+
+## License
+
+[UNLICENSE](LICENSE)
