@@ -6,7 +6,7 @@ Will need to be split up.
 
 # Installation
 
-See the [README install section](https://github.com/Drops-of-Diamond/diamond_drops#install),
+See the [README install section](https://github.com/Drops-of-Diamond/diamond_drops#install).
 
 # Usage
 
