@@ -13,7 +13,9 @@
 [![Gitter: sharding](https://img.shields.io/badge/gitter-sharding-4AB495.svg)](https://gitter.im/ethereum/sharding)
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-> WIP on sharding and Ethereum 2.0 with enshrined-in-consensus data availability and Rust: a fast, safe, concurrent and practical programming language
+> WIP on sharding and Ethereum 2.0 with enshrined-in-consensus data availability and Rust: a fast, safe, concurrent and practical programming language.
+
+This repo contains code that is implemented to a [deprecated sharding specification (notaries and proposers with a sharding manager contract](https://ethresear.ch/t/a-minimal-sharding-protocol-that-may-be-worthwhile-as-a-development-target-now/1650/3?u=justindrake)), as well as previous code for [collators and proposers](https://ethresear.ch/t/sharding-phase-1-spec-retired/1407)). The [latest specification](https://notes.ethereum.org/SCIg8AH5SA-O4C1G1LYZHQ) is not finalised. Currently as of July 31 2018 work is underway on the networking aspect, with [gossipsub](https://github.com/libp2p/rust-libp2p/pull/291) a work-in-progress, to be integrated into rust-libp2p.
 
 We are working on a [sharding](https://github.com/ethereum/wiki/wiki/Sharding-introduction-R&D-compendium) implementation for [Ethereum](https://ethereum.org) with the [Rust](https://www.rust-lang.org/en-US/) programming language, which is fast, safe and concurrent. [Ethereum](https://github.com/ethereum/wiki/wiki/White-Paper) can theoretically be used for any kind of economic and governance activity, at lower costs than conventional approaches, in a decentralized, trustless, and censorship-resistant fashion. Sharding plans to scale [Ethereum](https://github.com/ethereum/wiki/wiki/Ethereum-introduction), at first quadratically, then exponentially.
 
